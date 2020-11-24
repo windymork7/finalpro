@@ -9,9 +9,6 @@
     <title>$Title$</title>
 </head>
 <body>
-    <h1>디스</h1>
-    <hr>
-    <a href="show.do?name=이름">히얼</a>
-
+<h1>section</h1>
 </body>
 </html>
