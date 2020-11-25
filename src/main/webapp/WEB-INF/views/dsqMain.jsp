@@ -9,6 +9,6 @@
     <title>$Title$</title>
 </head>
 <body>
-    <h1>power</h1>
+    <h1>Main 페이지</h1>
 </body>
 </html>
