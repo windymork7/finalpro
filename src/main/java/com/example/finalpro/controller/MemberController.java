@@ -29,6 +29,7 @@ public class MemberController {
         return "template";
     }
 
+    // 일반회원 로그인 프로세스
     @RequestMapping("/loginProcess.me")
     public String loginProcess(HttpServletRequest request, HttpSession session, Model model){
 
