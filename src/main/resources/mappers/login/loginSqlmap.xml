@@ -6,9 +6,9 @@
 
 
 
-<mapper namespace="com.example.finalpro.dao">
+<mapper namespace="com.example.finalpro.dao.LoginDao">
 
-    <select id="selectListEnterpriseMember" parameterType="EnterpriseMemberVo"  resultType="EnterpriseMemberVo">
+    <select id="selectListEnterpriseMember" parameterType="com.example.finalpro.vo.EnterpriseMemberVo"  resultType="com.example.finalpro.vo.EnterpriseMemberVo">
              SELECT
                     ENTRPRS_MBER_ID as entrprsMberId
                     ,ENTRPRS_SE_CODE as entrprsSeCode
