@@ -27,7 +27,7 @@ public class MemberController {
         model.addAttribute("main", "member/memberLoginForm");
 
         return "template";
-    }123
+    }
 
     // 일반회원 로그인 프로세스
     @RequestMapping("/loginProcess.me")
