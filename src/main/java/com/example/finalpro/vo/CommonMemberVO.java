@@ -1,5 +1,6 @@
 package com.example.finalpro.vo;
 
+// 일반회원 테이블 클래스
 public class CommonMemberVO {
     private String mem_email;
     private String mem_pw;
