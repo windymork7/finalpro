@@ -1,4 +1,4 @@
-package com.example.finalpro.member.service;
+package com.example.finalpro.service.member;
 
 import com.example.finalpro.vo.CommonMemberVO;
 

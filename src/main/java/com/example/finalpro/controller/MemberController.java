@@ -1,13 +1,12 @@
 package com.example.finalpro.controller;
 
-import com.example.finalpro.member.service.CommonMemberJoinService;
-import com.example.finalpro.member.service.CommonMemberLoginService;
+import com.example.finalpro.service.member.CommonMemberJoinService;
+import com.example.finalpro.service.member.CommonMemberLoginService;
 import com.example.finalpro.vo.CommonMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,9 +34,10 @@ public class MemberController {
 
         String page = commonMemberLoginService.commonMemberLogin(request, session);
 
-        model.addAttribute("main", page);
+//        model.addAttribute("main", page);
 
-        return "template";
+//        return "template";
+        return "redirect:"+page;
     }
 
 
@@ -58,5 +58,8 @@ public class MemberController {
         model.addAttribute("main", "member/memberLoginForm");
         return "template";
     }
+
+
+
 
 }

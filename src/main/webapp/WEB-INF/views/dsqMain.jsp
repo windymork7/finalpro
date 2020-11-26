@@ -10,5 +10,7 @@
 </head>
 <body>
     <h1>Main 페이지</h1>
+    ${sessionScope.userNo} <br>
+    <button type="button" onclick="location.href='/loginForm.me'">로그인 페이지로 이동</button>
 </body>
 </html>

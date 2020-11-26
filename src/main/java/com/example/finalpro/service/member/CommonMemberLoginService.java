@@ -1,4 +1,4 @@
-package com.example.finalpro.member.service;
+package com.example.finalpro.service.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -17,4 +17,9 @@
     <select id="commonMemberLogin" resultType="String">
         SELECT MEM_PW FROM MEM WHERE MEM_EMAIL=#{param1}
     </select>
+
+    <!-- 회원 로그인 세션-->
+    <select id="commonMemberSelect" resultType="com.example.finalpro.vo.CommonMemberVO">
+        SELECT * FROM MEM WHERE MEM_EMAIL=#{param1}
+    </select>
 </mapper>

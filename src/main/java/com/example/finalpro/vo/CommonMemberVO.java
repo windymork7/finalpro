@@ -2,11 +2,20 @@ package com.example.finalpro.vo;
 
 // 일반회원 테이블 클래스
 public class CommonMemberVO {
+    private int mem_no;
     private String mem_email;
     private String mem_pw;
     private String mem_nick;
     private String mem_name;
     private String mem_tel;
+
+    public int getMem_no() {
+        return mem_no;
+    }
+
+    public void setMem_no(int mem_no) {
+        this.mem_no = mem_no;
+    }
 
     public String getMem_email() {
         return mem_email;
