@@ -36,17 +36,10 @@
                 <textarea id="q_content" name="q_content">${qBoardVO.q_content}</textarea>
             </td>
         </tr>
-        <tr>
-            <td>
-                <button type="submit">글쓰기</button>
-            </td>
-            <td>
-                <button type="reset">취소</button>
-            </td>
-        </tr>
     </table>
 
     <button type="button" onclick="location.href='/qboardListForm.bo'">리스트</button>
 </form>
+
 </body>
 </html>
