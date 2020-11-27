@@ -33,7 +33,7 @@ public class DsqController {
         return "template";
     }
 
-    // q게시판 등록 프로세스
+    // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
     public String boardInsertProcess(Model model, QboardVO qboardVO){
 
