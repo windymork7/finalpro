@@ -66,9 +66,5 @@ public class DsqController {
         return "template";
     }
 
-    public String reply(Model model){
-        return "template";
-    }
-
 
 }

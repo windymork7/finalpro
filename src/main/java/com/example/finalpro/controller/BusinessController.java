@@ -25,7 +25,6 @@ public class BusinessController {
     @RequestMapping("/businessJoinProcess.bi")
     public String businessJoinProcess(Model model, BusinessMemberVO businessMemberVO){
 
-//        System.out.println("여기인가 : " + businessMemberVO.toString());
         businessMemberJoinService.businessJoinProcess(businessMemberVO);
 
         model.addAttribute("main", "member/memberLoginForm");
