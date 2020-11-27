@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-sadc;hsadkc;hsd;k
-sadicjasdijci;lsdaj
-ivasivsd
-»£¿Ã»£¿’!
 
 </body>
 </html>

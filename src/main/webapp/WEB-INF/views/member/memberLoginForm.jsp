@@ -28,7 +28,7 @@
                 <button type="submit">로그인</button>
             </td>
             <td>
-                <button type="button" onclick="location.href='joinForm.me'">회원가입</button>
+                <button type="button" onclick="location.href='/joinFormWay.me'">회원가입</button>
             </td>
         </tr>
     </table>

@@ -59,6 +59,14 @@ public class MemberController {
         return "template";
     }
 
+    // 회원가입 나누기
+    @RequestMapping("/joinFormWay.me")
+    public String joinFormWay(Model model){
+
+        model.addAttribute("main", "joinFormWay");
+        return "template";
+    }
+
 
 
 
