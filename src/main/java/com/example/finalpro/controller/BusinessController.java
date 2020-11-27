@@ -30,4 +30,6 @@ public class BusinessController {
         model.addAttribute("main", "member/memberLoginForm");
         return "template";
     }
+
+
 }

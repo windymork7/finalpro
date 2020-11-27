@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.EditDAO">
+    <insert id="editBoardInsert" parameterType="com.example.finalpro.vo.EditMemberVO">
+        INSERT INTO EDIT VALUES(EDIT_SEQ.NEXTVAL, #{mem_no}, #{edit_title}, #{edit_content}, '이미지')
+    </insert>
+</mapper>

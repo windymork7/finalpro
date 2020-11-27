@@ -26,6 +26,7 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
             commonMemberVO = memberDAO.commonMemberSelect(request.getParameter("MEM_EMAIL"));
             session.setAttribute("userNo", commonMemberVO.getMem_no());
             session.setAttribute("userNick", commonMemberVO.getMem_nick());
+            session.setAttribute("userGrade", commonMemberVO.getGrade_no());
 //            return "qBoardInsertForm.bo";
             return "/qBoardInsertForm.bo";
         }

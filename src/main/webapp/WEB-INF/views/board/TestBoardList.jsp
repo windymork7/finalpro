@@ -39,6 +39,12 @@
         </tr>
     </c:forEach>
 </table>
+<c:choose>
+    <c:when test="${sessionScope.userGrade ge 5}">
+        <button type="button" onclick="location.href='/editBoardInsert.ed'">에디터 글쓰기</button>
+    </c:when>
+    <c:otherwise></c:otherwise>
+</c:choose>
 
 </body>
 </html>

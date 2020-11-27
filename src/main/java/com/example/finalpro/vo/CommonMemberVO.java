@@ -3,6 +3,7 @@ package com.example.finalpro.vo;
 // 일반회원 테이블 클래스
 public class CommonMemberVO {
     private int mem_no;
+    private int grade_no;
     private String mem_email;
     private String mem_pw;
     private String mem_nick;
@@ -15,6 +16,14 @@ public class CommonMemberVO {
 
     public void setMem_no(int mem_no) {
         this.mem_no = mem_no;
+    }
+
+    public int getGrade_no() {
+        return grade_no;
+    }
+
+    public void setGrade_no(int grade_no) {
+        this.grade_no = grade_no;
     }
 
     public String getMem_email() {
