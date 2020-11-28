@@ -3,6 +3,7 @@ package com.example.finalpro.vo;
 public class EditMemberVO {
     private int edit_no;
     private int mem_no;
+    private String mem_nick;
     private String edit_title;
     private String edit_content;
     private String edit_img;
@@ -29,6 +30,14 @@ public class EditMemberVO {
 
     public void setEdit_title(String edit_title) {
         this.edit_title = edit_title;
+    }
+
+    public String getMem_nick() {
+        return mem_nick;
+    }
+
+    public void setMem_nick(String mem_nick) {
+        this.mem_nick = mem_nick;
     }
 
     public String getEdit_content() {
