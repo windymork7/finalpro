@@ -17,28 +17,27 @@
     }
 </style>
 <body>
-<h1>게시판</h1>
+<h1>공지사항</h1>
 <hr>
 <form action="" method="post">
     <table>
         <tr>
             <td>글제목</td>
-            <td>
-                <input type="text" id="q_title" name="q_title" value="${qBoardVO.q_title}">
-            </td>
             <td>작성자</td>
-            <td>
-                <input type="text" value="${qBoardVO.mem_nick}">
-            </td>
         </tr>
         <tr>
-            <td>
-                <textarea id="q_content" name="q_content">${qBoardVO.q_content}</textarea>
-            </td>
+            <td>${noticeVO.notice_title}</td>
+            <td>관리자</td>
+        </tr>
+        <tr>
+        	<td>글내용</td>
+        </tr>
+        <tr>
+            <td>${noticeVO.notice_content}</td>
         </tr>
     </table>
 
-    <button type="button" onclick="location.href='/qboardListForm.bo'">리스트</button>
+    <button type="button" onclick="location.href='/noticeListForm.no'">리스트</button>
 </form>
 
 </body>

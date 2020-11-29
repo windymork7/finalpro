@@ -12,5 +12,6 @@
     <h1>Main 페이지</h1>
     ${sessionScope.userNo} <br>
     <button type="button" onclick="location.href='/loginForm.me'">로그인 페이지로 이동</button>
+    <button type="button" onclick="location.href='/noticeListForm.no'">공지사항</button>
 </body>
 </html>

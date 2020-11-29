@@ -1,5 +1,7 @@
 package com.example.finalpro.service.notice;
 
-public interface NoticeBoardInsertService {
+import com.example.finalpro.vo.NoticeVO;
 
+public interface NoticeBoardInsert {
+	public void noticeBoardInsert(NoticeVO noticeVO); 
 }
