@@ -47,8 +47,8 @@
       <a href="#"> <img src="img/D'sQ.png" width="200" height="100"
          alt="D'sQ"></a>
    </div>
-   <div class="row">
-      <form class="col-sm-4 offset-sm-4">
+   <div class="row" >
+      <form class="col-sm-4 offset-sm-4" action="loginWayProcess.me" method="post">
          <fieldset>
             <div class="form-group text-center col-sm-6 offset-sm-3">
                <div class="custom-control custom-radio" id="radio_1">
@@ -63,39 +63,82 @@
                      class="custom-control-label" for="customRadio2">기업회원</label>
                </div>
             </div>
-            <div class="form-group">
-               <input type="email" class="form-control" id="email"
-                  aria-describedby="emailHelp" placeholder="이메일">
-            </div>
+            <div id="here">
+<%--            <div class="form-group">--%>
+<%--               <input type="email" class="form-control" id="email" name="mem_email"--%>
+<%--                      aria-describedby="emailHelp" placeholder="이메일">--%>
+<%--            </div>--%>
 
-            <div class="form-group">
-               <input type="password" class="form-control" id="Password"
-                  placeholder="비밀번호">
+<%--               <div class="form-group">--%>
+<%--                  <input type="password" class="form-control" id="Password" name="mem_pw"--%>
+<%--                         placeholder="비밀번호">--%>
+<%--               </div>--%>
             </div>
+               <button type="submit"
+                       class="btn btn-primary btn-lg btn-block text-center">로그인</button>
+               <br>
 
-            <button type="submit"
-               class="btn btn-primary btn-lg btn-block text-center">로그인</button>
-            <br>
+               <div class="text-center">
+                  <a href="#">계정 찾기</a>&nbsp;
+                  <a href="#">비밀번호 찾기</a>&nbsp;
+                  <a href="/joinFormWay.me"><b>회원가입</b></a>
+               </div>
 
-            <div class="text-center">
-               <a href="#">계정 찾기</a>&nbsp; 
-               <a href="#">비밀번호 찾기</a>&nbsp; 
-               <a href="/joinFormWay.me"><b>회원가입</b></a>
-            </div>
          </fieldset>
       </form>
    </div>
 </body>
-<%--<script>--%>
-<%--   $(document).ready(function(){--%>
+<script>
 
-<%--      alert($('.custom-control-input:checked').val());--%>
+   $(document).ready(function(){
+      generalMember()
+   });
 
-<%--      if ($('.custom-control-input:checked').val() == 1){--%>
-<%--         --%>
-<%--      }--%>
 
-<%--   });--%>
+   $("input:radio[name=customRadio]").click(function(){
+      // alert("1")
+      if($("input:radio[name=customRadio]:checked").val() == 1){
+         generalMember();
+      } else if($("input:radio[name=customRadio]:checked").val() == 2){
+         businessMember();
+      }
+   })
 
-<%--</script>--%>
+   // 일반회원 가입 양식
+   function generalMember(){
+
+      // alert("2");
+      var html = "<div class=\"form-group\">\n" +
+              "               <input type=\"email\" class=\"form-control\" id=\"email\" name=\"mem_email\"\n" +
+              "                      aria-describedby=\"emailHelp\" placeholder=\"이메일\">\n" +
+              "            </div>\n" +
+              "\n" +
+              "               <div class=\"form-group\">\n" +
+              "                  <input type=\"password\" class=\"form-control\" id=\"Password\" name=\"mem_pw\"\n" +
+              "                         placeholder=\"비밀번호\">\n" +
+              "               </div>";
+
+      html += "";
+
+      $("#here").html(html);
+   }
+
+   function businessMember(){
+
+      // alert("3");
+      var html = "<div class=\"form-group\">\n" +
+              "               <input type=\"email\" class=\"form-control\" id=\"email\" name=\"biz_email\"\n" +
+              "                      aria-describedby=\"emailHelp\" placeholder=\"이메일\">\n" +
+              "            </div>\n" +
+              "\n" +
+              "               <div class=\"form-group\">\n" +
+              "                  <input type=\"password\" class=\"form-control\" id=\"Password\" name=\"biz_pw\"\n" +
+              "                         placeholder=\"비밀번호\">\n" +
+              "               </div>";
+
+      $("#here").html(html);
+   }
+
+
+</script>
 </html>
