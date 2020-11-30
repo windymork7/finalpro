@@ -17,7 +17,7 @@ public class BusinessController {
     @RequestMapping("/businessJoinForm.bi")
     public String businessJoinForm(Model model){
 
-        model.addAttribute("main","business/businessJoinForm");
+        model.addAttribute("main","business/business_join");
         return "template";
     }
 
