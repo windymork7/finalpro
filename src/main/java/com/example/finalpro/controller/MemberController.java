@@ -34,9 +34,6 @@ public class MemberController {
 
         String page = commonMemberLoginService.commonMemberLogin(request, session);
 
-//        model.addAttribute("main", page);
-
-//        return "template";
         return "redirect:"+page;
     }
 

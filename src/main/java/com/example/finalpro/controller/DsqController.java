@@ -39,8 +39,8 @@ public class DsqController {
 
         commonBoardInsertService.qBoardInsert(qboardVO);
 
-        model.addAttribute("main","dsqMain");
-        return "template";
+//        model.addAttribute("main","dsqMain");
+        return "redirect:qboardListForm.bo";
     }
 
     // 게시판 조회 페이지
