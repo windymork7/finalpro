@@ -3,6 +3,7 @@ package com.example.finalpro.vo;
 public class BusinessMemberVO {
 
     private int biz_no;
+    private String biz_pw;
     private String biz_trademark;
     private String biz_name;
     private String biz_tel;
@@ -15,6 +16,15 @@ public class BusinessMemberVO {
 
     public void setBiz_no(int biz_no) {
         this.biz_no = biz_no;
+    }
+
+
+    public String getBiz_pw() {
+        return biz_pw;
+    }
+
+    public void setBiz_pw(String biz_pw) {
+        this.biz_pw = biz_pw;
     }
 
     public String getBiz_trademark() {
