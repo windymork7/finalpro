@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.EditDAO">
+    <!-- 에디터 게시글 쓰기-->
+    <insert id="editBoardInsert" parameterType="com.example.finalpro.vo.EditMemberVO">
+        INSERT INTO EDIT VALUES(EDIT_SEQ.NEXTVAL, #{mem_no}, #{edit_title}, #{edit_content}, '이미지')
+    </insert>
+
+    <!-- 에디터 글 조회-->
+    <select id="editBoardList" resultType="com.example.finalpro.vo.EditMemberVO">
+        SELECT * FROM EDIT ED1 LEFT JOIN MEM M1 ON ED1.MEM_NO = M1.MEM_NO
+    </select>
+
+    <!-- 에디터 해당 글 조회-->
+    <select id="editBoardContent" resultType="com.example.finalpro.vo.EditMemberVO">
+        SELECT * FROM (SELECT * FROM EDIT WHERE EDIT_NO=#{param1}) ED1 LEFT JOIN MEM M1 ON ED1.MEM_NO = M1.MEM_NO
+    </select>
+</mapper>
