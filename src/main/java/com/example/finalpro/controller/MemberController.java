@@ -23,8 +23,8 @@ public class MemberController {
     // 일반회원 로그인 페이지로 이동
     @RequestMapping("/loginForm.me")
     public String loginForm(Model model){
-        model.addAttribute("main", "member/memberLoginForm");
-
+        model.addAttribute("main", "member/login");
+//        model.addAttribute("main", "login");
         return "template";
     }
 
@@ -41,8 +41,8 @@ public class MemberController {
     // 일반회원 회원가입 페이지로 이동
     @RequestMapping("/joinForm.me")
     public String joinForm(Model model){
-        model.addAttribute("main", "member/memberJoinForm");
-
+//        model.addAttribute("main", "member/memberJoinForm");
+        model.addAttribute("main", "member/Gene_join");
         return "template";
     }
 
@@ -52,7 +52,7 @@ public class MemberController {
 
         commonMemberJoinService.commonMemberInsert(commonMemberVO);
 
-        model.addAttribute("main", "member/memberLoginForm");
+        model.addAttribute("main", "member/memberJoinForm");
         return "template";
     }
 
