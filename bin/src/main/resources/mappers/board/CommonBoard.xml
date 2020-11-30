@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.BoardDAO">
+    <!--Q게시판 글쓰기-->
+    <insert id="qBoardInsert" parameterType="com.example.finalpro.vo.QboardVO">
+        INSERT INTO Q(q_no, mem_no, sub_ca_no, book_ca_no,  q_title, q_content, q_sos, q_up, q_rpt_cnt, q_admin_state)
+         VALUES (Q_SEQ.NEXTVAL, #{mem_no}, 1, 1, #{q_title}, #{q_content}, 1, 1, 1, 1)
+    </insert>
+
+    <!--게시글 조회-->
+    <select id="qBoardList" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT Q_NO, Q_TITLE, Q_SOS, Q_UP, Q_RPT_CNT, Q_DATE, MEM_NICK
+        FROM MEM M1 LEFT OUTER JOIN Q Q1
+        ON M1.MEM_NO = Q1.MEM_NO
+    </select>
+
+    <!-- 해당 게시글 조회-->
+    <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT Q_TITLE, Q_CONTENT, MEM_NICK
+            FROM MEM M1 LEFT OUTER JOIN (SELECT * FROM Q WHERE Q_NO=#{q_num}) Q1
+            ON M1.MEM_NO = Q1.MEM_NO
+    </select>
+</mapper>

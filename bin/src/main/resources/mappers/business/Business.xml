@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.BusinessDAO">
+    <!-- 사업자 회원가입 -->
+    <insert id="businessJoinProcess" parameterType="com.example.finalpro.vo.BusinessMemberVO">
+        INSERT INTO BIZ VALUES(BIZ_SEQ.NEXTVAL, #{biz_trademark}, #{biz_name}, #{biz_tel}, #{biz_email}, #{biz_address})
+    </insert>
+</mapper>
