@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,22 @@ public class MemberController {
         return "redirect:"+page;
     }
 
+    // 로그인 길 나누기
+    @RequestMapping("/loginWayProcess.me")
+    public String loginWayProcess(@RequestParam("customRadio") int radio,  HttpServletRequest request ,Model model){
+
+        if (radio == 1){
+            String mem_email = request.getParameter("mem_email");
+            String mem_pw = request.getParameter("mem_pw");
+            return "redirect:loginProcess.me?mem_email="+mem_email+"&mem_pw="+mem_pw;
+        } else if (radio == 2){
+            String biz_email = request.getParameter("biz_email");
+            String biz_pw = request.getParameter("biz_pw");
+            return "redirect:businessLoginProcess.bi?biz_email="+biz_email+"&biz_pw="+biz_pw;
+        }
+        return null;
+    }
+
 
     // 일반회원 회원가입 페이지로 이동
     @RequestMapping("/joinForm.me")
@@ -52,7 +69,7 @@ public class MemberController {
 
         commonMemberJoinService.commonMemberInsert(commonMemberVO);
 
-        model.addAttribute("main", "member/memberJoinForm");
+        model.addAttribute("main", "member/login");
         return "template";
     }
 

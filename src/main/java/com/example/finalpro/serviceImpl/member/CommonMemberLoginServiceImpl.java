@@ -18,12 +18,12 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
     @Override
     public String commonMemberLogin(HttpServletRequest request, HttpSession session) {
 
-        String userpw = memberDAO.commonMemberLogin(request.getParameter("MEM_EMAIL"));
+        String userpw = memberDAO.commonMemberLogin(request.getParameter("mem_email"));
 
-        if (userpw.equals(request.getParameter("MEM_PW"))){
+        if (userpw.equals(request.getParameter("mem_pw"))){
             session = request.getSession();
             CommonMemberVO commonMemberVO = new CommonMemberVO();
-            commonMemberVO = memberDAO.commonMemberSelect(request.getParameter("MEM_EMAIL"));
+            commonMemberVO = memberDAO.commonMemberSelect(request.getParameter("mem_email"));
             session.setAttribute("userNo", commonMemberVO.getMem_no());
             session.setAttribute("userNick", commonMemberVO.getMem_nick());
             session.setAttribute("userGrade", commonMemberVO.getGrade_no());
