@@ -1,15 +1,16 @@
 package com.example.finalpro.controller;
 
-import com.example.finalpro.service.board.CommonBoardContent;
-import com.example.finalpro.service.board.CommonBoardInsertService;
-import com.example.finalpro.service.board.CommonBoardListService;
+import com.example.finalpro.service.board.*;
 import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class DsqController {
 
     @Autowired
     CommonBoardContent commonBoardContent;
+
+    @Autowired
+    CommonBoardUpService commonBoardUpService;
 
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
@@ -56,6 +60,7 @@ public class DsqController {
         return "template";
     }
 
+    //게시판 내용
     @RequestMapping("/qboardContent.bo")
     public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
 
@@ -66,5 +71,16 @@ public class DsqController {
         return "template";
     }
 
+    //게시판 추천
+    /*한번 누른 유저에 대해서 추천버튼 못누르도록 해라
+    * up에 세션에 담긴 유저번호 넣고
+    * if문으로 select 쿼리문해서 up 테이블 조회했을때 같은 유저라면 false ( 값못넣음 )
+    * 다른 유저라면 True ( 추천가능 )*/
+    @RequestMapping("/qboardUpAction.bo")
+    public String qboardUp(@RequestParam("qboardNum")int qboardNum, Model model, HttpServletRequest request, HttpSession session){
+
+        commonBoardUpService.qBoardUp(qboardNum);
+        return "redirect:qboardListForm.bo";
+    }
 
 }
