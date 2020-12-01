@@ -42,8 +42,8 @@
 <body>
 
    <div class="text-center">
-   <br>
-   <br>
+<%--   <br>--%>
+<%--   <br>--%>
       <a href="#"> <img src="img/D'sQ.png" width="200" height="100"
          alt="D'sQ"></a>
    </div>
