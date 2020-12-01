@@ -79,7 +79,7 @@ public class DsqController {
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum, Model model, HttpServletRequest request, HttpSession session){
 
-        commonBoardUpService.qBoardUp(qboardNum);
+//        commonBoardUpService.qBoardUp(qboardNum);
         return "redirect:qboardListForm.bo";
     }
 

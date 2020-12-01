@@ -14,7 +14,7 @@
 <div align="center">
    <header>
       <div>
-         <a href="Problem.jsp"><b><h2>문제 풀이</h2></b></a>
+         <a href="/todayProblem.bp"><b><h2>문제 풀이</h2></b></a>
       </div>
    </header>
       
@@ -27,22 +27,26 @@
    <section>
       <div style="height: 50px;"></div>
       
-      <div class="row">
-         <div id="categori1" class="col-md-3"></div>
-         <div id="categori2" class="col-md-3"></div>
-         <div id="categori3" class="col-md-3"></div>
-         <div id="categori4" class="col-md-3"></div>
+      <div class="row" align="center">
+<%--         <div id="categori1" class="col-md-3"></div>--%>
+<%--         <div id="categori2" class="col-md-3"></div>--%>
+<%--         <div id="categori3" class="col-md-3"></div>--%>
+<%--         <div id="categori4" class="col-md-3"></div>--%>
+         <div class="col-md-4"></div>
+         <div id="categori" class="col-md-4"></div>
+         <div class="col-md-4"></div>
       </div>
-      
-      <div class="row">
-         <div style="height: 20px;"></div>
+
+      <div style="height: 20px;"></div>
+
+      <div class="row" style="height: 100px">
          <div id="title" class="col-md-4"></div>
          <div id="problem" class="col-md-8" align="left"></div>
       </div>
       
-      <div style="height: 50px;"></div>
+      <div style="height: 40px;"></div>
       
-      <div class="row" style="height: 400px;" align="left">
+      <div class="row" style="height: 250px;" align="left">
          <div class="col-md-2" style="height: 400px;"></div>
          <div id="view" class="col-md-8" style="height: 400px;"></div>
          <div class="col-md-2" style="height: 400px;"></div>
@@ -61,39 +65,38 @@
 </body>
 <script type="text/javascript">
 
-   	var random = Math.floor(Math.random()*5);
+   	var random;
    	var html;
-   
-   	
-	
+
    function start()
    {
-      html = "";
-      html += "<button type='button' id='programProblem1' class='btn btn-warning' onclick='programProblem()'>JAVA</button>";
-      $("#categori1").html(html);
+      // html = "";
+      // html += "<button type='button' class='btn btn-warning' onclick='javaProblem()'>JAVA</button>";
+      // $("#categori1").html(html);
+      //
+      // html = "";
+      // html += "<button type='button' class='btn btn-warning' onclick='commonProblem()'>C</button>";
+      // $("#categori2").html(html);
+      //
+      // html = "";
+      // html += "<button type='button' class='btn btn-warning' onclick='capitalProblem()'>PYTHON</button>";
+      // $("#categori3").html(html);
+      //
+      // html = "";
+      // html += "<button type='button' class='btn btn-warning' onclick='sportProblem()'>ORACLE</button>";
+      // $("#categori4").html(html);
 
       html = "";
-      html += "<button type='button' class='btn btn-warning' onclick='commonProblem()'>C</button>";
-      $("#categori2").html(html);
-
-      html = "";
-      html += "<button type='button' class='btn btn-warning' onclick='capitalProblem()'>PYTHON</button>";
-      $("#categori3").html(html);
-
-      html = "";
-      html += "<button type='button' class='btn btn-warning' onclick='sportProblem()'>ORACLE</button>";
-      $("#categori4").html(html);
+      html += "<button type='button' class='btn btn-warning' onclick='javaProblem()'>JAVA</button> &nbsp;";
+      html += "<button type='button' class='btn btn-warning' onclick='cProblem()'>C</button> &nbsp;";
+      html += "<button type='button' class='btn btn-warning' onclick='pythonProblem()'>PYTHON</button> &nbsp;";
+      html += "<button type='button' class='btn btn-warning' onclick='oracleProblem()'>ORACLE</button> &nbsp;";
+      $("#categori").html(html);
    }
    
-   function programProblem()
+   function javaProblem()
    {
-      $("#programProblem1").click(function(){
-         programProblem();
-         alert("휴ㅜ");
-      });
-
-
-
+      random = Math.floor(Math.random()*8);
 
       $("#title").css("border", "1px solid green");
       $("#problem").css("border", "1px solid green");
@@ -104,7 +107,7 @@
       $("#title").html(html);
       
       $.ajax({
-         url : "/scriptMoonJae.bp",
+         url : "/JavaProblem.bp",
          type : "get",
          data : "",
          success : function(data){
@@ -114,7 +117,7 @@
 
             answer = program[random].pro[0].val6;
 
-            html += "<b><font size='6' style='line-height: 68px;'>"+program[random].pro[0].val0+"</font>";
+            html += "<b><font size='5' style=''>"+program[random].pro[0].val0+"</font>";
             $("#problem").html(html);
 
             html = "<input type='radio' name='bogi' value='val1'>";
@@ -137,47 +140,49 @@
       });
    }
    
-   // function commonProblem()
-   // {
-   //    $("#title").css("border", "1px solid green");
-   //    $("#problem").css("border", "1px solid green");
+   function cProblem()
+   {
+      random = Math.floor(Math.random()*8);
+
+      $("#title").css("border", "1px solid green");
+      $("#problem").css("border", "1px solid green");
+
+
+      html = "";
+      html += "<font size='10'><strong>문 제</strong></font>";
+      $("#title").html(html);
+
+      $.ajax({
+         url : "/CProblem.bp",
+         type : "get",
+         data : "",
+         success : function(data){
+        	var obj = JSON.parse(data);
+            var program = obj.program;
+            var html = "";
+
+            answer = program[random].pro[0].val6;
+
+            html += "<b><font size='5' style='line-height: 68px;'>"+program[random].pro[0].val0+"</font>";
+            $("#problem").html(html);
+
+            html = "<input type='radio' name='bogi' value='val1'>";
+            html += "<span id='val1'><font size='4'>"+program[random].pro[0].val1+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val2'>";
+            html += "<span id='val2'><font size='4'>"+program[random].pro[0].val2+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val3'>";
+            html += "<span id='val3'><font size='4'>"+program[random].pro[0].val3+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val4'>";
+            html += "<span id='val4'><font size='4'>"+program[random].pro[0].val4+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val5'>";
+            html += "<span id='val5'><font size='4'>"+program[random].pro[0].val5+"</font></span><br><br>";
+            html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
+            $("#view").html(html);
+         }
+      });
+   }
    //
-   //
-   //    html = "";
-   //    html += "<font size='10'><strong>문 제</strong></font>";
-   //    $("#title").html(html);
-   //
-   //    $.ajax({
-   //       url : "json/CommonMoonJae.jsp",
-   //       type : "get",
-   //       data : "",
-   //       success : function(data){
-   //      	var obj = JSON.parse(data);
-   //          var CommonSense = obj.CommonSense;
-   //          var html = "";
-   //
-   //          answer = CommonSense[random].pro[0].val6;
-   //
-   //          html += "<b><font size='6' style='line-height: 68px;'>"+CommonSense[random].pro[0].val0+"</font>";
-   //          $("#problem").html(html);
-   //
-   //          html = "<input type='radio' name='bogi' value='val1'>";
-   //          html += "<span id='val1'><font size='4'>"+CommonSense[random].pro[0].val1+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val2'>";
-   //          html += "<span id='val2'><font size='4'>"+CommonSense[random].pro[0].val2+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val3'>";
-   //          html += "<span id='val3'><font size='4'>"+CommonSense[random].pro[0].val3+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val4'>";
-   //          html += "<span id='val4'><font size='4'>"+CommonSense[random].pro[0].val4+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val5'>";
-   //          html += "<span id='val5'><font size='4'>"+CommonSense[random].pro[0].val5+"</font></span><br><br>";
-   //          html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
-   //          $("#view").html(html);
-   //       }
-   //    });
-   // }
-   //
-   // function capitalProblem()
+   // function pythonProblem()
    // {
    //    $("#title").css("border", "1px solid green");
    //    $("#problem").css("border", "1px solid green");
@@ -216,49 +221,51 @@
    //       }
    //    });
    // }
-   //
-   // function sportProblem()
-   // {
-   //    $("#title").css("border", "1px solid green");
-   //    $("#problem").css("border", "1px solid green");
-   //
-   //
-   //    html = "";
-   //    html += "<font size='10'><strong>문 제</strong></font>";
-   //    $("#title").html(html);
-   //
-   //    $.ajax({
-   //       url : "json/SportMoonJae.jsp",
-   //       type : "get",
-   //       data : "",
-   //       success : function(data){
-   //      	var obj = JSON.parse(data);
-   //          var sport = obj.sport;
-   //          var html = "";
-   //
-   //          answer = sport[random].pro[0].val6;
-   //
-   //          html += "<b><font size='6' style='line-height: 68px;'>"+sport[random].pro[0].val0+"</font>";
-   //          $("#problem").html(html);
-   //
-   //          html = "<input type='radio' name='bogi' value='val1'>";
-   //          html += "<span id='val1'><font size='4'>"+sport[random].pro[0].val1+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val2'>";
-   //          html += "<span id='val2'><font size='4'>"+sport[random].pro[0].val2+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val3'>";
-   //          html += "<span id='val3'><font size='4'>"+sport[random].pro[0].val3+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val4'>";
-   //          html += "<span id='val4'><font size='4'>"+sport[random].pro[0].val4+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val5'>";
-   //          html += "<span id='val5'><font size='4'>"+sport[random].pro[0].val5+"</font></span><br><br>";
-   //          html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
-   //          $("#view").html(html);
-   //       }
-   //    });
-   // }
-   //
-   //
-   //
+
+   function oracleProblem()
+   {
+      random = Math.floor(Math.random()*8);
+
+      $("#title").css("border", "1px solid green");
+      $("#problem").css("border", "1px solid green");
+
+
+      html = "";
+      html += "<font size='10'><strong>문 제</strong></font>";
+      $("#title").html(html);
+
+      $.ajax({
+         url : "/OracleProblem.bp",
+         type : "get",
+         data : "",
+         success : function(data){
+        	var obj = JSON.parse(data);
+            var program = obj.program;
+            var html = "";
+
+            answer = program[random].pro[0].val6;
+
+            html += "<b><font size='5' style='line-height: 68px;'>"+program[random].pro[0].val0+"</font>";
+            $("#problem").html(html);
+
+            html = "<input type='radio' name='bogi' value='val1'>";
+            html += "<span id='val1'><font size='4'>"+program[random].pro[0].val1+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val2'>";
+            html += "<span id='val2'><font size='4'>"+program[random].pro[0].val2+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val3'>";
+            html += "<span id='val3'><font size='4'>"+program[random].pro[0].val3+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val4'>";
+            html += "<span id='val4'><font size='4'>"+program[random].pro[0].val4+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val5'>";
+            html += "<span id='val5'><font size='4'>"+program[random].pro[0].val5+"</font></span><br><br>";
+            html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
+            $("#view").html(html);
+         }
+      });
+   }
+
+
+
    function submit(answer)
    {
 	   var radioVal = $("input[name='bogi']:checked").val();

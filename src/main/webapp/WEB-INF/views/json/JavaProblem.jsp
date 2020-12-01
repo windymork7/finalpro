@@ -50,5 +50,35 @@
 			"val5": "5.function에서 return이 false면 멈춘다.",
 			"val6": "val2"
 		}]
+	}, {
+		"pro": [{
+			"val0": "OOP의 4대 원칙이 아닌 것은?",
+			"val1": "1.Abstraction",
+			"val2": "2.Inheritance",
+			"val3": "3.Procedural",
+			"val4": "4.Encapsulation",
+			"val5": "5.Polymorphism",
+			"val6": "val3"
+		}]
+	}, {
+		"pro": [{
+			"val0": "자바 소스 코드 컴파일시 명시적으로 코딩하지 않아도 자동으로 생성되는 코드가 아닌 것은?",
+			"val1": "1.import java.lang.*",
+			"val2": "2.매개변수 받는 constructor",
+			"val3": "3.this",
+			"val4": "4.toString()",
+			"val5": "5.자동 upcasting",
+			"val6": "val2"
+		}]
+	}, {
+		"pro": [{
+			"val0": "자바의 클래스와 객체에 대한 설명 중 틀린 것은?",
+			"val1": "1.객체를 인스턴스라고도 부른다.",
+			"val2": "2.클래스는 객체를 생성하기 위한 틀이다.",
+			"val3": "3.클래스 첫글자는 대문자가 아니어도 생성이 가능하다.",
+			"val4": "4.클래스는 필드와 메소드로 구성된다",
+			"val5": "5.클래스의 필드들은 private 보다는 public으로 선언하는 것이 바람직하다.",
+			"val6": "val5"
+		}]
 	}]
 }
