@@ -17,15 +17,21 @@
     }
     .header
     {
-        background-color: darkseagreen;
+    /*    background-color: darkseagreen;*/
         width: 100%;
         height: 15%;
 
     }
 
+    .section
+    {
+        /*height: 70%;*/
+    }
+
+
     .footer
     {
-        background-color: burlywood;
+        /*background-color: burlywood;*/
         bottom: 0px;
         width: 100%;
         height: 200px;
@@ -36,7 +42,7 @@
     <header class="header">
         <c:import url="header.jsp"/>
     </header>
-    <section>
+    <section class="section">
         <c:choose>
             <c:when test="${empty main}">
                 <c:import url="section.jsp"/>
