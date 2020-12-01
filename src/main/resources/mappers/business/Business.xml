@@ -9,4 +9,14 @@
     <insert id="businessJoinProcess" parameterType="com.example.finalpro.vo.BusinessMemberVO">
         INSERT INTO BIZ VALUES(#{biz_no}, #{biz_pw}, #{biz_trademark}, #{biz_name}, #{biz_tel}, #{biz_email}, #{biz_address})
     </insert>
+
+    <!-- 사업자 로그인-->
+    <select id="businessLoginProcess" resultType="String">
+        SELECT BIZ_PW FROM BIZ WHERE BIZ_EMAIL = #{param1}
+    </select>
+
+    <!-- 사업자 세션-->
+    <select id="businessMemberSelect" resultType="com.example.finalpro.vo.BusinessMemberVO">
+        SELECT * FROM BIZ WHERE BIZ_EMAIL = #{param1}
+    </select>
 </mapper>
