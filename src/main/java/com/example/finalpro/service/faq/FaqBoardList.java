@@ -1,5 +1,9 @@
 package com.example.finalpro.service.faq;
 
-public interface FaqBoardList {
+import com.example.finalpro.vo.FaqVO;
 
+import java.util.List;
+
+public interface FaqBoardList {
+    public List<FaqVO> faqBoardList();
 }

@@ -1,5 +1,7 @@
 package com.example.finalpro.service.faq;
 
-public interface FaqBoardContent {
+import com.example.finalpro.vo.FaqVO;
 
+public interface FaqBoardContent{
+    public FaqVO faqBoardContent(int notice_no);
 }
