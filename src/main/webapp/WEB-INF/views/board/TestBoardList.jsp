@@ -32,7 +32,7 @@
             <td>${qboard.q_no}</td>
             <td><a href="qboardContent.bo?qboardNum=${qboard.q_no}">${qboard.q_title}</a></td>
             <td>${qboard.q_sos}</td>
-            <td><a href="qboardUpAction.bo?qboardNum=${qboard.q_no}">${qboard.q_up}</a></td>
+            <td><a href="qboardUpCheck.bo?qboardNum=${qboard.q_no}">${qboard.q_up}</a></td>
             <td>${qboard.q_rpt_cnt}</td>
             <td>${qboard.q_date}</td>
             <td>${qboard.mem_nick}</td>
