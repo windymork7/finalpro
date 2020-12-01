@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.finalpro.dao.FaqDAO">
+
+    <!-- 게시글 조회 -->
+    <select id="faqBoardList" resultType="com.example.finalpro.vo.FaqVO">
+        SELECT * FROM FAQ
+    </select>
+    <!-- 글 조회-->
+    <select id="faqBoardContent" resultType="com.example.finalpro.vo.FaqVO">
+        SELECT * FROM FAQ
+    </select>
+    <!-- 글 삽입-->
+    <insert id="faqBoardInsert" parameterType="com.example.finalpro.vo.FaqVO">
+        INSERT INTO FAQ VALUES(FAQ_SEQ.NEXTVAL,#{faq_title},#{faq_content},default)
+    </insert>
+    <!-- 글 삭제 -->
+    <delete id="faqBoardDelete" parameterType="com.example.finalpro.vo.FaqVO">
+        DELETE FAQ WHERE FAQ_NO =#{faq_no}
+    </delete>
+    <!-- 글 수정 폼-->
+    <select id="faqBoardUpdateForm" resultType="com.example.finalpro.vo.FaqVO">
+        SELECT * from FAQ WHERE FAQ_NO=#{faq_no}
+    </select>
+    <!-- 글 수정 액션 -->
+    <select id="faqBoardUpdate" parameterType="com.example.finalpro.vo.FaqVO">
+        UPDATE FAQ SET FAQ_TITLE=#{faq_title}, FAQ_CONTENT=#{faq_content} WHERE FAQ_NO=#{faq_no}
+    </select>
+
+</mapper>
