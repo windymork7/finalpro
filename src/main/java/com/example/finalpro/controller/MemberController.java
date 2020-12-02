@@ -58,8 +58,8 @@ public class MemberController {
     // 일반회원 회원가입 페이지로 이동
     @RequestMapping("/joinForm.me")
     public String joinForm(Model model){
-//        model.addAttribute("main", "member/memberJoinForm");
-        model.addAttribute("main", "member/Gene_join");
+        model.addAttribute("main", "member/general_join");
+//        model.addAttribute("main", "member/Gene_join");
         return "template";
     }
 
@@ -78,6 +78,15 @@ public class MemberController {
     public String joinFormWay(Model model){
 
         model.addAttribute("main", "joinFormWay");
+        return "template";
+    }
+
+    // 회원 로그아웃
+    @RequestMapping("/logout.me")
+    public String logout(HttpSession session, Model model){
+
+        session.invalidate();
+        model.addAttribute("main", "dsqMain");
         return "template";
     }
 

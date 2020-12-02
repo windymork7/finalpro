@@ -93,9 +93,11 @@ public class DsqController {
     }
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum, Model model, HttpServletRequest request, HttpSession session){
+      
     	int mem_no = Integer.parseInt((String)session.getAttribute("userNo"));
     	System.out.println("mem_no");
         commonBoardUpService.qBoardUp(qboardNum,mem_no);
+
         return "redirect:qboardListForm.bo";
     }
 

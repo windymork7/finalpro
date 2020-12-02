@@ -19,4 +19,6 @@
     <select id="businessMemberSelect" resultType="com.example.finalpro.vo.BusinessMemberVO">
         SELECT * FROM BIZ WHERE BIZ_EMAIL = #{param1}
     </select>
+
+
 </mapper>
