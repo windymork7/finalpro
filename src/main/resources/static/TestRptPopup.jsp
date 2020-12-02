@@ -16,14 +16,6 @@
         border: 1px solid;
     }
 </style>
-<script language="JavaScript">
-    function popup(){
-        var url="/qboardDownPopup.bo";
-        var name="TestRptPopup";
-        var option="width=500,height=500,left=100,top=50,location=no"
-        window.open(url,name,option);
-    }
-</script>
 <body>
 <table>
     <tr>
@@ -41,7 +33,7 @@
             <td><a href="qboardContent.bo?qboardNum=${qboard.q_no}">${qboard.q_title}</a></td>
             <td>${qboard.q_sos}</td>
             <td><a href="qboardUpCheck.bo?qboardNum=${qboard.q_no}">${qboard.q_up}</a></td>
-            <td><input onclick="popup()" type="button" value="${qboard.q_rpt_cnt}"></td>
+            <td><a href="qboardUpCheck.bo?qboardNum=${qboard.q_no}">${qboard.q_rpt_cnt}</a></td>
             <td>${qboard.q_date}</td>
             <td>${qboard.mem_nick}</td>
         </tr>

@@ -13,8 +13,8 @@ public class CommonBoardUpServiceImpl implements CommonBoardUpService {
 
     @Override
     public void qBoardUp(int mem_no,int q_no){
-        boardDAO.qBoardUpCheck(mem_no,q_no);
+        //boardDAO.qBoardUpCheck(mem_no,q_no);
         boardDAO.qBoardUpUpdate(q_no);
-        boardDAO.qBoardUpInsert(q_no);
+        boardDAO.qBoardUpInsert(q_no,mem_no);
     }
 }
