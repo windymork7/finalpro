@@ -83,22 +83,42 @@ public class DsqController {
     /*
      * CheckServiceImpl에서 자꾸 null에러 뜸.. ; 
      * */
+    //추천 체크
     @RequestMapping("/qboardUpCheck.bo")
     public String qboardUpCheck(@RequestParam("qboardNum")int qboardNum, HttpServletRequest request, HttpSession session) {
     	System.out.println("qboardUpCheck");
     	String page= commonBoardUpCheckService.qBoardUpCheck(qboardNum, request, session);
     	
     	//참이면 qboardUpAction.bo 거짓이면 qboardListForm.bo
-    	return "redirect"+page;
+    	return "redirect:"+page;
     }
+    //추천 액션
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum, Model model, HttpServletRequest request, HttpSession session){
-      
-    	int mem_no = Integer.parseInt((String)session.getAttribute("userNo"));
-    	System.out.println("mem_no");
-        commonBoardUpService.qBoardUp(qboardNum,mem_no);
+
+        System.out.println("업액션컨트롤러");
+
+        int q_no = qboardNum;
+        int mem_no = (Integer)session.getAttribute("userNo");
+        System.out.println("업액션 qboardNum: "+ q_no);
+        System.out.println("업액션 mem_no: "+mem_no);
+        commonBoardUpService.qBoardUp(mem_no,q_no);
 
         return "redirect:qboardListForm.bo";
     }
-
+    //신고 체크
+    //@RequestMapping("/qboardDownCheck.bo")
+    //public String
+    //신고 팝업
+    @RequestMapping("/qboardDownPopup.bo")
+    public String qboardDownPopup(Model model){
+        System.out.println("큐보드다운팝업");
+        model.addAttribute("main", "joon/TestRptPopup");
+        return "template";
+    }
+    //신고 액션
+    @RequestMapping("/qboardDownAction.bo")
+    public String qboardDown(@RequestParam("qboardNum")int qboardNum,@RequestParam("rpt_no") int rpt_no,HttpServletRequest request, HttpSession session){
+        return "redirect:qboardListForm.bo";
+    }
 }
