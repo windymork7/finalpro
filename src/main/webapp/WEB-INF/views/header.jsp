@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    response.setCharacterEncoding("UTF-8");
 %>
@@ -20,7 +21,7 @@
 <body>
    <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
            <img src="img/D'sQ.png" width="70">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -127,7 +128,23 @@
                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
           </form>&nbsp;&nbsp;
-          <button type="button" class="btn btn-danger" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
+
+          <c:choose>
+            <c:when test="${not empty sessionScope.userNick}">
+              <c:choose>
+                <c:when test="${sessionScope.userNick eq 'admin'}">
+                  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
+                </c:when>
+                <c:otherwise>
+                  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
+                </c:otherwise>
+              </c:choose>
+              <button type="button" class="btn btn-danger" onclick="location.href='/logout.me'">로그아웃</button>
+            </c:when>
+            <c:otherwise>
+              <button type="button" class="btn btn-danger" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
+            </c:otherwise>
+          </c:choose>
           <button type="button" class="btn btn-primary" onclick="location.href='/joinFormWay.me'">회원가입</button>
         </div>
       </nav>

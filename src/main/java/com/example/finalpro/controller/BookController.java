@@ -15,9 +15,18 @@ public class BookController {
         model.addAttribute("main", "book/problem");
         return "template";
     }
-
-    @RequestMapping("/scriptMoonJae.bp")
+    
+    // 자바 문제 파일
+    @RequestMapping("/JavaProblem.bp")
     public String scriptMoonJae(){
-        return "json/scriptMoonJae";
+        return "json/JavaProblem";
     }
+    
+    // C 문제 파일
+    @RequestMapping("/CProblem.bp")
+    public String cProblem(){ return "json/CProblem";}
+
+    // Oracle 문제 파일
+    @RequestMapping("/OracleProblem.bp")
+    public String oracleProblem(){ return "json//OracleProblem";}
 }

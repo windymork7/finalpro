@@ -27,17 +27,45 @@
 </head>
 <body>
    <div class="text-center">
-   <br>
-   <br>
       <a href="#"> <img src="img/D'sQ.png" alt="D's Q"></a>
    </div>
    <div class="row">
       <form class="col-sm-6 offset-sm-3" action="/businessJoinProcess.bi" method="post">
          <fieldset>
             <div class="form-group">
-               <label for="biz_email"><b>이메일</b></label> <input type="email"
-                  class="form-control" id="biz_email" aria-describedby="emailHelp" name="biz_email">
-            </div>
+               <label for="biz_email"><b>이메일</b></label> 
+                  <div class="form-group">
+                     <div class="input-group mb-3">
+                     <input type="email" class="form-control" id="biz_email" aria-describedby="emailHelp" name="biz_email">
+                        <div class="input-group-append">
+                           <button type="button" class="btn btn-outline-secondary"
+                              data-toggle="modal" data-target="#exampleModal1">중복
+                              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                              </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Modal -->
+               <div class="modal fade" id="exampleModal1" tabindex="-1"
+                  aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel1">이메일 중복검사</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+                        <div class="modal-body">중복 여부~~</div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            
             <div class="form-group">
                <label for="biz_pw1"><b>비밀번호</b></label> <input
                   type="password" class="form-control" id="biz_pw1" name="biz_pw">
@@ -63,7 +91,9 @@
                      <input type="text" class="form-control" id="biz_address" name="biz_address">
                      <div class="input-group-append">
                         <button type="button" class="btn btn-secondary"
-                           data-toggle="modal" data-target="#exampleModal2">주소찾기</button>
+                           data-toggle="modal" data-target="#exampleModal2">
+                           <span class="glyphicon glyphicon-search" aria-hidden="true">
+                           </button>
                      </div>
                   </div>
                </div>
@@ -105,19 +135,19 @@
                      <input type="text" class="form-control" id="biz_tel" name="biz_tel">
                      <div class="input-group-append">
                         <button type="button" class="btn btn-secondary"
-                           data-toggle="modal" data-target="#exampleModal1">인증</button>
+                           data-toggle="modal" data-target="#exampleModal3">인증</button>
                      </div>
                   </div>
                </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1"
-               aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal fade" id="exampleModal3" tabindex="-1"
+               aria-labelledby="exampleModalLabel3" aria-hidden="true">
                <div class="modal-dialog">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">인증번호</h5>
+                        <h5 class="modal-title" id="exampleModalLabel3">인증번호</h5>
                         <button type="button" class="close" data-dismiss="modal"
                            aria-label="Close">
                            <span aria-hidden="true">&times;</span>
