@@ -20,7 +20,7 @@
 </head>
 <body>
    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="/">
            <img src="img/D'sQ.png" width="70">
         </a>
@@ -59,8 +59,8 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">C</a>
-                  <a class="dropdown-item" href="#">JAVA</a>
+                <a class="dropdown-item" href="">C</a>
+                  <a class="dropdown-item" href="/qboardListForm.bo">JAVA</a>
                   <a class="dropdown-item" href="#">PYTHON</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>데이터베이스</b></a>
@@ -124,7 +124,7 @@
           
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="내용을 검색하세요">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">검색
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">검색
                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
           </form>&nbsp;&nbsp;
@@ -139,10 +139,10 @@
                   <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:otherwise>
               </c:choose>
-              <button type="button" class="btn btn-danger" onclick="location.href='/logout.me'">로그아웃</button>
+              <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
             </c:when>
             <c:otherwise>
-              <button type="button" class="btn btn-danger" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-primary" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
             </c:otherwise>
           </c:choose>
           <button type="button" class="btn btn-primary" onclick="location.href='/joinFormWay.me'">회원가입</button>
