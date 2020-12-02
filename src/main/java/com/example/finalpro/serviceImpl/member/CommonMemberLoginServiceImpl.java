@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
 
     @Autowired
-    MemberDAO memberDAO;//gittest
+    MemberDAO memberDAO;
 
     @Override
     public String commonMemberLogin(HttpServletRequest request, HttpSession session) {
