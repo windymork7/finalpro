@@ -7,8 +7,27 @@ public class MyscrapVO {
     private int mem_no;         //스크랩한 회원번호 ( 외래키 )
     private String my_scrap_memo;   //스크랩글에대한 메모 ( 아마 안쓸듯 )
     private String my_scrap_date;   //스크랩한 날짜
+    private String q_title;
+    private int rownum;
+    
+    
+    public int getRownum() {
+		return rownum;
+	}
 
-    public int getMy_scrap_no() {
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
+	public String getQ_title() {
+		return q_title;
+	}
+
+	public void setQ_title(String q_title) {
+		this.q_title = q_title;
+	}
+
+	public int getMy_scrap_no() {
         return my_scrap_no;
     }
 
@@ -49,13 +68,8 @@ public class MyscrapVO {
     }
 
     @Override
-    public String toString() {
-        return "MyscrapVO{" +
-                "my_scrap_no=" + my_scrap_no +
-                ", q_no=" + q_no +
-                ", mem_no=" + mem_no +
-                ", my_scrap_memo='" + my_scrap_memo + '\'' +
-                ", my_scrap_date='" + my_scrap_date + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "MyscrapVO [my_scrap_no=" + my_scrap_no + ", q_no=" + q_no + ", mem_no=" + mem_no + ", my_scrap_memo="
+				+ my_scrap_memo + ", my_scrap_date=" + my_scrap_date + ", q_title=" + q_title + "]";
+	}
 }

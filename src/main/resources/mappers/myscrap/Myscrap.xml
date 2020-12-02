@@ -6,20 +6,23 @@
 
 
 
-<mapper namespace="com.example.finalpro.dao.MemberDAO">
-
-    <!-- 일반 회원가입-->
-    <insert id="commonMemberInsert" parameterType="com.example.finalpro.vo.CommonMemberVO">
-        INSERT INTO MEM(MEM_NO,GRADE_NO,MEM_EMAIL,MEM_PW,MEM_NICK,MEM_NAME,MEM_TEL,MEM_EXP,MEM_RPT_CNT) VALUES(MEM_SEQ.NEXTVAL,1,#{mem_email},#{mem_pw},#{mem_nick},#{mem_name},#{mem_tel},0,0)
-    </insert>
-
-    <!-- 일반 회원 로그인-->
-    <select id="commonMemberLogin" resultType="String">
-        SELECT MEM_PW FROM MEM WHERE MEM_EMAIL=#{param1}
-    </select>
-
-    <!-- 회원 로그인 세션-->
-    <select id="commonMemberSelect" resultType="com.example.finalpro.vo.CommonMemberVO">
-        SELECT * FROM MEM WHERE MEM_EMAIL=#{param1}
-    </select>
+<mapper namespace="com.example.finalpro.dao.MyscrapDAO">
+	<!-- 마이스크랩 체크 -->
+	<select id="myscrapCheck" resultType="Integer">
+		SELECT NVL(MAX(MEM_NO),0) FROM
+    		(SELECT MEM_NO FROM MY_SCRAP
+				WHERE Q_NO=#{q_no}
+    			AND MEM_NO=#{mem_no})
+	</select>
+	
+	<insert id="myscrapInsert" parameterType="com.example.finalpro.vo.MyscrapVO">
+		INSERT INTO MY_SCRAP VALUES(MY_SCRAP_SEQ.nextval,#{q_no},#{mem_no},null,SYSDATE)
+	</insert>
+	
+	<select id="myscrapList" resultType="com.example.finalpro.vo.MyscrapVO">
+		select rownum,ms.q_no,ms.mem_no,q.q_title,ms.my_scrap_date
+from my_scrap ms,( select q_title,q_no from q) q
+where ms.q_no = q.q_no
+and ms.mem_no=#{mem_no}
+	</select>
 </mapper>

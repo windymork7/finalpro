@@ -4,5 +4,5 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public interface MyscrapCheckService {
-    public String myscrapCheck(int scrap_no, HttpServletRequest request, HttpSession session);
+    public String myscrapCheck(int q_no, HttpServletRequest request, HttpSession session);
 }

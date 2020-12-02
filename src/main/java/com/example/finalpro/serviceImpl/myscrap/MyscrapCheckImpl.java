@@ -15,11 +15,17 @@ public class MyscrapCheckImpl implements MyscrapCheckService {
     MyscrapDAO myscrapDAO;
 
     @Override
-    public String myscrapCheck(int scrap_no, HttpServletRequest request, HttpSession session) {
+    public String myscrapCheck(int q_no, HttpServletRequest request, HttpSession session) {
         int mem_no =  (Integer) session.getAttribute("userNo"); // mem_no, q_no String -> int
-        if(myscrapDAO.myscrapCheck(scrap_no,mem_no)==0) {  //집가서 쿼리문 작성
-            return ""; //추가하는 my 컨트롤러로
+        System.out.println("mem_no:"+ mem_no);
+        System.out.println("Q_NO:"+ q_no);
+        System.out.println("체크:"+myscrapDAO.myscrapCheck(q_no,mem_no));
+        if(myscrapDAO.myscrapCheck(q_no,mem_no)==0) {  //집가서 쿼리문 작성
+        	
+            return "/myscrapInsert.my?qboardNum="+q_no; //추가하는 my 컨트롤러로
         }
-        return "";//이전페이지로
+        String referer = request.getHeader("Referer");
+        //return "myscrapList.my?qboardNum="+q_no;	//마이스크랩 리스트
+        return referer;
     }
 }
