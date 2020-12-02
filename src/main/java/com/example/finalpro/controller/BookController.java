@@ -18,9 +18,7 @@ public class BookController {
     
     // 자바 문제 파일
     @RequestMapping("/JavaProblem.bp")
-    public String scriptMoonJae(){
-        return "json/JavaProblem";
-    }
+    public String scriptMoonJae(){return "json/JavaProblem";}
     
     // C 문제 파일
     @RequestMapping("/CProblem.bp")
@@ -29,4 +27,10 @@ public class BookController {
     // Oracle 문제 파일
     @RequestMapping("/OracleProblem.bp")
     public String oracleProblem(){ return "json//OracleProblem";}
+
+    // Python 문제 파일
+    @RequestMapping("/PythonProblem.bp")
+    public String pythonProblem(){ return "json/PythonProblem";}
+
+
 }
