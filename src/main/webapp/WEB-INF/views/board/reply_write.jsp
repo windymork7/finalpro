@@ -62,123 +62,7 @@
 </head>
 <body>
 
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-		  <a class="navbar-brand" href="#">
-		  	<img src="img/D'sQ.png" width="70">
-		  </a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" 
-		  	data-target="#navbarColor02" aria-controls="navbarColor02" 
-		  	aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		
-		  <div class="collapse navbar-collapse" id="navbarColor02">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-		        	role="button" aria-haspopup="true" aria-expanded="false">첫걸음</a>
-		        <div class="dropdown-menu">
-		          <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">C</a>
-	          	  <a class="dropdown-item" href="#">JAVA</a>
-	          	  <a class="dropdown-item" href="#">PYTHON</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>데이터베이스</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">ORACLE</a>
-	          	  <a class="dropdown-item" href="#">MYSQL</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>프레임워크</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">SPRING</a>
-	          	  <a class="dropdown-item" href="#">DJANGO</a>
-		        </div>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-		        	role="button" aria-haspopup="true" aria-expanded="false">D'sQ</a>
-		        <div class="dropdown-menu">
-		          <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">C</a>
-	          	  <a class="dropdown-item" href="#">JAVA</a>
-	          	  <a class="dropdown-item" href="#">PYTHON</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>데이터베이스</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">ORACLE</a>
-	          	  <a class="dropdown-item" href="#">MYSQL</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>프레임워크</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">SPRING</a>
-	          	  <a class="dropdown-item" href="#">DJANGO</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>검색 Tip</b></a>
-		        </div>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-		        	role="button" aria-haspopup="true" aria-expanded="false">오답노트</a>
-		        <div class="dropdown-menu">
-		          <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">C</a>
-	          	  <a class="dropdown-item" href="#">JAVA</a>
-	          	  <a class="dropdown-item" href="#">PYTHON</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>데이터베이스</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">ORACLE</a>
-	          	  <a class="dropdown-item" href="#">MYSQL</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>프레임워크</b></a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">SPRING</a>
-	          	  <a class="dropdown-item" href="#">DJANGO</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item text-center"><b>오늘의 문제</b></a>
-		        </div>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">에디터's Tip
-		        </a>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-		        	role="button" aria-haspopup="true" aria-expanded="false">이벤트</a>
-		        <div class="dropdown-menu">
-		          <a class="dropdown-item text-center"><b>D'sQ 이벤트</b></a>
-		          <a class="dropdown-item text-center"><b>공모전</b></a>
-		        </div>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-		        	role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
-		        <div class="dropdown-menu">
-		          <a class="dropdown-item text-center"><b>D'sQ 가이드라인</b></a>
-		          <a class="dropdown-item text-center"><b>공지사항</b></a>
-		          <a class="dropdown-item text-center"><b>FAQ</b></a>
-		        </div>
-		      </li>
-		    </ul>
-		    
-		    <form class="form-inline my-2 my-lg-0">
-		      <input class="form-control mr-sm-2" type="text" placeholder="내용을 검색하세요">
-		      <button class="btn btn-primary my-2 my-sm-0" type="submit">검색
-		      	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		      </button>
-		    </form>&nbsp;&nbsp;
-		    <button type="button" class="btn btn-primary">로그인</button>&nbsp;&nbsp;
-		    <button type="button" class="btn btn-primary">회원가입</button>
-		  </div>
-		</nav>
-	</div>
-	<br>
-	<br>
-<!-- header -->	
+
 
    <div class="container-fluid">
       <div class="row">
@@ -187,15 +71,12 @@
 			<form>
 			  <fieldset>
                   <div>
-                  <br>
-                  <br>
-                  <br>
                      <div id="c_left">
                         <legend>JAVA</legend>
                      </div>
                      <div id="c_right">
                      <a href="#">
-                        <button type="button" class="btn btn-primary">답변하기</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo'">답변하기</button>
                      </a>
                         <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천">
 						  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>

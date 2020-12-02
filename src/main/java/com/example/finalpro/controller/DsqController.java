@@ -54,25 +54,40 @@ public class DsqController {
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(Model model){
 
-        List<QboardVO> list = new ArrayList<QboardVO>();
-
-        list = commonBoardListService.qBoardList();
-
-        model.addAttribute("list",list);
-        model.addAttribute("main","board/TestBoardList");
+//        List<QboardVO> list = new ArrayList<QboardVO>();
+//
+//        list = commonBoardListService.qBoardList();
+//
+//        model.addAttribute("list",list);
+//        model.addAttribute("main","board/TestBoardList");
+        model.addAttribute("main", "board/board_list");
         return "template";
     }
 
     //게시판 내용
     @RequestMapping("/qboardContent.bo")
-    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
-
-        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
-
-        model.addAttribute("qBoardVO", qboardVO);
-        model.addAttribute("main", "board/TestBoardContent");
+//    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
+//
+//        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
+//
+//        model.addAttribute("qBoardVO", qboardVO);
+//        model.addAttribute("main", "board/TestBoardContent");
+//        return "template";
+//    }
+    public String qboardContent(Model model){
+        model.addAttribute("main", "board/reply_write");
         return "template";
     }
+
+
+    @RequestMapping("/replyWriteForm.bo")
+    public String replyWriteForm(Model model){
+
+        model.addAttribute("main", "board/reply");
+        return "template";
+    }
+
+
 
     //게시판 추천
     /*한번 누른 유저에 대해서 추천버튼 못누르도록 해라
@@ -121,4 +136,6 @@ public class DsqController {
     public String qboardDown(@RequestParam("qboardNum")int qboardNum,@RequestParam("rpt_no") int rpt_no,HttpServletRequest request, HttpSession session){
         return "redirect:qboardListForm.bo";
     }
+
+
 }
