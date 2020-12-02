@@ -3,7 +3,6 @@ package com.example.finalpro.controller;
 import com.example.finalpro.service.board.*;
 import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,30 +53,32 @@ public class DsqController {
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(Model model){
 
-//        List<QboardVO> list = new ArrayList<QboardVO>();
-//
-//        list = commonBoardListService.qBoardList();
-//
-//        model.addAttribute("list",list);
-//        model.addAttribute("main","board/TestBoardList");
+        List<QboardVO> list = new ArrayList<QboardVO>();
+        list = commonBoardListService.qBoardList();
+        System.out.println(list);
+
+        model.addAttribute("list",list);
         model.addAttribute("main", "board/board_list");
         return "template";
     }
 
     //게시판 내용
     @RequestMapping("/qboardContent.bo")
-//    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
-//
-//        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
-//
-//        model.addAttribute("qBoardVO", qboardVO);
+    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
+
+        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
+        System.out.println("내용 : "  + qboardVO.toString());
+
+        model.addAttribute("qBoardVO", qboardVO);
 //        model.addAttribute("main", "board/TestBoardContent");
-//        return "template";
-//    }
-    public String qboardContent(Model model){
         model.addAttribute("main", "board/reply_write");
         return "template";
     }
+
+//    public String qboardContent(Model model){
+//        model.addAttribute("main", "board/reply_write");
+//        return "template";
+//    }
 
 
     @RequestMapping("/replyWriteForm.bo")

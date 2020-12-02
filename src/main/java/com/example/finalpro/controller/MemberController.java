@@ -77,7 +77,23 @@ public class MemberController {
     @RequestMapping("/joinFormWay.me")
     public String joinFormWay(Model model){
 
-        model.addAttribute("main", "joinFormWay");
+        model.addAttribute("main", "member/join_select");
+        return "template";
+    }
+
+    // 일반회원 이용약관
+    @RequestMapping("/member_agree")
+    public String memberAgree(Model model){
+
+        model.addAttribute("main", "member/general_agreement");
+        return "template";
+    }
+
+    // 사업자 이용약관
+    @RequestMapping("/business_agree")
+    public String businessAgree(Model model){
+
+        model.addAttribute("main", "business/business_agreement");
         return "template";
     }
 
@@ -89,6 +105,8 @@ public class MemberController {
         model.addAttribute("main", "dsqMain");
         return "template";
     }
+
+
 
 
 

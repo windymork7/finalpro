@@ -19,6 +19,7 @@ public class CommonBoardListServiceImpl implements CommonBoardListService {
     @Override
     public List<QboardVO> qBoardList() {
 
+
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy.mm.dd");
 
         List<QboardVO> list = boardDAO.qBoardList();

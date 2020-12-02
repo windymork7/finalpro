@@ -14,7 +14,7 @@
     <!--게시글 조회-->
     <select id="qBoardList" resultType="com.example.finalpro.vo.QboardVO">
         SELECT Q_NO, Q_TITLE, Q_SOS, Q_UP, Q_RPT_CNT, Q_DATE, MEM_NICK
-        FROM MEM M1 LEFT OUTER JOIN Q Q1
+        FROM MEM M1 RIGHT OUTER JOIN Q Q1
         ON M1.MEM_NO = Q1.MEM_NO
     </select>
 
