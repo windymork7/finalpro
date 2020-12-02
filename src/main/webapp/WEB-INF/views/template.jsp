@@ -25,7 +25,11 @@
 
     .section
     {
-        /*height: 70%;*/
+        width: 100%;
+        min-height:1000px;
+        max-height:2000px;
+        height: 100%;
+        display: block;
     }
 
     .footer
@@ -34,7 +38,7 @@
         bottom: 0px;
         width: 100%;
         height: 200px;
-        position: absolute;
+        top:500px;
     }
 </style>
 <body>

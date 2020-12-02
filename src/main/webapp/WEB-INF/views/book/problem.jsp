@@ -43,9 +43,12 @@
          <div id="title" class="col-md-4"></div>
          <div id="problem" class="col-md-8" align="left"></div>
       </div>
-      
-      <div style="height: 40px;"></div>
-      
+
+       <div style="height: 40px;"></div>
+
+       <div id="image" style="height: 200px; width: 400px;"></div>
+
+
       <div class="row" style="height: 250px;" align="left">
          <div class="col-md-2" style="height: 400px;"></div>
          <div id="view" class="col-md-8" style="height: 400px;"></div>
@@ -96,6 +99,8 @@
    
    function javaProblem()
    {
+       $("#image").html("");
+
       random = Math.floor(Math.random()*8);
 
       $("#title").css("border", "1px solid green");
@@ -142,6 +147,8 @@
    
    function cProblem()
    {
+       $("#image").html("");
+
       random = Math.floor(Math.random()*8);
 
       $("#title").css("border", "1px solid green");
@@ -181,49 +188,78 @@
          }
       });
    }
-   //
-   // function pythonProblem()
-   // {
-   //    $("#title").css("border", "1px solid green");
-   //    $("#problem").css("border", "1px solid green");
-   //
-   //
-   //    html = "";
-   //    html += "<font size='10'><strong>문 제</strong></font>";
-   //    $("#title").html(html);
-   //
-   //    $.ajax({
-   //       url : "json/CapitalMoonJae.jsp",
-   //       type : "get",
-   //       data : "",
-   //       success : function(data){
-   //      	var obj = JSON.parse(data);
-   //          var capital = obj.capital;
-   //          var html = "";
-   //
-   //          answer = capital[random].pro[0].val6;
-   //
-   //          html += "<b><font size='6' style='line-height: 68px;'>"+capital[random].pro[0].val0+"</font>";
-   //          $("#problem").html(html);
-   //
-   //          html = "<input type='radio' name='bogi' value='val1'>";
-   //          html += "<span id='val1'><font size='4'>"+capital[random].pro[0].val1+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val2'>";
-   //          html += "<span id='val2'><font size='4'>"+capital[random].pro[0].val2+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val3'>";
-   //          html += "<span id='val3'><font size='4'>"+capital[random].pro[0].val3+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val4'>";
-   //          html += "<span id='val4'><font size='4'>"+capital[random].pro[0].val4+"</font></span><br>";
-   //          html += "<input type='radio' name='bogi' value='val5'>";
-   //          html += "<span id='val5'><font size='4'>"+capital[random].pro[0].val5+"</font></span><br><br>";
-   //          html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
-   //          $("#view").html(html);
-   //       }
-   //    });
-   // }
+
+   function pythonProblem()
+   {
+       $("#image").html("");
+
+      random = Math.floor(Math.random()*8);
+
+
+
+      $("#title").css("border", "1px solid green");
+      $("#problem").css("border", "1px solid green");
+
+
+      html = "";
+      html += "<font size='10'><strong>문 제</strong></font>";
+      $("#title").html(html);
+
+      $.ajax({
+         url : "/PythonProblem.bp",
+         type : "get",
+         data : "",
+         success : function(data){
+        	var obj = JSON.parse(data);
+            var program = obj.program;
+            var html = "";
+
+            answer = program[random].pro[0].val6;
+
+             $("#problem").html(html);
+
+
+            html += "<b><font size='6' style='line-height: 68px;'>"+program[random].pro[0].val0+"</font>";
+            $("#problem").html(html);
+
+             // 그림
+             if (random == 1){
+                 html = "<img src='img/PyProblem1.png'/>"
+                 $("#image").html(html);
+             } else if(random == 3){
+                 html = "<img src='img/PyProblem3.png'/>";
+                 $("#image").html(html);
+             }else if(random == 4){
+                 html = "<img src='img/PyProblem4.png'/>";
+                 $("#image").html(html);
+             }else{
+                 html = "";
+                 $("#image").html(html);
+             }
+
+            html = "<input type='radio' name='bogi' value='val1'>";
+            html += "<span id='val1'><font size='4'>"+program[random].pro[0].val1+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val2'>";
+            html += "<span id='val2'><font size='4'>"+program[random].pro[0].val2+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val3'>";
+            html += "<span id='val3'><font size='4'>"+program[random].pro[0].val3+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val4'>";
+            html += "<span id='val4'><font size='4'>"+program[random].pro[0].val4+"</font></span><br>";
+            html += "<input type='radio' name='bogi' value='val5'>";
+            html += "<span id='val5'><font size='4'>"+program[random].pro[0].val5+"</font></span><br><br>";
+            html += "<div align='center'><button type='button' class='btn btn-danger' onclick='submit("+'answer'+")'>정답확인</button></div>"
+            $("#view").html(html);
+         },
+          error:function(request,status,error){
+              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+          }
+      });
+   }
 
    function oracleProblem()
    {
+       $("#image").html("");
+
       random = Math.floor(Math.random()*8);
 
       $("#title").css("border", "1px solid green");
