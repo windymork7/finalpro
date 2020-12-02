@@ -41,9 +41,9 @@ public class DsqController {
 
     // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
-    public String boardInsertProcess(Model model, QboardVO qboardVO){
+    public String boardInsertProcess(@RequestParam int subCa, Model model, QboardVO qboardVO){
 
-        commonBoardInsertService.qBoardInsert(qboardVO);
+        commonBoardInsertService.qBoardInsert(subCa, qboardVO);
 
 //        model.addAttribute("main","dsqMain");
         return "redirect:qboardListForm.bo";
@@ -51,10 +51,10 @@ public class DsqController {
 
     // 게시판 조회 페이지
     @RequestMapping("/qboardListForm.bo")
-    public String boardListForm(Model model){
+    public String boardListForm(@RequestParam int subCa, Model model){
 
         List<QboardVO> list = new ArrayList<QboardVO>();
-        list = commonBoardListService.qBoardList();
+        list = commonBoardListService.qBoardList(subCa);
         System.out.println(list);
 
         model.addAttribute("list",list);

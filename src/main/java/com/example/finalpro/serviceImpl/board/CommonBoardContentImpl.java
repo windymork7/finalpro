@@ -17,6 +17,8 @@ public class CommonBoardContentImpl implements CommonBoardContent {
 
         QboardVO qboardVO = boardDAO.qBoardContent(q_no);
 
+        qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
+
         return qboardVO;
     }
 }

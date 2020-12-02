@@ -5,6 +5,6 @@ import com.example.finalpro.vo.QboardVO;
 import java.util.List;
 
 public interface CommonBoardListService {
-    public List<QboardVO> qBoardList();
+    public List<QboardVO> qBoardList(int bookCa);
 
 }

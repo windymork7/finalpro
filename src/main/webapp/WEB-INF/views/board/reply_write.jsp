@@ -107,7 +107,7 @@
 					    <h6 class="card-subtitle mb-2">${qBoardVO.mem_nick}</h6>
 					    <p class="card-text">
 					    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-					    1~5번 책 대분류 선택한 것</p>
+					    ${qBoardVO.book_ca_name}</p>
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
@@ -129,7 +129,7 @@
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">
 						  <i class="fa fa-book" aria-hidden="true"></i>
 						</button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집" onclick="editAddContent()">
 						  <i class="fa fa-pencil" aria-hidden="true"></i>
 						</button>
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩">
@@ -182,7 +182,7 @@
                      </div>
                   </div>
                </div>
-					
+				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
 				
 	<div class="card">
@@ -237,6 +237,7 @@
 				</button>
 		</div>
 		&nbsp;
+
 		&nbsp;
 	   <textarea class="form-control" rows="8" id="reply_text" readonly>
 채택 했을 때(질문자, 사용자에게 모두 이렇게 보임)
@@ -298,9 +299,48 @@
    </div>
 
 <script>
+	var html = "";
 	$(function () {
 	    $('[data-toggle="tooltip"]').tooltip();
 	  })
+
+	function editAddContent(){
+
+		if (${sessionScope.userGrade} >= 5){
+
+			html += "<div class=\"card\">\n" +
+					"\t  <div class=\"card-header\">\n" +
+					"\t  ${sessionScope.userNick} (로고)\n" +
+					"\t  </div>\n" +
+					"\t  <div class=\"card-body\">\n" +
+					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+					// "\t    \t<div class=\"btn-group-vertical\">\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t\t20\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t</div>\n" +
+					// "\t\t&nbsp;\n" +
+					// "\t\t&nbsp;\n" +
+					"\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
+					"\t\t</textarea>\n" +
+					"\t   </div>\n" +
+					"<button type='button' class='btn btn-success' onclick='location.href=\"/loginForm.me\"'>전송</button>\n"+
+					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
+					"\t  </div>\n" +
+					"\t</div>";
+
+
+			$("#editAddContentForm").html(html);
+
+		}
+	}
 </script>
 
 </body>

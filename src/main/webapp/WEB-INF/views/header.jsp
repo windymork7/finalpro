@@ -60,7 +60,7 @@
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="">C</a>
-                  <a class="dropdown-item" href="/qboardListForm.bo">JAVA</a>
+                  <a class="dropdown-item" href="/qboardListForm.bo?subCa=1">JAVA</a>
                   <a class="dropdown-item" href="#">PYTHON</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>데이터베이스</b></a>
