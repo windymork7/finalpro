@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.example.finalpro.dao.MemberDAO">
+
+    <!-- 일반 회원가입-->
+    <insert id="commonMemberInsert" parameterType="com.example.finalpro.vo.CommonMemberVO">
+        INSERT INTO MEM(MEM_NO,GRADE_NO,MEM_EMAIL,MEM_PW,MEM_NICK,MEM_NAME,MEM_TEL,MEM_EXP,MEM_RPT_CNT) VALUES(MEM_SEQ.NEXTVAL,1,#{mem_email},#{mem_pw},#{mem_nick},#{mem_name},#{mem_tel},0,0)
+    </insert>
+
+    <!-- 일반 회원 로그인-->
+    <select id="commonMemberLogin" resultType="String">
+        SELECT MEM_PW FROM MEM WHERE MEM_EMAIL=#{param1}
+    </select>
+
+    <!-- 회원 로그인 세션-->
+    <select id="commonMemberSelect" resultType="com.example.finalpro.vo.CommonMemberVO">
+        SELECT * FROM MEM WHERE MEM_EMAIL=#{param1}
+    </select>
+</mapper>

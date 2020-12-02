@@ -34,6 +34,7 @@
         <td>누적신고</td>
         <td>작성일</td>
         <td>작성자</td>
+        <td>스크랩</td>
     </tr>
     <c:forEach var="qboard" items="${list}">
         <tr>
@@ -44,6 +45,7 @@
             <td><input onclick="popup()" type="button" value="${qboard.q_rpt_cnt}"></td>
             <td>${qboard.q_date}</td>
             <td>${qboard.mem_nick}</td>
+            <td><a href="myscrapCheck.my?qboardNum=${qboard.q_no}">스크랩하기</a></td>
         </tr>
     </c:forEach>
 </table>
