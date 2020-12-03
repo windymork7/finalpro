@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -72,13 +73,13 @@
 			  <fieldset>
                   <div>
                      <div id="c_left">
-                        <legend>JAVA</legend>
+                        <legend>${qBoardVO.sub_ca_name}</legend>
                      </div>
                      <div id="c_right">
                      <a href="#">
                         <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo'">답변하기</button>
                      </a>
-                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천">
+                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 						</button>
 						<span data-toggle="modal" data-target="#Modal_1">
@@ -184,102 +185,8 @@
                </div>
 				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
-				
-	<div class="card">
-	  <div class="card-header">
-	  아이디1 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-				<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-				20
-			</button>
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
-				<i class="fa fa-check" aria-hidden="true"></i>
-			</button>
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-				<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-			</button>
-		</div>
-		&nbsp;
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 안 했을 때(질문자에게 이렇게 보임)
-	
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-부족하지만 도움이 되셨기를 바라며 추가적인 문의가 필요하시면 답변 부탁드려요!
-		</textarea>
-	   </div>
-	  </div>
-	</div>
-	<br>
-	
-	<div class="card">
-	  <div class="card-header">
-	  아이디2 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-					<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					20
-				</button>
-				<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="채택">
-					<i class="fa fa-check" aria-hidden="true"></i>
-				</button>
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-				</button>
-		</div>
-		&nbsp;
 
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 했을 때(질문자, 사용자에게 모두 이렇게 보임)
-
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-	   </div>
-	  </div>
-	</div>
-	<br>
-	
-	<div class="card">
-	  <div class="card-header">
-	  아이디3 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-					<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					13
-				</button>
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-				</button>
-			</div>
-		&nbsp;
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 받지 못한 답변
-
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-	   </div>
-	  </div>
-	</div>
+	<c:import url="board/comment.jsp"></c:import>
 	<br>
 				
 				<br>
@@ -305,6 +212,7 @@
 	  })
 
 	function editAddContent(){
+		html = "";
 
 		if (${sessionScope.userGrade} >= 5){
 

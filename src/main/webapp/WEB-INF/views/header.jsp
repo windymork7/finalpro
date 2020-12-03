@@ -32,7 +32,7 @@
       
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">첫걸음</a>
               <div class="dropdown-menu">
@@ -53,7 +53,7 @@
                   <a class="dropdown-item" href="#">DJANGO</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">D'sQ</a>
               <div class="dropdown-menu">
@@ -76,9 +76,9 @@
                 <a class="dropdown-item text-center"><b>검색 Tip</b></a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-                 role="button" aria-haspopup="true" aria-expanded="false">오답노트</a>
+                 role="button" aria-haspopup="true" aria-expanded="false">스크랩북</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
@@ -99,11 +99,11 @@
                 <a class="dropdown-item text-center" href="/todayProblem.bp"><b>오늘의 문제</b></a>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="#">에디터's Tip
               </a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">이벤트</a>
               <div class="dropdown-menu">
@@ -111,7 +111,7 @@
                 <a class="dropdown-item text-center"><b>공모전</b></a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
               <div class="dropdown-menu">

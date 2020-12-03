@@ -157,14 +157,12 @@
 
 
 
-
-
   <div class="tab-pane fade active show" id="complete">
 	  <c:forEach var="qboard" items="${list}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}">
+		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 		  <i class="fa fa-quora" aria-hidden="true"></i>  
 		    ${qboard.q_title}</a></h4>
 		    <small>
@@ -339,7 +337,7 @@
 	<br><br>
 	  <ul class="pagination pagination-lg justify-content-center align-items-center">
 	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
+	      <a class="page-link" href="">&laquo;</a>
 	    </li>
 	    <li class="page-item active">
 	      <a class="page-link" href="#">1</a>
@@ -426,6 +424,9 @@
 				<p>3. 질문 내용에 개인정보(실명, 주민번호, 연락처)가 포함되지 않게 작성해주세요!</p>
                </div>
 		</div>
+	<div style="max-width: 20rem;">
+		<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo'">질문하기</button></a>
+	</div>
 </div>
 
 </div>

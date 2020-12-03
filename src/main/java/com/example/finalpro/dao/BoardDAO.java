@@ -12,9 +12,9 @@ public interface BoardDAO {
     // q게시글 조회
     public List<QboardVO> qBoardList(int subCa);
     // 해당 게시글 조회
-    public QboardVO qBoardContent(int q_no);
+    public QboardVO qBoardContent(int q_no, int subCa);
     // 해당 게시글 추천
-    public int qBoardUpCheck(int mem_no,int q_no);
+    public int qBoardUpCheck(int mem_no, int q_no);
     public void qBoardUpUpdate(int q_no);
     public void qBoardUpInsert(int q_no,int mem_no);
 

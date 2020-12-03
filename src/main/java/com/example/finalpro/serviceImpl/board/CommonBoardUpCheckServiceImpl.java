@@ -16,7 +16,7 @@ public class CommonBoardUpCheckServiceImpl implements CommonBoardUpCheckService 
 	BoardDAO boardDAO;
 
 	@Override
-	public String qBoardUpCheck(int qboardNum, HttpServletRequest request, HttpSession session) {
+	public String qBoardUpCheck(int qboardNum, int subCa, HttpServletRequest request, HttpSession session) {
 
 
 		if (!session.getAttribute("userNo").equals(null)) {	//세션에 담긴 userNo가 없지 않을때
@@ -32,10 +32,10 @@ public class CommonBoardUpCheckServiceImpl implements CommonBoardUpCheckService 
 			if (boardDAO.qBoardUpCheck(mem_no, qboardNum) == 0) {	//up 테이블에 추천누른 정보가 없을때 ( 추천해도될때)
 				System.out.println("if qboardNum: "+qboardNum);
 
-				return "/qboardUpAction.bo?qboardNum=" + qboardNum;
+				return "/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 			}
-			return "/qboardListForm.bo";
+			return "/qboardContent.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 		}
-		return "/qboardListForm.bo";
+		return "/qboardContent.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 	}
 }
