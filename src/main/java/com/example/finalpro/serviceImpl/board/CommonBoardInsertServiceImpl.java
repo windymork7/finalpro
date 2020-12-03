@@ -17,8 +17,8 @@ public class CommonBoardInsertServiceImpl implements CommonBoardInsertService {
     BoardDAO boardDAO;
 
     @Override
-    public void qBoardInsert(int subCa, QboardVO qboardVO) {
+    public void qBoardInsert(QboardVO qboardVO) {
 
-        boardDAO.qBoardInsert(subCa, qboardVO);
+        boardDAO.qBoardInsert(qboardVO);
     }
 }

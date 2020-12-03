@@ -186,7 +186,10 @@
 				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
 
-	<c:import url="board/comment.jsp"></c:import>
+	<c:import url="board/comment.jsp">
+        <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
+        <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
+    </c:import>
 	<br>
 				
 				<br>

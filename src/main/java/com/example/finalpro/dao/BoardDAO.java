@@ -7,8 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface BoardDAO {
+    // q게시글 글쓰기 폼 이동시 북 카테고리 조회
+    public List<QboardVO> bookCategory(int subCa);
+    // q게시글 서브 카테고리 조회
+    public String subCategory(int subCa);
     // q게시글 쓰기
-    public void qBoardInsert(int subCa, QboardVO qboardVO);
+    public void qBoardInsert(QboardVO qboardVO);
     // q게시글 조회
     public List<QboardVO> qBoardList(int subCa);
     // 해당 게시글 조회

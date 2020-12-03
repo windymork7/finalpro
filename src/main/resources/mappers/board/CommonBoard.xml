@@ -5,38 +5,46 @@
 
 
 <mapper namespace="com.example.finalpro.dao.BoardDAO">
+
+    <!--  책 카테고리 -->
+    <select id="bookCategory" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT B.BOOK_CA_NO AS BOOK_CA_NO, B.BOOK_CA_NAME AS BOOK_CA_NAME, SU.SUB_CA_NAME AS SUB_CA_NAME
+        FROM BOOK_CA B,(SELECT * FROM SUB_CA WHERE SUB_CA_NO = #{param1}) SU
+        WHERE B.SUB_CA_NO = SU.SUB_CA_NO
+    </select>
+
+    <!--  서브 카테고리 반환  -->
+    <select id="subCategory" resultType="String">
+        SELECT SUB_CA_NAME
+        FROM SUB_CA
+        WHERE SUB_CA_NO = #{param1}
+    </select>
+
     <!--Q게시판 글쓰기-->
     <insert id="qBoardInsert" parameterType="com.example.finalpro.vo.QboardVO">
         INSERT INTO Q(q_no, mem_no, sub_ca_no, book_ca_no,  q_title, q_content, q_sos, q_up, q_rpt_cnt, q_admin_state)
-         VALUES (Q_SEQ.NEXTVAL, #{mem_no}, #{sub_ca_no}, 0, #{q_title}, #{q_content}, 0, 0, 0, 0)
+         VALUES (Q_SEQ.NEXTVAL, #{mem_no}, #{sub_ca_no}, #{book_ca_no}, #{q_title}, #{q_content}, 0, 0, 0, 0)
     </insert>
 
     <!--게시글 조회-->
     <select id="qBoardList" resultType="com.example.finalpro.vo.QboardVO">
-        SELECT *
-        FROM SUB_CA SA INNER JOIN
-        (SELECT *
-        FROM BOOK_CA BC INNER JOIN
-        (SELECT *
-        FROM MEM M1 RIGHT OUTER JOIN (SELECT * FROM Q) Q1
-        ON M1.MEM_NO = Q1.MEM_NO) MQ
-        ON BC.BOOK_CA_NO = MQ.BOOK_CA_NO) BCMQ
-        ON SA.SUB_CA_NO = BCMQ.SUB_CA_NO
-        WHERE SA.SUB_CA_NO = #{param1}
+        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
+        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
+        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
+        where q1.sub_ca_no = ca.sub_ca_no
+        and bca.book_ca_no = q1.book_ca_no
+        and q1.sub_ca_no = #{param1}
     </select>
 
     <!-- 해당 게시글 조회-->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
-        SELECT *
-        FROM SUB_CA SC INNER JOIN
-        (SELECT *
-        FROM BOOK_CA BC INNER JOIN
-        (SELECT *
-        FROM MEM M1 RIGHT OUTER JOIN (SELECT * FROM Q WHERE Q_NO=#{param1}) Q1
-        ON M1.MEM_NO = Q1.MEM_NO) MQ
-        ON BC.BOOK_CA_NO = MQ.BOOK_CA_NO) BCMQ
-        ON SC.SUB_CA_NO = BCMQ.SUB_CA_NO
-        WHERE SC.SUB_CA_NO = #{param2}
+        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
+        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
+        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
+        where q1.sub_ca_no = ca.sub_ca_no
+        and bca.book_ca_no = q1.book_ca_no
+        and q1.sub_ca_no = #{param2}
+        and q1.q_no=#{param1}
     </select>
     
     <!-- 추천 체크 -->
@@ -56,4 +64,6 @@
     <insert id="qBoardUpInsert" parameterType="com.example.finalpro.vo.QboardVO">
         INSERT INTO UP VALUES(UP_SEQ.nextval,#{q_no},#{mem_no})
     </insert>
+
+
 </mapper>

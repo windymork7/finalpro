@@ -24,8 +24,9 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
 <body>
-<h2> Hello !</h2>
 
+<h1>qboardNum : ${param.qboardNum}</h1>
+<h1>subCa : ${param.subCa}</h1>
 
 <div class="card">
     <div class="card-header">
