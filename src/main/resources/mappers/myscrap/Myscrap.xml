@@ -23,6 +23,6 @@
 		select rownum,ms.q_no,ms.mem_no,q.q_title,ms.my_scrap_date
 from my_scrap ms,( select q_title,q_no from q) q
 where ms.q_no = q.q_no
-and ms.mem_no=#{mem_no} order by ms.my_scrap_date desc;
+and ms.mem_no=#{mem_no} order by ms.my_scrap_date desc
 	</select>
 </mapper>

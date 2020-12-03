@@ -25,6 +25,6 @@
     ${sessionScope.userNo} <br>
     <button type="button" onclick="location.href='/myscrapList.my'">스크랩리스트</button>
     <button type="button" onclick="location.href='/myQuestion.my'">내가한 질문</button>
-	<button type="button" onclick="location.href='#'">정보수정</button>
+	<button type="button" onclick="location.href='/mypageInfo.my'">내정보</button>
 </body>
 </html>

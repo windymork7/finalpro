@@ -9,12 +9,17 @@
 <mapper namespace="com.example.finalpro.dao.MypageDAO">
 	<!-- 마이페이지 내가한 질문 -->
 	<select id="myquestion" resultType="com.example.finalpro.vo.QboardVO" >
-		select rownum,q_no,mem_no,ca.sub_ca_name,book_ca_name,q_title,
+		select rownum,q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
 		q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
 		from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
 		where q1.sub_ca_no = ca.sub_ca_no
 		and bca.book_ca_no = q1.book_ca_no
 		and mem_no=#{mem_no}
 	</select>
-
+	<select id="mypageUpdateForm" resultType="com.example.finalpro.vo.CommonMemberVO">
+		SELECT *
+		FROM MEM M, (SELECT * FROM GRADE)G
+		WHERE MEM_NO=#{MEM_NO}
+		AND M.GRADE_NO = G.GRADE_NO
+	</select>
 </mapper>

@@ -9,6 +9,33 @@ public class CommonMemberVO {
     private String mem_nick;
     private String mem_name;
     private String mem_tel;
+    private String grade_name;
+    private int mem_exp;
+    private String mem_date;
+
+    public String getMem_date() {
+        return mem_date;
+    }
+
+    public void setMem_date(String mem_date) {
+        this.mem_date = mem_date;
+    }
+
+    public int getMem_exp() {
+        return mem_exp;
+    }
+
+    public void setMem_exp(int mem_exp) {
+        this.mem_exp = mem_exp;
+    }
+
+    public String getGrade_name() {
+        return grade_name;
+    }
+
+    public void setGrade_name(String grade_name) {
+        this.grade_name = grade_name;
+    }
 
     public int getMem_no() {
         return mem_no;
@@ -69,11 +96,16 @@ public class CommonMemberVO {
     @Override
     public String toString() {
         return "CommonMemberVO{" +
-                "mem_email='" + mem_email + '\'' +
+                "mem_no=" + mem_no +
+                ", grade_no=" + grade_no +
+                ", mem_email='" + mem_email + '\'' +
                 ", mem_pw='" + mem_pw + '\'' +
                 ", mem_nick='" + mem_nick + '\'' +
                 ", mem_name='" + mem_name + '\'' +
                 ", mem_tel='" + mem_tel + '\'' +
+                ", grade_name='" + grade_name + '\'' +
+                ", mem_exp=" + mem_exp +
+                ", mem_date='" + mem_date + '\'' +
                 '}';
     }
 }

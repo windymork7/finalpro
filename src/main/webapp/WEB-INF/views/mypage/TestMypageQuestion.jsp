@@ -38,7 +38,7 @@
     <c:forEach var="myquestion" items="${list}">
         <tr>
             <td>${myquestion.rownum}</td>
-            <td><a href="qboardContent.bo?qboardNum=${myquestion.q_no}">${myquestion.q_title}</a></td>
+            <td><a href="qboardContent.bo?qboardNum=${myquestion.q_no}&subCa=${myquestion.sub_ca_no}">${myquestion.q_title}</a></td>
             <td>${myquestion.q_date}</td>
             <td>${myquestion.sub_ca_name}</td>
             <td>${myquestion.book_ca_name}</td>
