@@ -425,7 +425,7 @@
                </div>
 		</div>
 	<div style="max-width: 20rem;">
-		<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo'">질문하기</button></a>
+		<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo?subCa=${requestScope.subCa}'">질문하기</button></a>
 	</div>
 </div>
 

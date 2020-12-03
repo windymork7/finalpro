@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%
@@ -46,15 +47,45 @@
       <div class="row">
          <div class="col-sm-3"></div>
          <div class="col-sm-6">
-            <form>
+            <form action="/qboardInsertProcess.bo" method="post">
                <fieldset>
                   <div>
                   <br>
                   <br>
                   <br>
                      <div id="c_left">
-                        <legend>JAVA</legend>
+                        <legend>${subCategory}</legend>
                      </div>
+
+                     <c:choose>
+                        <c:when test="${subCategory eq 'JAVA'}">
+                           <c:set var="sub" value="1"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'PYTHON'}">
+                           <c:set var="sub" value="2"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'C'}">
+                           <c:set var="sub" value="3"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'SPRING'}">
+                           <c:set var="sub" value="4"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'REACT'}">
+                           <c:set var="sub" value="5"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'VUE'}">
+                           <c:set var="sub" value="6"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'ORACLE'}">
+                           <c:set var="sub" value="7"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'MYSQL'}">
+                           <c:set var="sub" value="8"/>
+                        </c:when>
+                        <c:when test="${subCategory eq 'NOSQL'}">
+                           <c:set var="sub" value="9"/>
+                        </c:when>
+                     </c:choose>
                      <div id="c_right">
                         <button type="submit" class="btn btn-secondary">등록하기</button>
                      </div>
@@ -63,28 +94,29 @@
                   
                   <hr class="my-4">
                   <div class="form-group">
-                     <select class="custom-select">
-                        <option selected="">책 분류를 선택하세요</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                     <select class="custom-select" name="book_ca_no">
+                        <option>책 분류를 선택하세요</option>
+                        <c:forEach var="BookCa" items="${Book}">
+                           <option value="${BookCa.book_ca_no}">${BookCa.book_ca_name}</option>
+                        </c:forEach>
                      </select>
                   </div>
 
                   <div class="form-group">
                      <input type="text" class="form-control" placeholder="제목을 입력하세요"
-                        id="title">
+                        id="title" name="q_title">
                   </div>
+
+                  <input type="hidden" name="sub_ca_no" value="${sub}">
+                  <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
                   
                   <div class="form-group">
-                     <textarea class="form-control" id="content" rows="20">
-질문글을 작성할 때  가이드라인을 지켜주세요.
+                     <textarea class="form-control" id="content" name="q_content" rows="20">
+                     질문글을 작성할 때  가이드라인을 지켜주세요.
 
-*필수 작성
-1. 사용하는 언어 버전 : 
-2. 사용하는 IDE : 
+                     *필수 작성
+                     1. 사용하는 언어 버전 :
+                     2. 사용하는 IDE :
                      </textarea>
                   </div>
                   <div class="form-group">

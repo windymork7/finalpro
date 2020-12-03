@@ -23,21 +23,22 @@
 
     }
 
-    .section
+/*    .section
     {
         width: 100%;
-        min-height:1000px;
-        max-height:2000px;
+        min-height:400px;
+        max-height:3000px;
         height: 100%;
         display: block;
-    }
+
+    }*/
 
     .footer
     {
         /*background-color: burlywood;*/
         bottom: 0px;
         width: 100%;
-        height: 200px;
+        height: 100px;
         top:500px;
     }
 </style>
@@ -45,7 +46,7 @@
     <header class="header">
         <c:import url="header.jsp"/>
     </header>
-    <section class="section">
+    <section >
         <c:choose>
             <c:when test="${empty main}">
                 <c:import url="section.jsp"/>
@@ -55,6 +56,9 @@
             </c:otherwise>
         </c:choose>
     </section>
+    <%----%>
+    <div style="height:3vh"></div>
+    <%----%>
     <footer class="footer">
         <c:import url="footer.jsp"/>
     </footer>

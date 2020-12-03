@@ -17,6 +17,12 @@ import java.util.List;
 public class DsqController {
 
     @Autowired
+    CommonSubCateService commonSubCateService;
+
+    @Autowired
+    CommonBoardBookCateSelectService commonBoardBookCateSelectService;
+
+    @Autowired
     CommonBoardInsertService commonBoardInsertService;
 
     @Autowired
@@ -33,19 +39,24 @@ public class DsqController {
     
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
-    public String qBoardInsertForm(Model model){
+    public String qBoardInsertForm(@RequestParam int subCa, Model model){
 
+        List<QboardVO> list = commonBoardBookCateSelectService.bookCategory(subCa);
+        String subcategory = commonSubCateService.subCategory(subCa);
+
+        model.addAttribute("Book", list);
+        model.addAttribute("subCategory", subcategory);
         model.addAttribute("main", "board/dsq_board_write");
         return "template";
     }
 
     // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
-    public String boardInsertProcess(@RequestParam int subCa, Model model, QboardVO qboardVO){
+    public String boardInsertProcess(Model model, QboardVO qboardVO){
 
-        commonBoardInsertService.qBoardInsert(subCa, qboardVO);
+        System.out.println(qboardVO.toString());
+        commonBoardInsertService.qBoardInsert(qboardVO);
 
-//        model.addAttribute("main","dsqMain");
         return "redirect:qboardListForm.bo";
     }
 
@@ -59,8 +70,7 @@ public class DsqController {
 
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
-
-    public String boardListForm(@RequestParam int subCa, Model model){
+    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
 
         List<QboardVO> list = new ArrayList<QboardVO>();
         list = commonBoardListService.qBoardList(subCa);
