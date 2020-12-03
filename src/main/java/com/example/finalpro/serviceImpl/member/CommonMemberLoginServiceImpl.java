@@ -28,7 +28,7 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
             session.setAttribute("userNick", commonMemberVO.getMem_nick());
             session.setAttribute("userGrade", commonMemberVO.getGrade_no());
 //            return "qBoardInsertForm.bo";
-            return "/qBoardInsertForm.bo";
+            return "/";
         }
 
         return "section";

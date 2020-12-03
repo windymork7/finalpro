@@ -69,7 +69,6 @@
       <div class="row">
          <div class="col-sm-3"></div>
          <div class="col-sm-6">
-			<form>
 			  <fieldset>
                   <div>
                      <div id="c_left">
@@ -77,7 +76,7 @@
                      </div>
                      <div id="c_right">
                      <a href="#">
-                        <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo'">답변하기</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
                      </a>
                         <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
@@ -200,7 +199,6 @@
 				<br>
 				
             	</fieldset>
-			</form>
          </div>
          
          

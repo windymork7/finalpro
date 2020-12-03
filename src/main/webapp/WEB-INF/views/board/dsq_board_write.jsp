@@ -108,7 +108,7 @@
                   </div>
 
                   <input type="hidden" name="sub_ca_no" value="${sub}">
-                  <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+                  <input type="hidden" name="mem_no" value=${sessionScope.userNo}>
                   
                   <div class="form-group">
                      <textarea class="form-control" id="content" name="q_content" rows="20">
