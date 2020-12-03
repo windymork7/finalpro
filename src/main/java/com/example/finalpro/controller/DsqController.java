@@ -50,32 +50,42 @@ public class DsqController {
         return "redirect:qboardListForm.bo";
     }
 
-    // 게시판 조회 페이지
+    // 게시판 조회 페이지 ( 찐 )
+//    @RequestMapping("/qboardListForm.bo")
+//    public String boardListForm(Model model){
+
+//        model.addAttribute("main", "board/board_list");
+//        return "template";
+//    }
+
+    // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(Model model){
 
-//        List<QboardVO> list = new ArrayList<QboardVO>();
-//
-//        list = commonBoardListService.qBoardList();
-//
-//        model.addAttribute("list",list);
-//        model.addAttribute("main","board/TestBoardList");
-        model.addAttribute("main", "board/board_list");
+        List<QboardVO> list = new ArrayList<QboardVO>();
+
+        list = commonBoardListService.qBoardList();
+
+        model.addAttribute("list",list);
+        model.addAttribute("main","board/TestBoardList");
         return "template";
     }
 
-    //게시판 내용
-    @RequestMapping("/qboardContent.bo")
-//    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
-//
-//        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
-//
-//        model.addAttribute("qBoardVO", qboardVO);
-//        model.addAttribute("main", "board/TestBoardContent");
+
+
+//      게시판 내용 ( 찐 )
+//    @RequestMapping("/qboardContent.bo")
+//    public String qboardContent(Model model){
+//        model.addAttribute("main", "board/reply_write");
 //        return "template";
 //    }
-    public String qboardContent(Model model){
-        model.addAttribute("main", "board/reply_write");
+    //내가 작업하려고 만든거 ( 게시판 내용 )
+    @RequestMapping("/qboardContent.bo")
+    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
+        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
+
+        model.addAttribute("qBoardVO", qboardVO);
+        model.addAttribute("main", "board/TestBoardContent");
         return "template";
     }
 
