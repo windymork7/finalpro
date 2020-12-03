@@ -12,5 +12,7 @@ public interface MemberDAO {
     public String commonMemberLogin(String commonMemberEmail);
     // 회원정보 조회
     public CommonMemberVO commonMemberSelect(String commonMemberEmail);
+    // 회원정보 수정
+    public CommonMemberVO commonMemberUpdate(CommonMemberVO commonMemberVO);
 
 }

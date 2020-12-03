@@ -16,6 +16,7 @@ public class MypageQuestionImpl implements MypageQuestionService {
 
     @Override
     public List<QboardVO> mypageQuestion(HttpSession session) {
+        System.out.println("내가한질문 Impl");
         int mem_no = (Integer) session.getAttribute("userNo"); // mem_no, q_no String -> int
         System.out.println("mem_no:" + mem_no);
 

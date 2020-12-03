@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import com.example.finalpro.dao.MypageDAO;
 import com.example.finalpro.service.mypage.MypageQuestionService;
+import com.example.finalpro.service.mypage.MypageUpdateActionService;
+import com.example.finalpro.service.mypage.MypageUpdateFormService;
+import com.example.finalpro.vo.CommonMemberVO;
 import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +33,12 @@ public class MypageController {
     MyscrapInsertService myscrapInsertService;
     @Autowired
     MyscrapListService myscrapListService;
-
     @Autowired
     MypageQuestionService mypageQuestionService;
+    @Autowired
+    MypageUpdateFormService mypageUpdateFormService;
+    @Autowired
+    MypageUpdateActionService mypageUpdateActionService;
     //테스트용마이페이지 메인
     @RequestMapping("/mypageMain.my")
     public String mypageMain(Model model) {
@@ -77,7 +83,32 @@ public class MypageController {
         model.addAttribute("list",list);
         model.addAttribute("main","mypage/TestMypageQuestion");
         return "template";
-
     }
 
+    //회원정보 확인
+    @RequestMapping("/mypageInfo.my")
+    public String mypageInfo(Model model,HttpSession session){
+        CommonMemberVO commonMemberVO = mypageUpdateFormService.mypageUpdateForm(session);
+        model.addAttribute("mem",commonMemberVO);
+        model.addAttribute("main","mypage/TestMypageInfo");
+        return "template";
+    }
+
+    /****************회*원*정*보*수*정*폼***************/
+    @RequestMapping("/mypageUpdateForm.my")
+    public String mypageUpdateForm(Model model,HttpSession session){
+        CommonMemberVO commonMemberVO = mypageUpdateFormService.mypageUpdateForm(session);
+        model.addAttribute("mem",commonMemberVO);
+        model.addAttribute("main","mypage/TestMypageUpdateForm");
+        return "template";
+    }
+    //회원정보 수정 액션
+    @RequestMapping("/mypageUpdateAction.my")
+    public String mypagUpdateAction(HttpSession session,CommonMemberVO commonMemberVO){
+        System.out.println(commonMemberVO.toString());
+
+        mypageUpdateActionService.mypageUpdateAction(session,commonMemberVO);
+        return "redirect:mypageInfo.my";
+
+    }
 }

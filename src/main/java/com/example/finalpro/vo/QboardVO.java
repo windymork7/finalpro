@@ -19,7 +19,15 @@ public class QboardVO {
     private int q_admin_state;
     private int grade_no;
     private int ca_no;
+    private int rownum;
 
+    public int getRownum() {
+        return rownum;
+    }
+
+    public void setRownum(int rownum) {
+        this.rownum = rownum;
+    }
 
     public int getQ_no() {
         return q_no;
