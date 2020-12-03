@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.finalpro.dao.MypageDAO;
+import com.example.finalpro.service.mypage.MypageQuestionService;
+import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,7 @@ import com.example.finalpro.service.myscrap.MyscrapListService;
 import com.example.finalpro.vo.MyscrapVO;
 
 @Controller
-public class MyscrapController {
+public class MypageController {
 
     @Autowired
     MyscrapCheckService myscrapCheckService;
@@ -28,6 +31,8 @@ public class MyscrapController {
     @Autowired
     MyscrapListService myscrapListService;
 
+    @Autowired
+    MypageQuestionService mypageQuestionService;
     //테스트용마이페이지 메인
     @RequestMapping("/mypageMain.my")
     public String mypageMain(Model model) {
@@ -62,4 +67,17 @@ public class MyscrapController {
     	return "template";
     	
     }
+    /****************내*가*한*질*문*******************/
+    @RequestMapping("/myQuestion.my")
+    public String myQuestion(Model model,HttpSession session){
+        System.out.println("1: 내가한질문 컨트롤러");
+        List<QboardVO> list = new ArrayList<QboardVO>();
+        System.out.println("2: 내가한질문 컨트롤러 list생성");
+        list = mypageQuestionService.mypageQuestion(session);
+        model.addAttribute("list",list);
+        model.addAttribute("main","mypage/TestMypageQuestion");
+        return "template";
+
+    }
+
 }

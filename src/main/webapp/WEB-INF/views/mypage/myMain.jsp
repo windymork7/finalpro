@@ -21,9 +21,10 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Main 페이지  ${sessionScope.userNo}</h1>
+    <h1>${sessionScope.userNick}</h1>
     ${sessionScope.userNo} <br>
     <button type="button" onclick="location.href='/myscrapList.my'">스크랩리스트</button>
+    <button type="button" onclick="location.href='/myQuestion.my'">내가한 질문</button>
 	<button type="button" onclick="location.href='#'">정보수정</button>
 </body>
 </html>
