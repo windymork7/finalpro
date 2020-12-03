@@ -3,7 +3,6 @@ package com.example.finalpro.controller;
 import com.example.finalpro.service.board.*;
 import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,15 +35,15 @@ public class DsqController {
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(Model model){
 
-        model.addAttribute("main", "board/TestBoard");
+        model.addAttribute("main", "board/dsq_board_write");
         return "template";
     }
 
     // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
-    public String boardInsertProcess(Model model, QboardVO qboardVO){
+    public String boardInsertProcess(@RequestParam int subCa, Model model, QboardVO qboardVO){
 
-        commonBoardInsertService.qBoardInsert(qboardVO);
+        commonBoardInsertService.qBoardInsert(subCa, qboardVO);
 
 //        model.addAttribute("main","dsqMain");
         return "redirect:qboardListForm.bo";
@@ -60,34 +59,39 @@ public class DsqController {
 
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
-    public String boardListForm(Model model){
+
+    public String boardListForm(@RequestParam int subCa, Model model){
 
         List<QboardVO> list = new ArrayList<QboardVO>();
-
-        list = commonBoardListService.qBoardList();
+        list = commonBoardListService.qBoardList(subCa);
+        System.out.println(list);
 
         model.addAttribute("list",list);
-        model.addAttribute("main","board/TestBoardList");
+        model.addAttribute("subCa", subCa);
+        model.addAttribute("main", "board/board_list");
         return "template";
     }
 
+    //게시판 내용
+    @RequestMapping("/qboardContent.bo")
+    public String qboardContent(@RequestParam("qboardNum") int qboardNum,
+                               @RequestParam("subCa") int subCa, Model model){
 
+        QboardVO qboardVO = commonBoardContent.qBoardContent(qboardNum, subCa);
+        System.out.println("내용 : "  + qboardVO.toString());
 
-//      게시판 내용 ( 찐 )
-//    @RequestMapping("/qboardContent.bo")
+        model.addAttribute("qBoardVO", qboardVO);
+//        model.addAttribute("main", "board/TestBoardContent");
+        model.addAttribute("main", "board/reply_write");
+
+    
+        return "template";
+    }
+
 //    public String qboardContent(Model model){
 //        model.addAttribute("main", "board/reply_write");
 //        return "template";
 //    }
-    //내가 작업하려고 만든거 ( 게시판 내용 )
-    @RequestMapping("/qboardContent.bo")
-    public String qboardContent(@RequestParam("qboardNum") String qboardNum, Model model){
-        QboardVO qboardVO = commonBoardContent.qBoardContent(Integer.parseInt(qboardNum));
-
-        model.addAttribute("qBoardVO", qboardVO);
-        model.addAttribute("main", "board/TestBoardContent");
-        return "template";
-    }
 
 
     @RequestMapping("/replyWriteForm.bo")
@@ -110,16 +114,18 @@ public class DsqController {
      * */
     //추천 체크
     @RequestMapping("/qboardUpCheck.bo")
-    public String qboardUpCheck(@RequestParam("qboardNum")int qboardNum, HttpServletRequest request, HttpSession session) {
-    	System.out.println("qboardUpCheck");
-    	String page= commonBoardUpCheckService.qBoardUpCheck(qboardNum, request, session);
+    public String qboardUpCheck(@RequestParam("qboardNum")int qboardNum,
+                                @RequestParam("subCa") int subCa, HttpServletRequest request, HttpSession session) {
+
+    	String page= commonBoardUpCheckService.qBoardUpCheck(qboardNum, subCa, request, session);
     	
     	//참이면 qboardUpAction.bo 거짓이면 qboardListForm.bo
     	return "redirect:"+page;
     }
     //추천 액션
     @RequestMapping("/qboardUpAction.bo")
-    public String qboardUp(@RequestParam("qboardNum")int qboardNum, Model model, HttpServletRequest request, HttpSession session){
+    public String qboardUp(@RequestParam("qboardNum")int qboardNum,
+                           @RequestParam("subCa") int subCa, Model model, HttpServletRequest request, HttpSession session){
 
         System.out.println("업액션컨트롤러");
 
@@ -129,8 +135,9 @@ public class DsqController {
         System.out.println("업액션 mem_no: "+mem_no);
         commonBoardUpService.qBoardUp(mem_no,q_no);
 
-        return "redirect:qboardListForm.bo";
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum + "&subCa=" + subCa;
     }
+
     //신고 체크
     //@RequestMapping("/qboardDownCheck.bo")
     //public String
@@ -146,6 +153,7 @@ public class DsqController {
     public String qboardDown(@RequestParam("qboardNum")int qboardNum,@RequestParam("rpt_no") int rpt_no,HttpServletRequest request, HttpSession session){
         return "redirect:qboardListForm.bo";
     }
+
 
 
 }

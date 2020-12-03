@@ -17,11 +17,13 @@ public class CommonBoardListServiceImpl implements CommonBoardListService {
     BoardDAO boardDAO;
 
     @Override
-    public List<QboardVO> qBoardList() {
+    public List<QboardVO> qBoardList(int subCa) {
+
 
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy.mm.dd");
 
-        List<QboardVO> list = boardDAO.qBoardList();
+        int bookCa = 1;
+        List<QboardVO> list = boardDAO.qBoardList(subCa);
 
         for (int i = 0; i < list.size(); i++) {
 

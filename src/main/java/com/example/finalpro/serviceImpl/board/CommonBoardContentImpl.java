@@ -13,9 +13,11 @@ public class CommonBoardContentImpl implements CommonBoardContent {
     BoardDAO boardDAO;
 
     @Override
-    public QboardVO qBoardContent(int q_no) {
+    public QboardVO qBoardContent(int q_no, int subCa) {
 
-        QboardVO qboardVO = boardDAO.qBoardContent(q_no);
+        QboardVO qboardVO = boardDAO.qBoardContent(q_no, subCa);
+
+        qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
 
         return qboardVO;
     }

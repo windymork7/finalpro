@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -154,25 +155,29 @@
 
 <div id="myTabContent" class="tab-content">
 
+
+
   <div class="tab-pane fade active show" id="complete">
-  <!-- for each문 여기 넣으면 됩니다 -->
+	  <c:forEach var="qboard" items="${list}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="/qboardContent.bo">
+		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 		  <i class="fa fa-quora" aria-hidden="true"></i>  
-		    답변 완료 질문 제목이 들어갑니다.</a></h4>
+		    ${qboard.q_title}</a></h4>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		    	추천수
+		    	${qboard.q_up}
 		    </small>
 		    </div>
-		    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
+		    <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
 		    <p class="card-text">
 		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 		    1~5번 책 대분류 선택한 것</p>
 		  </div>
 	 </div>
+
+	  </c:forEach>
  	 <br>
  	 
 	<div>
@@ -205,24 +210,26 @@
   </div>
   
   <div class="tab-pane fade" id="await">
+	  <c:forEach var="qboard" items="${list}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="#">
-			  <i class="fa fa-quora" aria-hidden="true"></i>  
-			    답변 대기 질문 제목이 들어갑니다.</a>
+		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}">
+			  <i class="fa fa-quora" aria-hidden="true"></i>
+					${qboard.q_title}</a>
 		    </h4>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		    	추천수
+					${qboard.q_up}
 		    </small>
 		    </div>
-		    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
+		    <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
 		    <p class="card-text">
 		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-		    1~5번 책 대분류 선택한 것</p>
+		    ${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
+	  </c:forEach>
  	 <br>
  	 
  	<div>
@@ -273,6 +280,7 @@
 		    1~5번 책 대분류 선택한 것</p>
 		  </div>
 	 </div>
+
  	 <br>
  	 
  	<div>
@@ -329,7 +337,7 @@
 	<br><br>
 	  <ul class="pagination pagination-lg justify-content-center align-items-center">
 	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
+	      <a class="page-link" href="">&laquo;</a>
 	    </li>
 	    <li class="page-item active">
 	      <a class="page-link" href="#">1</a>
@@ -375,7 +383,7 @@
 		  </div>
 	 </div>
  	 <br>
- 	 
+
  	<div>
 	<br><br>
 	  <ul class="pagination pagination-lg justify-content-center align-items-center">
@@ -416,6 +424,9 @@
 				<p>3. 질문 내용에 개인정보(실명, 주민번호, 연락처)가 포함되지 않게 작성해주세요!</p>
                </div>
 		</div>
+	<div style="max-width: 20rem;">
+		<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo'">질문하기</button></a>
+	</div>
 </div>
 
 </div>

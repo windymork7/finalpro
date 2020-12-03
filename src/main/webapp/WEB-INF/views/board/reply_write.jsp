@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -72,13 +73,13 @@
 			  <fieldset>
                   <div>
                      <div id="c_left">
-                        <legend>JAVA</legend>
+                        <legend>${qBoardVO.sub_ca_name}</legend>
                      </div>
                      <div id="c_right">
                      <a href="#">
                         <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo'">답변하기</button>
                      </a>
-                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천">
+                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 						</button>
 						<span data-toggle="modal" data-target="#Modal_1">
@@ -96,37 +97,40 @@
 					  <div class="d-flex w-100 justify-content-between">
 					  	<h4 class="card-title">
 					  		<i class="fa fa-quora" aria-hidden="true"></i>
-					  		질문 제목이 들어갑니다.
+					  		${qBoardVO.q_title}
 					  	</h4>
 					  	<small>
 					    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					    	13
+					    	${qBoardVO.q_up}
 					    </small>
 					    </div>
-					    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
-					    <h6 class="card-subtitle mb-2">글쓴이ID</h6>
+					    <h6 class="card-subtitle mb-2 text-muted text-right">${qBoardVO.q_date}</h6>
+					    <h6 class="card-subtitle mb-2">${qBoardVO.mem_nick}</h6>
 					    <p class="card-text">
 					    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-					    1~5번 책 대분류 선택한 것</p>
+					    ${qBoardVO.book_ca_name}</p>
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
 					    <textarea class="form-control" rows="20" readonly>
-진로를 컴퓨터 프로그래머쪽으로 가고싶은 고1입니다.
-가고 싶은 분야는 앱, 웹쪽으로 가고 싶고
-선호하는 언어는 앱, 웹쪽이니까 Java 입니다.
-제가 온라인 강의로 통해서 언어를 배우고 싶습니다만
-저희 집에는 컴퓨터는 없고, 노트북 한대 있습니다.
-노트북이 좋은 것도 아니고 가끔씩 인터넷만 켜도 렉걸리는 노트북인데, 심하게 걸리는건 아주 가끔이라서 쓸만 합니다.(모델명 : 노트북 컴퓨터 LGR58)
-저는 이 노트북으로 언어를 배우는 시도조차 못할 것을 인지하고 부모님에게 설득을 하면서 컴퓨터 하나 사달라고 했는데, 지금 이 노트북으로 할 수 있으면서 왜 컴퓨터를 살려고 하니 등...전혀 설득이 되지 않습니다.
-이 부분에 대해서 알려주시면 감사하겠습니다.
+							${qBoardVO.q_content}
+
+
+<%--진로를 컴퓨터 프로그래머쪽으로 가고싶은 고1입니다.--%>
+<%--가고 싶은 분야는 앱, 웹쪽으로 가고 싶고--%>
+<%--선호하는 언어는 앱, 웹쪽이니까 Java 입니다.--%>
+<%--제가 온라인 강의로 통해서 언어를 배우고 싶습니다만--%>
+<%--저희 집에는 컴퓨터는 없고, 노트북 한대 있습니다.--%>
+<%--노트북이 좋은 것도 아니고 가끔씩 인터넷만 켜도 렉걸리는 노트북인데, 심하게 걸리는건 아주 가끔이라서 쓸만 합니다.(모델명 : 노트북 컴퓨터 LGR58)--%>
+<%--저는 이 노트북으로 언어를 배우는 시도조차 못할 것을 인지하고 부모님에게 설득을 하면서 컴퓨터 하나 사달라고 했는데, 지금 이 노트북으로 할 수 있으면서 왜 컴퓨터를 살려고 하니 등...전혀 설득이 되지 않습니다.--%>
+<%--이 부분에 대해서 알려주시면 감사하겠습니다.--%>
 						</textarea>
 						<br>
 						<div id="q_right">
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">
 						  <i class="fa fa-book" aria-hidden="true"></i>
 						</button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집" onclick="editAddContent()">
 						  <i class="fa fa-pencil" aria-hidden="true"></i>
 						</button>
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩">
@@ -179,103 +183,10 @@
                      </div>
                   </div>
                </div>
-					
+				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
-				
-	<div class="card">
-	  <div class="card-header">
-	  아이디1 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-				<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-				20
-			</button>
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
-				<i class="fa fa-check" aria-hidden="true"></i>
-			</button>
-			<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-				<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-			</button>
-		</div>
-		&nbsp;
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 안 했을 때(질문자에게 이렇게 보임)
-	
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-부족하지만 도움이 되셨기를 바라며 추가적인 문의가 필요하시면 답변 부탁드려요!
-		</textarea>
-	   </div>
-	  </div>
-	</div>
-	<br>
-	
-	<div class="card">
-	  <div class="card-header">
-	  아이디2 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-					<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					20
-				</button>
-				<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="채택">
-					<i class="fa fa-check" aria-hidden="true"></i>
-				</button>
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-				</button>
-		</div>
-		&nbsp;
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 했을 때(질문자, 사용자에게 모두 이렇게 보임)
 
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-	   </div>
-	  </div>
-	</div>
-	<br>
-	
-	<div class="card">
-	  <div class="card-header">
-	  아이디3 (로고)
-	  </div>
-	  <div class="card-body">
-	    <div class="card-text d-flex justify-content-between align-items-center">
-	    	<div class="btn-group-vertical">
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-					<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					13
-				</button>
-				<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-				</button>
-			</div>
-		&nbsp;
-		&nbsp;
-	   <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 받지 못한 답변
-
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-	   </div>
-	  </div>
-	</div>
+	<c:import url="board/comment.jsp"></c:import>
 	<br>
 				
 				<br>
@@ -295,9 +206,49 @@
    </div>
 
 <script>
+	var html = "";
 	$(function () {
 	    $('[data-toggle="tooltip"]').tooltip();
 	  })
+
+	function editAddContent(){
+		html = "";
+
+		if (${sessionScope.userGrade} >= 5){
+
+			html += "<div class=\"card\">\n" +
+					"\t  <div class=\"card-header\">\n" +
+					"\t  ${sessionScope.userNick} (로고)\n" +
+					"\t  </div>\n" +
+					"\t  <div class=\"card-body\">\n" +
+					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+					// "\t    \t<div class=\"btn-group-vertical\">\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t\t20\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
+					// "\t\t\t\t<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
+					// "\t\t\t</button>\n" +
+					// "\t\t</div>\n" +
+					// "\t\t&nbsp;\n" +
+					// "\t\t&nbsp;\n" +
+					"\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
+					"\t\t</textarea>\n" +
+					"\t   </div>\n" +
+					"<button type='button' class='btn btn-success' onclick='location.href=\"/loginForm.me\"'>전송</button>\n"+
+					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
+					"\t  </div>\n" +
+					"\t</div>";
+
+
+			$("#editAddContentForm").html(html);
+
+		}
+	}
 </script>
 
 </body>

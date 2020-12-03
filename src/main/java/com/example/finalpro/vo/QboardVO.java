@@ -5,6 +5,8 @@ public class QboardVO {
 
     private int q_no;
     private int mem_no;
+    private String sub_ca_name;
+    private String book_ca_name;
     private String mem_nick;
     private int sub_ca_no;
     private int book_ca_no;
@@ -17,6 +19,7 @@ public class QboardVO {
     private int q_admin_state;
     private int grade_no;
     private int ca_no;
+
 
     public int getQ_no() {
         return q_no;
@@ -32,6 +35,22 @@ public class QboardVO {
 
     public void setMem_no(int mem_no) {
         this.mem_no = mem_no;
+    }
+
+    public String getSub_ca_name() {
+        return sub_ca_name;
+    }
+
+    public void setSub_ca_name(String sub_ca_name) {
+        this.sub_ca_name = sub_ca_name;
+    }
+
+    public String getBook_ca_name() {
+        return book_ca_name;
+    }
+
+    public void setBook_ca_name(String book_ca_name) {
+        this.book_ca_name = book_ca_name;
     }
 
     public String getMem_nick() {

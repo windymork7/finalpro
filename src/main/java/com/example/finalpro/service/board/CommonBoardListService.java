@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public interface CommonBoardListService {
-    public List<QboardVO> qBoardList();
+    public List<QboardVO> qBoardList(int bookCa);
 
 }
