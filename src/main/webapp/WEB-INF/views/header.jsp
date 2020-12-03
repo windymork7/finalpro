@@ -136,7 +136,8 @@
                   <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:when>
                 <c:otherwise>
-                  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
+                  <!--  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>-->
+                  <span><a href="mypageMain.my">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:otherwise>
               </c:choose>
               <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>

@@ -49,8 +49,17 @@ public class DsqController {
         return "redirect:qboardListForm.bo";
     }
 
-    // 게시판 조회 페이지
+    // 게시판 조회 페이지 ( 찐 )
+//    @RequestMapping("/qboardListForm.bo")
+//    public String boardListForm(Model model){
+
+//        model.addAttribute("main", "board/board_list");
+//        return "template";
+//    }
+
+    // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
+
     public String boardListForm(@RequestParam int subCa, Model model){
 
         List<QboardVO> list = new ArrayList<QboardVO>();
@@ -74,6 +83,8 @@ public class DsqController {
         model.addAttribute("qBoardVO", qboardVO);
 //        model.addAttribute("main", "board/TestBoardContent");
         model.addAttribute("main", "board/reply_write");
+
+    
         return "template";
     }
 

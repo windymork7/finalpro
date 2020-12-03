@@ -29,23 +29,15 @@
     <tr>
         <td>번호</td>
         <td>제목</td>
-        <td>긴급상태</td>
-        <td>추천</td>
-        <td>누적신고</td>
         <td>작성일</td>
-        <td>작성자</td>
-        <td>스크랩</td>
+
+
     </tr>
-    <c:forEach var="qboard" items="${list}">
+    <c:forEach var="myscrap" items="${list}">
         <tr>
-            <td>${qboard.q_no}</td>
-            <td><a href="qboardContent.bo?qboardNum=${qboard.q_no}">${qboard.q_title}</a></td>
-            <td>${qboard.q_sos}</td>
-            <td><a href="qboardUpCheck.bo?qboardNum=${qboard.q_no}">${qboard.q_up}</a></td>
-            <td><input onclick="popup()" type="button" value="${qboard.q_rpt_cnt}"></td>
-            <td>${qboard.q_date}</td>
-            <td>${qboard.mem_nick}</td>
-            <td><a href="myscrapCheck.my?qboardNum=${qboard.q_no}">스크랩하기</a></td>
+            <td>${myscrap.rownum}</td>
+            <td><a href="qboardContent.bo?qboardNum=${myscrap.q_no}">${myscrap.q_title}</a></td>
+            <td>${myscrap.my_scrap_date}</td>
         </tr>
     </c:forEach>
 </table>

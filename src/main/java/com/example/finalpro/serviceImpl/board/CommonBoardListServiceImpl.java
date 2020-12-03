@@ -31,8 +31,6 @@ public class CommonBoardListServiceImpl implements CommonBoardListService {
         }
 
 
-
-
         return list;
     }
 }
