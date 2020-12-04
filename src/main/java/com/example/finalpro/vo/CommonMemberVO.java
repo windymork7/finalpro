@@ -14,6 +14,15 @@ public class CommonMemberVO {
     private String mem_date;
     private int rownum;
     private String mem_black_date;
+    private String sysdate;
+
+    public String getSysdate() {
+        return sysdate;
+    }
+
+    public void setSysdate(String sysdate) {
+        this.sysdate = sysdate;
+    }
 
     public String getMem_black_date() {
         return mem_black_date;

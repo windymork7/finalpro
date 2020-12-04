@@ -105,7 +105,12 @@ public class MemberController {
         model.addAttribute("main", "dsqMain");
         return "template";
     }
-
+    // 제제된 회원 alert
+    @RequestMapping("/loginFail.me")
+    public String loginFail(Model model){
+        model.addAttribute("main","member/loginFailPopup");
+        return "template";
+    }
     // 회원 제재
 
 

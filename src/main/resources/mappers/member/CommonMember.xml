@@ -20,7 +20,7 @@
 
     <!-- 회원 로그인 세션-->
     <select id="commonMemberSelect" resultType="com.example.finalpro.vo.CommonMemberVO">
-        SELECT * FROM MEM WHERE MEM_EMAIL=#{param1}
+        SELECT * FROM MEM ,(select sysdate from dual) WHERE MEM_EMAIL=#{param1}
     </select>
     <!-- 회원 수정   -->
     <select id="commonMemberUpdate" parameterType="com.example.finalpro.vo.CommonMemberVO">
