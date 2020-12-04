@@ -38,12 +38,13 @@
 
     <!-- 해당 게시글 조회-->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
-        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
-        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
-        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
+        select q1.q_no,q1.mem_no, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
+        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
+        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca,(select * from mem)m
         where q1.sub_ca_no = ca.sub_ca_no
         and bca.book_ca_no = q1.book_ca_no
-        and q1.sub_ca_no = #{param2}
+        and q1.mem_no = m.mem_no
+        and q1.sub_ca_no =#{param2}
         and q1.q_no=#{param1}
     </select>
     
@@ -81,7 +82,7 @@
     <!-- 게시판 신고 업데이트 -->
     <update id="qBoardDownUpdate">
         UPDATE Q
-        SET Q_RPT_CNT = Q_RPT_CNT+1
+        SET Q_RPT_CNT = +1
         WHERE Q_NO = #{param1}
     </update>
 
@@ -142,6 +143,29 @@
         ]]>
     </update>
 
+    <!-- 댓글 신고 체크 -->
+    <select id="replyDownCheck" resultType="Integer">
+        SELECT NVL(MAX(RD.MEM_NO), 0)
+        FROM REPLY R,
+        (SELECT R.RPT_NO, R.RPT_CONTENT, D.REPLY_DOWN_NO, D.REPLY_NO, D.MEM_NO
+        FROM RPT R, REPLY_DOWN D
+        WHERE R.RPT_NO = D.RPT_NO) RD
+        WHERE R.REPLY_NO = RD.REPLY_NO
+        AND R.REPLY_NO = #{param1}
+        AND RD.MEM_NO = #{param2}
+    </select>
+
+    <!-- 댓글 신고 업데이트 -->
+    <update id="replyDownUpdate">
+        UPDATE REPLY
+        SET REPLY_RPT_CNT = REPLY_RPT_CNT + 1
+        WHERE REPLY_NO = #{param1}
+    </update>
+
+    <!-- 댓글 신고 INSERT -->
+    <insert id="replyDownInsert">
+        INSERT INTO REPLY_DOWN VALUES(REPLY_DOWN_SEQ.NEXTVAL, #{param1}, #{param3}, #{param2})
+    </insert>
 
 
 </mapper>

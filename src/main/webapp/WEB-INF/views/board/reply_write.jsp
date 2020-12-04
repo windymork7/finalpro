@@ -70,7 +70,7 @@
 			  <fieldset>
                   <div>
                      <div id="c_left">
-                        <legend>${qBoardVO.sub_ca_name}</legend>
+                        <a href="/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}"><legend>${qBoardVO.sub_ca_name}</legend></a>
                      </div>
                      <div id="c_right">
                          <c:choose>
@@ -120,19 +120,7 @@
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
-					    <textarea class="form-control" rows="20" readonly>
-							${qBoardVO.q_content}
-
-
-<%--진로를 컴퓨터 프로그래머쪽으로 가고싶은 고1입니다.--%>
-<%--가고 싶은 분야는 앱, 웹쪽으로 가고 싶고--%>
-<%--선호하는 언어는 앱, 웹쪽이니까 Java 입니다.--%>
-<%--제가 온라인 강의로 통해서 언어를 배우고 싶습니다만--%>
-<%--저희 집에는 컴퓨터는 없고, 노트북 한대 있습니다.--%>
-<%--노트북이 좋은 것도 아니고 가끔씩 인터넷만 켜도 렉걸리는 노트북인데, 심하게 걸리는건 아주 가끔이라서 쓸만 합니다.(모델명 : 노트북 컴퓨터 LGR58)--%>
-<%--저는 이 노트북으로 언어를 배우는 시도조차 못할 것을 인지하고 부모님에게 설득을 하면서 컴퓨터 하나 사달라고 했는데, 지금 이 노트북으로 할 수 있으면서 왜 컴퓨터를 살려고 하니 등...전혀 설득이 되지 않습니다.--%>
-<%--이 부분에 대해서 알려주시면 감사하겠습니다.--%>
-						</textarea>
+					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 						<div id="q_right">
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">

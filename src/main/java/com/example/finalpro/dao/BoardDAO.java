@@ -41,6 +41,12 @@ public interface BoardDAO {
     // 댓글 채택
     public void replyPick(int reply_no);
     public void replyAnotherPick();
+    
+    // 댓글 신고
+    public int replyDownCheck(int reply_no, int mem_no);
+    public void replyDownUpdate(int reply_no);
+    public void replyDownInsert(int reply_no, int mem_no, int rpt_no);
+
 
 
 
