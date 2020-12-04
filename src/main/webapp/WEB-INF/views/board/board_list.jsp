@@ -176,7 +176,7 @@
 		    ${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
-
+		  <br>
 	  </c:forEach>
  	 <br>
  	 

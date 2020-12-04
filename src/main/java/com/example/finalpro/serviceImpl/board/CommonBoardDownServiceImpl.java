@@ -15,9 +15,23 @@ public class CommonBoardDownServiceImpl implements CommonBoardDownService {
     BoardDAO boardDAO;
 
     @Override
-    public void qBoardDown(int q_no,int mem_no, int rpt_no) {
-        boardDAO.qBoardDownUpdate(q_no);
-        boardDAO.qBoardDownInsert(q_no,mem_no,rpt_no);
+    public void qBoardDown(HttpServletRequest request) {
 
+        HttpSession session = request.getSession();
+        int mem_no = (Integer)session.getAttribute("userNo");
+        int q_no = Integer.parseInt(request.getParameter("qboardNum"));
+        int radio = Integer.parseInt(request.getParameter("customRadio"));
+
+
+        System.out.println(boardDAO.qBoardDownCheck(mem_no, q_no));
+
+        if (boardDAO.qBoardDownCheck(mem_no, q_no) == 0){
+            boardDAO.qBoardDownUpdate(q_no);
+            boardDAO.qBoardDownInsert(q_no, mem_no, radio);
+        }
+
+
+//        boardDAO.qBoardDownUpdate(q_no);
+//        boardDAO.qBoardDownInsert(q_no,mem_no,rpt_no);
     }
 }

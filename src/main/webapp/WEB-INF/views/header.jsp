@@ -59,18 +59,18 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="">C</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=3">C</a>
                   <a class="dropdown-item" href="/qboardListForm.bo?subCa=1">JAVA</a>
-                  <a class="dropdown-item" href="#">PYTHON</a>
+                  <a class="dropdown-item" href="/qboardListForm.bo?subCa=2">PYTHON</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>데이터베이스</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">ORACLE</a>
-                  <a class="dropdown-item" href="#">MYSQL</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=7">ORACLE</a>
+                  <a class="dropdown-item" href="/qboardListForm.bo?subCa=8">MYSQL</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>프레임워크</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">SPRING</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=4">SPRING</a>
                   <a class="dropdown-item" href="#">DJANGO</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>검색 Tip</b></a>
