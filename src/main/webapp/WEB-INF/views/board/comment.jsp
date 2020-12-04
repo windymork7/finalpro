@@ -25,103 +25,90 @@
         crossorigin="anonymous"></script>
 <body>
 
-<h1>qboardNum : ${param.qboardNum}</h1>
-<h1>subCa : ${param.subCa}</h1>
+<div id="commentListForm"></div>
 
-<div class="card">
-    <div class="card-header">
-        아이디1 (로고)
-    </div>
-    <div class="card-body">
-        <div class="card-text d-flex justify-content-between align-items-center">
-            <div class="btn-group-vertical">
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                    20
-                </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                </button>
-            </div>
-            &nbsp;
-            &nbsp;
-            <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 안 했을 때(질문자에게 이렇게 보임)
-
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-부족하지만 도움이 되셨기를 바라며 추가적인 문의가 필요하시면 답변 부탁드려요!
-		</textarea>
-        </div>
-    </div>
-</div>
-<br>
-
-<div class="card">
-    <div class="card-header">
-        아이디2 (로고)
-    </div>
-    <div class="card-body">
-        <div class="card-text d-flex justify-content-between align-items-center">
-            <div class="btn-group-vertical">
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                    20
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="채택">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                </button>
-            </div>
-            &nbsp;
-
-            &nbsp;
-            <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 했을 때(질문자, 사용자에게 모두 이렇게 보임)
-
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-        </div>
-    </div>
-</div>
-<br>
-
-<div class="card">
-    <div class="card-header">
-        아이디3 (로고)
-    </div>
-    <div class="card-body">
-        <div class="card-text d-flex justify-content-between align-items-center">
-            <div class="btn-group-vertical">
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                    13
-                </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                </button>
-            </div>
-            &nbsp;
-            &nbsp;
-            <textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 받지 못한 답변
-
-질문하신 내용에 대하여 아래와 같이 답변 드립니다.
-인터넷만 켜도 렉 걸리는정도면 새로 맞추시는게 좋습니다.
-요즘은 장비가 비싸지 않아서 저렴하게 맞출수 있고공부하는 모습을 보여주시면서 설득을 하셔야할것 같습니다.
-독학을 고려하신다면 꼭 바꾸시는게 맞습니다
-		</textarea>
-        </div>
-    </div>
-</div>
+<input type="hidden" id="qboardNum" value="${param.qboardNum}">
+<input type="hidden" id="subCa" value="${param.subCa}">
+<input type="hidden" id="sessionNick" value="${sessionScope.userNick}">
+<input type="hidden" id="sessionNo" value="${sessionScope.userNo}">
 </body>
+<script>
+    $(document).ready(function(){
+        getCommentList();
+    });
+
+    function getCommentList(){
+
+        var qboardNum = $("#qboardNum").val();
+        var subCa = $("#subCa").val();
+        var sessionNick = $("#sessionNick").val();
+
+        console.log("처음 : "+sessionNick);
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/replyList.bo",
+                dataType : "json",
+                data : {
+                    "q_no" : qboardNum,
+                },
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(data)
+                {
+                    // alert(data.length);
+                    var html = "";
+
+
+                    for (var i = 0; i < data.length; i++) {
+
+                            console.log(data[i]);
+
+
+                        html += "<div class=\"card\">\n" +
+                            "    <div class=\"card-header\">\n" +
+                            "        " + data[i].mem_nick +"\n" +
+                            "    </div>\n" +
+                            "    <div class=\"card-body\">\n" +
+                            "        <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+                            "            <div class=\"btn-group-vertical\">\n" +
+                            "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\" onclick='location.href=\"/replyUpCheck.bo?replyNum="+data[i].reply_no+"&subCa="+subCa+"&qboardNum="+qboardNum+"\"'>\n" +
+                            "                    <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
+                            "                    "+ data[i].reply_up +"\n" +
+                            "                </button>\n";
+                            if(data[i].reply_pick == 0){
+                                html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+                                "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
+                                "                </button>\n";
+                            } else if(data[i].reply_pick == 1){
+                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+                                "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
+                                "                </button>\n";
+                            } else if(data[i].reply_pick == -1){}
+                            html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
+                            "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
+                            "                </button>\n" +
+                            "            </div>\n" +
+                            "            &nbsp;\n" +
+                            "            &nbsp;\n" +
+                            "            <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\" readonly>\n" +
+                            "                "+ data[i].reply_content+"\n" +
+                            "\t\t</textarea>\n" +
+                            "        </div>\n" +
+                            "    </div>\n" +
+                            "</div>";
+
+
+                        $("#commentListForm").html(html);
+                    }
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+
+    }
+</script>
 </html>

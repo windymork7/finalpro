@@ -2,19 +2,36 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.board.*;
 import com.example.finalpro.vo.QboardVO;
+import com.example.finalpro.vo.ReplyBoardVO;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
 public class DsqController {
+
+    @Autowired
+    CommonReplyUpCheckService commonReplyUpCheckService;
+
+    @Autowired
+    CommonReplyListService commonReplyListService;
+
+    @Autowired
+    CommonReplyInsertService commonReplyInsertService;
 
     @Autowired
     CommonSubCateService commonSubCateService;
@@ -54,7 +71,7 @@ public class DsqController {
     @RequestMapping("/qboardInsertProcess.bo")
     public String boardInsertProcess(Model model, QboardVO qboardVO){
 
-        System.out.println(qboardVO.toString());
+        System.out.println("QboardVO : " + qboardVO.toString());
         commonBoardInsertService.qBoardInsert(qboardVO);
 
         return "redirect:qboardListForm.bo";
@@ -103,14 +120,62 @@ public class DsqController {
 //        return "template";
 //    }
 
-
+    // 댓글 쓰기 페이지
     @RequestMapping("/replyWriteForm.bo")
-    public String replyWriteForm(Model model){
+    public String replyWriteForm(@RequestParam int qboardNum,
+                                @RequestParam int subCa, Model model){
 
+        QboardVO qboardVO = commonBoardContent.qBoardContent(qboardNum, subCa);
+
+        model.addAttribute("qBoardVO", qboardVO);
         model.addAttribute("main", "board/reply");
         return "template";
     }
 
+    // 댓글 쓰기 프로세스
+    @RequestMapping("/replyWriteProcess.bo")
+    public String replyWriteProcess(@RequestParam int subCa, Model model, ReplyBoardVO replyBoardVO){
+
+        commonReplyInsertService.replyInsertProcess(replyBoardVO);
+
+        int qboardNum = replyBoardVO.getQ_no();
+
+        return "redirect:/qboardContent.bo?qboardNum="+ qboardNum + "&subCa=" + subCa;
+    }
+
+    // 댓글 리스트
+    @RequestMapping(value = "/replyList.bo", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity replyList(@ModelAttribute("ReplyBoardVO") ReplyBoardVO replyBoardVO, HttpSession session){
+//        System.out.println("replyBoardVO : " + replyBoardVO);
+//        System.out.println("sessionNick : " + (String)session.getAttribute("userNick"));
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+
+        List<ReplyBoardVO> replyVOlist = new ArrayList<ReplyBoardVO>();
+
+        replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
+        System.out.println(replyVOlist);
+
+        if (replyVOlist.size() > 0){
+            for (int i = 0; i < replyVOlist.size(); i++) {
+                HashMap hm = new HashMap();
+                hm.put("reply_no", replyVOlist.get(i).getReply_no());
+                hm.put("q_no", replyVOlist.get(i).getQ_no());
+                hm.put("mem_no", replyVOlist.get(i).getMem_no());
+                hm.put("mem_nick", replyVOlist.get(i).getMem_nick());
+                hm.put("reply_content", replyVOlist.get(i).getReply_content());
+                hm.put("reply_pick", replyVOlist.get(i).getReply_pick());
+                hm.put("reply_up", replyVOlist.get(i).getReply_up());
+                hm.put("reply_rpt_cnt", replyVOlist.get(i).getReply_rpt_cnt());
+
+                hmlist.add(hm);
+            }
+        }
+        JSONArray jsonArray = new JSONArray(hmlist);
+        return new ResponseEntity(jsonArray.toString(), responseHeaders, HttpStatus.CREATED);
+    }
 
 
     //게시판 추천
@@ -132,7 +197,7 @@ public class DsqController {
     	//참이면 qboardUpAction.bo 거짓이면 qboardListForm.bo
     	return "redirect:"+page;
     }
-    //추천 액션
+    // 게시판 추천 액션
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum,
                            @RequestParam("subCa") int subCa, Model model, HttpServletRequest request, HttpSession session){
@@ -147,6 +212,21 @@ public class DsqController {
 
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum + "&subCa=" + subCa;
     }
+
+    // 댓글 추천 체크
+    @RequestMapping("/replyUpCheck.bo")
+    public String replyUpCheck(HttpServletRequest request, HttpSession session, Model model){
+
+        String qboardNum = request.getParameter("qboardNum");
+        String subCa = request.getParameter("subCa");
+
+
+        int check = commonReplyUpCheckService.replyUpCheck(request, session);
+        System.out.println("check : " + check);
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
+    }
+
 
     //신고 체크
     //@RequestMapping("/qboardDownCheck.bo")

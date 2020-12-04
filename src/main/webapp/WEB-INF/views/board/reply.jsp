@@ -42,14 +42,13 @@
       <div class="row">
          <div class="col-sm-3"></div>
          <div class="col-sm-6">
-            <form>
                <fieldset>
                   <div>
                   <br>
                   <br>
                   <br>
                      <div>
-                        <legend>JAVA</legend>
+                        <legend>${qBoardVO.sub_ca_name}</legend>
                      </div>
                   </div>
                   <hr class="my-4">
@@ -58,30 +57,23 @@
 					  <div class="d-flex w-100 justify-content-between">
 					  	<h4 class="card-title">
 					  		<i class="fa fa-quora" aria-hidden="true"></i>
-					  		질문 제목이 들어갑니다.
+                            ${qBoardVO.q_title}
 					  	</h4>
 					  	<small>
 					    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-					    	13
+                            ${qBoardVO.q_up}
 					    </small>
 					    </div>
-					    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
-					    <h6 class="card-subtitle mb-2">글쓴이ID (로고)</h6>
+					    <h6 class="card-subtitle mb-2 text-muted text-right">${qBoardVO.q_date}</h6>
+					    <h6 class="card-subtitle mb-2">${qBoardVO.mem_nick} (로고)</h6>
 					    <p class="card-text">
 					    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-					    1~5번 책 대분류 선택한 것</p>
+                            ${qBoardVO.book_ca_name}</p>
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
 					    <textarea class="form-control" rows="20" readonly>
-진로를 컴퓨터 프로그래머쪽으로 가고싶은 고1입니다.
-가고 싶은 분야는 앱, 웹쪽으로 가고 싶고
-선호하는 언어는 앱, 웹쪽이니까 Java 입니다.
-제가 온라인 강의로 통해서 언어를 배우고 싶습니다만
-저희 집에는 컴퓨터는 없고, 노트북 한대 있습니다.
-노트북이 좋은 것도 아니고 가끔씩 인터넷만 켜도 렉걸리는 노트북인데, 심하게 걸리는건 아주 가끔이라서 쓸만 합니다.(모델명 : 노트북 컴퓨터 LGR58)
-저는 이 노트북으로 언어를 배우는 시도조차 못할 것을 인지하고 부모님에게 설득을 하면서 컴퓨터 하나 사달라고 했는데, 지금 이 노트북으로 할 수 있으면서 왜 컴퓨터를 살려고 하니 등...전혀 설득이 되지 않습니다.
-이 부분에 대해서 알려주시면 감사하겠습니다.
+                            ${qBoardVO.q_content}
 						</textarea>
 						<br>
 					    </div>
@@ -124,7 +116,7 @@
   </div>
                         </div>
                         <div class="modal-footer">
-                           <button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">전송</button>
                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                         </div>
                      </div>
@@ -132,9 +124,11 @@
                </div>
 					
 				<hr class="my-4">
-				
+				<form action="/replyWriteProcess.bo?subCa=${qBoardVO.sub_ca_no}" method="post">
                   <div id="c_left">
-                     <h5>글쓴이ID (로고)</h5>
+                     <h5>${sessionScope.userNick}</h5>
+                      <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+                      <input type="hidden" name="q_no" value="${qBoardVO.q_no}">
                   </div>
                   <div id="c_right">
                      <button type="submit" class="btn btn-primary">등록하기</button>
@@ -142,13 +136,12 @@
                   <br>
                   <br>
 				  <div class="form-group">
-                     <textarea class="form-control" id="content" rows="8">
-답변을 작성할 때  가이드라인을 지켜주세요.
+                     <textarea class="form-control" id="content" name="reply_content" rows="8">답변을 작성할 때  가이드라인을 지켜주세요.
                      </textarea>
                   </div>
-
+                </form>
 </fieldset>
-</form>
+
 </div>
 </div>
 </div>

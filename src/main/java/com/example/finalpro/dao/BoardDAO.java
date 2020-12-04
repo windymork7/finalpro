@@ -1,6 +1,7 @@
 package com.example.finalpro.dao;
 
 import com.example.finalpro.vo.QboardVO;
+import com.example.finalpro.vo.ReplyBoardVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,6 +27,17 @@ public interface BoardDAO {
     public int qBoardDownCheck(int mem_no,int q_no);
     public void qBoardDownUpdate(int q_no);
     public void qBoardDownInsert(int q_no,int mem_no,int rpt_no);
+
+
+    // 댓글 리스트
+    public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);
+    // 댓글 글쓰기 프로세스
+    public void replyInsertProcess(ReplyBoardVO replyBoardVO);
+    // 댓글 추천
+    public int replyUpCheck(int mem_no, int reply_no);
+    public void replyUpUpdate(int reply_no);
+    public void replyUpInsert(int reply_no, int mem_no);
+
 
 
 

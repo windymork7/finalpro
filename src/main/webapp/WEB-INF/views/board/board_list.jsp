@@ -173,7 +173,7 @@
 		    <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
 		    <p class="card-text">
 		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-		    1~5번 책 대분류 선택한 것</p>
+		    ${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
 

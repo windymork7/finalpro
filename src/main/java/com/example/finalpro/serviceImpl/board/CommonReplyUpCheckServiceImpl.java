@@ -1,0 +1,35 @@
+package com.example.finalpro.serviceImpl.board;
+
+import com.example.finalpro.dao.BoardDAO;
+import com.example.finalpro.service.board.CommonReplyUpCheckService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+@Service
+public class CommonReplyUpCheckServiceImpl implements CommonReplyUpCheckService {
+    @Autowired
+    BoardDAO boardDAO;
+
+    @Override
+    public int replyUpCheck(HttpServletRequest request, HttpSession session) {
+
+        int replyNo = Integer.parseInt(request.getParameter("replyNum"));
+
+        if ((session.getAttribute("userNo") != null)){
+            int mem_no = (Integer)session.getAttribute("userNo");
+
+            if (boardDAO.replyUpCheck(mem_no, replyNo) != 0){
+                return 0;
+            } else{
+                boardDAO.replyUpUpdate(replyNo);
+                boardDAO.replyUpInsert(replyNo, mem_no);
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+}
