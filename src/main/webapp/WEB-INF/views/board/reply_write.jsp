@@ -14,9 +14,9 @@
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="https://use.fontawesome.com/b490e94c82.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--%>
+<%--	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--%>
 
 
 	<style>
@@ -63,8 +63,6 @@
 </head>
 <body>
 
-
-
    <div class="container-fluid">
       <div class="row">
          <div class="col-sm-3"></div>
@@ -75,17 +73,28 @@
                         <legend>${qBoardVO.sub_ca_name}</legend>
                      </div>
                      <div id="c_right">
-                     <a href="#">
-                        <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
-                     </a>
-                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
-						  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-						</button>
-						<span data-toggle="modal" data-target="#Modal_1">
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="신고">
-						  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-						</button>
-						</span>
+                         <c:choose>
+                             <c:when test="${empty sessionScope.userNo}"></c:when>
+                             <c:when test="${sessionScope.userNo ne qBoardVO.mem_no}">
+                                 <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
+
+                                 <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
+                                     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                 </button>
+                                 <span data-toggle="modal" data-target="#Modal_1">
+                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="신고" >
+                                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </button>
+                                </span>
+                             </c:when>
+                             <c:when test="${sessionScope.userNo eq qBoardVO.mem_no}">
+                                <span data-toggle="modal" data-target="#Modal_2">
+                                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="현상금 걸기">
+                                    <i class="fa fa-krw" aria-hidden="true"></i>
+                                </button>
+                                </span>
+                             </c:when>
+                         </c:choose>
                      </div>
                   </div>
                   <br>
@@ -151,42 +160,67 @@
                               <span aria-hidden="true">&times;</span>
                            </button>
                         </div>
-                        <div class="modal-body">
-                          <div class="form-group">
-    <div class="custom-control custom-radio">
-      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio1">신고 사유 1</label>
-    </div>
-    <div class="custom-control custom-radio">
-      <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio2">신고 사유 2</label>
-    </div>
-    <div class="custom-control custom-radio">
-      <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio3">신고 사유 3</label>
-    </div>
-    <div class="custom-control custom-radio">
-      <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio3">신고 사유 4</label>
-    </div>
-    <div class="custom-control custom-radio">
-      <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio3">신고 사유 5</label>
-    </div>
-  </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
-                           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                        </div>
+                        <form action="/qboardDownPopup.bo" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                <input type="hidden" name="qboardNum" value="${qBoardVO.q_no}">
+                            <input type="hidden" name="subCa" value="${qBoardVO.sub_ca_no}">
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
+                              <label class="custom-control-label" for="customRadio1">주제에 맞지 않음</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
+                              <label class="custom-control-label" for="customRadio2">욕설</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
+                              <label class="custom-control-label" for="customRadio3">광고</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
+                              <label class="custom-control-label" for="customRadio4">사칭</label>
+                            </div>
+
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                               <button type="submit" class="btn btn-primary">전송</button>
+                               <button type="button" class="btn btn-secondary">닫기</button>
+                            </div>
+                        </form>
                      </div>
                   </div>
                </div>
+                  <div class="modal fade" id="Modal_2" tabindex="-1"
+                       aria-labelledby="ModalLabel_2" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="ModalLabel_2">현상금 얼마를 거시겠습니까?</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                              <div class="modal-body">
+                                  <div class="form-group">
+                                      <label class="col-form-label col-form-label-lg" for="inputLarge">EXP</label>
+                                      <input class="form-control form-control-lg" type="text" id="inputLarge">
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary" data-dismiss="modal">걸기</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
 
 	<c:import url="board/comment.jsp">
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
+        <c:param name="memNo" value="${qBoardVO.mem_no}"/>
         <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
     </c:import>
 	<br>

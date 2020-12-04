@@ -38,6 +38,10 @@ public interface BoardDAO {
     public void replyUpUpdate(int reply_no);
     public void replyUpInsert(int reply_no, int mem_no);
 
+    // 댓글 채택
+    public void replyPick(int reply_no);
+    public void replyAnotherPick();
+
 
 
 

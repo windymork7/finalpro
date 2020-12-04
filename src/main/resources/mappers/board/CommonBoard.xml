@@ -65,6 +65,32 @@
         INSERT INTO UP VALUES(UP_SEQ.nextval,#{q_no},#{mem_no})
     </insert>
 
+
+    <!-- 게시판 신고 체크-->
+    <select id="qBoardDownCheck" resultType="Integer">
+        SELECT NVL(MAX(RD.MEM_NO), 0)
+        FROM Q,
+        (SELECT R.RPT_NO, R.RPT_CONTENT, D.DOWN_NO, D.Q_NO, D.MEM_NO
+        FROM RPT R, DOWN D
+        WHERE R.RPT_NO = D.RPT_NO) RD
+        WHERE Q.Q_NO = RD.Q_NO
+        AND Q.Q_NO = #{param2}
+        AND RD.MEM_NO = #{param1}
+    </select>
+
+    <!-- 게시판 신고 업데이트 -->
+    <update id="qBoardDownUpdate">
+        UPDATE Q
+        SET Q_RPT_CNT = Q_RPT_CNT+1
+        WHERE Q_NO = #{param1}
+    </update>
+
+    <!-- 게시판 신고 입력-->
+    <insert id="qBoardDownInsert">
+        INSERT INTO DOWN VALUES(DOWN_SEQ.NEXTVAL, #{param1}, #{param3}, #{param2})
+    </insert>
+
+
     <!-- 댓글쓰기-->
     <insert id="replyInsertProcess" parameterType="com.example.finalpro.vo.ReplyBoardVO">
         INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, #{mem_no}, #{q_no}, #{reply_content}, 0, 0, 0, SYSDATE)
@@ -100,5 +126,22 @@
     <insert id="replyUpInsert">
         INSERT INTO REPLY_UP VALUES(REPLY_UP_SEQ.NEXTVAL, #{param1}, #{param2})
     </insert>
+    <!-- 댓글 채택-->
+    <update id="replyPick">
+        UPDATE REPLY
+        SET REPLY_PICK = REPLY_PICK+1
+        WHERE REPLY_NO = #{param1}
+    </update>
+
+    <!-- 댓글 채택 후 나머지 -1 초기화 -->
+    <update id="replyAnotherPick">
+        <![CDATA[
+        UPDATE REPLY
+        SET REPLY_PICK = -1
+        WHERE REPLY_PICK < 1
+        ]]>
+    </update>
+
+
 
 </mapper>

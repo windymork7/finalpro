@@ -25,6 +25,12 @@ import java.util.List;
 public class DsqController {
 
     @Autowired
+    CommonBoardDownService commonBoardDownService;
+
+    @Autowired
+    CommonReplyPickService commonReplyPickService;
+
+    @Autowired
     CommonReplyUpCheckService commonReplyUpCheckService;
 
     @Autowired
@@ -153,10 +159,8 @@ public class DsqController {
         HttpHeaders responseHeaders = new HttpHeaders();
         ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
 
-        List<ReplyBoardVO> replyVOlist = new ArrayList<ReplyBoardVO>();
-
-        replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
-        System.out.println(replyVOlist);
+        List<ReplyBoardVO> replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
+//        System.out.println(replyVOlist);
 
         if (replyVOlist.size() > 0){
             for (int i = 0; i < replyVOlist.size(); i++) {
@@ -200,7 +204,7 @@ public class DsqController {
     // 게시판 추천 액션
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum,
-                           @RequestParam("subCa") int subCa, Model model, HttpServletRequest request, HttpSession session){
+                           @RequestParam("subCa") int subCa, HttpSession session){
 
         System.out.println("업액션컨트롤러");
 
@@ -215,7 +219,7 @@ public class DsqController {
 
     // 댓글 추천 체크
     @RequestMapping("/replyUpCheck.bo")
-    public String replyUpCheck(HttpServletRequest request, HttpSession session, Model model){
+    public String replyUpCheck(HttpServletRequest request, HttpSession session){
 
         String qboardNum = request.getParameter("qboardNum");
         String subCa = request.getParameter("subCa");
@@ -227,21 +231,37 @@ public class DsqController {
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
     }
 
+    // 댓글 체택
+    @RequestMapping("/replyPick.bo")
+    public String replyPick(HttpServletRequest request){
+
+        String qboardNum = request.getParameter("qboardNum");
+        String subCa = request.getParameter("subCa");
+        System.out.println("dsafds : " + request.getParameter("qMemNo"));
+
+        commonReplyPickService.replyPick(request);
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
+//        return "template";
+    }
+
 
     //신고 체크
     //@RequestMapping("/qboardDownCheck.bo")
     //public String
     //신고 팝업
     @RequestMapping("/qboardDownPopup.bo")
-    public String qboardDownPopup(Model model){
-        System.out.println("큐보드다운팝업");
-        model.addAttribute("main", "joon/TestRptPopup");
-        return "template";
-    }
-    //신고 액션
-    @RequestMapping("/qboardDownAction.bo")
-    public String qboardDown(@RequestParam("qboardNum")int qboardNum,@RequestParam("rpt_no") int rpt_no,HttpServletRequest request, HttpSession session){
-        return "redirect:qboardListForm.bo";
+    public String qboardDownPopup(HttpServletRequest request){
+
+        System.out.println("들어오나");
+
+        String qboardNum = request.getParameter("qboardNum");
+        String subCa = request.getParameter("subCa");
+
+        commonBoardDownService.qBoardDown(request);
+
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.finalpro.service.board;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface CommonBoardDownService {
-    public void qBoardDown(int q_no,int mem_no, int rpt_no);
+    public void qBoardDown(HttpServletRequest request);
 }

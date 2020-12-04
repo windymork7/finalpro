@@ -27,7 +27,9 @@
 
 <div id="commentListForm"></div>
 
+
 <input type="hidden" id="qboardNum" value="${param.qboardNum}">
+<input type="hidden" id="memNo" value="${param.memNo}">
 <input type="hidden" id="subCa" value="${param.subCa}">
 <input type="hidden" id="sessionNick" value="${sessionScope.userNick}">
 <input type="hidden" id="sessionNo" value="${sessionScope.userNo}">
@@ -42,6 +44,10 @@
         var qboardNum = $("#qboardNum").val();
         var subCa = $("#subCa").val();
         var sessionNick = $("#sessionNick").val();
+        var sessionNo = $("#sessionNo").val();
+        var qMemNo = $("#memNo").val();
+
+
 
         console.log("처음 : "+sessionNick);
 
@@ -77,11 +83,11 @@
                             "                    "+ data[i].reply_up +"\n" +
                             "                </button>\n";
                             if(data[i].reply_pick == 0){
-                                html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+                                html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&subCa="+subCa+"&qboardNum="+qboardNum+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick == 1){
-                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
+                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick == -1){}
@@ -96,8 +102,8 @@
                             "\t\t</textarea>\n" +
                             "        </div>\n" +
                             "    </div>\n" +
-                            "</div>";
-
+                            "</div>" +
+                            "<br>";
 
                         $("#commentListForm").html(html);
                     }
