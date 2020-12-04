@@ -12,6 +12,24 @@ public class CommonMemberVO {
     private String grade_name;
     private int mem_exp;
     private String mem_date;
+    private int rownum;
+    private String mem_black_date;
+
+    public String getMem_black_date() {
+        return mem_black_date;
+    }
+
+    public void setMem_black_date(String mem_black_date) {
+        this.mem_black_date = mem_black_date;
+    }
+
+    public int getRownum() {
+        return rownum;
+    }
+
+    public void setRownum(int rownum) {
+        this.rownum = rownum;
+    }
 
     public String getMem_date() {
         return mem_date;
@@ -68,7 +86,7 @@ public class CommonMemberVO {
     public void setMem_pw(String mem_pw) {
         this.mem_pw = mem_pw;
     }
-
+//
     public String getMem_nick() {
         return mem_nick;
     }

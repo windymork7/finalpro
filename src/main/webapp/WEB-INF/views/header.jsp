@@ -133,7 +133,7 @@
             <c:when test="${not empty sessionScope.userNick}">
               <c:choose>
                 <c:when test="${sessionScope.userNick eq 'admin'}">
-                  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>
+                  <span><a href="adminMain.ad">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:when>
                 <c:otherwise>
                   <!--  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>-->
