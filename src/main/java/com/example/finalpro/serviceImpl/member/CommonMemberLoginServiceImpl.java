@@ -18,6 +18,9 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
     @Override
     public String commonMemberLogin(HttpServletRequest request, HttpSession session) {
 
+    	if(memberDAO.commonMemberLogin(request.getParameter("mem_email")).equals(null)) {
+    		return "/loginForm.me";
+    	}
         String userpw = memberDAO.commonMemberLogin(request.getParameter("mem_email"));
 
         if (userpw.equals(request.getParameter("mem_pw"))){
@@ -31,6 +34,6 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
             return "/";
         }
 
-        return "section";
+        return "/loginForm.me";
     }
 }

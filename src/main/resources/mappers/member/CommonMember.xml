@@ -24,6 +24,6 @@
     </select>
     <!-- 회원 수정   -->
     <select id="commonMemberUpdate" parameterType="com.example.finalpro.vo.CommonMemberVO">
-        UPDATE MEM SET MEM_NAME=#{mem_name},MEM_NICK='b',MEM_TEL=#{mem_tel} WHERE MEM_NO=#{mem_no}
+        UPDATE MEM SET MEM_NAME=#{mem_name},MEM_NICK=#{mem_nick},MEM_TEL=#{mem_tel} WHERE MEM_NO=#{mem_no}
     </select>
 </mapper>
