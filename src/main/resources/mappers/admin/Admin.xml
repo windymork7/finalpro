@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.AdminDAO">
+    <!-- 신고 10개 넘은 애들 -->
+    <select id="memRptList" resultType="com.example.finalpro.vo.CommonMemberVO">
+        SELECT * FROM
+        (select rownum,mem_no from mem WHERE MEM_RPT_CNT>10)r,
+        MEM m ,
+        (select * from grade) g
+        WHERE r.mem_no = m.mem_no
+        and m.grade_no = g.grade_no
+        AND MEM_RPT_CNT>10
+    </select>
+
+    <!-- 블랙리스트로 보내버리는 액션 -->
+    <update id="memBlackAction" parameterType="com.example.finalpro.vo.CommonMemberVO">
+        UPDATE MEM SET MEM_BLACK_DATE = SYSDATE+4, MEM_RPT_CNT = 0 WHERE MEM_NO=#{mem_no}
+    </update>
+
+    <!-- 블랙리스트 -->
+    <select id="memBlackList" resultType="com.example.finalpro.vo.CommonMemberVO">
+        SELECT * FROM
+        (SELECT ROWNUM,MEM_NO
+        FROM MEM WHERE MEM_BLACK_DATE > SYSDATE)R,
+        MEM M,
+        (SELECT * FROM GRADE) G
+        WHERE MEM_BLACK_DATE > SYSDATE
+        AND R.MEM_NO=M.MEM_NO
+        AND M.GRADE_NO = G.GRADE_NO
+    </select>
+
+</mapper>

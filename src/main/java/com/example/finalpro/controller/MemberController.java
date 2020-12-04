@@ -106,6 +106,8 @@ public class MemberController {
         return "template";
     }
 
+    // 회원 제재
+
 
 
 
