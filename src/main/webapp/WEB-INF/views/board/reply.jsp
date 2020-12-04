@@ -72,9 +72,7 @@
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
-					    <textarea class="form-control" rows="20" readonly>
-                            ${qBoardVO.q_content}
-						</textarea>
+					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 					    </div>
 					  </div>

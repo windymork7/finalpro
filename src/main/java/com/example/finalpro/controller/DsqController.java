@@ -25,6 +25,9 @@ import java.util.List;
 public class DsqController {
 
     @Autowired
+    CommonReplyDownService commonReplyDownService;
+
+    @Autowired
     CommonBoardDownService commonBoardDownService;
 
     @Autowired
@@ -245,6 +248,19 @@ public class DsqController {
 //        return "template";
     }
 
+    
+    // 댓글 신고
+    @RequestMapping("/replyDownPopup.bo")
+    public String replyDownPopup(HttpServletRequest request){
+
+        String qboardNum = request.getParameter("qboardNum");
+        String subCa = request.getParameter("subCa");
+
+        commonReplyDownService.replyDown(request);
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
+    }
+
 
     //신고 체크
     //@RequestMapping("/qboardDownCheck.bo")
@@ -253,16 +269,15 @@ public class DsqController {
     @RequestMapping("/qboardDownPopup.bo")
     public String qboardDownPopup(HttpServletRequest request){
 
-        System.out.println("들어오나");
-
         String qboardNum = request.getParameter("qboardNum");
         String subCa = request.getParameter("subCa");
 
         commonBoardDownService.qBoardDown(request);
 
-
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
     }
+
+
 
 
 
