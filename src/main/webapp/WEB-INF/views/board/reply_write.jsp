@@ -76,8 +76,9 @@
                          <c:choose>
                              <c:when test="${empty sessionScope.userNo}"></c:when>
                              <c:when test="${sessionScope.userNo ne qBoardVO.mem_no}">
-                                 <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
-
+                                 <c:if test="${qBoardVO.reply_pick == 0}">
+                                     <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
+                                 </c:if>
                                  <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
                                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                  </button>
@@ -89,15 +90,18 @@
                              </c:when>
                              <c:when test="${sessionScope.userNo eq qBoardVO.mem_no}">
                                 <span data-toggle="modal" data-target="#Modal_2">
+                                <c:if test="${qBoardVO.reply_pick == 1}">
                                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="현상금 걸기">
                                     <i class="fa fa-krw" aria-hidden="true"></i>
                                 </button>
+                                </c:if>
                                 </span>
                              </c:when>
                          </c:choose>
                      </div>
                   </div>
                   <br>
+
                   
                   <hr class="my-4">
 					<div class="card bg-light mb-3">
@@ -210,6 +214,7 @@
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
         <c:param name="memNo" value="${qBoardVO.mem_no}"/>
         <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
+        <c:param name="userNick" value="${sessionScope.userNick}"/>
     </c:import>
 	<br>
 				
@@ -245,20 +250,6 @@
 					"\t  </div>\n" +
 					"\t  <div class=\"card-body\">\n" +
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
-					// "\t    \t<div class=\"btn-group-vertical\">\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t\t20\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t</div>\n" +
-					// "\t\t&nbsp;\n" +
-					// "\t\t&nbsp;\n" +
 					"\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
 					"\t\t</textarea>\n" +
 					"\t   </div>\n" +

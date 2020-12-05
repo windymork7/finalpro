@@ -26,40 +26,28 @@ public class DsqController {
 
     @Autowired
     CommonReplyDownService commonReplyDownService;
-
     @Autowired
     CommonBoardDownService commonBoardDownService;
-
     @Autowired
     CommonReplyPickService commonReplyPickService;
-
     @Autowired
     CommonReplyUpCheckService commonReplyUpCheckService;
-
     @Autowired
     CommonReplyListService commonReplyListService;
-
     @Autowired
     CommonReplyInsertService commonReplyInsertService;
-
     @Autowired
     CommonSubCateService commonSubCateService;
-
     @Autowired
     CommonBoardBookCateSelectService commonBoardBookCateSelectService;
-
     @Autowired
     CommonBoardInsertService commonBoardInsertService;
-
     @Autowired
     CommonBoardListService commonBoardListService;
-
     @Autowired
     CommonBoardContent commonBoardContent;
-
     @Autowired
     CommonBoardUpService commonBoardUpService;
-
     @Autowired
     CommonBoardUpCheckService commonBoardUpCheckService;
     
@@ -86,20 +74,11 @@ public class DsqController {
         return "redirect:qboardListForm.bo";
     }
 
-    // 게시판 조회 페이지 ( 찐 )
-//    @RequestMapping("/qboardListForm.bo")
-//    public String boardListForm(Model model){
-
-//        model.addAttribute("main", "board/board_list");
-//        return "template";
-//    }
-
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
 
-        List<QboardVO> list = new ArrayList<QboardVO>();
-        list = commonBoardListService.qBoardList(subCa);
+        List<QboardVO> list = commonBoardListService.qBoardList(subCa);
         System.out.println(list);
 
         model.addAttribute("list",list);
@@ -117,7 +96,6 @@ public class DsqController {
         System.out.println("내용 : "  + qboardVO.toString());
 
         model.addAttribute("qBoardVO", qboardVO);
-//        model.addAttribute("main", "board/TestBoardContent");
         model.addAttribute("main", "board/reply_write");
 
     
@@ -240,7 +218,7 @@ public class DsqController {
 
         String qboardNum = request.getParameter("qboardNum");
         String subCa = request.getParameter("subCa");
-        System.out.println("dsafds : " + request.getParameter("qMemNo"));
+        System.out.println("reply_pick : " + request.getParameter("qMemNo"));
 
         commonReplyPickService.replyPick(request);
 

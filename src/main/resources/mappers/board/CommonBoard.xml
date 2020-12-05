@@ -36,7 +36,7 @@
         and q1.sub_ca_no = #{param1}
     </select>
 
-    <!-- 해당 게시글 조회-->
+    <!-- 해당 게시글 조회 -->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
         select q1.q_no,q1.mem_no, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
         q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
@@ -46,6 +46,31 @@
         and q1.mem_no = m.mem_no
         and q1.sub_ca_no =#{param2}
         and q1.q_no=#{param1}
+    </select>
+
+    <!-- 댓글 있는 해당 게시글 조회-->
+    <select id="qBoardReplyContent" resultType="com.example.finalpro.vo.QboardVO">
+        select te.q_no,te.mem_no, te.sub_ca_name, te.sub_ca_no, te.book_ca_name, te.book_ca_no, te.q_title,
+        te.q_content, te.q_sos, te.q_up, te.q_rpt_cnt, te.q_date, te.q_admin_state, te.mem_nick, r.reply_no, r.reply_pick
+        from reply r,
+        (select q1.q_no,q1.mem_no, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
+        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
+        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca,(select * from mem)m
+        where q1.sub_ca_no = ca.sub_ca_no
+        and bca.book_ca_no = q1.book_ca_no
+        and q1.mem_no = m.mem_no) te
+        where r.q_no = te.q_no
+        and te.q_no = #{param1}
+        and te.sub_ca_no = ${param2}
+    </select>
+
+    <!-- 해당 게시글 댓글 체크 -->
+    <select id="qBoardReplyCheck" resultType="Integer">
+        SELECT NVL(MAX(REPLY_NO), 0)
+        FROM Q, REPLY R
+        WHERE Q.Q_NO = R.Q_NO
+        AND Q.Q_NO = #{param1}
+        AND Q.SUB_CA_NO = #{param2}
     </select>
     
     <!-- 추천 체크 -->
