@@ -90,7 +90,7 @@
                              </c:when>
                              <c:when test="${sessionScope.userNo eq qBoardVO.mem_no}">
                                 <span data-toggle="modal" data-target="#Modal_2">
-                                <c:if test="${qBoardVO.reply_pick == 1}">
+                                <c:if test="${qBoardVO.reply_pick == 0}">
                                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="현상금 걸기">
                                     <i class="fa fa-krw" aria-hidden="true"></i>
                                 </button>

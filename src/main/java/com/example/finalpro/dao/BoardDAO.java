@@ -30,6 +30,8 @@ public interface BoardDAO {
     public void qBoardDownUpdate(int q_no);
     public void qBoardDownInsert(int q_no,int mem_no,int rpt_no);
 
+    // 댓글 채택 있는지 체크
+    public QboardVO qBoardReplyPickCheck(int q_no);
 
     // 댓글 리스트
     public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);

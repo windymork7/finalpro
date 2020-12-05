@@ -31,28 +31,28 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
             session = request.getSession();
             CommonMemberVO commonMemberVO = new CommonMemberVO();
             commonMemberVO = memberDAO.commonMemberSelect(request.getParameter("mem_email"));
-//            System.out.println("멤버로그인블랙데이트: " + commonMemberVO.getMem_date() + commonMemberVO.getMem_black_date() + commonMemberVO.getSysdate());
-//
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-//            String tempBlackDate = commonMemberVO.getMem_black_date().substring(0, 10);
-//            String tempSysdate = commonMemberVO.getSysdate().substring(0, 10);
-//            try {
-//                Date blackDate = format.parse(tempBlackDate);
-//                Date sysdate = format.parse(tempSysdate);
-//                System.out.println(blackDate);
-//                System.out.println(sysdate);
-//                if(sysdate.equals(blackDate) || sysdate.after(blackDate)) {
+            System.out.println("멤버로그인블랙데이트: " + commonMemberVO.getMem_date() + commonMemberVO.getMem_black_date() + commonMemberVO.getSysdate());
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+            String tempBlackDate = commonMemberVO.getMem_black_date().substring(0, 10);
+            String tempSysdate = commonMemberVO.getSysdate().substring(0, 10);
+            try {
+                Date blackDate = format.parse(tempBlackDate);
+                Date sysdate = format.parse(tempSysdate);
+                System.out.println(blackDate);
+                System.out.println(sysdate);
+                if(sysdate.equals(blackDate) || sysdate.after(blackDate)) {
                     session.setAttribute("userNo", commonMemberVO.getMem_no());
                     session.setAttribute("userNick", commonMemberVO.getMem_nick());
                     session.setAttribute("userGrade", commonMemberVO.getGrade_no());
-//                    System.out.println("날짜트루");
+                    System.out.println("날짜트루");
                     return "/";
-//                }
-//                return "/loginFail.me";
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//            return "/loginForm.me";
+                }
+                return "/loginFail.me";
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            return "/loginForm.me";
         }
         return "/loginForm.me";
     }
