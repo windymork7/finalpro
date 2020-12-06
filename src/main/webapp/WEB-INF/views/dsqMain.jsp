@@ -28,5 +28,6 @@
     <button type="button" onclick="location.href='/qboardListForm.bo'">DSQ리스트</button>
     <button type="button" onclick="location.href='/qReplyList.re'">답글리스트</button>
     <button type="button" onclick="location.href='/faqListForm.fa'">FAQ</button>
+    <button type="button" onclick="location.href='/bookSubCaList.bs'">스크랩북</button>
 </body>
 </html>

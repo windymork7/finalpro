@@ -1,13 +1,37 @@
 package com.example.finalpro.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.finalpro.service.book.BookBookCaContentListService;
+import com.example.finalpro.service.book.BookBookCaListService;
+import com.example.finalpro.service.book.BookBookCaNameService;
+import com.example.finalpro.service.book.BookSubCaListService;
+import com.example.finalpro.service.book.BookSubCaNameService;
+import com.example.finalpro.vo.QboardVO;
 
 @Controller
 public class BookController {
 
+	//준열이가 작업한 부분 시작
+	@Autowired
+	BookSubCaListService bookSubCaListService;
+	@Autowired
+	BookBookCaContentListService bookBookCaContentListService;
+	@Autowired
+	BookSubCaNameService bookSubCaNameService;
+	@Autowired
+	BookBookCaListService bookBookCaListSerivce;
+	@Autowired
+	BookBookCaNameService bookBookCaNameService;
+	//준열이가 작업한 부분  끝
+	
     // 문제풀이
     @RequestMapping("/todayProblem.bp")
     public String todayProblem(Model model){
@@ -32,5 +56,44 @@ public class BookController {
     @RequestMapping("/PythonProblem.bp")
     public String pythonProblem(){ return "json/PythonProblem";}
 
+    
+  
+    
+    
+    /*****밑은 준열이가 작업한부분*******/
+    //스크랩북 큰 카테고리 ( 자바, 파이선 등 리스트 )
+    @RequestMapping("/bookSubCaList.bs")
+    public String bookSubCaList(Model model) {
+    	List<QboardVO> list = bookSubCaListService.subCaList();
+    	
+    	model.addAttribute("main","book/TestBookSubCaList");
+    	model.addAttribute("list",list);
+    	return "template";
+    }
+    //스크랩북 책 카테고리 ( **의 개념, 제어문 출력문 등등 리스트)
+    @RequestMapping("/bookBookCaList.bs")
+    public String bookBookCaList(Model model, @RequestParam int subCa) {
+
+    	List<QboardVO> list = bookBookCaListSerivce.bookCaList(subCa);
+    	QboardVO qboardVO = bookSubCaNameService.subCaName(subCa);
+
+    	model.addAttribute("qboardVO",qboardVO);
+    	model.addAttribute("list",list);
+    	model.addAttribute("main","book/TestBookBookCaList");
+    	return "template";
+    }
+    
+    //스크랩북 책 카테고리리스트 안에 속해있는 게시글 목록 리스트
+    @RequestMapping("/bookBookCaContentList.bs")
+    public String bookBookCaContentList(Model model,@RequestParam int subCa,@RequestParam int bookCa) {
+    	List<QboardVO> list = bookBookCaContentListService.bookCaContentList(subCa,bookCa);
+    	QboardVO qboardVO = bookBookCaNameService.bookCaName(bookCa);
+
+    	model.addAttribute("qboardVO",qboardVO);
+    	model.addAttribute("main","book/TestBookBookCaContentList");
+    	model.addAttribute("list",list);
+    	
+    	return "template";
+    }
 
 }

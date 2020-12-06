@@ -20,8 +20,18 @@ public class QboardVO {
     private int grade_no;
     private int ca_no;
     private int rownum;
+    private String ca_name;
+    
+    
+    public String getCa_name() {
+		return ca_name;
+	}
 
-    public int getRownum() {
+	public void setCa_name(String ca_name) {
+		this.ca_name = ca_name;
+	}
+
+	public int getRownum() {
         return rownum;
     }
 
@@ -132,7 +142,6 @@ public class QboardVO {
     public void setQ_date(String q_date) {
         this.q_date = q_date;
     }
-
     public int getQ_admin_state() {
         return q_admin_state;
     }
@@ -157,22 +166,15 @@ public class QboardVO {
         this.ca_no = ca_no;
     }
 
-    @Override
-    public String toString() {
-        return "QboardVO{" +
-                "q_no=" + q_no +
-                ", mem_no=" + mem_no +
-                ", sub_ca_no=" + sub_ca_no +
-                ", book_ca_no=" + book_ca_no +
-                ", q_title='" + q_title + '\'' +
-                ", q_content='" + q_content + '\'' +
-                ", q_sos=" + q_sos +
-                ", q_up=" + q_up +
-                ", q_rpt_cnt=" + q_rpt_cnt +
-                ", q_date=" + q_date +
-                ", q_admin_state=" + q_admin_state +
-                ", grade_no=" + grade_no +
-                ", ca_no=" + ca_no +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "QboardVO [q_no=" + q_no + ", mem_no=" + mem_no + ", sub_ca_name=" + sub_ca_name + ", book_ca_name="
+				+ book_ca_name + ", mem_nick=" + mem_nick + ", sub_ca_no=" + sub_ca_no + ", book_ca_no=" + book_ca_no
+				+ ", q_title=" + q_title + ", q_content=" + q_content + ", q_sos=" + q_sos + ", q_up=" + q_up
+				+ ", q_rpt_cnt=" + q_rpt_cnt + ", q_date=" + q_date + ", q_admin_state=" + q_admin_state + ", grade_no="
+				+ grade_no + ", ca_no=" + ca_no + ", rownum=" + rownum + ", ca_name=" + ca_name + "]";
+	}
+
+
+    
 }
