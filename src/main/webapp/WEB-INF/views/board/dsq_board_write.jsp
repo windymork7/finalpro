@@ -109,6 +109,7 @@
 
                   <input type="hidden" name="sub_ca_no" value="${sub}">
                   <input type="hidden" name="mem_no" value=${sessionScope.userNo}>
+
                   
                   <div class="form-group">
                      <textarea class="form-control" id="content" name="q_content" rows="20">질문글을 작성할 때  가이드라인을 지켜주세요.

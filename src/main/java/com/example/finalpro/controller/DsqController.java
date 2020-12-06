@@ -77,7 +77,9 @@ public class DsqController {
         System.out.println("QboardVO : " + qboardVO.toString());
         commonBoardInsertService.qBoardInsert(qboardVO);
 
-        return "redirect:qboardListForm.bo";
+        int subCa = qboardVO.getSub_ca_no();
+
+        return "redirect:qboardListForm.bo?subCa="+subCa;
     }
 
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
