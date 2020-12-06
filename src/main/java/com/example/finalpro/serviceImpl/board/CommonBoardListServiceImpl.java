@@ -20,10 +20,8 @@ public class CommonBoardListServiceImpl implements CommonBoardListService {
     public List<QboardVO> qBoardList(int subCa) {
 
 
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy.mm.dd");
-
-        int bookCa = 1;
         List<QboardVO> list = boardDAO.qBoardList(subCa);
+        System.out.println("completeList : " + list);
 
         for (int i = 0; i < list.size(); i++) {
 

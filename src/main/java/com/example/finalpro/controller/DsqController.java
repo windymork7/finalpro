@@ -25,6 +25,12 @@ import java.util.List;
 public class DsqController {
 
     @Autowired
+    CommonBoardPopularityListService commonBoardPopularityListService;
+    @Autowired
+    CommonBoardLatesListService commonBoardLatesListService;
+    @Autowired
+    CommonBoardReadyListService commonBoardReadyListService;
+    @Autowired
     CommonReplyDownService commonReplyDownService;
     @Autowired
     CommonBoardDownService commonBoardDownService;
@@ -78,10 +84,16 @@ public class DsqController {
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
 
-        List<QboardVO> list = commonBoardListService.qBoardList(subCa);
-        System.out.println(list);
+        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
+        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
+        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
+        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
 
-        model.addAttribute("list",list);
+        model.addAttribute("completeList",completeList);
+        model.addAttribute("readyList", readyList);
+        model.addAttribute("latestList", latestList);
+        model.addAttribute("popularityList", popularityList);
+
         model.addAttribute("subCa", subCa);
         model.addAttribute("main", "board/board_list");
         return "template";

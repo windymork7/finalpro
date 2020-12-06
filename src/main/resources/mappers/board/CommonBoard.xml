@@ -26,15 +26,70 @@
          VALUES (Q_SEQ.NEXTVAL, #{mem_no}, #{sub_ca_no}, #{book_ca_no}, #{q_title}, #{q_content}, 0, 0, 0, 0)
     </insert>
 
-    <!--게시글 조회-->
+    <!-- 답변 완료 게시글 조회 -->
     <select id="qBoardList" resultType="com.example.finalpro.vo.QboardVO">
-        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
-        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
-        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
-        where q1.sub_ca_no = ca.sub_ca_no
-        and bca.book_ca_no = q1.book_ca_no
-        and q1.sub_ca_no = #{param1}
+<!--        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,-->
+<!--        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state-->
+<!--        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca-->
+<!--        where q1.sub_ca_no = ca.sub_ca_no-->
+<!--        and bca.book_ca_no = q1.book_ca_no-->
+<!--        and q1.sub_ca_no = #{param1}-->
+        SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,G.GRADE_NAME,Q1.*, R.* FROM
+        (SELECT * FROM Q) Q1,
+        (SELECT * FROM MEM) M,
+        (SELECT * FROM SUB_CA) SC,
+        (SELECT * FROM CA) C,
+        (SELECT * FROM BOOK_CA) BC,
+        (SELECT * FROM GRADE) G,
+        (SELECT * FROM REPLY) R
+        WHERE Q1.MEM_NO = M.MEM_NO
+        AND Q1.SUB_CA_NO = SC.SUB_CA_NO
+        AND SC.CA_NO = C.CA_NO
+        AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
+        AND G.GRADE_NO = M.GRADE_NO
+        AND Q1.Q_NO = R.Q_NO
+        AND R.REPLY_PICK = 1
+        AND Q1.SUB_CA_NO = #{param1}
+        ORDER BY Q1.Q_DATE DESC
     </select>
+
+    <!-- 답변 대기 게시글 조회 -->
+    <select id="qBoardReadyList" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT QRSC.Q_NO, QRSC.MEM_NO, QRSC.SUB_CA_NO, QRSC.Q_TITLE, QRSC.BOOK_CA_NO, BK.BOOK_CA_NAME, QRSC.Q_UP, QRSC.Q_DATE
+        FROM
+        (SELECT QR.Q_NO, QR.MEM_NO, QR.SUB_CA_NO, QR.Q_TITLE, QR.BOOK_CA_NO, QR.Q_UP, QR.Q_DATE
+        FROM
+        (SELECT Q.Q_NO, Q.MEM_NO, Q.SUB_CA_NO, Q.Q_TITLE, Q.BOOK_CA_NO, Q.Q_UP, Q.Q_DATE
+        FROM Q LEFT OUTER JOIN REPLY R
+        ON Q.Q_NO = R.Q_NO
+        WHERE R.Q_NO IS NULL
+        OR R.REPLY_PICK = 0) QR LEFT OUTER JOIN SUB_CA SC
+        ON QR.SUB_CA_NO = SC.SUB_CA_NO
+        WHERE QR.SUB_CA_NO = #{param1}) QRSC LEFT OUTER JOIN BOOK_CA BK
+        ON QRSC.BOOK_CA_NO = BK.BOOK_CA_NO
+        ORDER BY QRSC.Q_DATE DESC
+    </select>
+
+    <!-- 최신순 게시글 조회-->
+    <select id="qBoardLatesList" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT *
+        FROM Q, BOOK_CA BC, SUB_CA SC
+        WHERE Q.BOOK_CA_NO = BC.BOOK_CA_NO
+        AND Q.SUB_CA_NO = SC.SUB_CA_NO
+        AND Q.SUB_CA_NO = #{param1}
+        ORDER BY Q.Q_DATE DESC
+    </select>
+
+    <!-- 인기순 게시글 조회-->
+    <select id="qBoardPopularityList" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT *
+        FROM Q, BOOK_CA BC, SUB_CA SC
+        WHERE Q.BOOK_CA_NO = BC.BOOK_CA_NO
+        AND Q.SUB_CA_NO = SC.SUB_CA_NO
+        AND Q.SUB_CA_NO = #{param1}
+        ORDER BY Q.Q_UP DESC
+    </select>
+
 
     <!-- 해당 게시글 조회 -->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
@@ -61,7 +116,7 @@
         and q1.mem_no = m.mem_no) te
         where r.q_no = te.q_no
         and te.q_no = #{param1}
-        and te.sub_ca_no = ${param2}
+        and te.sub_ca_no = #{param2}
     </select>
 
     <!-- 해당 게시글 댓글 체크 -->
@@ -122,7 +177,7 @@
         FROM Q, REPLY R
         WHERE Q.Q_NO = R.Q_NO
         AND R.REPLY_PICK = 1
-        AND Q.Q_NO = 1
+        AND Q.Q_NO = #{param1}
     </select>
 
 
