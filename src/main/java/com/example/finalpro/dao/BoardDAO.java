@@ -14,10 +14,18 @@ public interface BoardDAO {
     public String subCategory(int subCa);
     // q게시글 쓰기
     public void qBoardInsert(QboardVO qboardVO);
-    // q게시글 조회
+    // q게시글 답변 완료 조회
     public List<QboardVO> qBoardList(int subCa);
+    // q게시글 답변 대기 조회
+    public List<QboardVO> qBoardReadyList(int subCa);
+    // q게시글 최근순 조회
+    public List<QboardVO> qBoardLatesList(int subCa);
+    // q게시글 인기순 조회
+    public List<QboardVO> qBoardPopularityList(int subCa);
     // 해당 게시글 조회
     public QboardVO qBoardContent(int q_no, int subCa);
+    public QboardVO qBoardReplyContent(int q_no, int subCa);
+    public int qBoardReplyCheck(int q_no, int subCa);
     // 해당 게시글 추천
     public int qBoardUpCheck(int mem_no, int q_no);
     public void qBoardUpUpdate(int q_no);
@@ -28,6 +36,8 @@ public interface BoardDAO {
     public void qBoardDownUpdate(int q_no);
     public void qBoardDownInsert(int q_no,int mem_no,int rpt_no);
 
+    // 댓글 채택 있는지 체크
+    public QboardVO qBoardReplyPickCheck(int q_no);
 
     // 댓글 리스트
     public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);

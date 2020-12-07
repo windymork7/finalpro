@@ -137,6 +137,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#await"><b>답변대기</b></a>
+<%--    <a class="nav-link" data-toggle="tab" href="#await" href="javascript:void(0);" onclick="test()"><b>답변대기</b></a>--%>
   </li>
   <li class="nav-item ml-auto">
   	<a class="nav-link" data-toggle="tab" href="#latest">최신순</a>
@@ -154,11 +155,8 @@
 <br>
 
 <div id="myTabContent" class="tab-content">
-
-
-
   <div class="tab-pane fade active show" id="complete">
-	  <c:forEach var="qboard" items="${list}">
+	  <c:forEach var="qboard" items="${completeList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
@@ -208,13 +206,13 @@
 	</div>
  	 
   </div>
-  
+
   <div class="tab-pane fade" id="await">
-	  <c:forEach var="qboard" items="${list}">
+	  <c:forEach var="qboard" items="${readyList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}">
+		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 			  <i class="fa fa-quora" aria-hidden="true"></i>
 					${qboard.q_title}</a>
 		    </h4>
@@ -231,7 +229,7 @@
 	 </div>
 	  </c:forEach>
  	 <br>
- 	 
+
  	<div>
 	<br><br>
 	  <ul class="pagination pagination-lg justify-content-center align-items-center">
@@ -258,28 +256,30 @@
 	    </li>
 	  </ul>
 	</div>
- 	 
+
   </div>
   
   <div class="tab-pane fade" id="latest">
-	  <div class="card bg-light">
-		  <div class="card-body">
-			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="#">
-			  <i class="fa fa-quora" aria-hidden="true"></i>  
-			    최신순으로 나열됩니다.</a>
-		    </h4>
-		    <small>
-		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		    	추천수
-		    </small>
-		    </div>
-		    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
-		    <p class="card-text">
-		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-		    1~5번 책 대분류 선택한 것</p>
+	  <c:forEach var="qboard" items="${latestList}">
+		  <div class="card bg-light">
+			  <div class="card-body">
+				  <div class="d-flex w-100 justify-content-between">
+					  <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
+						  <i class="fa fa-quora" aria-hidden="true"></i>
+							  ${qboard.q_title}</a>
+					  </h4>
+					  <small>
+						  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							  ${qboard.q_up}
+					  </small>
+				  </div>
+				  <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
+				  <p class="card-text">
+					  <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+						  ${qboard.book_ca_name}</p>
+			  </div>
 		  </div>
-	 </div>
+	  </c:forEach>
 
  	 <br>
  	 
@@ -313,24 +313,26 @@
   </div>
   
   <div class="tab-pane fade" id="popular">
-	  <div class="card bg-light">
-		  <div class="card-body">
-			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="#">
-			  <i class="fa fa-quora" aria-hidden="true"></i>  
-			    인기순으로 나열됩니다.</a>
-		    </h4>
-		    <small>
-		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		    	추천수
-		    </small>
-		    </div>
-		    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
-		    <p class="card-text">
-		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-		    1~5번 책 대분류 선택한 것</p>
+	  <c:forEach var="qboard" items="${popularityList}">
+		  <div class="card bg-light">
+			  <div class="card-body">
+				  <div class="d-flex w-100 justify-content-between">
+					  <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
+						  <i class="fa fa-quora" aria-hidden="true"></i>
+							  ${qboard.q_title}</a>
+					  </h4>
+					  <small>
+						  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							  ${qboard.q_up}
+					  </small>
+				  </div>
+				  <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
+				  <p class="card-text">
+					  <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+						  ${qboard.book_ca_name}</p>
+			  </div>
 		  </div>
-	 </div>
+	  </c:forEach>
  	 <br>
  	 
  	<div>
