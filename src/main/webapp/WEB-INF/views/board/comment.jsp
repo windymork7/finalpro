@@ -31,8 +31,8 @@
 <input type="hidden" id="qboardNum" value="${param.qboardNum}">
 <input type="hidden" id="memNo" value="${param.memNo}">
 <input type="hidden" id="subCa" value="${param.subCa}">
-<input type="hidden" id="sessionNick" value="${sessionScope.userNick}">
-<input type="hidden" id="sessionNo" value="${sessionScope.userNo}">
+<input type="hidden" id="sessionNick" value="${param.userNick}">
+<input type="hidden" id="sessionNo" value="${param.userNo}">
 </body>
 <script>
     $(document).ready(function(){
@@ -44,7 +44,6 @@
         var qboardNum = $("#qboardNum").val();
         var subCa = $("#subCa").val();
         var sessionNick = $("#sessionNick").val();
-        var sessionNo = $("#sessionNo").val();
         var qMemNo = $("#memNo").val();
 
 
@@ -68,7 +67,8 @@
 
                     for (var i = 0; i < data.length; i++) {
 
-                            console.log(data[i]);
+                            console.log(data[i].reply_no);
+
 
 
                         html += "<div class=\"card\">\n" +
@@ -90,20 +90,67 @@
                                 html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
-                            } else if(data[i].reply_pick == -1){}
-                            html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
-                            "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
-                            "                </button>\n" +
-                            "            </div>\n" +
+                            } else if(data[i].reply_pick !== -1){}
+                            if(data[i].mem_nick != sessionNick){
+                                html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
+                                    "<span data-toggle=\"modal\" data-target=\"#Modal_3\">" +
+                                    "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
+                                    "</span>" +
+                                    "                </button>\n";
+                            }
+                            html += "            </div>\n" +
                             "            &nbsp;\n" +
                             "            &nbsp;\n" +
                             "            <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\" readonly>\n" +
-                            "                "+ data[i].reply_content+"\n" +
-                            "\t\t</textarea>\n" +
+                            ""+ data[i].reply_content+"\n" +
+                            "</textarea>\n" +
                             "        </div>\n" +
                             "    </div>\n" +
                             "</div>" +
-                            "<br>";
+                            "<br>" +
+                            "<div class=\"modal fade\" id=\"Modal_3\" tabindex=\"-1\"\n" +
+                                "                  aria-labelledby=\"ModalLabel_3\" aria-hidden=\"true\">\n" +
+                                "                  <div class=\"modal-dialog\">\n" +
+                                "                     <div class=\"modal-content\">\n" +
+                                "                        <div class=\"modal-header\">\n" +
+                                "                           <h5 class=\"modal-title\" id=\"ModalLabel_1\">신고 사유를 선택하세요.</h5>\n" +
+                                "                           <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+                                "                              <span aria-hidden=\"true\">&times;</span>\n" +
+                                "                           </button>\n" +
+                                "                        </div>\n" +
+                                "                        <form action=\"/replyDownPopup.bo\" method=\"post\">\n" +
+                                "                            <div class=\"modal-body\">\n" +
+                                "                                <div class=\"form-group\">\n" +
+                                "                                <input type=\"hidden\" name=\"qboardNum\" value='"+ qboardNum +"'>\n" +
+                                "                            <input type=\"hidden\" name=\"subCa\" value='"+ subCa+"'>\n" +
+                                "                            <input type=\"hidden\" name=\"reply_no\" value='"+ data[i].reply_no+"'>\n" +
+                                "                            <div class=\"custom-control custom-radio\">\n" +
+                                "                              <input type=\"radio\" id=\"customRadio5\" name=\"customRadio\" class=\"custom-control-input\" value=\"1\">\n" +
+                                "                              <label class=\"custom-control-label\" for=\"customRadio5\">주제에 맞지 않음</label>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"custom-control custom-radio\">\n" +
+                                "                              <input type=\"radio\" id=\"customRadio6\" name=\"customRadio\" class=\"custom-control-input\" value=\"2\">\n" +
+                                "                              <label class=\"custom-control-label\" for=\"customRadio6\">욕설</label>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"custom-control custom-radio\">\n" +
+                                "                              <input type=\"radio\" id=\"customRadio7\" name=\"customRadio\" class=\"custom-control-input\" value=\"3\">\n" +
+                                "                              <label class=\"custom-control-label\" for=\"customRadio7\">광고</label>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"custom-control custom-radio\">\n" +
+                                "                              <input type=\"radio\" id=\"customRadio8\" name=\"customRadio\" class=\"custom-control-input\" value=\"4\">\n" +
+                                "                              <label class=\"custom-control-label\" for=\"customRadio8\">사칭</label>\n" +
+                                "                            </div>\n" +
+                                "\n" +
+                                "                            </div>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"modal-footer\">\n" +
+                                "                               <button type=\"submit\" class=\"btn btn-primary\">전송</button>\n" +
+                                "                               <button type=\"button\" class=\"btn btn-secondary\">닫기</button>\n" +
+                                "                            </div>\n" +
+                                "                        </form>\n" +
+                                "                     </div>\n" +
+                                "                  </div>\n" +
+                                "               </div>";
 
                         $("#commentListForm").html(html);
                     }

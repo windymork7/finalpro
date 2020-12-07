@@ -19,15 +19,13 @@ public class CommonReplyPickServiceImpl implements CommonReplyPickService {
         HttpSession session = request.getSession();
 
         int seesionNum = (int)session.getAttribute("userNo");
+        System.out.println(seesionNum);
         int reply_no = Integer.parseInt(request.getParameter("replyNum"));
         int mem_no = Integer.parseInt(request.getParameter("qMemNo"));
-        System.out.println("훗5");
-
 
         if (seesionNum == mem_no){
             boardDAO.replyPick(reply_no);
             boardDAO.replyAnotherPick();
-            System.out.println("훗3");
         }
     }
 }

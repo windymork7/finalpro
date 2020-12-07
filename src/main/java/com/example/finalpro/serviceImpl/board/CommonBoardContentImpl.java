@@ -15,10 +15,30 @@ public class CommonBoardContentImpl implements CommonBoardContent {
     @Override
     public QboardVO qBoardContent(int q_no, int subCa) {
 
-        QboardVO qboardVO = boardDAO.qBoardContent(q_no, subCa);
+        QboardVO qboardVO;
 
-        qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
+        if (boardDAO.qBoardReplyCheck(q_no, subCa) == 0){
+            qboardVO = boardDAO.qBoardContent(q_no, subCa);
+            qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
+            System.out.println("댓글 없는거");
+            return qboardVO;
+        } else {
+            if (boardDAO.qBoardReplyPickCheck(q_no) != null){
+                System.out.println("머야 : " + boardDAO.qBoardReplyPickCheck(q_no));
+                qboardVO = boardDAO.qBoardContent(q_no, subCa);
+                qboardVO.setReply_pick(1);
+                qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
+                System.out.println("댓글 있는거");
+                return qboardVO;
+            } else{
+                qboardVO = boardDAO.qBoardContent(q_no, subCa);
+                qboardVO.setReply_pick(0);
+                qboardVO.setQ_date(qboardVO.getQ_date().substring(0,11));
+                System.out.println("댓글 있는거2");
+            }
+        }
 
         return qboardVO;
+
     }
 }
