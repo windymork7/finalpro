@@ -163,6 +163,9 @@
 		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 		  <i class="fa fa-quora" aria-hidden="true"></i>  
 		    ${qboard.q_title}</a></h4>
+			<c:if test="${qboard.q_sos == 1}">
+				<span class="badge badge-secondary">현상금</span>
+			</c:if>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 		    	${qboard.q_up}
@@ -215,6 +218,9 @@
 		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 			  <i class="fa fa-quora" aria-hidden="true"></i>
 					${qboard.q_title}</a>
+			<c:if test="${qboard.q_sos == 1}">
+				<span class="badge badge-secondary">현상금</span>
+			</c:if>
 		    </h4>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -267,6 +273,9 @@
 					  <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 						  <i class="fa fa-quora" aria-hidden="true"></i>
 							  ${qboard.q_title}</a>
+						  <c:if test="${qboard.q_sos == 1}">
+							  <span class="badge badge-secondary">현상금</span>
+						  </c:if>
 					  </h4>
 					  <small>
 						  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -320,6 +329,9 @@
 					  <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 						  <i class="fa fa-quora" aria-hidden="true"></i>
 							  ${qboard.q_title}</a>
+						  <c:if test="${qboard.q_sos == 1}">
+							  <span class="badge badge-secondary">현상금</span>
+						  </c:if>
 					  </h4>
 					  <small>
 						  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -365,25 +377,27 @@
   </div>
   
   <div class="tab-pane fade" id="emergency">
+	  <c:forEach var="qboard" items="${expList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
-		    <h4 class="card-title"><a href="#">
+		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
 			  <i class="fa fa-quora" aria-hidden="true"></i>
-			    긴급질문입니다.
+				${qboard.q_title}
 		    <span class="badge badge-secondary">현상금</span>
 		    </a></h4>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-		    	추천수
+				${qboard.q_up}
 		    </small>
 		    </div>
-		    <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
+		    <h6 class="card-subtitle mb-2 text-muted text-right">${qboard.q_date}</h6>
 		    <p class="card-text">
 		    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-		    1~5번 책 대분류 선택한 것</p>
+				${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
+	  </c:forEach>
  	 <br>
 
  	<div>

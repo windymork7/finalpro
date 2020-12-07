@@ -90,7 +90,7 @@
                              </c:when>
                              <c:when test="${sessionScope.userNo eq qBoardVO.mem_no}">
                                 <span data-toggle="modal" data-target="#Modal_2">
-                                <c:if test="${qBoardVO.reply_pick == 0}">
+                                <c:if test="${qBoardVO.reply_pick == 0 && qBoardVO.q_sos == 0}">
                                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="현상금 걸기">
                                     <i class="fa fa-krw" aria-hidden="true"></i>
                                 </button>
@@ -127,13 +127,15 @@
 					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 						<div id="q_right">
+                        <c:if test="${qBoardVO.q_admin_state > 0 && qBoardVO.q_admin_state < 4}">
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">
 						  <i class="fa fa-book" aria-hidden="true"></i>
 						</button>
+                        </c:if>
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집" onclick="editAddContent()">
 						  <i class="fa fa-pencil" aria-hidden="true"></i>
 						</button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩" onclick="location.href='/myscrapCheck.my?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
 						</button>
 						</div>
@@ -212,11 +214,14 @@
 				  <div id="editAddContentForm"></div>
 				<hr class="my-4">
 
+                  <div id="editAddContentComplete"></div>
+
 	<c:import url="board/comment.jsp">
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
         <c:param name="memNo" value="${qBoardVO.mem_no}"/>
         <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
         <c:param name="userNick" value="${sessionScope.userNick}"/>
+        <c:param name="userNo" value="${sessionScope.userNo}"/>
     </c:import>
 	<br>
 				
@@ -244,7 +249,7 @@
 	function editAddContent(){
 		html = "";
 
-		if (${sessionScope.userGrade} >= 5){
+		if (${sessionScope.userGrade} >= 3){
 
 			html += "<div class=\"card\">\n" +
 					"\t  <div class=\"card-header\">\n" +
@@ -252,10 +257,10 @@
 					"\t  </div>\n" +
 					"\t  <div class=\"card-body\">\n" +
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
-					"\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
+					"\t   <textarea id='editText' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
 					"\t\t</textarea>\n" +
 					"\t   </div>\n" +
-					"<button type='button' class='btn btn-success' onclick='location.href=\"/loginForm.me\"'>전송</button>\n"+
+					"<button type='button' class='btn btn-success' onclick='editAddContentComplete()'>전송</button>\n"+
 					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
 					"\t  </div>\n" +
 					"\t</div>";
@@ -265,6 +270,31 @@
 
 		}
 	}
+
+	function editAddContentComplete(){
+
+	    var editText = $("#editText").val();
+	    var html = "";
+
+	    html += "<div class=\"card\">\n" +
+                "\t  <div class=\"card-header\">\n" +
+                "\t  ${sessionScope.userNick} (로고)\n" +
+                "\t  </div>\n" +
+                "\t  <div class=\"card-body\">\n" +
+                "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+                "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">"+ editText +"\n" +
+                "\t\t</textarea>\n" +
+                "\t   </div>\n" +
+                "\t  </div>\n" +
+                "\t</div>";
+
+        $("#editAddContentComplete").html(html);
+
+        html = "";
+        $("#editAddContentForm").html(html);
+
+
+    }
 
 
 	function expInput(){

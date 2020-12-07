@@ -30,6 +30,8 @@ public class DsqController {
     @Autowired
     CommonMemberExpSelect commonMemberExpSelect;
     @Autowired
+    CommonBoardExpListSerivce commonBoardExpListSerivce;
+    @Autowired
     CommonBoardPopularityListService commonBoardPopularityListService;
     @Autowired
     CommonBoardLatesListService commonBoardLatesListService;
@@ -95,11 +97,13 @@ public class DsqController {
         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
         List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
         List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
+        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
 
         model.addAttribute("completeList",completeList);
         model.addAttribute("readyList", readyList);
         model.addAttribute("latestList", latestList);
         model.addAttribute("popularityList", popularityList);
+        model.addAttribute("expList", expList);
 
         model.addAttribute("subCa", subCa);
         model.addAttribute("main", "board/board_list");
@@ -160,6 +164,7 @@ public class DsqController {
         ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
 
         List<ReplyBoardVO> replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
+
 //        System.out.println(replyVOlist);
 
         if (replyVOlist.size() > 0){
