@@ -62,7 +62,7 @@
 		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
 		AND SC.CA_NO = C.CA_NO
         AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
-		AND Q_ADMIN_STATE=4
+		AND Q_ADMIN_STATE=3
 	</select>
 	
 	<!-- 승인 ( 책에 추가 )  필요 없는 컬럼
