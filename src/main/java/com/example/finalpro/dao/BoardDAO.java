@@ -22,6 +22,8 @@ public interface BoardDAO {
     public List<QboardVO> qBoardLatesList(int subCa);
     // q게시글 인기순 조회
     public List<QboardVO> qBoardPopularityList(int subCa);
+    // q게시글 현상금 업데이트
+    public void qBoardExpUpdate(int q_no, int exp);
     // 해당 게시글 조회
     public QboardVO qBoardContent(int q_no, int subCa);
     public QboardVO qBoardReplyContent(int q_no, int subCa);
@@ -58,6 +60,8 @@ public interface BoardDAO {
     public int replyDownCheck(int reply_no, int mem_no);
     public void replyDownUpdate(int reply_no);
     public void replyDownInsert(int reply_no, int mem_no, int rpt_no);
+
+
 
 
 

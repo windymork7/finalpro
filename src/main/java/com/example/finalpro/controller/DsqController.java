@@ -1,6 +1,7 @@
 package com.example.finalpro.controller;
 
 import com.example.finalpro.service.board.*;
+import com.example.finalpro.service.member.CommonMemberExpSelect;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.json.JSONArray;
@@ -24,6 +25,10 @@ import java.util.List;
 @Controller
 public class DsqController {
 
+    @Autowired
+    CommonBoardExpUpdateService commonBoardExpUpdateService;
+    @Autowired
+    CommonMemberExpSelect commonMemberExpSelect;
     @Autowired
     CommonBoardPopularityListService commonBoardPopularityListService;
     @Autowired
@@ -265,6 +270,41 @@ public class DsqController {
         String subCa = request.getParameter("subCa");
 
         commonBoardDownService.qBoardDown(request);
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
+    }
+
+
+    // 현상금 걸기
+    @RequestMapping("/qboardExpInput.bo")
+    @ResponseBody
+    public int qboardExpInput(HttpSession session){
+
+        int userNo = (Integer)session.getAttribute("userNo");
+        System.out.println("userNo : " + userNo);
+
+        int memberExp = commonMemberExpSelect.memberExp(userNo);
+
+        return memberExp;
+    }
+
+    // 게시글 현상금 업데이트
+    @RequestMapping("/qboardExpUpdate.bo")
+    public String qboardExpUpdate(HttpServletRequest request){
+
+
+
+        String qboardNum = request.getParameter("qboardNum");
+        System.out.println("q_no : " + qboardNum);
+        String subCa = request.getParameter("subCa");
+        System.out.println("sub_ca : " + subCa);
+
+        int exp = Integer.parseInt(request.getParameter("mem_exp"));
+        System.out.println("exp : " + exp);
+
+        commonBoardExpUpdateService.qBoardExpUpdate(Integer.parseInt(qboardNum), exp);
+
+
 
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
     }
