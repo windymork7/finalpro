@@ -1,5 +1,6 @@
 package com.example.finalpro.serviceImpl.board;
 
+import com.example.finalpro.dao.MemberDAO;
 import com.example.finalpro.service.board.CommonBoardInsertService;
 import com.example.finalpro.dao.BoardDAO;
 import com.example.finalpro.vo.NoticeVO;
@@ -16,9 +17,14 @@ public class CommonBoardInsertServiceImpl implements CommonBoardInsertService {
     @Autowired
     BoardDAO boardDAO;
 
+    @Autowired
+    MemberDAO memberDAO;
+
     @Override
     public void qBoardInsert(QboardVO qboardVO) {
 
         boardDAO.qBoardInsert(qboardVO);
+        memberDAO.commonExpUpate(qboardVO.getMem_no(),5);
+
     }
 }

@@ -207,7 +207,7 @@ public class DsqController {
         int mem_no = (Integer)session.getAttribute("userNo");
         System.out.println("업액션 qboardNum: "+ q_no);
         System.out.println("업액션 mem_no: "+mem_no);
-        commonBoardUpService.qBoardUp(mem_no,q_no);
+        commonBoardUpService.qBoardUp(mem_no,q_no, subCa);
 
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum + "&subCa=" + subCa;
     }

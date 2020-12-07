@@ -255,6 +255,14 @@
     <insert id="replyDownInsert">
         INSERT INTO REPLY_DOWN VALUES(REPLY_DOWN_SEQ.NEXTVAL, #{param1}, #{param3}, #{param2})
     </insert>
+    
+    <!-- 댓글 조회 -->
+    <select id="replyContent" resultType="com.example.finalpro.vo.ReplyBoardVO">
+        SELECT *
+        FROM REPLY R, MEM M
+        WHERE R.MEM_NO = M.MEM_NO
+        AND R.REPLY_NO = #{param1}
+    </select>
 
 
 </mapper>

@@ -36,7 +36,7 @@
 		  border-top-left-radius: 0.4rem;
 		  border-top-right-radius: 0.4rem;
 		}
-	
+
 		.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
 		  color: #78c2ad;
 		  border-color: #f7f7f9 #f7f7f9 #eceeef;
