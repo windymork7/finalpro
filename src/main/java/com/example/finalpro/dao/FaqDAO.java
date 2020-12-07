@@ -1,6 +1,7 @@
 package com.example.finalpro.dao;
 
 import com.example.finalpro.vo.FaqVO;
+import com.example.finalpro.vo.PagingVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public interface FaqDAO {
 
     //수정액션
     public void faqBoardUpdate(FaqVO faqVO);
+
+    //페이징
+    public int countFaq();
+    public List<FaqVO> selectFaq(PagingVO vo);
 }
 
