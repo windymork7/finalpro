@@ -4,6 +4,7 @@ import com.example.finalpro.service.board.*;
 import com.example.finalpro.service.member.CommonMemberExpSelect;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,10 @@ import java.util.List;
 @Controller
 public class DsqController {
 
+    @Autowired
+    EditQboardReplyListService editQboardReplyListService;
+    @Autowired
+    EditQboardReplyInsertService editQboardReplyInsertService;
     @Autowired
     CommonBoardExpUpdateService commonBoardExpUpdateService;
     @Autowired
@@ -315,6 +320,44 @@ public class DsqController {
     }
 
 
+    // 게시판 에디터 답변 글쓰기
+    @RequestMapping("/editInput.bo")
+    @ResponseBody
+    public String editInput(QboardVO qboardVO){
+
+        editQboardReplyInsertService.editBoardInsert(qboardVO);
+
+        return "success";
+    }
+
+
+    // 게시판 에디터 리스트
+    @RequestMapping(value = "/editList.bo", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity replyList(QboardVO qboardVO){
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+
+        List<QboardVO> editList = editQboardReplyListService.editBoardReply(qboardVO);
+        System.out.println(editList);
+
+        if (editList.size() > 0){
+            for (int i = 0; i < editList.size(); i++) {
+                HashMap hm = new HashMap();
+                hm.put("reply_no", editList.get(i).getReply_no());
+                hm.put("q_no", editList.get(i).getQ_no());
+                hm.put("mem_no", editList.get(i).getMem_no());
+                hm.put("mem_nick", editList.get(i).getMem_nick());
+                hm.put("reply_pick", editList.get(i).getReply_pick());
+                hm.put("edit_reply_content", editList.get(i).getReply_Edit_Content());
+
+                hmlist.add(hm);
+            }
+        }
+        JSONArray jsonArray = new JSONArray(hmlist);
+        return new ResponseEntity(jsonArray.toString(), responseHeaders, HttpStatus.CREATED);
+    }
 
 
 
