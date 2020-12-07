@@ -22,8 +22,18 @@ public class QboardVO {
     private int grade_no;
     private int ca_no;
     private int rownum;
+    private String ca_name;
+    
+    
+    public String getCa_name() {
+		return ca_name;
+	}
 
-    public int getRownum() {
+	public void setCa_name(String ca_name) {
+		this.ca_name = ca_name;
+	}
+
+	public int getRownum() {
         return rownum;
     }
 
@@ -150,7 +160,6 @@ public class QboardVO {
     public void setQ_date(String q_date) {
         this.q_date = q_date;
     }
-
     public int getQ_admin_state() {
         return q_admin_state;
     }
