@@ -8,6 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface BoardDAO {
+
+    // q게시글 총 갯수
+    public int qBoardCount();
     // q게시글 글쓰기 폼 이동시 북 카테고리 조회
     public List<QboardVO> bookCategory(int subCa);
     // q게시글 서브 카테고리 조회
@@ -22,6 +25,8 @@ public interface BoardDAO {
     public List<QboardVO> qBoardLatesList(int subCa);
     // q게시글 인기순 조회
     public List<QboardVO> qBoardPopularityList(int subCa);
+    // q게시글 현상글 조회
+    public List<QboardVO> qboardExpList(int subCa);
     // q게시글 현상금 업데이트
     public void qBoardExpUpdate(int q_no, int exp);
     // 해당 게시글 조회

@@ -45,6 +45,7 @@
         var subCa = $("#subCa").val();
         var sessionNick = $("#sessionNick").val();
         var qMemNo = $("#memNo").val();
+        var sessionNo = $("#sessionNo").val();
 
 
 
@@ -82,7 +83,7 @@
                             "                    <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
                             "                    "+ data[i].reply_up +"\n" +
                             "                </button>\n";
-                            if(data[i].reply_pick == 0){
+                            if(data[i].reply_pick == 0 && qMemNo == sessionNo){
                                 html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&subCa="+subCa+"&qboardNum="+qboardNum+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
