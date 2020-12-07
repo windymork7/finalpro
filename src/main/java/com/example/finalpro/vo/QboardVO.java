@@ -14,6 +14,7 @@ public class QboardVO {
     private int book_ca_no;
     private String q_title;
     private String q_content;
+    private int q_exp;
     private int q_sos;
     private int q_up;
     private int q_rpt_cnt;
@@ -184,6 +185,14 @@ public class QboardVO {
         this.ca_no = ca_no;
     }
 
+    public int getQ_exp() {
+        return q_exp;
+    }
+
+    public void setQ_exp(int q_exp) {
+        this.q_exp = q_exp;
+    }
+
     @Override
     public String toString() {
         return "QboardVO{" +
@@ -198,6 +207,7 @@ public class QboardVO {
                 ", book_ca_no=" + book_ca_no +
                 ", q_title='" + q_title + '\'' +
                 ", q_content='" + q_content + '\'' +
+                ", q_exp=" + q_exp +
                 ", q_sos=" + q_sos +
                 ", q_up=" + q_up +
                 ", q_rpt_cnt=" + q_rpt_cnt +
@@ -206,6 +216,7 @@ public class QboardVO {
                 ", grade_no=" + grade_no +
                 ", ca_no=" + ca_no +
                 ", rownum=" + rownum +
+                ", ca_name='" + ca_name + '\'' +
                 '}';
     }
 }

@@ -33,6 +33,12 @@
         WHERE MEM_NO = #{param1}
     </update>
 
+    <select id="commonMemberExp" resultType="Integer">
+        SELECT MEM_EXP
+        FROM MEM
+        WHERE MEM_NO = #{param1}
+    </select>
+
     <!-- 회원 명성 수정 -->
     <update id="commonExpUpate">
         UPDATE MEM

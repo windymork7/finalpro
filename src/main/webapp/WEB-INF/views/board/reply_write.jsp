@@ -197,11 +197,13 @@
                               <div class="modal-body">
                                   <div class="form-group">
                                       <label class="col-form-label col-form-label-lg" for="inputLarge">EXP</label>
-                                      <input class="form-control form-control-lg" type="text" id="inputLarge">
+                                      <form action="/qboardExpUpdate.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}" method="post" id="ExpForm">
+                                        <input class="form-control form-control-lg" type="text" id="inputLarge" name="mem_exp">
+                                      </form>
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                  <button type="submit" class="btn btn-primary" data-dismiss="modal">걸기</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="expInput()">걸기</button>
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                               </div>
                           </div>
@@ -263,6 +265,34 @@
 
 		}
 	}
+
+
+	function expInput(){
+	    var exp = $("#inputLarge").val();
+
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/qboardExpInput.bo",
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(memExp)
+                {
+                    if (exp > memExp){
+                        alert("회원님이 명성이 부족합니다.");
+                        $("#inputLarge").val("0");
+                    } else{
+                        $("#ExpForm").submit();
+                    }
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+    }
 </script>
 
 </body>
