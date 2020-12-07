@@ -1,7 +1,9 @@
 package com.example.finalpro.serviceImpl.board;
 
 import com.example.finalpro.dao.BoardDAO;
+import com.example.finalpro.dao.MemberDAO;
 import com.example.finalpro.service.board.CommonBoardDownService;
+import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class CommonBoardDownServiceImpl implements CommonBoardDownService {
 
     @Autowired
     BoardDAO boardDAO;
+    @Autowired
+    MemberDAO memberDAO;
 
     @Override
     public void qBoardDown(HttpServletRequest request) {
@@ -23,11 +27,16 @@ public class CommonBoardDownServiceImpl implements CommonBoardDownService {
         int radio = Integer.parseInt(request.getParameter("customRadio"));
 
 
+
         System.out.println(boardDAO.qBoardDownCheck(mem_no, q_no));
 
         if (boardDAO.qBoardDownCheck(mem_no, q_no) == 0){
             boardDAO.qBoardDownUpdate(q_no);
             boardDAO.qBoardDownInsert(q_no, mem_no, radio);
+            QboardVO qboardVO = boardDAO.qBoardContent(q_no, Integer.parseInt(request.getParameter("subCa")));
+            memberDAO.commonExpUpate(qboardVO.getMem_no(), -2);
+            memberDAO.commonExpUpate(mem_no, -10);
+            memberDAO.commonMemberRpt(qboardVO.getMem_no());
         }
 
 

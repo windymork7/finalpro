@@ -41,6 +41,8 @@ public interface BoardDAO {
 
     // 댓글 리스트
     public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);
+    // 해당 댓글 번호 댓글 조회
+    public ReplyBoardVO replyContent(int reply_no);
     // 댓글 글쓰기 프로세스
     public void replyInsertProcess(ReplyBoardVO replyBoardVO);
     // 댓글 추천
