@@ -60,7 +60,7 @@ public class FaqController {
         }
         vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 
-
+//
         List<FaqVO> list = new ArrayList<>();
         list = faqSelectFaqService.selectFaq(vo);
 
