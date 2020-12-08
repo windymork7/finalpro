@@ -82,7 +82,8 @@
 			  <fieldset>
                   <div>
                      <div id="c_left">
-                        <a href="/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}"><legend>${qBoardVO.sub_ca_name}</legend></a>
+<%--                        <a href="/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}"><legend>${qBoardVO.sub_ca_name}</legend></a>--%>
+                        <a href="#" onclick="history.back()"><legend>${qBoardVO.sub_ca_name}</legend></a>
                      </div>
                      <div id="c_right">
                          <c:choose>
