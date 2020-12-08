@@ -67,7 +67,10 @@ public interface BoardDAO {
     public void replyDownInsert(int reply_no, int mem_no, int rpt_no);
 
 
-
+    // 에디터 댓글
+    public void editQboardReplyInsert(QboardVO qboardVO);
+    // 에디터 댓글 리스트
+    public List<QboardVO> editBoardReplyList(QboardVO qboardVO);
 
 
 

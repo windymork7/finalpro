@@ -71,7 +71,7 @@
 	</insert> -->
 	<!-- 승인 ( 어드빈 상태 5로 변경 )  -->
 	<update id="bookAdminStateUpdate" parameterType="com.example.finalpro.vo.QboardVO">
-		UPDATE Q SET Q_ADMIN_STATE=5 WHERE Q_NO=#{param1}
+		UPDATE Q SET Q_ADMIN_STATE=4 WHERE Q_NO=#{param1}
 	</update>
 
 </mapper>
