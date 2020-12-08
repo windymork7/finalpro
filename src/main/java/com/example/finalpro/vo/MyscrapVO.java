@@ -9,8 +9,43 @@ public class MyscrapVO {
     private String my_scrap_date;   //스크랩한 날짜
     private String q_title;
     private int rownum;
-    
-    
+    private String book_ca_name;
+    private String sub_ca_name;
+    private int q_up;
+    private String q_date;
+
+    public String getQ_date() {
+        return q_date;
+    }
+
+    public void setQ_date(String q_date) {
+        this.q_date = q_date;
+    }
+
+    public int getQ_up() {
+        return q_up;
+    }
+
+    public void setQ_up(int q_up) {
+        this.q_up = q_up;
+    }
+
+    public String getSub_ca_name() {
+        return sub_ca_name;
+    }
+
+    public void setSub_ca_name(String sub_ca_name) {
+        this.sub_ca_name = sub_ca_name;
+    }
+
+    public String getBook_ca_name() {
+        return book_ca_name;
+    }
+
+    public void setBook_ca_name(String book_ca_name) {
+        this.book_ca_name = book_ca_name;
+    }
+
     public int getRownum() {
 		return rownum;
 	}
@@ -68,8 +103,16 @@ public class MyscrapVO {
     }
 
     @Override
-	public String toString() {
-		return "MyscrapVO [my_scrap_no=" + my_scrap_no + ", q_no=" + q_no + ", mem_no=" + mem_no + ", my_scrap_memo="
-				+ my_scrap_memo + ", my_scrap_date=" + my_scrap_date + ", q_title=" + q_title + "]";
-	}
+    public String toString() {
+        return "MyscrapVO{" +
+                "my_scrap_no=" + my_scrap_no +
+                ", q_no=" + q_no +
+                ", mem_no=" + mem_no +
+                ", my_scrap_memo='" + my_scrap_memo + '\'' +
+                ", my_scrap_date='" + my_scrap_date + '\'' +
+                ", q_title='" + q_title + '\'' +
+                ", rownum=" + rownum +
+                ", book_ca_name='" + book_ca_name + '\'' +
+                '}';
+    }
 }

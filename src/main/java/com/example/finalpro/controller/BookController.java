@@ -19,7 +19,6 @@ import com.example.finalpro.vo.QboardVO;
 @Controller
 public class BookController {
 
-	//준열이가 작업한 부분 시작
 	@Autowired
 	BookSubCaListService bookSubCaListService;
 	@Autowired
@@ -30,7 +29,6 @@ public class BookController {
 	BookBookCaListService bookBookCaListSerivce;
 	@Autowired
 	BookBookCaNameService bookBookCaNameService;
-	//준열이가 작업한 부분  끝
 
 
     // 문제풀이
@@ -60,12 +58,33 @@ public class BookController {
     
   
     
-    
-    /*****밑은 준열이가 작업한부분*******/
+
+    //스크랩북 메인
+    @RequestMapping("/scrapBookMain.bs")
+    public String scrapBookMain(Model model,@RequestParam int ca_no ,@RequestParam(defaultValue = "1") int subCa,@RequestParam(defaultValue = "1") int bookCa){
+
+        List<QboardVO> subCaList = bookSubCaListService.subCaList(ca_no);
+        List<QboardVO> bookCaList = bookBookCaListSerivce.bookCaList(ca_no);
+        List<QboardVO> contentlist = bookBookCaContentListService.bookCaContentList(subCa,bookCa);
+
+        QboardVO subVO = bookSubCaNameService.subCaName(subCa);
+        QboardVO bookVO = bookBookCaNameService.bookCaName(bookCa);
+
+
+        model.addAttribute("subCaList",subCaList);
+        model.addAttribute("bookCaList",bookCaList);
+        model.addAttribute("contentList",contentlist);
+        model.addAttribute("bookVO",bookVO);
+        model.addAttribute("subVO",subVO);
+        model.addAttribute("main","book/scrapBook");
+        return "template";
+    }
+
+
     //스크랩북 큰 카테고리 ( 자바, 파이선 등 리스트 )
     @RequestMapping("/bookSubCaList.bs")
-    public String bookSubCaList(Model model) {
-    	List<QboardVO> list = bookSubCaListService.subCaList();
+    public String bookSubCaList(Model model,@RequestParam int ca_no) {
+    	List<QboardVO> list = bookSubCaListService.subCaList(ca_no);
     	
     	model.addAttribute("main","book/TestBookSubCaList");
     	model.addAttribute("list",list);
@@ -91,9 +110,8 @@ public class BookController {
     	QboardVO qboardVO = bookBookCaNameService.bookCaName(bookCa);
 
     	model.addAttribute("qboardVO",qboardVO);
+        model.addAttribute("list",list);
     	model.addAttribute("main","book/TestBookBookCaContentList");
-    	model.addAttribute("list",list);
-    	
     	return "template";
     }
 

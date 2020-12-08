@@ -1,4 +1,4 @@
-package com.example.finalpro.dao;
+package com.example.finalpro.service.mypage;
 
 import com.example.finalpro.vo.MyscrapVO;
 import com.example.finalpro.vo.QboardVO;

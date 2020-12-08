@@ -9,10 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.finalpro.dao.MyscrapDAO;
+import com.example.finalpro.service.mypage.MyscrapDAO;
 import com.example.finalpro.service.myscrap.MyscrapListService;
 import com.example.finalpro.vo.MyscrapVO;
-import com.example.finalpro.vo.QboardVO;
 
 @Service
 public class MyscrapListImpl implements MyscrapListService {

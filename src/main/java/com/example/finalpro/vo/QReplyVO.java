@@ -12,8 +12,16 @@ public class QReplyVO {
 	private String reply_date;
 	private String q_title;
 	private String mem_nick;
-	
-	
+	private int q_up;
+
+	public int getQ_up() {
+		return q_up;
+	}
+
+	public void setQ_up(int q_up) {
+		this.q_up = q_up;
+	}
+
 	public String getQ_title() {
 		return q_title;
 	}

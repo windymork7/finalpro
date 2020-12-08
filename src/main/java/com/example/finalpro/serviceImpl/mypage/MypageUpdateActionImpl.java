@@ -19,6 +19,7 @@ public class MypageUpdateActionImpl implements MypageUpdateActionService {
         int mem_no = (Integer)session.getAttribute("userNo");
         System.out.println("회원수정폼정보값 toString:"+commonMemberVO.toString());
         System.out.println("회원수정액션 mem_no:"+mem_no);
+        commonMemberVO.setMem_no(mem_no);
         memberDAO.commonMemberUpdate(commonMemberVO);
     }
 }
