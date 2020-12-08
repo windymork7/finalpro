@@ -40,7 +40,7 @@ public class CommonReplyPickServiceImpl implements CommonReplyPickService {
                 memberDAO.commonExpUpate(mem_no, -(qboardVO.getQ_exp()));
                 System.out.println("머가 나오냐 : " + qboardVO.getQ_exp());
                 System.out.println("replyVO : " + replyVO.getMem_no());
-                memberDAO.commonExpUpate(replyVO.getMem_no(), qboardVO.getQ_exp());
+                memberDAO.commonExpUpate(replyVO.getMem_no(), 15 + qboardVO.getQ_exp());
                 System.out.println("되라2");
             }else{
                 memberDAO.commonExpUpate(replyVO.getMem_no(), 15);

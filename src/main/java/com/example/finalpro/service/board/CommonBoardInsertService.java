@@ -1,7 +1,8 @@
 package com.example.finalpro.service.board;
 
 import com.example.finalpro.vo.QboardVO;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface CommonBoardInsertService {
-    public void qBoardInsert(QboardVO qboardVO);
+    public void qBoardInsert(MultipartFile q_file, QboardVO qboardVO);
 }

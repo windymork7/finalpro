@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -20,6 +21,11 @@
 
 
 	<style>
+
+    .fa-pencil-square{
+        color:#ffce67;
+    }
+
 	#c_left {
 	   float: left;
 	}
@@ -62,6 +68,12 @@
 	</style>
 </head>
 <body>
+
+    <c:set var="length" value="${fn:length(qBoardVO.q_file)}"/>
+    <c:set var="q_file3" value="${fn:substring(qBoardVO.q_file, length-3, length)}"/>
+    <c:set var="q_file4" value="${fn:substring(qBoardVO.q_file, length-4, length)}"/>
+
+    <h1>${q_file}</h1>
 
    <div class="container-fluid">
       <div class="row">
@@ -124,6 +136,12 @@
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
+                        <c:if test="${not empty qBoardVO.q_file}">
+                            <a href="${pageContext.request.contextPath}/upload/${qBoardVO.q_file}">${qBoardVO.q_file}</a>
+                            <c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
+                                <img src="upload/${qBoardVO.q_file}" width="100%" height="350"><br><br>
+                            </c:if>
+                        </c:if>
 					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 						<div id="q_right">
@@ -212,13 +230,14 @@
                       </div>
                   </div>
 				  <div id="editAddContentForm"></div>
-				<hr class="my-4">
 
                   <div id="editAddContentComplete"></div>
 
                   <div style="height: 20px"></div>
+                  <hr class="my-4">
 
-	<c:import url="board/comment.jsp">
+
+      <c:import url="board/comment.jsp">
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
         <c:param name="memNo" value="${qBoardVO.mem_no}"/>
         <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
@@ -280,22 +299,27 @@
 
     function editList(){
 
+        var html = "";
 
         $.ajax(
             {
                 type : 'GET',
                 url : "/editList.bo",
                 dataType : "json",
+                data : {
+                    "q_no" : ${qBoardVO.q_no},
+                },
                 contentType : "application/x-www-form-urlencoded; charset=UTF-8",
                 success : function(data)
                 {
-                    var html = "";
+                    // alert(data);
 
 
                     for (var i = 0; i < data.length; i++) {
                         html += "<div class=\"card\">\n" +
                             "\t  <div class=\"card-header\">\n" +
-                            "\t  "+ data[i].mem_nick +" (로고)\n" +
+                            "\t<i class=\"fa fa-pencil-square fa-lg\" aria-hidden=\"true\"></i>\n" +
+                            "\t  "+ data[i].mem_nick +"\n" +
                             "\t  </div>\n" +
                             "\t  <div class=\"card-body\">\n" +
                             "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
@@ -339,6 +363,7 @@
                 {
                     alert("에디터 글이 등록되었습니다.");
                     $("#editAddContentForm").html(html);
+                    editList();
 
                 },
                 error : function(request, status, error)

@@ -20,6 +20,15 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 	<style>
+
+		.card-header-gd {
+			padding: 0.75rem 1.25rem;
+			margin-bottom: 0;
+			background-color: #f3969a;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+			color: #fff;
+		}
+
 		.nav-tabs {
 		  color: #5a5a5a;
 		  border-bottom: 1px solid #eceeef;
@@ -63,24 +72,7 @@
 		  color: #888;
 		  text-decoration: none;
 		}
-		
-		#guideline{
-		  border: 2px solid rgba(0, 0, 0, 0.125);
-		}
-		
-		.badge {
-		  display: inline-block;
-		  padding: 0.25em 0.8em;
-		  font-size: 100%;
-		  font-weight: 700;
-		  line-height: 1;
-		  text-align: center;
-		  white-space: nowrap;
-		  vertical-align: baseline;
-		  border-radius: 0.4rem;
-		  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-		}
-		
+
 		.fa-quora{
 		  color:#78c2ad
 		}
@@ -99,8 +91,8 @@
 <br>
 <div class="container-fluid">
 <div class="row">
-<div class="col-sm-3">
-<div class="row col-sm-11">
+<div class="col-sm-2">
+<%--<div class="row col-sm-11">--%>
 <div class="card mb-3">
   <h3 class="card-header">Card header</h3>
   <div class="card-body">
@@ -126,14 +118,14 @@
   <div class="card-footer text-muted">
     2 days ago
   </div>
-</div>
+<%--</div>--%>
 </div>
 
 </div>
-<div class="col-sm-6">
+<div class="col-sm-7">
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#complete"><b>답변완료</b></a>
+  <li class="nav-item active">
+    <a class="nav-link " data-toggle="tab" href="#complete"><b>답변완료</b></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#await"><b>답변대기</b></a>
@@ -433,7 +425,7 @@
 
 <div class="col-sm-3">
 		<div class="card border-secondary mb-3" style="max-width: 20rem;" id="guideline">
-               <div class="card-header"><b>필독사항</b></div>
+               <div class="card-header-gd"><b>필독사항</b></div>
                <div class="card-body">
 				<p>1. 질문은 <b>구체</b>적으로 해주세요!</p>
 				<p>2. 토론을 유발할 가능성이 높은 질문은 피하세요!</p>

@@ -27,8 +27,8 @@
 
     <!--Q게시판 글쓰기-->
     <insert id="qBoardInsert" parameterType="com.example.finalpro.vo.QboardVO">
-        INSERT INTO Q(q_no, mem_no, sub_ca_no, book_ca_no,  q_title, q_content, q_sos, q_up, q_rpt_cnt, q_admin_state)
-         VALUES (Q_SEQ.NEXTVAL, #{mem_no}, #{sub_ca_no}, #{book_ca_no}, #{q_title}, #{q_content}, 0, 0, 0, 0)
+        INSERT INTO Q(q_no, mem_no, sub_ca_no, book_ca_no,  q_title, q_content, q_file, q_sos, q_up, q_rpt_cnt, q_admin_state)
+         VALUES (Q_SEQ.NEXTVAL, #{mem_no}, #{sub_ca_no}, #{book_ca_no}, #{q_title}, #{q_content}, #{q_file}, 0, 0, 0, 0)
     </insert>
 
     <!-- 답변 완료 게시글 조회 -->
@@ -116,8 +116,8 @@
 
     <!-- 해당 게시글 조회 -->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
-        select q1.q_no,q1.mem_no, q1.q_exp, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
-        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
+        select q1.q_no,q1.mem_no, q1.q_exp, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,q_file
+        , q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
         from q q1, (select * from sub_ca) ca,(select * from book_ca) bca,(select * from mem)m
         where q1.sub_ca_no = ca.sub_ca_no
         and bca.book_ca_no = q1.book_ca_no
