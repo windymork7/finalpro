@@ -87,7 +87,7 @@
               </div>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">에디터's Tip
+              <a class="nav-link" href="/editBoardList.ed">에디터's Tip
               </a>
             </li>
             <li class="nav-item active">
