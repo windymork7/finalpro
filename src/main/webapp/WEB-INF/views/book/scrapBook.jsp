@@ -74,7 +74,7 @@ small {
                      </li>--%>
                          <c:forEach begin="${a}" var="bList" items="${bookCaList}" end="${c}">
                          <li class="nav-item"><a class="nav-link pl-0" href="#">
-                             <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}">${bList.book_ca_name}</a> </span></a>
+                             <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}&bookCa=${bList.book_ca_no}">${bList.book_ca_name}</a> </span></a>
                          </li>
                          <c:set var="a" value="${a+1}"/>
                          </c:forEach>

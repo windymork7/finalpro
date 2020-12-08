@@ -15,7 +15,7 @@
 <!--        SELECT b.*,s.sub_ca_name FROM BOOK_CA b,(select * from sub_ca)s -->
 <!--		where b.sub_ca_no = s.sub_ca_no-->
 <!--		and b.sub_ca_no=#{param1}-->
-        SELECT b.*,s.sub_ca_name FROM BOOK_CA b,(select * from sub_ca)s
+        SELECT b.*,s.sub_ca_name,s.ca_no FROM BOOK_CA b,(select * from sub_ca)s
         where b.sub_ca_no = s.sub_ca_no
         and s.ca_no=#{param1}
     </select>
