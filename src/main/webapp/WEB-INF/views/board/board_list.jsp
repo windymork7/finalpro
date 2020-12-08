@@ -161,11 +161,11 @@
 		  <div class="card-body">
 			<div class="d-flex w-100 justify-content-between">
 		    <h4 class="card-title"><a href="/qboardContent.bo?qboardNum=${qboard.q_no}&subCa=${subCa}">
-		  <i class="fa fa-quora" aria-hidden="true"></i>  
-		    ${qboard.q_title}</a></h4>
+		  <i class="fa fa-quora" aria-hidden="true"></i>
+		    ${qboard.q_title}</a>
 			<c:if test="${qboard.q_sos == 1}">
 				<span class="badge badge-secondary">현상금</span>
-			</c:if>
+			</c:if></h4>
 		    <small>
 		    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 		    	${qboard.q_up}

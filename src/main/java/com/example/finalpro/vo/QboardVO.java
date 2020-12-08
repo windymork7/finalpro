@@ -24,6 +24,7 @@ public class QboardVO {
     private int ca_no;
     private int rownum;
     private String ca_name;
+    private String reply_Edit_Content;
     
     
     public String getCa_name() {
@@ -193,6 +194,14 @@ public class QboardVO {
         this.q_exp = q_exp;
     }
 
+    public String getReply_Edit_Content() {
+        return reply_Edit_Content;
+    }
+
+    public void setReply_Edit_Content(String reply_Edit_Content) {
+        this.reply_Edit_Content = reply_Edit_Content;
+    }
+
     @Override
     public String toString() {
         return "QboardVO{" +
@@ -217,6 +226,7 @@ public class QboardVO {
                 ", ca_no=" + ca_no +
                 ", rownum=" + rownum +
                 ", ca_name='" + ca_name + '\'' +
+                ", reply_Edit_Content='" + reply_Edit_Content + '\'' +
                 '}';
     }
 }

@@ -216,6 +216,8 @@
 
                   <div id="editAddContentComplete"></div>
 
+                  <div style="height: 20px"></div>
+
 	<c:import url="board/comment.jsp">
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
         <c:param name="memNo" value="${qBoardVO.mem_no}"/>
@@ -246,6 +248,10 @@
 	    $('[data-toggle="tooltip"]').tooltip();
 	  })
 
+    $(document).ready(function(){
+        editList();
+    });
+
 	function editAddContent(){
 		html = "";
 
@@ -257,45 +263,108 @@
 					"\t  </div>\n" +
 					"\t  <div class=\"card-body\">\n" +
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
-					"\t   <textarea id='editText' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
-					"\t\t</textarea>\n" +
+					"\t   <textarea id='editText' name='edit_reply_content' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
+					"</textarea>\n" +
 					"\t   </div>\n" +
-					"<button type='button' class='btn btn-success' onclick='editAddContentComplete()'>전송</button>\n"+
+					"<button type='button' class='btn btn-success' onclick='editAddContentInsert()'>전송</button>\n"+
 					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
 					"\t  </div>\n" +
-					"\t</div>";
-
+					"\t</div>" +
+                    "<br>";
 
 			$("#editAddContentForm").html(html);
 
 		}
 	}
 
-	function editAddContentComplete(){
+
+    function editList(){
+
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/editList.bo",
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(data)
+                {
+                    var html = "";
+
+
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<div class=\"card\">\n" +
+                            "\t  <div class=\"card-header\">\n" +
+                            "\t  "+ data[i].mem_nick +" (로고)\n" +
+                            "\t  </div>\n" +
+                            "\t  <div class=\"card-body\">\n" +
+                            "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+                            "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\" readonly>"+ data[i].edit_reply_content +"\n" +
+                            "\t\t</textarea>\n" +
+                            "\t   </div>\n" +
+                            "\t  </div>\n" +
+                            "\t</div>" +
+                            "<br>";
+
+                        $("#editAddContentComplete").html(html);
+
+                    }
+
+
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+    }
+
+	function editAddContentInsert(){
 
 	    var editText = $("#editText").val();
 	    var html = "";
 
-	    html += "<div class=\"card\">\n" +
-                "\t  <div class=\"card-header\">\n" +
-                "\t  ${sessionScope.userNick} (로고)\n" +
-                "\t  </div>\n" +
-                "\t  <div class=\"card-body\">\n" +
-                "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
-                "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">"+ editText +"\n" +
-                "\t\t</textarea>\n" +
-                "\t   </div>\n" +
-                "\t  </div>\n" +
-                "\t</div>";
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/editInput.bo",
+                data : {
+                    "q_no" : ${qBoardVO.q_no},
+                    "mem_no" : ${sessionScope.userNo},
+                    "reply_Edit_Content" : editText
+                },
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function()
+                {
+                    alert("에디터 글이 등록되었습니다.");
+                    $("#editAddContentForm").html(html);
 
-        $("#editAddContentComplete").html(html);
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
 
-        html = "";
-        $("#editAddContentForm").html(html);
+            });
 
+
+	    <%--html += "<div class=\"card\">\n" +--%>
+        <%--        "\t  <div class=\"card-header\">\n" +--%>
+        <%--        "\t  ${sessionScope.userNick} (로고)\n" +--%>
+        <%--        "\t  </div>\n" +--%>
+        <%--        "\t  <div class=\"card-body\">\n" +--%>
+        <%--        "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +--%>
+        <%--        "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">"+ editText +"\n" +--%>
+        <%--        "\t\t</textarea>\n" +--%>
+        <%--        "\t   </div>\n" +--%>
+        <%--        "\t  </div>\n" +--%>
+        <%--        "\t</div>";--%>
+
+
+        // $("#editAddContentComplete").html(html);
 
     }
-
 
 	function expInput(){
 	    var exp = $("#inputLarge").val();
