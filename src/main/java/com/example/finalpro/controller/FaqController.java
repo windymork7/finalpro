@@ -3,6 +3,7 @@ package com.example.finalpro.controller;
 import com.example.finalpro.service.faq.*;
 import com.example.finalpro.vo.FaqVO;
 import com.example.finalpro.vo.NoticeVO;
+import com.example.finalpro.vo.PagingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +27,14 @@ public class FaqController {
     FaqBoardUpdateForm faqBoardUpdateForm;
     @Autowired
     FaqBoardUpdate faqBoardUpdate;
+    @Autowired
+    FaqCountFaqService faqCountFaqService;
+    @Autowired
+    FaqSelectFaqService faqSelectFaqService;
+    /*
     //리스트
     @RequestMapping("faqListForm.fa")
-    public String faqBoardList(Model model){
+    public String faqBoardList(Model model,@RequestParam(defaultValue = "1")int curPage){
 
         List<FaqVO> list = new ArrayList<>();
         list = faqBoardList.faqBoardList();
@@ -36,7 +42,35 @@ public class FaqController {
         model.addAttribute("list",list);
         model.addAttribute("main","faq/TestFaqList");
         return "template";
+    }*/
+    //리스트 ( 페이징 )
+    @RequestMapping("faqListForm.fa")
+    public String faqBoardList(PagingVO vo,Model model,
+                               @RequestParam(value = "nowPage", required = false)String nowPage,
+                                @RequestParam(value = "cntPerPage",required = false)String cntPerPage){
+        int total = faqCountFaqService.countFaq();
+
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+//
+        List<FaqVO> list = new ArrayList<>();
+        list = faqSelectFaqService.selectFaq(vo);
+
+        model.addAttribute("paging",vo);
+        model.addAttribute("list",list);
+        model.addAttribute("main","faq/TestFaqList");
+        return "template";
     }
+
+
     //내용
     @RequestMapping("faqBoardContent.fa")
     public String faqBoardContent(@RequestParam("faq_no") String faq_no, Model model){
@@ -87,5 +121,6 @@ public class FaqController {
         model.addAttribute("main","faq/TestFaqList");
         return "redirect:faqListForm.fa";
     }
+
 
 }

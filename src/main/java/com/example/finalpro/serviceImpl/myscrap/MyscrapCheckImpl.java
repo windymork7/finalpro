@@ -1,6 +1,6 @@
 package com.example.finalpro.serviceImpl.myscrap;
 
-import com.example.finalpro.dao.MyscrapDAO;
+import com.example.finalpro.service.mypage.MyscrapDAO;
 import com.example.finalpro.service.myscrap.MyscrapCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

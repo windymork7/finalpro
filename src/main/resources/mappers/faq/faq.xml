@@ -4,6 +4,25 @@
 
 <mapper namespace="com.example.finalpro.dao.FaqDAO">
 
+    <!-- 페이징 -->
+    <!-- 총 게시글 갯수 출력 -->
+    <select id="countFaq" resultType="int">
+        SELECT COUNT(*) FROM BOARD
+    </select>
+    <!-- 페이징 처리 후 게시글 조회 -->
+    <select id="selectFaq" resultType="com.example.finalpro.vo.FaqVO">
+        SELECT *
+        FROM (
+        SELECT ROWNUM RN, A.*
+        FROM (
+        SELECT *
+        FROM faq
+        ORDER BY faq_no DESC
+        ) A
+        )
+        WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    <!-- 여기까지 페이징 -->
     <!-- 게시글 조회 -->
     <select id="faqBoardList" resultType="com.example.finalpro.vo.FaqVO">
         SELECT * FROM FAQ

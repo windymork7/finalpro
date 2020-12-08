@@ -15,6 +15,7 @@ public class FaqBoardListImpl implements FaqBoardList {
     @Autowired
     FaqDAO faqDAO;
 
+
     @Override
     public List<FaqVO> faqBoardList(){
 

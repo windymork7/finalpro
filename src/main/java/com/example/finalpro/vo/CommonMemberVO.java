@@ -15,6 +15,33 @@ public class CommonMemberVO {
     private int rownum;
     private String mem_black_date;
     private String sysdate;
+    private int replycnt;
+    private int questioncnt;
+    private int scrapcnt;
+
+    public int getScrapcnt() {
+        return scrapcnt;
+    }
+
+    public void setScrapcnt(int scrapcnt) {
+        this.scrapcnt = scrapcnt;
+    }
+
+    public int getReplycnt() {
+        return replycnt;
+    }
+
+    public void setReplycnt(int replycnt) {
+        this.replycnt = replycnt;
+    }
+
+    public int getQuestioncnt() {
+        return questioncnt;
+    }
+
+    public void setQuestioncnt(int questioncnt) {
+        this.questioncnt = questioncnt;
+    }
 
     public String getSysdate() {
         return sysdate;

@@ -16,8 +16,8 @@ public class BookSubCaListImpl implements BookSubCaListService{
 	BookDAO bookDAO;
 
 	@Override
-	public List<QboardVO> subCaList() {
-		List<QboardVO> list = bookDAO.subCaList();
+	public List<QboardVO> subCaList(int ca_no) {
+		List<QboardVO> list = bookDAO.subCaList(ca_no);
 		return list;
 	}
 	

@@ -16,11 +16,14 @@ public class MypageQuestionImpl implements MypageQuestionService {
 
     @Override
     public List<QboardVO> mypageQuestion(HttpSession session) {
-        System.out.println("내가한질문 Impl");
         int mem_no = (Integer) session.getAttribute("userNo"); // mem_no, q_no String -> int
-        System.out.println("mem_no:" + mem_no);
 
         List<QboardVO> list = mypageDAO.myquestion(mem_no);
+        for (int i = 0; i < list.size(); i++) {
+
+            list.get(i).setQ_date(list.get(i).getQ_date().substring(0,11));
+        }
+
         return list;
     }
 }

@@ -12,7 +12,51 @@ public class ReplyBoardVO {
     private int reply_pick;
     private int reply_rpt_cnt;
     private String reply_date;
+    private String q_date;
+    private String q_title;
+    private int q_up;
+    private String sub_ca_name;
+    private String book_ca_name;
 
+    public String getBook_ca_name() {
+        return book_ca_name;
+    }
+
+    public void setBook_ca_name(String book_ca_name) {
+        this.book_ca_name = book_ca_name;
+    }
+
+    public String getSub_ca_name() {
+        return sub_ca_name;
+    }
+
+    public void setSub_ca_name(String sub_ca_name) {
+        this.sub_ca_name = sub_ca_name;
+    }
+
+    public int getQ_up() {
+        return q_up;
+    }
+
+    public void setQ_up(int q_up) {
+        this.q_up = q_up;
+    }
+
+    public String getQ_title() {
+        return q_title;
+    }
+
+    public void setQ_title(String q_title) {
+        this.q_title = q_title;
+    }
+
+    public String getQ_date() {
+        return q_date;
+    }
+
+    public void setQ_date(String q_date) {
+        this.q_date = q_date;
+    }
 
     public int getReply_no() {
         return reply_no;

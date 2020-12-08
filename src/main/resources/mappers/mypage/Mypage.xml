@@ -16,10 +16,31 @@
 		and bca.book_ca_no = q1.book_ca_no
 		and mem_no=#{mem_no}
 	</select>
+	<!-- 마이페이지 내가한 답변 -->
+	<select id="myreply" resultType="com.example.finalpro.vo.ReplyBoardVO">
+		SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,Q1.*,C.CA_NO FROM
+		(SELECT * FROM Q) Q1,
+		(SELECT * FROM MEM) M,
+		(SELECT * FROM SUB_CA) SC,
+		(SELECT * FROM CA) C,
+		(SELECT * FROM REPLY) R,
+		(SELECT * FROM BOOK_CA) BC
+		WHERE Q1.MEM_NO = M.MEM_NO
+		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
+		AND SC.CA_NO = C.CA_NO
+		AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
+		AND Q1.Q_NO = R.Q_NO
+		AND R.MEM_NO=#{mem_no}
+	</select>
+	<!-- 내정보 -->
 	<select id="mypageUpdateForm" resultType="com.example.finalpro.vo.CommonMemberVO">
 		SELECT *
-		FROM MEM M, (SELECT * FROM GRADE)G
-		WHERE MEM_NO=#{MEM_NO}
+		FROM MEM M,
+		(SELECT * FROM GRADE)G,
+		(SELECT COUNT(*)REPLYCNT FROM REPLY WHERE MEM_NO=#{mem_no})R,
+		(SELECT COUNT(*)QUESTIONCNT FROM Q WHERE MEM_NO=#{mem_no})Q,
+		(SELECT COUNT(*)SCRAPCNT FROM MY_SCRAP WHERE MEM_NO=#{mem_no})S
+		WHERE MEM_NO=#{mem_no}
 		AND M.GRADE_NO = G.GRADE_NO
 	</select>
 </mapper>

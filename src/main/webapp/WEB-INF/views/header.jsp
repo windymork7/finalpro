@@ -80,44 +80,27 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">스크랩북</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">C</a>
-                  <a class="dropdown-item" href="#">JAVA</a>
-                  <a class="dropdown-item" href="#">PYTHON</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center"><b>데이터베이스</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">ORACLE</a>
-                  <a class="dropdown-item" href="#">MYSQL</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center"><b>프레임워크</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">SPRING</a>
-                  <a class="dropdown-item" href="#">DJANGO</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center" href="/todayProblem.bp"><b>오늘의 문제</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=1"><b>프로그래밍 언어</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=3"><b>데이터베이스</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=2"><b>프레임워크</b></a>
+                <a class="dropdown-item" href="/todayProblem.bp"><b>오늘의 문제</b></a>
               </div>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#">에디터's Tip
               </a>
             </li>
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-                 role="button" aria-haspopup="true" aria-expanded="false">이벤트</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>D'sQ 이벤트</b></a>
-                <a class="dropdown-item text-center"><b>공모전</b></a>
-              </div>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">공모전
+              </a>
             </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>D'sQ 가이드라인</b></a>
-                <a class="dropdown-item text-center"><b>공지사항</b></a>
-                <a class="dropdown-item text-center"><b>FAQ</b></a>
+                <a class="dropdown-item"><b>D'sQ 가이드라인</b></a>
+                <a class="dropdown-item"><b>공지사항</b></a>
+                <a class="dropdown-item"><b>FAQ</b></a>
               </div>
             </li>
           </ul>
