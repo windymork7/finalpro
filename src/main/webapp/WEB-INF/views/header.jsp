@@ -98,9 +98,9 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item"><b>D'sQ 가이드라인</b></a>
-                <a class="dropdown-item"><b>공지사항</b></a>
-                <a class="dropdown-item"><b>FAQ</b></a>
+                <a class="dropdown-item" href="guideLine.cu"><b>D'sQ 가이드라인</b></a>
+                <a class="dropdown-item" href="noticeList.cu"><b>공지사항</b></a>
+                <a class="dropdown-item" href="faqList.cu"><b>FAQ</b></a>
               </div>
             </li>
           </ul>

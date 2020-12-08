@@ -5,6 +5,17 @@ public class NoticeVO {
 	private String notice_title;
 	private String notice_content;
 	private String notice_date;
+	private int rownum;
+	
+	
+
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 
 	public int getNotice_no() {
 		return notice_no;

@@ -65,7 +65,7 @@ public class BookController {
 
         List<QboardVO> subCaList = bookSubCaListService.subCaList(ca_no);
         List<QboardVO> bookCaList = bookBookCaListSerivce.bookCaList(ca_no);
-        List<QboardVO> contentlist = bookBookCaContentListService.bookCaContentList(subCa,bookCa);
+        List<QboardVO> contentlist = bookBookCaContentListService.bookCaContentList(subCa,bookCa,ca_no);
 
         QboardVO subVO = bookSubCaNameService.subCaName(subCa);
         QboardVO bookVO = bookBookCaNameService.bookCaName(bookCa);
@@ -104,6 +104,7 @@ public class BookController {
     }
     
     //스크랩북 책 카테고리리스트 안에 속해있는 게시글 목록 리스트
+    /*
     @RequestMapping("/bookBookCaContentList.bs")
     public String bookBookCaContentList(Model model,@RequestParam int subCa,@RequestParam int bookCa) {
     	List<QboardVO> list = bookBookCaContentListService.bookCaContentList(subCa,bookCa);
@@ -113,6 +114,6 @@ public class BookController {
         model.addAttribute("list",list);
     	model.addAttribute("main","book/TestBookBookCaContentList");
     	return "template";
-    }
+    }*/
 
 }

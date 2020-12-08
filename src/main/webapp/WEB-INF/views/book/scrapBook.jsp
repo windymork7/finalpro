@@ -101,13 +101,13 @@ small {
                               </a>
                            </h4>
                            <small> <span class="glyphicon glyphicon-thumbs-up"
-                              aria-hidden="true"></span> 100
+                              aria-hidden="true"></span> ${cList.q_up}
                            </small>
                         </div>
                         <h6 class="card-subtitle mb-2 text-muted text-right">2020-12-01</h6>
                         <h5 class="card-text text-warning">
                            <i class="fa fa-book text-warning" aria-hidden="true"></i>
-                           25(신청수)
+                           ${cList.book_scrap_cnt }
                         </h5>
                      </div>
                   </div>

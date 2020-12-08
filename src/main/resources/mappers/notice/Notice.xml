@@ -6,11 +6,12 @@
 
 <mapper namespace="com.example.finalpro.dao.NoticeDAO">
 
-    <!-- 해당 게시글 조회-->
+    
     <select id="noticeBoardList" resultType="com.example.finalpro.vo.NoticeVO">
     	SELECT * FROM NOTICE
     </select>
     
+    <!-- 해당 게시글 조회-->
     <select id="noticeBoardContent" resultType="com.example.finalpro.vo.NoticeVO">
     	SELECT * FROM NOTICE WHERE NOTICE_NO =#{notice_no}
     </select>
