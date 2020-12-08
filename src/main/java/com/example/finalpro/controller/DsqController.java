@@ -4,7 +4,6 @@ import com.example.finalpro.service.board.*;
 import com.example.finalpro.service.member.CommonMemberExpSelect;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,9 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,10 +86,10 @@ public class DsqController {
 
     // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
-    public String boardInsertProcess(Model model, QboardVO qboardVO){
+    public String boardInsertProcess(Model model, @RequestParam MultipartFile q_file1, QboardVO qboardVO){
 
         System.out.println("QboardVO : " + qboardVO.toString());
-        commonBoardInsertService.qBoardInsert(qboardVO);
+        commonBoardInsertService.qBoardInsert(q_file1, qboardVO);
 
         int subCa = qboardVO.getSub_ca_no();
 
@@ -97,6 +99,7 @@ public class DsqController {
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
     @RequestMapping("/qboardListForm.bo")
     public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
+
 
         List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
@@ -336,11 +339,13 @@ public class DsqController {
     @ResponseBody
     public ResponseEntity replyList(QboardVO qboardVO){
 
+        System.out.println("이건? : " + qboardVO);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
 
         List<QboardVO> editList = editQboardReplyListService.editBoardReply(qboardVO);
-        System.out.println(editList);
+        System.out.println("살려줘 : "+editList);
 
         if (editList.size() > 0){
             for (int i = 0; i < editList.size(); i++) {

@@ -17,6 +17,8 @@ public class EditQboardReplyListServiceImpl implements EditQboardReplyListServic
     public List<QboardVO> editBoardReply(QboardVO qboardVO) {
 
         List<QboardVO> editList = boardDAO.editBoardReplyList(qboardVO);
+        System.out.println("여기22");
+        System.out.println(editList);
 
         return editList;
     }

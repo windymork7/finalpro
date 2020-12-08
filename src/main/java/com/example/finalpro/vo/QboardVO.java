@@ -14,6 +14,7 @@ public class QboardVO {
     private int book_ca_no;
     private String q_title;
     private String q_content;
+    private String q_file;
     private int q_exp;
     private int q_sos;
     private int q_up;
@@ -202,6 +203,14 @@ public class QboardVO {
         this.reply_Edit_Content = reply_Edit_Content;
     }
 
+    public String getQ_file() {
+        return q_file;
+    }
+
+    public void setQ_file(String q_file) {
+        this.q_file = q_file;
+    }
+
     @Override
     public String toString() {
         return "QboardVO{" +
@@ -216,6 +225,7 @@ public class QboardVO {
                 ", book_ca_no=" + book_ca_no +
                 ", q_title='" + q_title + '\'' +
                 ", q_content='" + q_content + '\'' +
+                ", q_file='" + q_file + '\'' +
                 ", q_exp=" + q_exp +
                 ", q_sos=" + q_sos +
                 ", q_up=" + q_up +
