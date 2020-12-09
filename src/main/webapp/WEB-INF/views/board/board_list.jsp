@@ -463,7 +463,9 @@
                </div>
 		</div>
 	<div style="max-width: 20rem;">
-		<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo?subCa=${requestScope.subCa}'">질문하기</button></a>
+		<c:if test="${not empty sessionScope.userNo}">
+			<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo?subCa=${requestScope.subCa}'">질문하기</button></a>
+		</c:if>
 	</div>
 </div>
 
