@@ -20,8 +20,10 @@ public class CommonBoardListServiceImpl implements CommonBoardListService {
     @Override
     public List<QboardVO> qBoardList(int subCa, PagingVO pagingVO) {
 
+        pagingVO.setSubCa(subCa);
+        System.out.println(pagingVO);
 
-        List<QboardVO> list = boardDAO.qBoardList(subCa, pagingVO);
+        List<QboardVO> list = boardDAO.qBoardList(pagingVO);
         System.out.println("completeList : " + list);
 
         for (int i = 0; i < list.size(); i++) {

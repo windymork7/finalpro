@@ -19,15 +19,15 @@ public interface BoardDAO {
     // q게시글 쓰기
     public void qBoardInsert(QboardVO qboardVO);
     // q게시글 답변 완료 조회
-    public List<QboardVO> qBoardList(int subCa, PagingVO pagingVO);
+    public List<QboardVO> qBoardList(PagingVO pagingVO);
     // q게시글 답변 대기 조회
-    public List<QboardVO> qBoardReadyList(int subCa);
+    public List<QboardVO> qBoardReadyList(PagingVO pagingVO);
     // q게시글 최근순 조회
-    public List<QboardVO> qBoardLatesList(int subCa);
+    public List<QboardVO> qBoardLatesList(PagingVO pagingVO);
     // q게시글 인기순 조회
-    public List<QboardVO> qBoardPopularityList(int subCa);
+    public List<QboardVO> qBoardPopularityList(PagingVO pagingVO);
     // q게시글 현상글 조회
-    public List<QboardVO> qboardExpList(int subCa);
+    public List<QboardVO> qboardExpList(PagingVO pagingVO);
     // q게시글 현상금 업데이트
     public void qBoardExpUpdate(int q_no, int exp);
     // 해당 게시글 조회
@@ -75,11 +75,11 @@ public interface BoardDAO {
 
 
     // 게시글 갯수
-    public int qBoardCompleteCount();
-    public int qBoardReadyCount();
-    public int qBoardLatesCount();
-    public int qBoardPopularityCount();
-    public int qBoardExpCount();
+    public int qBoardCompleteCount(int subCa);
+    public int qBoardReadyCount(int subCa);
+    public int qBoardLatesCount(int subCa);
+    public int qBoardPopularityCount(int subCa);
+    public int qBoardExpCount(int subCa);
 
 
 }

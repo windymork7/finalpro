@@ -1,15 +1,15 @@
 package com.example.finalpro.serviceImpl.board;
 
 import com.example.finalpro.dao.BoardDAO;
-import com.example.finalpro.service.board.CommonBoardCompleteCount;
+import com.example.finalpro.service.board.CommonBoardLatesCountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommonBoardCompleteCountImpl implements CommonBoardCompleteCount {
+public class CommonBoardLatesCountServiceImpl implements CommonBoardLatesCountService {
     @Autowired
     BoardDAO boardDAO;
 
     @Override
-    public int qBoardCompleteCount(int subCa) { return boardDAO.qBoardCompleteCount(subCa); }
+    public int qBoardLatesCount(int subCa) { return boardDAO.qBoardLatesCount(subCa); }
 }

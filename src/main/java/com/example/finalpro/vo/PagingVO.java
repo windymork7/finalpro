@@ -12,6 +12,7 @@ public class PagingVO {
     private int	start; // SQL쿼리에 쓸 start
     private int end; // SQL 쿼리에 쓸 end
     private int cntPage = 5;
+    private int subCa;
 
     public PagingVO()
     {
@@ -144,6 +145,22 @@ public class PagingVO {
     public void getCntPage(int cntPage)
     {
         this.cntPage = cntPage;
+    }
+
+    public int getCntPage() {
+        return cntPage;
+    }
+
+    public void setCntPage(int cntPage) {
+        this.cntPage = cntPage;
+    }
+
+    public int getSubCa() {
+        return subCa;
+    }
+
+    public void setSubCa(int subCa) {
+        this.subCa = subCa;
     }
 
     @Override

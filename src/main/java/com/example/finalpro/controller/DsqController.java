@@ -73,6 +73,14 @@ public class DsqController {
     CommonBoardUpCheckService commonBoardUpCheckService;
     @Autowired
     CommonBoardCompleteCount commonBoardCompleteCount;
+    @Autowired
+    CommonBoardReadyCountService commonBoardReadyCountService;
+    @Autowired
+    CommonBoardLatesCountService commonBoardLatesCountService;
+    @Autowired
+    CommonBoardPopularityCountService commonBoardPopularityCountService;
+    @Autowired
+    CommonBoardExpCountService commonBoardExpCountService;
 
     
     // Q게시판 등록 페이지 이동
@@ -123,50 +131,108 @@ public class DsqController {
 //    }
 
      @RequestMapping("/qboardListForm.bo")
-    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, PagingVO pagingVO, Model model,
-                                @RequestParam(value = "nowPage", required = false) String nowPage,
-                                @RequestParam(value = "cntPerPage", required = false) String cntPerPage,
-                                @RequestParam(value = "state", required = false) String state){
+    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model,
+                                @RequestParam(value = "nowPage1", required = false) String nowPage1,
+                                @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
+                                @RequestParam(value = "nowPage2", required = false) String nowPage2,
+                                @RequestParam(value = "cntPerPage2", required = false) String cntPerPage2,
+                                @RequestParam(value = "nowPage3", required = false) String nowPage3,
+                                @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
+                                @RequestParam(value = "nowPage4", required = false) String nowPage4,
+                                @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
+                                @RequestParam(value = "nowPage5", required = false) String nowPage5,
+                                @RequestParam(value = "cntPerPage5", required = false) String cntPerPage5,
+                                @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 
-        if (state == null){state = "1";}
-        int state1 = Integer.parseInt(state);
-        if (nowPage == null && cntPerPage == null) {
-            nowPage = "1";
-            cntPerPage = "5";
-        } else if (nowPage == null) {
-            nowPage = "1";
-        } else if (cntPerPage == null) {
-            cntPerPage = "5";
-        }
+         if (state == null) {
+             state = "1";
+         }
+         int state1 = Integer.parseInt(state);
 
-        if (state1 == 1){
-            int count = commonBoardCompleteCount.qBoardCompleteCount();
+         if (nowPage1 == null && cntPerPage1 == null) {
+             nowPage1 = "1";
+             cntPerPage1 = "5";
+         } else if (nowPage1 == null) {
+             nowPage1 = "1";
+         } else if (cntPerPage1 == null) {
+             cntPerPage1 = "5";
+         }
 
-            pagingVO = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+         int completeCount = commonBoardCompleteCount.qBoardCompleteCount(subCa);
+         PagingVO completePaging = new PagingVO(completeCount, Integer.parseInt(nowPage1), Integer.parseInt(cntPerPage1));
+         model.addAttribute("completePaging", completePaging);
+         List<QboardVO> completeList = commonBoardListService.qBoardList(subCa, completePaging);
+         model.addAttribute("completeList", completeList);
 
-            model.addAttribute("paging", pagingVO);
-            List<QboardVO> completeList = commonBoardListService.qBoardList(subCa, pagingVO);
-            model.addAttribute("completeList",completeList);
-        } else if (state1 == 2) {
+         if (nowPage2 == null && cntPerPage2 == null) {
+             nowPage2 = "1";
+             cntPerPage2 = "5";
+         } else if (nowPage2 == null) {
+             nowPage2 = "1";
+         } else if (cntPerPage2 == null) {
+             cntPerPage2 = "5";
+         }
 
-        }
+
+         int readyCount = commonBoardReadyCountService.qBoardReadyCount(subCa);
+         PagingVO readyPaging = new PagingVO(readyCount, Integer.parseInt(nowPage2), Integer.parseInt(cntPerPage2));
+         model.addAttribute("readyPaging", readyPaging);
+         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa, readyPaging);
+         model.addAttribute("readyList", readyList);
+
+         if (nowPage3 == null && cntPerPage3 == null) {
+             nowPage3 = "1";
+             cntPerPage3 = "5";
+         } else if (nowPage3 == null) {
+             nowPage3 = "1";
+         } else if (cntPerPage3 == null) {
+             cntPerPage3 = "5";
+         }
+
+         int latesCount = commonBoardLatesCountService.qBoardLatesCount(subCa);
+         PagingVO latesPaging = new PagingVO(latesCount, Integer.parseInt(nowPage3), Integer.parseInt(cntPerPage3));
+         model.addAttribute("latesPaging", latesPaging);
+         List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa, latesPaging);
+         model.addAttribute("latestList", latestList);
+
+         if (nowPage4 == null && cntPerPage4 == null) {
+             nowPage4 = "1";
+             cntPerPage4 = "5";
+         } else if (nowPage4 == null) {
+             nowPage4 = "1";
+         } else if (cntPerPage4 == null) {
+             cntPerPage4 = "5";
+         }
+
+         int popuCount = commonBoardPopularityCountService.qBoardPopularityCount(subCa);
+         PagingVO popuPaging = new PagingVO(popuCount, Integer.parseInt(nowPage4), Integer.parseInt(cntPerPage4));
+         model.addAttribute("popuPaging", popuPaging);
+         List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa, popuPaging);
+         model.addAttribute("popularityList", popularityList);
+
+         if (nowPage5 == null && cntPerPage5 == null) {
+             nowPage5 = "1";
+             cntPerPage5 = "5";
+         } else if (nowPage5 == null) {
+             nowPage5 = "1";
+         } else if (cntPerPage5 == null) {
+             cntPerPage5 = "5";
+         }
+
+         int expCount = commonBoardExpCountService.qBoardExpCount(subCa);
+
+         PagingVO expPaging = new PagingVO(expCount, Integer.parseInt(nowPage5), Integer.parseInt(cntPerPage5));
+         model.addAttribute("expPaging", expPaging);
+         List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa, expPaging);
+         model.addAttribute("expList", expList);
 
 
 
+         model.addAttribute("state", state);
 
-         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
-         List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
-         List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
-         List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
-
-        model.addAttribute("readyList", readyList);
-        model.addAttribute("latestList", latestList);
-        model.addAttribute("popularityList", popularityList);
-        model.addAttribute("expList", expList);
-
-        model.addAttribute("subCa", subCa);
-        model.addAttribute("main", "board/board_list");
-        return "template";
+         model.addAttribute("subCa", subCa);
+         model.addAttribute("main", "board/board_list");
+         return "template";
     }
 
 

@@ -2,6 +2,7 @@ package com.example.finalpro.serviceImpl.board;
 
 import com.example.finalpro.dao.BoardDAO;
 import com.example.finalpro.service.board.CommonBoardExpListSerivce;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,10 @@ public class CommonBoardExpListSerivceImpl implements CommonBoardExpListSerivce 
     BoardDAO boardDAO;
 
     @Override
-    public List<QboardVO> qboardExpList(int subCa) {
+    public List<QboardVO> qboardExpList(int subCa, PagingVO pagingVO) {
 
-        List<QboardVO> expList = boardDAO.qboardExpList(subCa);
+        pagingVO.setSubCa(subCa);
+        List<QboardVO> expList = boardDAO.qboardExpList(pagingVO);
 
         for (int i = 0; i < expList.size(); i++) {
 
