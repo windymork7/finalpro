@@ -70,9 +70,9 @@ public class CustomerController {
 	}
 	//내용
 	@RequestMapping("/noticeContent.cu")
-	public String noticeContent(@RequestParam("noticeNo") String noticeNo, Model model) {
+	public String noticeContent(@RequestParam("notice_no") String notice_no, Model model) {
 		
-		NoticeVO noticeVO = noticeBoardContent.noticeBoardContent(Integer.parseInt(noticeNo));
+		NoticeVO noticeVO = noticeBoardContent.noticeBoardContent(Integer.parseInt(notice_no));
 		
 		model.addAttribute("noticeVO",noticeVO);
 		model.addAttribute("main","customer/cs_notice");

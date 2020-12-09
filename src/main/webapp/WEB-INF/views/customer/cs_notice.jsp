@@ -81,13 +81,13 @@ small {
 
                         <div class="d-flex w-100 justify-content-between">
                            <h4 class="card-title">
-                              2020.12.07 AM 2:00 에 서버 점검이 있을 예정입니다.
+                              ${noticeVO.notice_title }
                            </h4>
                         </div>
 
                         <p class="card-text">
                         <h6>관리자</h6>
-                        <p>2020-12-06</p>
+                        <p>${noticeVO.notice_date }</p>
                      </div>
 
                      <div class="card-body">
@@ -96,6 +96,7 @@ small {
                            <img src="img/Check.jpg" width="100%" height="350"> <br>
                            <br>
                            <textarea class="form-control" rows="12" readonly>
+${noticeVO.notice_content }
 안녕하세요.  
 
 현재 잦은 서비스 다운으로 인해 서버 증설 작업을 진행합니다.
@@ -107,11 +108,14 @@ small {
 - 내용 : 데이터베이스 서버 분리
                   </textarea>
                            <br>
+                           <c:set var="nick" value="${sessionScope.userNick}"/>
+                           <c:if test="${nick eq 'admin'}">
                            <div class="text-right">
                               <!-- 관리자만 보이게 -->
                               <button type="button" class="btn btn-primary">수정</button>
                               <button type="button" class="btn btn-secondary">삭제</button>
                            </div>
+                           </c:if>
                         </div>
                      </div>
                   </div>

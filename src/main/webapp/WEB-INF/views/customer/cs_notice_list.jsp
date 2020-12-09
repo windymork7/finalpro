@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    response.setCharacterEncoding("UTF-8");
 %>
@@ -67,18 +68,12 @@
             <c:forEach var="notice" items="${list}">
                <tr class="table-light">
                   <td>2${notice.notice_no }</td>
-                  <td><a href="/noticeContent.cu?noticeNo=${notice.notice_no}">2020.12.07 AM 2:00 에 서버 점검이 있을 예정입니다.</a></td>
+                  <td><a href="/noticeContent.cu?notice_no=${notice.notice_no}">${notice.notice_title }</a></td>
                   <td>관리자</td>
-                  <td>2020.12.06</td>
+                  <td>${notice.notice_date }</td>
                </tr>
                <br>
             </c:forEach>
-               <tr class="table-light">
-                  <td>1</td>
-                  <td><a href="#">명성을 쌓을려고 부적절한 행동을 하게 될 시 조치를 하겠습니다.</a></td>
-                  <td>관리자</td>
-                  <td>2020.12.05</td>
-               </tr>
             </tbody>
          </table>
 

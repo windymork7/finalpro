@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
    response.setCharacterEncoding("UTF-8");
 %>
@@ -65,10 +66,10 @@
             <tbody>
             <c:forEach var="faq" items="${list}">
                <tr class="table-light">
-                  <td>2</td>
-                  <td><a href="faqContent.cu">비밀번호를 잊어버렸습니다.</a></td>
+                  <td>${faq.faq_no}</td>
+                  <td><a href="faqContent.cu?faq_no=${faq.faq_no }">${faq.faq_title }</a></td>
                   <td>관리자</td>
-                  <td>2020.12.06</td>
+                  <td>${faq.faq_date }</td>
                </tr>
             </c:forEach>
             <!-- 

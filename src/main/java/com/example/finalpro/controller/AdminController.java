@@ -1,12 +1,16 @@
 package com.example.finalpro.controller;
 
 import com.example.finalpro.service.admin.AdminBookAddActionService;
+import com.example.finalpro.service.admin.AdminBookCaListService;
 import com.example.finalpro.service.admin.AdminBookStandByListService;
+import com.example.finalpro.service.admin.AdminCaListService;
 import com.example.finalpro.service.admin.AdminMemberBlackListService;
 import com.example.finalpro.service.admin.AdminMemberRptListService;
 import com.example.finalpro.service.admin.AdminQDeleteActionService;
 import com.example.finalpro.service.admin.AdminQRptListService;
+import com.example.finalpro.service.admin.AdminSubCaListService;
 import com.example.finalpro.serviceImpl.admin.AdminMemberBlackActionImpl;
+import com.example.finalpro.vo.CategoryVO;
 import com.example.finalpro.vo.CommonMemberVO;
 import com.example.finalpro.vo.QboardVO;
 
@@ -36,7 +40,12 @@ public class AdminController {
     AdminBookStandByListService adminBookStandByListService;
     @Autowired
     AdminBookAddActionService adminBookAddActionService;
-    
+    @Autowired
+    AdminCaListService adminCaListService;
+    @Autowired
+    AdminSubCaListService adminSubCaListService;
+    @Autowired
+    AdminBookCaListService adminBookCaListService;
     //어드민 메인페이지
     @RequestMapping("/adminMain.ad")
     public String adminMain(Model model){
@@ -99,5 +108,33 @@ public class AdminController {
     		adminBookAddActionService.bookAddActionService(q_no, ca_no ,sub_ca_no, book_ca_no);
     		return "redirect:/adminMain.ad";
     }
+    
+    
+    //카테고리관리(메인)
+    @RequestMapping("/caManegementMain.ad")
+    public String caManegementMain(Model model) {
+    	List<CategoryVO> list = adminCaListService.caList();
+    	model.addAttribute("list",list);
+    	model.addAttribute("main","admin/TestCaManegementMain");
+    	return "template";
+    }
+    //서브카테고리관리리스트
+    @RequestMapping("/subCaList.ad")
+    public String subCaList(Model model,@RequestParam("ca_no") int ca_no) {
+    	List<CategoryVO> list = adminSubCaListService.subCaList(ca_no);
+    	model.addAttribute("list",list);
+    	model.addAttribute("main","admin/TestSubCaList");
+    	return "template";
+    }
+    //책카테고리리스트
+    @RequestMapping("/bookCaList.ad")
+    public String bookCaList(Model model,@RequestParam("subCa")int subCa) {
+    	List<CategoryVO> list = adminBookCaListService.bookCaList(subCa);
+    	
+    	model.addAttribute("list",list);
+    	model.addAttribute("main","admin/TestBookCaList");
+    	return "template";
+    }
+    
 
 }

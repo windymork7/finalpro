@@ -1,5 +1,6 @@
 package com.example.finalpro.dao;
 
+import com.example.finalpro.vo.CategoryVO;
 import com.example.finalpro.vo.CommonMemberVO;
 import com.example.finalpro.vo.QboardVO;
 
@@ -31,4 +32,11 @@ public interface AdminDAO {
     //public void bookAddAction(int q_no, int ca_no, int sub_ca_no, int book_ca_no);
     //책에 추가하면서 어드민상태 업데이트
     public void bookAdminStateUpdate(int q_no);
+    
+    //카테고리 리스트
+    public List<CategoryVO> caList();
+    //서브카테고리리스트
+    public List<CategoryVO> subCaList(int ca_no);
+    //책카테고리리스트
+    public List<CategoryVO> bookCaList(int subCa);
 }
