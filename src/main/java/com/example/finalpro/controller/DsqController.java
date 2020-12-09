@@ -144,9 +144,7 @@ public class DsqController {
                                 @RequestParam(value = "cntPerPage5", required = false) String cntPerPage5,
                                 @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 
-         if (state == null) {
-             state = "1";
-         }
+
          int state1 = Integer.parseInt(state);
 
          if (nowPage1 == null && cntPerPage1 == null) {
@@ -226,9 +224,24 @@ public class DsqController {
          List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa, expPaging);
          model.addAttribute("expList", expList);
 
+         if (state1 == 1){
+             model.addAttribute("active1", "active");
+             model.addAttribute("show1", "active show");
+         } else if(state1 == 2){
+             model.addAttribute("active2", "active");
+             model.addAttribute("show2", "active show");
+         } else if(state1 == 3){
+             model.addAttribute("active3", "active");
+             model.addAttribute("show3", "active show");
+         } else if(state1 == 4){
+             model.addAttribute("active4", "active");
+             model.addAttribute("show4", "active show");
+         } else if(state1 == 5){
+             model.addAttribute("active5", "active");
+             model.addAttribute("show5", "active show");
+         }
 
 
-         model.addAttribute("state", state);
 
          model.addAttribute("subCa", subCa);
          model.addAttribute("main", "board/board_list");

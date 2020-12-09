@@ -124,20 +124,20 @@
 </div>
 <div class="col-sm-7">
 <ul class="nav nav-tabs">
-  <li class="nav-item active">
+  <li class="nav-item ${active1}">
     <a class="nav-link " data-toggle="tab" href="#complete"><b>답변완료</b></a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item ${active2}">
     <a class="nav-link" data-toggle="tab" href="#await"><b>답변대기</b></a>
 <%--    <a class="nav-link" data-toggle="tab" href="#await" href="javascript:void(0);" onclick="test()"><b>답변대기</b></a>--%>
   </li>
-  <li class="nav-item ml-auto">
+  <li class="nav-item ml-auto ${active3}">
   	<a class="nav-link" data-toggle="tab" href="#latest">최신순</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item ${active4}">
   	<a class="nav-link" data-toggle="tab" href="#popular">인기순</a>
   </li>&nbsp;
-  <li class="nav-item">
+  <li class="nav-item ${active5}">
   	<a class="nav-link btn btn-primary btn-sm" data-toggle="tab" href="#emergency" id="emergency2">
   	<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
   	 긴급질문
@@ -147,7 +147,7 @@
 <br>
 
 <div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active show" id="complete">
+  <div class="tab-pane fade ${show1}" id="complete">
 	  <c:forEach var="qboard" items="${completeList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
@@ -221,7 +221,7 @@
  	 
   </div>
 
-  <div class="tab-pane fade" id="await">
+  <div class="tab-pane fade ${show2}" id="await">
 	  <c:forEach var="qboard" items="${readyList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
@@ -244,6 +244,7 @@
 		    ${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
+	  <br>
 	  </c:forEach>
  	 <br>
 
@@ -275,7 +276,7 @@
 		<ul
 				class="pagination pagination-lg justify-content-center align-items-center">
 			<c:if test="${readyPaging.startPage != 1 }">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${readyPaging.startPage - 1 }&cntPerPage2=${readyPaging.cntPerPage}&state=1">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${readyPaging.startPage - 1 }&cntPerPage2=${readyPaging.cntPerPage}&state=2">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${readyPaging.startPage }" end="${readyPaging.endPage }" var="p2">
 				<c:choose>
@@ -283,19 +284,19 @@
 						<li class="page-item active"><a class="page-link">${p2}</a></li>
 					</c:when>
 					<c:when test="${p2 != readyPaging.nowPage}">
-						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${p2}&cntPerPage2=${readyPaging.cntPerPage}&state=1">${p2}</a></li>
+						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${p2}&cntPerPage2=${readyPaging.cntPerPage}&state=2">${p2}</a></li>
 					</c:when>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${readyPaging.endPage != readyPaging.lastPage}">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${readyPaging.endPage+1 }&cntPerPage2=${readyPaging.cntPerPage}&state=1">&raquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage2=${readyPaging.endPage+1 }&cntPerPage2=${readyPaging.cntPerPage}&state=2">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
 
   </div>
   
-  <div class="tab-pane fade" id="latest">
+  <div class="tab-pane fade ${show3}" id="latest">
 	  <c:forEach var="qboard" items="${latestList}">
 		  <div class="card bg-light">
 			  <div class="card-body">
@@ -318,6 +319,7 @@
 						  ${qboard.book_ca_name}</p>
 			  </div>
 		  </div>
+		  <br>
 	  </c:forEach>
 
  	 <br>
@@ -327,7 +329,7 @@
 		<ul
 				class="pagination pagination-lg justify-content-center align-items-center">
 			<c:if test="${latesPaging.startPage != 1 }">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${latesPaging.startPage - 1 }&cntPerPage3=${latesPaging.cntPerPage}&state=1">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${latesPaging.startPage - 1 }&cntPerPage3=${latesPaging.cntPerPage}&state=3">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${latesPaging.startPage }" end="${latesPaging.endPage }" var="p3">
 				<c:choose>
@@ -335,19 +337,19 @@
 						<li class="page-item active"><a class="page-link">${p3}</a></li>
 					</c:when>
 					<c:when test="${p3 != latesPaging.nowPage}">
-						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${p3}&cntPerPage3=${latesPaging.cntPerPage}&state=1">${p3}</a></li>
+						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${p3}&cntPerPage3=${latesPaging.cntPerPage}&state=3">${p3}</a></li>
 					</c:when>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${latesPaging.endPage != latesPaging.lastPage}">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${latesPaging.endPage+1 }&cntPerPage3=${latesPaging.cntPerPage}&state=1">&raquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage3=${latesPaging.endPage+1 }&cntPerPage3=${latesPaging.cntPerPage}&state=3">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
  	 
   </div>
   
-  <div class="tab-pane fade" id="popular">
+  <div class="tab-pane fade ${show4}" id="popular">
 	  <c:forEach var="qboard" items="${popularityList}">
 		  <div class="card bg-light">
 			  <div class="card-body">
@@ -370,6 +372,7 @@
 						  ${qboard.book_ca_name}</p>
 			  </div>
 		  </div>
+		  <br>
 	  </c:forEach>
  	 <br>
  	 
@@ -378,7 +381,7 @@
 		<ul
 				class="pagination pagination-lg justify-content-center align-items-center">
 			<c:if test="${popuPaging.startPage != 1 }">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${popuPaging.startPage - 1 }&cntPerPage4=${popuPaging.cntPerPage}&state=1">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${popuPaging.startPage - 1 }&cntPerPage4=${popuPaging.cntPerPage}&state=4">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${popuPaging.startPage }" end="${popuPaging.endPage }" var="p3">
 				<c:choose>
@@ -386,19 +389,19 @@
 						<li class="page-item active"><a class="page-link">${p3}</a></li>
 					</c:when>
 					<c:when test="${p3 != popuPaging.nowPage}">
-						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${p3}&cntPerPage4=${popuPaging.cntPerPage}&state=1">${p3}</a></li>
+						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${p3}&cntPerPage4=${popuPaging.cntPerPage}&state=4">${p3}</a></li>
 					</c:when>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${popuPaging.endPage != popuPaging.lastPage}">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${popuPaging.endPage+1 }&cntPerPage4=${popuPaging.cntPerPage}&state=1">&raquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage4=${popuPaging.endPage+1 }&cntPerPage4=${popuPaging.cntPerPage}&state=4">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
  	 
   </div>
   
-  <div class="tab-pane fade" id="emergency">
+  <div class="tab-pane fade ${show5}" id="emergency">
 	  <c:forEach var="qboard" items="${expList}">
 	  <div class="card bg-light">
 		  <div class="card-body">
@@ -419,6 +422,7 @@
 				${qboard.book_ca_name}</p>
 		  </div>
 	 </div>
+	  <br>
 	  </c:forEach>
  	 <br>
 
@@ -427,7 +431,7 @@
 		<ul
 				class="pagination pagination-lg justify-content-center align-items-center">
 			<c:if test="${expPaging.startPage != 1 }">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${expPaging.startPage - 1 }&cntPerPage5=${expPaging.cntPerPage}&state=1">&laquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${expPaging.startPage - 1 }&cntPerPage5=${expPaging.cntPerPage}&state=5">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${expPaging.startPage }" end="${expPaging.endPage }" var="p3">
 				<c:choose>
@@ -435,12 +439,12 @@
 						<li class="page-item active"><a class="page-link">${p3}</a></li>
 					</c:when>
 					<c:when test="${p3 != expPaging.nowPage}">
-						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${p3}&cntPerPage5=${expPaging.cntPerPage}&state=1">${p3}</a></li>
+						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${p3}&cntPerPage5=${expPaging.cntPerPage}&state=5">${p3}</a></li>
 					</c:when>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${expPaging.endPage != expPaging.lastPage}">
-				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${expPaging.endPage+1 }&cntPerPage5=${expPaging.cntPerPage}&state=1">&raquo;</a></li>
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage5=${expPaging.endPage+1 }&cntPerPage5=${expPaging.cntPerPage}&state=5">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>

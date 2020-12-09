@@ -26,7 +26,12 @@ public class ContestInsertServiceImpl implements ContestInsertService {
         File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+contest_img2.getOriginalFilename());
 //        File dest = new File("C:/Users/CMH/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+edit_img1.getOriginalFilename());
 
-        contestVO.setContest_img(strToday+"_"+contest_img2.getOriginalFilename());
+        if (!(contest_img2.getOriginalFilename().equals(""))){
+            contestVO.setContest_img(strToday+"_"+contest_img2.getOriginalFilename());
+        } else{
+            contestVO.setContest_img("");
+        }
+
 
         try {
             contest_img2.transferTo(dest);
