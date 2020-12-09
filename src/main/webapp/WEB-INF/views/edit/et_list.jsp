@@ -26,6 +26,15 @@
    crossorigin="anonymous"></script>
 
 <style>
+
+    .card-header-gd {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #f3969a;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        color: #fff;
+    }
+
    .fa-pencil-square-o{
       color:#78c2ad
    }
@@ -101,7 +110,7 @@ small {
                                 ${editBoard.edit_title}
                               </a>
                            </h4>
-                           <small> <i class="fa fa-eye" aria-hidden="true"></i>${editBoard.edit_view}
+                           <small> <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;${editBoard.edit_view}
                            </small>
                         </div>
                         <h6 class="card-subtitle mb-2 text-muted text-right">${editBoard.edit_date}</h6>
@@ -110,26 +119,47 @@ small {
                         </h5>
                      </div>
                   </div>
+                 <br>
              </c:forEach>
                   <div>
                      <br>
                      <br>
-                     <ul
-                        class="pagination pagination-lg justify-content-center align-items-center">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                        </li>
-                     </ul>
+<%--                     <ul--%>
+<%--                        class="pagination pagination-lg justify-content-center align-items-center">--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">&laquo;</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="page-item active"><a class="page-link" href="#">1</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">4</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">5</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">&raquo;</a>--%>
+<%--                        </li>--%>
+<%--                     </ul>--%>
+                      <ul
+                              class="pagination pagination-lg justify-content-center align-items-center">
+                          <c:if test="${paging.startPage != 1 }">
+                              <li class="page-item"><a class="page-link" href="editBoardList.ed?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&laquo;</a></li>
+                          </c:if>
+                          <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+                              <c:choose>
+                                  <c:when test="${p == paging.nowPage}">
+                                      <li class="page-item active"><a class="page-link">${p}</a></li>
+                                  </c:when>
+                                  <c:when test="${p != paging.nowPage}">
+                                      <li class="page-item"><a class="page-link" href="editBoardList.ed?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                  </c:when>
+                              </c:choose>
+                          </c:forEach>
+                          <c:if test="${paging.endPage != paging.lastPage}">
+                              <li class="page-item"><a class="page-link" href="editBoardList.ed?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&raquo;</a></li>
+                          </c:if>
+                      </ul>
                   </div>
-            
          </div>
+
+
          
          
 
@@ -137,7 +167,7 @@ small {
             
             <div class="card border-secondary mb-3" style="max-width: 20rem;"
                id="guideline">
-               <div class="card-header">
+               <div class="card-header-gd">
                   <b>유의사항</b>
                </div>
                <div class="card-body">
@@ -149,7 +179,7 @@ small {
             <div style="max-width: 20rem;">
             <c:if test="${sessionScope.userGrade >= 3}">
                <button type="button" onclick="location.href='/editBoardInsert.ed'"
-                     class="btn btn-primary btn-block">등록하기</button>
+                     class="btn btn-secondary btn-block">등록하기</button>
             </c:if>
             </div>
          </div>

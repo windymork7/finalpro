@@ -32,12 +32,14 @@ public class BusinessController {
     @RequestMapping("/businessJoinProcess.bi")
     public String businessJoinProcess(Model model, BusinessMemberVO businessMemberVO){
 
+        System.out.println(businessMemberVO);
         businessMemberJoinService.businessJoinProcess(businessMemberVO);
 
         model.addAttribute("main", "member/login");
         return "template";
     }
-
+    
+    // 사업자 로그인 프로세스
     @RequestMapping("/businessLoginProcess.bi")
     public String businessLoginProcess(HttpServletRequest request, HttpSession session, Model model){
 

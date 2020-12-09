@@ -83,7 +83,14 @@
                           <div class="d-flex w-100 justify-content-between">
                            <h4 class="card-title">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                ${editMemberVO.edit_title}
+                               <c:choose>
+                                   <c:when test="${upda == 1}">
+                                       <input type="text" class="form-control" name="edit_title" value="${editMemberVO.edit_title}">
+                                   </c:when>
+                                   <c:otherwise>
+                                       ${editMemberVO.edit_title}
+                                   </c:otherwise>
+                               </c:choose>
                            </h4>
                            <small> <i class="fa fa-eye" aria-hidden="true"></i> ${editMemberVO.edit_view}
                            </small>
@@ -237,9 +244,9 @@
            "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
            "\t   <textarea id='editText' name='edit_reply_content' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
            "</textarea>\n" +
-           "\t   </div>\n" +
-           "<button type='button' class='btn btn-success' onclick='editAddReplyInsert()'>전송</button>\n"+
-           "<button type='reset' class='btn btn-danger'>취소</button>\n"+
+           "\t   </div><br>\n" +
+           "<button type='button' class='btn btn-primary' onclick='editAddReplyInsert()'>전송</button>\n"+
+           "<button type='reset' class='btn btn-secondary'>취소</button>\n"+
            "\t  </div>\n" +
            "\t</div>" +
            "<br>";

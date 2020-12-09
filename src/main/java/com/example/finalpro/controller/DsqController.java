@@ -2,6 +2,7 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.board.*;
 import com.example.finalpro.service.member.CommonMemberExpSelect;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.json.JSONArray;
@@ -70,6 +71,9 @@ public class DsqController {
     CommonBoardUpService commonBoardUpService;
     @Autowired
     CommonBoardUpCheckService commonBoardUpCheckService;
+    @Autowired
+    CommonBoardCompleteCount commonBoardCompleteCount;
+
     
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
@@ -97,17 +101,64 @@ public class DsqController {
     }
 
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
-    @RequestMapping("/qboardListForm.bo")
-    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
+//    @RequestMapping("/qboardListForm.bo")
+//    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
+//
+//
+//        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
+//        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
+//        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
+//        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
+//        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
+//
+//        model.addAttribute("completeList",completeList);
+//        model.addAttribute("readyList", readyList);
+//        model.addAttribute("latestList", latestList);
+//        model.addAttribute("popularityList", popularityList);
+//        model.addAttribute("expList", expList);
+//
+//        model.addAttribute("subCa", subCa);
+//        model.addAttribute("main", "board/board_list");
+//        return "template";
+//    }
+
+     @RequestMapping("/qboardListForm.bo")
+    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, PagingVO pagingVO, Model model,
+                                @RequestParam(value = "nowPage", required = false) String nowPage,
+                                @RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+                                @RequestParam(value = "state", required = false) String state){
+
+        if (state == null){state = "1";}
+        int state1 = Integer.parseInt(state);
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+
+        if (state1 == 1){
+            int count = commonBoardCompleteCount.qBoardCompleteCount();
+
+            pagingVO = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+            model.addAttribute("paging", pagingVO);
+            List<QboardVO> completeList = commonBoardListService.qBoardList(subCa, pagingVO);
+            model.addAttribute("completeList",completeList);
+        } else if (state1 == 2) {
+
+        }
 
 
-        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
-        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
-        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
-        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
-        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
 
-        model.addAttribute("completeList",completeList);
+
+         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
+         List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
+         List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
+         List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
+
         model.addAttribute("readyList", readyList);
         model.addAttribute("latestList", latestList);
         model.addAttribute("popularityList", popularityList);
@@ -117,6 +168,7 @@ public class DsqController {
         model.addAttribute("main", "board/board_list");
         return "template";
     }
+
 
     //게시판 내용
     @RequestMapping("/qboardContent.bo")

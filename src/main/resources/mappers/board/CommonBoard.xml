@@ -32,14 +32,14 @@
     </insert>
 
     <!-- 답변 완료 게시글 조회 -->
-    <select id="qBoardList" resultType="com.example.finalpro.vo.QboardVO">
+    <select id="qBoardList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">
 <!--        select q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,-->
 <!--        q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state-->
 <!--        from q q1, (select * from sub_ca) ca,(select * from book_ca) bca-->
 <!--        where q1.sub_ca_no = ca.sub_ca_no-->
 <!--        and bca.book_ca_no = q1.book_ca_no-->
 <!--        and q1.sub_ca_no = #{param1}-->
-        SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,G.GRADE_NAME,Q1.*, R.* FROM
+        SELECT rownum RN,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,G.GRADE_NAME,Q1.*, R.* FROM
         (SELECT * FROM Q) Q1,
         (SELECT * FROM MEM) M,
         (SELECT * FROM SUB_CA) SC,
@@ -55,6 +55,7 @@
         AND Q1.Q_NO = R.Q_NO
         AND R.REPLY_PICK = 1
         AND Q1.SUB_CA_NO = #{param1}
+        AND ROWNUM BETWEEN 1 AND 10
         ORDER BY Q1.Q_DATE DESC
     </select>
 
@@ -294,16 +295,30 @@
     </select>
 
 
-    <!-- 에디터 댓글 -->
+    <!-- 에디터 댓글 등록 -->
     <select id="editQboardReplyInsert" parameterType="com.example.finalpro.vo.QboardVO">
         INSERT INTO REPLY_EDIT VALUES(REPLY_EDIT_SEQ.NEXTVAL, #{mem_no}, #{q_no}, #{reply_Edit_Content}, SYSDATE)
     </select>
 
+    <!-- 에디터 댓글 리스트-->
     <select id="editBoardReplyList" resultType="com.example.finalpro.vo.QboardVO">
         SELECT *
         FROM REPLY_EDIT R, MEM M
         WHERE R.MEM_NO = M.MEM_NO
         AND Q_NO = #{q_no}
     </select>
+
+    <!-- 답변 완료 게시물 갯수-->
+    <select id="qBoardCompleteCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM Q, REPLY R
+        WHERE Q.Q_NO = R.Q_NO
+        AND R.REPLY_PICK = 1
+    </select>
+
+    <select id="qBoardReadyCount" resultType="Integer">
+
+    </select>
+
 
 </mapper>

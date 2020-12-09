@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.ContestDAO">
+    <!-- 공모전 글쓰기 -->
+    <insert id="contestInsert" parameterType="com.example.finalpro.vo.ContestVO">
+        INSERT INTO CONTEST VALUES(CONTEST_SEQ.NEXTVAL, #{biz_no}, #{contest_title}, #{contest_hosting}, #{contest_period}, #{contest_target},
+        #{contest_application}, #{contest_scale}, #{contest_firstMoney}, #{contest_tel}, #{contest_email}, #{contest_homepage}, #{contest_content}, #{contest_img})
+    </insert>
+
+    <!-- 공모전 리스트 -->
+    <select id="contestList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.ContestVO">
+<!--        SELECT *-->
+<!--        FROM CONTEST-->
+        SELECT *
+        FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM CONTEST ORDER BY CONTEST_NO DESC) A)
+        WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+
+    <!-- 공모전 해당 글 보기-->
+    <select id="contestContent" resultType="com.example.finalpro.vo.ContestVO">
+        SELECT *
+        FROM CONTEST
+        WHERE CONTEST_NO = #{param1}
+    </select>
+
+    <select id="contestCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM CONTEST
+    </select>
+
+
+</mapper>

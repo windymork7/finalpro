@@ -73,7 +73,6 @@
     <c:set var="q_file3" value="${fn:substring(qBoardVO.q_file, length-3, length)}"/>
     <c:set var="q_file4" value="${fn:substring(qBoardVO.q_file, length-4, length)}"/>
 
-    <h1>${q_file}</h1>
 
    <div class="container-fluid">
       <div class="row">

@@ -24,9 +24,9 @@ public class BusinessMemberLoginService implements BusinessMemberLoginSevice {
         if (userpw.equals(request.getParameter("biz_pw"))){
             session = request.getSession();
             BusinessMemberVO businessMemberVO = businessDAO.businessMemberSelect(request.getParameter("biz_email"));
-            session.setAttribute("userNo", businessMemberVO.getBiz_no());
-            session.setAttribute("userNick", businessMemberVO.getBiz_trademark());
-            return "/qBoardInsertForm.bo";
+            session.setAttribute("businessNo", businessMemberVO.getBiz_no());
+            session.setAttribute("businessNick", businessMemberVO.getBiz_trademark());
+            return "/";
         }
 
         return "section";

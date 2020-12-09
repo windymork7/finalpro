@@ -1,5 +1,6 @@
 package com.example.finalpro.dao;
 
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,7 +19,7 @@ public interface BoardDAO {
     // q게시글 쓰기
     public void qBoardInsert(QboardVO qboardVO);
     // q게시글 답변 완료 조회
-    public List<QboardVO> qBoardList(int subCa);
+    public List<QboardVO> qBoardList(int subCa, PagingVO pagingVO);
     // q게시글 답변 대기 조회
     public List<QboardVO> qBoardReadyList(int subCa);
     // q게시글 최근순 조회
@@ -73,6 +74,12 @@ public interface BoardDAO {
     public List<QboardVO> editBoardReplyList(QboardVO qboardVO);
 
 
+    // 게시글 갯수
+    public int qBoardCompleteCount();
+    public int qBoardReadyCount();
+    public int qBoardLatesCount();
+    public int qBoardPopularityCount();
+    public int qBoardExpCount();
 
 
 }

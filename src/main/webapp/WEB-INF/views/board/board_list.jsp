@@ -175,29 +175,48 @@
  	 
 	<div>
 	<br><br>
-	  <ul class="pagination pagination-lg justify-content-center align-items-center">
-	    <li class="page-item">
-	      <a class="page-link" href="#">&laquo;</a>
-	    </li>
-	    <li class="page-item active">
-	      <a class="page-link" href="#">1</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">3</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">4</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">5</a>
-	    </li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">&raquo;</a>
-	    </li>
-	  </ul>
+<%--	  <ul class="pagination pagination-lg justify-content-center align-items-center">--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">&laquo;</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item active">--%>
+<%--	      <a class="page-link" href="#">1</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">2</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">3</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">4</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">5</a>--%>
+<%--	    </li>--%>
+<%--	    <li class="page-item">--%>
+<%--	      <a class="page-link" href="#">&raquo;</a>--%>
+<%--	    </li>--%>
+<%--	  </ul>--%>
+		<ul
+				class="pagination pagination-lg justify-content-center align-items-center">
+			<c:if test="${paging.startPage != 1 }">
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage=${paging.startPage - 1 }&cntPerPage1=${paging.cntPerPage}&state=1">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage}">
+						<li class="page-item active"><a class="page-link">${p}</a></li>
+					</c:when>
+					<c:when test="${p != paging.nowPage}">
+						<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage=${p}&cntPerPage1=${paging.cntPerPage}&state=1">${p}</a></li>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<li class="page-item"><a class="page-link" href="qboardListForm.bo?nowPage=${paging.endPage+1 }&cntPerPage1=${paging.cntPerPage}&state=1">&raquo;</a></li>
+			</c:if>
+		</ul>
 	</div>
  	 
   </div>

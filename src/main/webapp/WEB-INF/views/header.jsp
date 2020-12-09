@@ -91,7 +91,7 @@
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">공모전
+              <a class="nav-link" href="/contestList.co">공모전
               </a>
             </li>
             <li class="nav-item dropdown active">
@@ -113,17 +113,23 @@
           </form>&nbsp;&nbsp;
 
           <c:choose>
-            <c:when test="${not empty sessionScope.userNick}">
+            <c:when test="${not empty sessionScope.userNick || not empty sessionScope.businessNick}">
               <c:choose>
                 <c:when test="${sessionScope.userNick eq 'admin'}">
                   <span><a href="adminMain.ad">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:when>
                 <c:otherwise>
-                  <!--  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>-->
-                  <span><a href="mypageMain.my">${sessionScope.userNick}</a>&nbsp;</span>
+                  <c:choose>
+                    <c:when test="${not empty sessionScope.userNick}">
+                      <span><a href="mypageMain.my">${sessionScope.userNick}</a>&nbsp;</span>
+                    </c:when>
+                    <c:when test="${not empty sessionScope.businessNick}">
+                      <span><a href="#">${sessionScope.businessNick}</a>&nbsp;</span>
+                    </c:when>
+                  </c:choose>
+                  <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
                 </c:otherwise>
               </c:choose>
-              <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
             </c:when>
             <c:otherwise>
               <button type="button" class="btn btn-primary" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
