@@ -19,6 +19,11 @@ public class EditBoardListServiceImpl implements EditBoardListService {
 
         List<EditMemberVO> list = editDAO.editBoardList();
 
+        for (int i = 0; i < list.size(); i++) {
+
+            list.get(i).setEdit_date(list.get(i).getEdit_date().substring(0,11));
+        }
+
         return list;
     }
 }

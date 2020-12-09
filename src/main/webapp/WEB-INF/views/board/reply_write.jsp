@@ -279,7 +279,7 @@
 
 			html += "<div class=\"card\">\n" +
 					"\t  <div class=\"card-header\">\n" +
-					"\t  ${sessionScope.userNick} (로고)\n" +
+					"\t  ${sessionScope.userNick}\n" +
 					"\t  </div>\n" +
 					"\t  <div class=\"card-body\">\n" +
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
