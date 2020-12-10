@@ -41,7 +41,7 @@
 			<div class="form-group">
 				<div class="form-check">
 					<label class="form-check-label"> 
-					<input class="form-check-input" type="checkbox" value="" id="biz_agree_chk1">
+					<input class="form-check-input" name="check" type="checkbox" value="" id="biz_agree_chk1">
 						기업회원 약관 동의
 					</label>
 				</div>
@@ -246,7 +246,7 @@
 			<div class="form-group">
 				<div class="form-check">
 					<label class="form-check-label"> 
-					<input class="form-check-input" type="checkbox" value="" id="biz_agree_chk2">
+					<input class="form-check-input" name="check" type="checkbox" value="" id="biz_agree_chk2">
 						개인정보 수집 및 이용 동의
 					</label>
 				</div>
@@ -272,12 +272,30 @@
 			</div>
 			<br>
 			 <label class="form-check-label"> 
-			 <input class="form-check-input" type="checkbox" value="" id="biz_all_agree_chk">
+			 <input class="form-check-input" name="check" type="checkbox" value="" onclick="checkAll()" id="biz_all_agree_chk">
 				<b>D's Q 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</b>
 			</label>
 			<br><br>
-			<a href="#"><button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='businessJoinForm.bi'">확인</button></a>
+			<a href="#"><button type="button" class="btn btn-primary btn-lg btn-block" onclick="check()">확인</button></a>
 		</div>
 	</div>
 </body>
+<script>
+	function checkAll(){
+		if ($("#biz_all_agree_chk").prop("checked")==true){
+			$("input[name=check]").prop("checked", true);
+		}
+	}
+
+
+	function check(){
+
+		if ($("#biz_agree_chk1").prop("checked")==false || $("#biz_agree_chk2").prop("checked")==false){
+			alert("모든 이용약관의 동의해 주세요.");
+		} else {
+			location.href='businessJoinForm.bi'
+		}
+	}
+
+</script>
 </html>

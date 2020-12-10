@@ -2,6 +2,7 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.member.CommonMemberJoinService;
 import com.example.finalpro.service.member.CommonMemberLoginService;
+import com.example.finalpro.service.member.CommonMemberValiService;
 import com.example.finalpro.vo.CommonMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class MemberController {
 
     @Autowired
     CommonMemberLoginService commonMemberLoginService;
+
+    @Autowired
+    CommonMemberValiService commonMemberValiService;
 
     // 이메일 찾기 첫번째
     @RequestMapping("/emailSearchFirst.me")
@@ -47,6 +51,7 @@ public class MemberController {
         return "template";
     }
 
+    // 패스워드 찾기 두번째
     @RequestMapping("/passSearchSecond.me")
     public String passSearchSecond(Model model){
 
@@ -146,7 +151,24 @@ public class MemberController {
         model.addAttribute("main","member/loginFailPopup");
         return "template";
     }
-    // 회원 제재
+
+
+    // 회원가입 중복 체크
+    @ResponseBody
+    @RequestMapping("/memberVali.me")
+    public int memberVali(@RequestParam(required = false) String mem_email,
+                        @RequestParam(required = false) String mem_nick,
+                        @RequestParam int state){
+
+        System.out.println("email : " + mem_email);
+        System.out.println("nick : " + mem_nick);
+        System.out.println("state : " + state);
+
+        int check = commonMemberValiService.memberVali(mem_email, mem_nick, state);
+
+
+        return check;
+    }
 
 
 

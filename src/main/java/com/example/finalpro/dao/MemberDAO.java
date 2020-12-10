@@ -20,5 +20,9 @@ public interface MemberDAO {
     public void commonMemberRpt(int mem_no);
     // 회원 명성 조회
     public int commonMemberExp(int mem_no);
+    // 회원 이메일 유효성 검사
+    public int emailVali(String mem_email);
+    // 회원 닉네임 유효성 검사
+    public int nickVali(String mem_nick);
 
 }
