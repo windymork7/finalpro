@@ -26,9 +26,19 @@ public class QboardVO {
     private int rownum;
     private String ca_name;
     private String reply_Edit_Content;
+    private int book_scrap_cnt;
     
     
-    public String getCa_name() {
+    
+    public int getBook_scrap_cnt() {
+		return book_scrap_cnt;
+	}
+
+	public void setBook_scrap_cnt(int book_scrap_cnt) {
+		this.book_scrap_cnt = book_scrap_cnt;
+	}
+
+	public String getCa_name() {
 		return ca_name;
 	}
 

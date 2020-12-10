@@ -29,7 +29,7 @@
     </select>
     <!-- 글 조회-->
     <select id="faqBoardContent" resultType="com.example.finalpro.vo.FaqVO">
-        SELECT * FROM FAQ
+        SELECT * FROM FAQ WHERE FAQ_NO=#{faq_no}
     </select>
     <!-- 글 삽입-->
     <insert id="faqBoardInsert" parameterType="com.example.finalpro.vo.FaqVO">

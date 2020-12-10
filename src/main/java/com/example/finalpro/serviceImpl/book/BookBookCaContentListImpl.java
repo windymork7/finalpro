@@ -16,9 +16,9 @@ public class BookBookCaContentListImpl implements BookBookCaContentListService{
 	BookDAO bookDAO;
 
 	@Override
-	public List<QboardVO> bookCaContentList(int sub_ca_no,int book_ca_no) {
+	public List<QboardVO> bookCaContentList(int sub_ca_no,int book_ca_no,int ca_no) {
 		
-		List<QboardVO> list = bookDAO.bookCaContentList(sub_ca_no,book_ca_no);
+		List<QboardVO> list = bookDAO.bookCaContentList(sub_ca_no,book_ca_no,ca_no);
 		return list;
 	}
 	

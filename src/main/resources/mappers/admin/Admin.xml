@@ -73,5 +73,17 @@
 	<update id="bookAdminStateUpdate" parameterType="com.example.finalpro.vo.QboardVO">
 		UPDATE Q SET Q_ADMIN_STATE=4 WHERE Q_NO=#{param1}
 	</update>
-
+	
+	<!-- 카테고리리스트 -->
+	<select id="caList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM CA
+	</select>
+	<!-- 서브카테고리리스트 -->
+	<select id="subCaList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM SUB_CA WHERE CA_NO=#{ca_no}
+	</select>
+	<!-- 책카테고리리스트 -->
+	<select id="bookCaList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM BOOK_CA WHERE SUB_CA_NO=#{subCa}
+	</select>
 </mapper>

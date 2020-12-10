@@ -306,71 +306,40 @@
                                 </div>
                             </div>
 
-                          <c:choose>
-                          <c:when test = "${mem.grade_no eq 1}">
-                          <span class="badge badge-light">${mem.mem_exp}xp</span>
+                            <!--  exp별 등급 색깔 및 로고
+                          <span class="badge badge-light">0~15</span>
                           <div class="text-muted">
                              <i class="fa fa-thermometer-empty fa-4x" aria-hidden="true"></i>
                           </div>
-						  </c:when>
-						  
-						  <c:when test = "${mem.grade_no eq 2}">
-                          <span class="badge badge-warning">${mem.mem_exp}xp</span>
+
+                          <span class="badge badge-warning">16~50</span>
                           <div class="text-warning">
                              <i class="fa fa-thermometer-quarter fa-4x" aria-hidden="true"></i>
                           </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no eq 3}">
-                          <span class="badge badge-primary">${mem.mem_exp}xp</span>
+
+                          <span class="badge badge-primary">51~125</span>
                           <div class="text-primary">
                              <i class="fa fa-thermometer-half fa-4x" aria-hidden="true"></i>
                           </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no eq 4}">
-                          <span class="badge badge-secondary">${mem.mem_exp}xp</span>
+
+                          <span class="badge badge-secondary">126~500</span>
                           <div class="text-secondary">
                              <i class="fa fa-thermometer-three-quarters fa-4x"
                                 aria-hidden="true"></i>
                           </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no >= 5}">
-                          <span class="badge badge-danger">${mem.mem_exp}xp</span>
+
+                          <span class="badge badge-danger">501~1000</span>
                           <div class="text-danger">
                              <i class="fa fa-thermometer-full fa-4x" aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						</c:choose>
+                          </div> -->
+
                         </div>
                         <div class="col-sm-8">
                             <p>
                             </p>
                             <!-- 여기 닉네임도 등급 색깔 참고 -->
-                          <c:choose>
-                            <c:when test = "${mem.grade_no eq 1}">
-                              <h4 class="card-title"><span class="text-muted">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 2}">
-                              <h4 class="card-title"><span class="text-warning">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 3}">
-                              <h4 class="card-title"><span class="text-primary">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 4}">
-                              <h4 class="card-title"><span class="text-secondary">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no >= 5}">
-                              <h4 class="card-title"><span class="text-danger">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                          </c:choose>
+                            <h4 class="card-title"><span class="text-danger">${mem.mem_nick}</span>님</h4>
+                            <h4 class="card-title">안녕하세요!</h4>
                         </div>
                     </div>
                 </div>
