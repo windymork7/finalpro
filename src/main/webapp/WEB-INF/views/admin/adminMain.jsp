@@ -26,5 +26,8 @@
     <button type="button" onclick="location.href='/memRptList.ad'">신고10개넘은애들</button>
     <button type="button" onclick="location.href='/memBlackList.ad'">제재당한애들</button>
 	<button type="button" onclick="location.href='/mypageInfo.my'">내정보</button>
+	<button type="button" onclick="location.href='/qRptList.ad'">신고10개넘은게시물들</button>
+	<button type="button" onclick="location.href='/bookStandByList.ad'">책승인대기리스트</button>
+	<button type="button" onclick="location.href='/caManegementMain.ad'">카테고리관리</button>
 </body>
 </html>

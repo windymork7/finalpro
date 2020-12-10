@@ -31,8 +31,8 @@
 <input type="hidden" id="qboardNum" value="${param.qboardNum}">
 <input type="hidden" id="memNo" value="${param.memNo}">
 <input type="hidden" id="subCa" value="${param.subCa}">
-<input type="hidden" id="sessionNick" value="${sessionScope.userNick}">
-<input type="hidden" id="sessionNo" value="${sessionScope.userNo}">
+<input type="hidden" id="sessionNick" value="${param.userNick}">
+<input type="hidden" id="sessionNo" value="${param.userNo}">
 </body>
 <script>
     $(document).ready(function(){
@@ -44,8 +44,8 @@
         var qboardNum = $("#qboardNum").val();
         var subCa = $("#subCa").val();
         var sessionNick = $("#sessionNick").val();
-        var sessionNo = $("#sessionNo").val();
         var qMemNo = $("#memNo").val();
+        var sessionNo = $("#sessionNo").val();
 
 
 
@@ -71,6 +71,7 @@
                             console.log(data[i].reply_no);
 
 
+
                         html += "<div class=\"card\">\n" +
                             "    <div class=\"card-header\">\n" +
                             "        " + data[i].mem_nick +"\n" +
@@ -82,7 +83,7 @@
                             "                    <i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
                             "                    "+ data[i].reply_up +"\n" +
                             "                </button>\n";
-                            if(data[i].reply_pick == 0){
+                            if(data[i].reply_pick == 0 && qMemNo == sessionNo){
                                 html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&subCa="+subCa+"&qboardNum="+qboardNum+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
@@ -90,13 +91,15 @@
                                 html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
-                            } else if(data[i].reply_pick == -1){}
-                            html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
-                            "<span data-toggle=\"modal\" data-target=\"#Modal_3\">" +
-                            "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
-                            "</span>" +
-                            "                </button>\n" +
-                            "            </div>\n" +
+                            } else if(data[i].reply_pick !== -1){}
+                            if(data[i].mem_nick != sessionNick){
+                                html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
+                                    "<span data-toggle=\"modal\" data-target=\"#Modal_3\">" +
+                                    "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
+                                    "</span>" +
+                                    "                </button>\n";
+                            }
+                            html += "            </div>\n" +
                             "            &nbsp;\n" +
                             "            &nbsp;\n" +
                             "            <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\" readonly>\n" +

@@ -21,6 +21,7 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
+    <h1>${sessionScope.businessNick}</h1>
     <h1>Main 페이지  ${sessionScope.userNo}</h1>
     ${sessionScope.userNo} <br>
     <button type="button" onclick="location.href='/loginForm.me'">로그인 페이지로 이동</button>
@@ -28,5 +29,6 @@
     <button type="button" onclick="location.href='/qboardListForm.bo'">DSQ리스트</button>
     <button type="button" onclick="location.href='/qReplyList.re'">답글리스트</button>
     <button type="button" onclick="location.href='/faqListForm.fa'">FAQ</button>
+    <button type="button" onclick="location.href='/bookSubCaList.bs'">스크랩북</button>
 </body>
 </html>

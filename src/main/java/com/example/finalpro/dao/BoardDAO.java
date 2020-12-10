@@ -1,5 +1,6 @@
 package com.example.finalpro.dao;
 
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,16 +9,31 @@ import java.util.List;
 
 @Mapper
 public interface BoardDAO {
+
+    // q게시글 총 갯수
+    public int qBoardCount();
     // q게시글 글쓰기 폼 이동시 북 카테고리 조회
     public List<QboardVO> bookCategory(int subCa);
     // q게시글 서브 카테고리 조회
     public String subCategory(int subCa);
     // q게시글 쓰기
     public void qBoardInsert(QboardVO qboardVO);
-    // q게시글 조회
-    public List<QboardVO> qBoardList(int subCa);
+    // q게시글 답변 완료 조회
+    public List<QboardVO> qBoardList(PagingVO pagingVO);
+    // q게시글 답변 대기 조회
+    public List<QboardVO> qBoardReadyList(PagingVO pagingVO);
+    // q게시글 최근순 조회
+    public List<QboardVO> qBoardLatesList(PagingVO pagingVO);
+    // q게시글 인기순 조회
+    public List<QboardVO> qBoardPopularityList(PagingVO pagingVO);
+    // q게시글 현상글 조회
+    public List<QboardVO> qboardExpList(PagingVO pagingVO);
+    // q게시글 현상금 업데이트
+    public void qBoardExpUpdate(int q_no, int exp);
     // 해당 게시글 조회
     public QboardVO qBoardContent(int q_no, int subCa);
+    public QboardVO qBoardReplyContent(int q_no, int subCa);
+    public int qBoardReplyCheck(int q_no, int subCa);
     // 해당 게시글 추천
     public int qBoardUpCheck(int mem_no, int q_no);
     public void qBoardUpUpdate(int q_no);
@@ -28,9 +44,13 @@ public interface BoardDAO {
     public void qBoardDownUpdate(int q_no);
     public void qBoardDownInsert(int q_no,int mem_no,int rpt_no);
 
+    // 댓글 채택 있는지 체크
+    public QboardVO qBoardReplyPickCheck(int q_no);
 
     // 댓글 리스트
     public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);
+    // 해당 댓글 번호 댓글 조회
+    public ReplyBoardVO replyContent(int reply_no);
     // 댓글 글쓰기 프로세스
     public void replyInsertProcess(ReplyBoardVO replyBoardVO);
     // 댓글 추천
@@ -48,7 +68,18 @@ public interface BoardDAO {
     public void replyDownInsert(int reply_no, int mem_no, int rpt_no);
 
 
+    // 에디터 댓글
+    public void editQboardReplyInsert(QboardVO qboardVO);
+    // 에디터 댓글 리스트
+    public List<QboardVO> editBoardReplyList(QboardVO qboardVO);
 
+
+    // 게시글 갯수
+    public int qBoardCompleteCount(int subCa);
+    public int qBoardReadyCount(int subCa);
+    public int qBoardLatesCount(int subCa);
+    public int qBoardPopularityCount(int subCa);
+    public int qBoardExpCount(int subCa);
 
 
 }

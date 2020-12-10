@@ -14,7 +14,11 @@ public interface MemberDAO {
     public CommonMemberVO commonMemberSelect(String commonMemberEmail);
     // 회원정보 수정
     public CommonMemberVO commonMemberUpdate(CommonMemberVO commonMemberVO);
-    // 회원 제재
-//    public void commonMemberBlack(String )
+    // 회원 명성 업데이트
+    public void commonExpUpate(int mem_no, int exp);
+    // 회원 신고시
+    public void commonMemberRpt(int mem_no);
+    // 회원 명성 조회
+    public int commonMemberExp(int mem_no);
 
 }

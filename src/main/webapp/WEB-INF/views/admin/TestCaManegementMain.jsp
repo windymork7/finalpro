@@ -16,20 +16,13 @@
         border: 1px solid;
     }
 </style>
+
+
 <body>
-<table>
-    <tr>
-        <td>번호</td>
-        <td>제목</td>
-        <td>작성자</td>
-    </tr>
-    <c:forEach var="edit" items="${list}">
-        <tr>
-            <td>${edit.edit_no}</td>
-            <td><a href="editBoardContent.ed?editBoardNum=${edit.edit_no}">${edit.edit_title}</a></td>
-            <td>${edit.mem_nick}</td>
-        </tr>
+
+    <c:forEach var="ca" items="${list}">
+    	<a href="/subCaList.ad?ca_no=${ca.ca_no}">${ca.ca_name}</a>
+    	<br><br><br>
     </c:forEach>
-</table>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -20,6 +21,11 @@
 
 
 	<style>
+
+    .fa-pencil-square{
+        color:#ffce67;
+    }
+
 	#c_left {
 	   float: left;
 	}
@@ -63,6 +69,11 @@
 </head>
 <body>
 
+    <c:set var="length" value="${fn:length(qBoardVO.q_file)}"/>
+    <c:set var="q_file3" value="${fn:substring(qBoardVO.q_file, length-3, length)}"/>
+    <c:set var="q_file4" value="${fn:substring(qBoardVO.q_file, length-4, length)}"/>
+
+
    <div class="container-fluid">
       <div class="row">
          <div class="col-sm-3"></div>
@@ -70,14 +81,16 @@
 			  <fieldset>
                   <div>
                      <div id="c_left">
-                        <a href="/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}"><legend>${qBoardVO.sub_ca_name}</legend></a>
+<%--                        <a href="/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}"><legend>${qBoardVO.sub_ca_name}</legend></a>--%>
+                        <a href="#" onclick="location.href='/qboardListForm.bo?subCa=${qBoardVO.sub_ca_no}'"><legend>${qBoardVO.sub_ca_name}</legend></a>
                      </div>
                      <div id="c_right">
                          <c:choose>
                              <c:when test="${empty sessionScope.userNo}"></c:when>
                              <c:when test="${sessionScope.userNo ne qBoardVO.mem_no}">
-                                 <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
-
+                                 <c:if test="${qBoardVO.reply_pick == 0}">
+                                     <button type="button" class="btn btn-primary" onclick="location.href='/replyWriteForm.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">답변하기</button>
+                                 </c:if>
                                  <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='/qboardUpCheck.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
                                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                  </button>
@@ -89,15 +102,18 @@
                              </c:when>
                              <c:when test="${sessionScope.userNo eq qBoardVO.mem_no}">
                                 <span data-toggle="modal" data-target="#Modal_2">
+                                <c:if test="${qBoardVO.reply_pick == 0 && qBoardVO.q_sos == 0}">
                                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="현상금 걸기">
                                     <i class="fa fa-krw" aria-hidden="true"></i>
                                 </button>
+                                </c:if>
                                 </span>
                              </c:when>
                          </c:choose>
                      </div>
                   </div>
                   <br>
+
                   
                   <hr class="my-4">
 					<div class="card bg-light mb-3">
@@ -120,16 +136,24 @@
 					  </div>
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
+                        <c:if test="${not empty qBoardVO.q_file}">
+                            <a href="${pageContext.request.contextPath}/upload/${qBoardVO.q_file}">${qBoardVO.q_file}</a>
+                            <c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
+                                <img src="upload/${qBoardVO.q_file}" width="100%" height="350"><br><br>
+                            </c:if>
+                        </c:if>
 					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 						<div id="q_right">
+                        <c:if test="${qBoardVO.q_admin_state > 0 && qBoardVO.q_admin_state < 4}">
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">
 						  <i class="fa fa-book" aria-hidden="true"></i>
 						</button>
+                        </c:if>
                         <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="편집" onclick="editAddContent()">
 						  <i class="fa fa-pencil" aria-hidden="true"></i>
 						</button>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="스크랩" onclick="location.href='/myscrapCheck.my?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-bookmark-o" aria-hidden="true"></i>
 						</button>
 						</div>
@@ -193,23 +217,32 @@
                               <div class="modal-body">
                                   <div class="form-group">
                                       <label class="col-form-label col-form-label-lg" for="inputLarge">EXP</label>
-                                      <input class="form-control form-control-lg" type="text" id="inputLarge">
+                                      <form action="/qboardExpUpdate.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}" method="post" id="ExpForm">
+                                        <input class="form-control form-control-lg" type="text" id="inputLarge" name="mem_exp">
+                                      </form>
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                  <button type="submit" class="btn btn-primary" data-dismiss="modal">걸기</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="expInput()">걸기</button>
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                               </div>
                           </div>
                       </div>
                   </div>
 				  <div id="editAddContentForm"></div>
-				<hr class="my-4">
 
-	<c:import url="board/comment.jsp">
+                  <div id="editAddContentComplete"></div>
+
+                  <div style="height: 20px"></div>
+                  <hr class="my-4">
+
+
+      <c:import url="board/comment.jsp">
         <c:param name="qboardNum" value="${qBoardVO.q_no}"/>
         <c:param name="memNo" value="${qBoardVO.mem_no}"/>
         <c:param name="subCa" value="${qBoardVO.sub_ca_no}"/>
+        <c:param name="userNick" value="${sessionScope.userNick}"/>
+        <c:param name="userNo" value="${sessionScope.userNo}"/>
     </c:import>
 	<br>
 				
@@ -234,44 +267,156 @@
 	    $('[data-toggle="tooltip"]').tooltip();
 	  })
 
+    $(document).ready(function(){
+        editList();
+    });
+
 	function editAddContent(){
 		html = "";
 
-		if (${sessionScope.userGrade} >= 5){
+		if (${sessionScope.userGrade} >= 3){
 
 			html += "<div class=\"card\">\n" +
 					"\t  <div class=\"card-header\">\n" +
-					"\t  ${sessionScope.userNick} (로고)\n" +
+					"\t  ${sessionScope.userNick}\n" +
 					"\t  </div>\n" +
 					"\t  <div class=\"card-body\">\n" +
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
-					// "\t    \t<div class=\"btn-group-vertical\">\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t\t20\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t\t<button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
-					// "\t\t\t\t<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
-					// "\t\t\t</button>\n" +
-					// "\t\t</div>\n" +
-					// "\t\t&nbsp;\n" +
-					// "\t\t&nbsp;\n" +
-					"\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
-					"\t\t</textarea>\n" +
+					"\t   <textarea id='editText' name='edit_reply_content' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
+					"</textarea>\n" +
 					"\t   </div>\n" +
-					"<button type='button' class='btn btn-success' onclick='location.href=\"/loginForm.me\"'>전송</button>\n"+
+					"<button type='button' class='btn btn-success' onclick='editAddContentInsert()'>전송</button>\n"+
 					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
 					"\t  </div>\n" +
-					"\t</div>";
-
+					"\t</div>" +
+                    "<br>";
 
 			$("#editAddContentForm").html(html);
 
 		}
 	}
+
+
+    function editList(){
+
+        var html = "";
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/editList.bo",
+                dataType : "json",
+                data : {
+                    "q_no" : ${qBoardVO.q_no},
+                },
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(data)
+                {
+                    // alert(data);
+
+
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<div class=\"card\">\n" +
+                            "\t  <div class=\"card-header\">\n" +
+                            "\t<i class=\"fa fa-pencil-square fa-lg\" aria-hidden=\"true\"></i>\n" +
+                            "\t  "+ data[i].mem_nick +"\n" +
+                            "\t  </div>\n" +
+                            "\t  <div class=\"card-body\">\n" +
+                            "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
+                            "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\" readonly>"+ data[i].edit_reply_content +"\n" +
+                            "\t\t</textarea>\n" +
+                            "\t   </div>\n" +
+                            "\t  </div>\n" +
+                            "\t</div>" +
+                            "<br>";
+
+                        $("#editAddContentComplete").html(html);
+
+                    }
+
+
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+    }
+
+	function editAddContentInsert(){
+
+	    var editText = $("#editText").val();
+	    var html = "";
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/editInput.bo",
+                data : {
+                    "q_no" : ${qBoardVO.q_no},
+                    "mem_no" : ${sessionScope.userNo},
+                    "reply_Edit_Content" : editText
+                },
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function()
+                {
+                    alert("에디터 글이 등록되었습니다.");
+                    $("#editAddContentForm").html(html);
+                    editList();
+
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+
+
+	    <%--html += "<div class=\"card\">\n" +--%>
+        <%--        "\t  <div class=\"card-header\">\n" +--%>
+        <%--        "\t  ${sessionScope.userNick} (로고)\n" +--%>
+        <%--        "\t  </div>\n" +--%>
+        <%--        "\t  <div class=\"card-body\">\n" +--%>
+        <%--        "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +--%>
+        <%--        "\t   <textarea class=\"form-control\" rows=\"8\" id=\"reply_text\">"+ editText +"\n" +--%>
+        <%--        "\t\t</textarea>\n" +--%>
+        <%--        "\t   </div>\n" +--%>
+        <%--        "\t  </div>\n" +--%>
+        <%--        "\t</div>";--%>
+
+
+        // $("#editAddContentComplete").html(html);
+
+    }
+
+	function expInput(){
+	    var exp = $("#inputLarge").val();
+
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/qboardExpInput.bo",
+                dataType : "json",
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(memExp)
+                {
+                    if (exp > memExp){
+                        alert("회원님이 명성이 부족합니다.");
+                        $("#inputLarge").val("0");
+                    } else{
+                        $("#ExpForm").submit();
+                    }
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+    }
 </script>
 
 </body>

@@ -6,7 +6,7 @@
 
 
 
-<mapper namespace="com.example.finalpro.dao.MyscrapDAO">
+<mapper namespace="com.example.finalpro.service.mypage.MyscrapDAO">
 	<!-- 마이스크랩 체크 -->
 	<select id="myscrapCheck" resultType="Integer" >
 		SELECT NVL(MAX(MEM_NO),0) FROM
@@ -20,9 +20,11 @@
 	</insert>
 	
 	<select id="myscrapList" resultType="com.example.finalpro.vo.MyscrapVO">
-		select rownum,ms.q_no,ms.mem_no,q.q_title,ms.my_scrap_date
-from my_scrap ms,( select q_title,q_no from q) q
-where ms.q_no = q.q_no
-and ms.mem_no=#{mem_no} order by ms.my_scrap_date desc
+		select rownum,ms.q_no,ms.mem_no,q.q_title,ms.my_scrap_date,b.book_ca_name,s.sub_ca_name,q.q_up,q.q_date
+		from my_scrap ms,( select * from q) q,(select * from book_ca)b,(select * from sub_ca)s
+		where ms.q_no = q.q_no
+		and q.book_ca_no = b.book_ca_no
+		and b.sub_ca_no = s.sub_ca_no
+		and ms.mem_no=#{mem_no} order by ms.my_scrap_date desc
 	</select>
 </mapper>

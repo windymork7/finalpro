@@ -80,44 +80,27 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">스크랩북</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">C</a>
-                  <a class="dropdown-item" href="#">JAVA</a>
-                  <a class="dropdown-item" href="#">PYTHON</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center"><b>데이터베이스</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">ORACLE</a>
-                  <a class="dropdown-item" href="#">MYSQL</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center"><b>프레임워크</b></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">SPRING</a>
-                  <a class="dropdown-item" href="#">DJANGO</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center" href="/todayProblem.bp"><b>오늘의 문제</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=1"><b>프로그래밍 언어</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=3"><b>데이터베이스</b></a>
+                <a class="dropdown-item" href="scrapBookMain.bs?ca_no=2"><b>프레임워크</b></a>
+                <a class="dropdown-item" href="/todayProblem.bp"><b>오늘의 문제</b></a>
               </div>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">에디터's Tip
+              <a class="nav-link" href="/editBoardList.ed">에디터's Tip
               </a>
             </li>
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
-                 role="button" aria-haspopup="true" aria-expanded="false">이벤트</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>D'sQ 이벤트</b></a>
-                <a class="dropdown-item text-center"><b>공모전</b></a>
-              </div>
+            <li class="nav-item active">
+              <a class="nav-link" href="/contestList.co">공모전
+              </a>
             </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" 
                  role="button" aria-haspopup="true" aria-expanded="false">고객센터</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item text-center"><b>D'sQ 가이드라인</b></a>
-                <a class="dropdown-item text-center"><b>공지사항</b></a>
-                <a class="dropdown-item text-center"><b>FAQ</b></a>
+                <a class="dropdown-item" href="guideLine.cu"><b>D'sQ 가이드라인</b></a>
+                <a class="dropdown-item" href="noticeList.cu"><b>공지사항</b></a>
+                <a class="dropdown-item" href="faqList.cu"><b>FAQ</b></a>
               </div>
             </li>
           </ul>
@@ -130,17 +113,23 @@
           </form>&nbsp;&nbsp;
 
           <c:choose>
-            <c:when test="${not empty sessionScope.userNick}">
+            <c:when test="${not empty sessionScope.userNick || not empty sessionScope.businessNick}">
               <c:choose>
                 <c:when test="${sessionScope.userNick eq 'admin'}">
                   <span><a href="adminMain.ad">${sessionScope.userNick}</a>&nbsp;</span>
                 </c:when>
                 <c:otherwise>
-                  <!--  <span><a href="#">${sessionScope.userNick}</a>&nbsp;</span>-->
-                  <span><a href="mypageMain.my">${sessionScope.userNick}</a>&nbsp;</span>
+                  <c:choose>
+                    <c:when test="${not empty sessionScope.userNick}">
+                      <span><a href="mypageMain.my">${sessionScope.userNick}</a>&nbsp;</span>
+                    </c:when>
+                    <c:when test="${not empty sessionScope.businessNick}">
+                      <span><a href="#">${sessionScope.businessNick}</a>&nbsp;</span>
+                    </c:when>
+                  </c:choose>
+                  <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
                 </c:otherwise>
               </c:choose>
-              <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
             </c:when>
             <c:otherwise>
               <button type="button" class="btn btn-primary" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;

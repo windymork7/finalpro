@@ -119,7 +119,6 @@
               "                         placeholder=\"비밀번호\">\n" +
               "               </div>";
 
-      html += "";
 
       $("#here").html(html);
    }

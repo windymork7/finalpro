@@ -40,7 +40,7 @@ public class NoticeController {
 		
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
 		list = noticeBoardList.noticeBoardList();
-		
+
 		model.addAttribute("list",list);
 		model.addAttribute("main","notice/TestNoticeList");
 		return "template";

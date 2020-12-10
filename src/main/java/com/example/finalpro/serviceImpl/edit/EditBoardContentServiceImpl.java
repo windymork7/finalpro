@@ -15,7 +15,9 @@ public class EditBoardContentServiceImpl implements EditBoardContentService {
     @Override
     public EditMemberVO editBoardContent(int editBoardNum) {
 
+        editDAO.editBoardViewUp(editBoardNum);
         EditMemberVO editMemberVO = editDAO.editBoardContent(editBoardNum);
+        editMemberVO.setEdit_date(editMemberVO.getEdit_date().substring(0,11));
 
         return editMemberVO;
     }

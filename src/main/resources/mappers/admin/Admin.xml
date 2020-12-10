@@ -32,5 +32,58 @@
         AND R.MEM_NO=M.MEM_NO
         AND M.GRADE_NO = G.GRADE_NO
     </select>
-
+    
+    <!-- Q신고 10개 넘은 리스트 -->
+    <select id="qRptList" resultType="com.example.finalpro.vo.QboardVO">
+		SELECT rownum,Q1.*,M.MEM_NICK,SC.SUB_CA_NAME FROM 
+		(SELECT ROWNUM,Q_NO FROM Q) R,
+		(SELECT * FROM Q) Q1,
+		(SELECT MEM_NO, MEM_NICK FROM MEM) M,
+		(SELECT * FROM SUB_CA) SC
+		WHERE R.Q_NO = Q1.Q_NO
+		AND Q1.MEM_NO = M.MEM_NO
+		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
+		AND Q_RPT_CNT>10
+    </select>
+	<!-- Q신고 10개 넘은거 삭제 -->
+	<delete id="qDeleteAction" parameterType="com.example.finalpro.vo.QboardVO">
+		DELETE Q WHERE Q_NO=#{param1}
+	</delete>    
+    
+    <!-- 승인허가 리스트 -->
+    <select id="bookStandByList" resultType="com.example.finalpro.vo.QboardVO">
+		SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,Q1.*,C.CA_NO FROM 
+		(SELECT * FROM Q) Q1,
+		(SELECT * FROM MEM) M,
+		(SELECT * FROM SUB_CA) SC,
+		(SELECT * FROM CA) C,
+        (SELECT * FROM BOOK_CA) BC
+		WHERE Q1.MEM_NO = M.MEM_NO
+		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
+		AND SC.CA_NO = C.CA_NO
+        AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
+		AND Q_ADMIN_STATE=3
+	</select>
+	
+	<!-- 승인 ( 책에 추가 )  필요 없는 컬럼
+	<insert id="bookAddAction" parameterType="com.example.finalpro.vo.QboardVO">
+		insert into test3 values(1)
+	</insert> -->
+	<!-- 승인 ( 어드빈 상태 5로 변경 )  -->
+	<update id="bookAdminStateUpdate" parameterType="com.example.finalpro.vo.QboardVO">
+		UPDATE Q SET Q_ADMIN_STATE=4 WHERE Q_NO=#{param1}
+	</update>
+	
+	<!-- 카테고리리스트 -->
+	<select id="caList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM CA
+	</select>
+	<!-- 서브카테고리리스트 -->
+	<select id="subCaList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM SUB_CA WHERE CA_NO=#{ca_no}
+	</select>
+	<!-- 책카테고리리스트 -->
+	<select id="bookCaList" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM BOOK_CA WHERE SUB_CA_NO=#{subCa}
+	</select>
 </mapper>

@@ -47,7 +47,7 @@
       <div class="row">
          <div class="col-sm-3"></div>
          <div class="col-sm-6">
-            <form action="/qboardInsertProcess.bo" method="post">
+            <form action="/qboardInsertProcess.bo" method="post" enctype="multipart/form-data">
                <fieldset>
                   <div>
                   <br>
@@ -109,19 +109,18 @@
 
                   <input type="hidden" name="sub_ca_no" value="${sub}">
                   <input type="hidden" name="mem_no" value=${sessionScope.userNo}>
+
                   
                   <div class="form-group">
-                     <textarea class="form-control" id="content" name="q_content" rows="20">
-                     질문글을 작성할 때  가이드라인을 지켜주세요.
-
-                     *필수 작성
-                     1. 사용하는 언어 버전 :
-                     2. 사용하는 IDE :
+                     <textarea class="form-control" id="content" name="q_content" rows="20">질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 :
+                        2. 사용하는 IDE :
                      </textarea>
                   </div>
                   <div class="form-group">
                      <label for="exampleInputFile" class="text-muted">파일 Upload</label> 
-                     <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                     <input type="file" class="form-control-file" id="exampleInputFile" name="q_file1" aria-describedby="fileHelp">
                   </div>
                </fieldset>
             </form>
