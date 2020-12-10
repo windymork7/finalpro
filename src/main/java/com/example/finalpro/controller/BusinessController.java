@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,12 +41,13 @@ public class BusinessController {
     }
     
     // 사업자 로그인 프로세스
+    @ResponseBody
     @RequestMapping("/businessLoginProcess.bi")
     public String businessLoginProcess(HttpServletRequest request, HttpSession session, Model model){
 
         String page = businessMemberLoginSevice.businessLoginProcess(request, session);
 
-        return "redirect:" + page;
+        return page;
     }
 
 

@@ -10,7 +10,7 @@ public class HomeController {
     @RequestMapping("/")
     public String main(Model model) {
 
-        model.addAttribute("main", "dsqMain");
+        model.addAttribute("main", "mainForm");
 
         return "template";
     }

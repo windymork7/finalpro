@@ -105,7 +105,7 @@
                    <c:if test="${not empty editMemberVO.edit_img}">
                        <a href="${pageContext.request.contextPath}/upload/${editMemberVO.edit_img}">${editMemberVO.edit_img}</a>
                        <c:if test="${edit_img3 == 'jpg' || edit_img3 == 'gif' || edit_img3 == 'png' || edit_img4 == 'jpeg'}">
-                           <img src="upload/${editMemberVO.edit_img}" width="100%" height="350"><br><br>
+                           <img src="upload/${editMemberVO.edit_img}" width="100%"><br><br>
                        </c:if>
                    </c:if>
                    <br>

@@ -90,9 +90,9 @@
             color: #78c2ad;
         }
 
-        .nav-item{
-            width: 33.333333%;
-        }
+        /*.nav-item{*/
+        /*    width: 33.333333%;*/
+        /*}*/
 
     </style>
 
@@ -144,13 +144,13 @@
 
         <div class="col-sm-7">
             <ul class="nav nav-tabs">
-                <li class="nav-item text-center"><a class="nav-link active"
+                <li class="nav-item text-center" style="width: 33.333333%;"><a class="nav-link active"
                                                     data-toggle="tab" href="#my_Q"><b>
                     나의 질문</b></a></li>
-                <li class="nav-item text-center"><a class="nav-link" data-toggle="tab"
+                <li class="nav-item text-center" style="width: 33.333333%;"><a class="nav-link" data-toggle="tab"
                                                     href="#my_A"><b>
                     나의 답변</b></a></li>
-                <li class="nav-item text-center"><a class="nav-link" data-toggle="tab"
+                <li class="nav-item text-center" style="width: 33.333333%;"><a class="nav-link" data-toggle="tab"
                                                     href="#my_S"><b>
                     스크랩</b></a></li>
             </ul>

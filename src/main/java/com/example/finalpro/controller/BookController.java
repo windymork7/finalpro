@@ -35,7 +35,7 @@ public class BookController {
     @RequestMapping("/todayProblem.bp")
     public String todayProblem(Model model){
 
-        model.addAttribute("main", "book/problem");
+        model.addAttribute("main", "book/sb_Quiz");
         return "template";
     }
     
