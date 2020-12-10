@@ -27,6 +27,14 @@
    crossorigin="anonymous"></script>
 
 <style>
+.card-header-gd {
+   padding: 0.75rem 1.25rem;
+   margin-bottom: 0;
+   background-color: #f3969a;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+   color: #fff;
+}
+
 #c_left {
    float: left;
 }
@@ -82,7 +90,7 @@
          
             <div class="card border-secondary mb-3" style="max-width: 20rem;"
                id="guideline">
-               <div class="card-header">
+               <div class="card-header-gd">
                   <b>유의사항</b>
                </div>
                <div class="card-body">

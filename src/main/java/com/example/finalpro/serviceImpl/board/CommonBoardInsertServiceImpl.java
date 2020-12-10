@@ -37,13 +37,21 @@ public class CommonBoardInsertServiceImpl implements CommonBoardInsertService {
 //        String filePath = basePath + "/" + q_file2.getOriginalFilename();
 //        System.out.println("filePath : " + filePath);
 
+        System.out.println("q_file2 : " + q_file2);
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일HH시mm분ss초");
         Calendar c1 = Calendar.getInstance();
         String strToday = sdf.format(c1.getTime());
 
         File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+q_file2.getOriginalFilename());
+//        File dest = new File("C:/Users/CMH/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+q_file2.getOriginalFilename());
 
-        qboardVO.setQ_file(strToday+"_"+q_file2.getOriginalFilename());
+        if (!(q_file2.getOriginalFilename().equals(""))){
+            qboardVO.setQ_file(strToday+"_"+q_file2.getOriginalFilename());
+        } else{
+            qboardVO.setQ_file("");
+        }
+
 
         try {
             q_file2.transferTo(dest);

@@ -2,6 +2,7 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.board.*;
 import com.example.finalpro.service.member.CommonMemberExpSelect;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.json.JSONArray;
@@ -70,6 +71,17 @@ public class DsqController {
     CommonBoardUpService commonBoardUpService;
     @Autowired
     CommonBoardUpCheckService commonBoardUpCheckService;
+    @Autowired
+    CommonBoardCompleteCount commonBoardCompleteCount;
+    @Autowired
+    CommonBoardReadyCountService commonBoardReadyCountService;
+    @Autowired
+    CommonBoardLatesCountService commonBoardLatesCountService;
+    @Autowired
+    CommonBoardPopularityCountService commonBoardPopularityCountService;
+    @Autowired
+    CommonBoardExpCountService commonBoardExpCountService;
+
     
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
@@ -97,26 +109,145 @@ public class DsqController {
     }
 
     // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
-    @RequestMapping("/qboardListForm.bo")
-    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
+//    @RequestMapping("/qboardListForm.bo")
+//    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
+//
+//
+//        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
+//        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
+//        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
+//        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
+//        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
+//
+//        model.addAttribute("completeList",completeList);
+//        model.addAttribute("readyList", readyList);
+//        model.addAttribute("latestList", latestList);
+//        model.addAttribute("popularityList", popularityList);
+//        model.addAttribute("expList", expList);
+//
+//        model.addAttribute("subCa", subCa);
+//        model.addAttribute("main", "board/board_list");
+//        return "template";
+//    }
+
+     @RequestMapping("/qboardListForm.bo")
+    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model,
+                                @RequestParam(value = "nowPage1", required = false) String nowPage1,
+                                @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
+                                @RequestParam(value = "nowPage2", required = false) String nowPage2,
+                                @RequestParam(value = "cntPerPage2", required = false) String cntPerPage2,
+                                @RequestParam(value = "nowPage3", required = false) String nowPage3,
+                                @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
+                                @RequestParam(value = "nowPage4", required = false) String nowPage4,
+                                @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
+                                @RequestParam(value = "nowPage5", required = false) String nowPage5,
+                                @RequestParam(value = "cntPerPage5", required = false) String cntPerPage5,
+                                @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 
 
-        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
-        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
-        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
-        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
-        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
+         int state1 = Integer.parseInt(state);
 
-        model.addAttribute("completeList",completeList);
-        model.addAttribute("readyList", readyList);
-        model.addAttribute("latestList", latestList);
-        model.addAttribute("popularityList", popularityList);
-        model.addAttribute("expList", expList);
+         if (nowPage1 == null && cntPerPage1 == null) {
+             nowPage1 = "1";
+             cntPerPage1 = "5";
+         } else if (nowPage1 == null) {
+             nowPage1 = "1";
+         } else if (cntPerPage1 == null) {
+             cntPerPage1 = "5";
+         }
 
-        model.addAttribute("subCa", subCa);
-        model.addAttribute("main", "board/board_list");
-        return "template";
+         int completeCount = commonBoardCompleteCount.qBoardCompleteCount(subCa);
+         PagingVO completePaging = new PagingVO(completeCount, Integer.parseInt(nowPage1), Integer.parseInt(cntPerPage1));
+         model.addAttribute("completePaging", completePaging);
+         List<QboardVO> completeList = commonBoardListService.qBoardList(subCa, completePaging);
+         model.addAttribute("completeList", completeList);
+
+         if (nowPage2 == null && cntPerPage2 == null) {
+             nowPage2 = "1";
+             cntPerPage2 = "5";
+         } else if (nowPage2 == null) {
+             nowPage2 = "1";
+         } else if (cntPerPage2 == null) {
+             cntPerPage2 = "5";
+         }
+
+
+         int readyCount = commonBoardReadyCountService.qBoardReadyCount(subCa);
+         PagingVO readyPaging = new PagingVO(readyCount, Integer.parseInt(nowPage2), Integer.parseInt(cntPerPage2));
+         model.addAttribute("readyPaging", readyPaging);
+         List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa, readyPaging);
+         model.addAttribute("readyList", readyList);
+
+         if (nowPage3 == null && cntPerPage3 == null) {
+             nowPage3 = "1";
+             cntPerPage3 = "5";
+         } else if (nowPage3 == null) {
+             nowPage3 = "1";
+         } else if (cntPerPage3 == null) {
+             cntPerPage3 = "5";
+         }
+
+         int latesCount = commonBoardLatesCountService.qBoardLatesCount(subCa);
+         PagingVO latesPaging = new PagingVO(latesCount, Integer.parseInt(nowPage3), Integer.parseInt(cntPerPage3));
+         model.addAttribute("latesPaging", latesPaging);
+         List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa, latesPaging);
+         model.addAttribute("latestList", latestList);
+
+         if (nowPage4 == null && cntPerPage4 == null) {
+             nowPage4 = "1";
+             cntPerPage4 = "5";
+         } else if (nowPage4 == null) {
+             nowPage4 = "1";
+         } else if (cntPerPage4 == null) {
+             cntPerPage4 = "5";
+         }
+
+         int popuCount = commonBoardPopularityCountService.qBoardPopularityCount(subCa);
+         PagingVO popuPaging = new PagingVO(popuCount, Integer.parseInt(nowPage4), Integer.parseInt(cntPerPage4));
+         model.addAttribute("popuPaging", popuPaging);
+         List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa, popuPaging);
+         model.addAttribute("popularityList", popularityList);
+
+         if (nowPage5 == null && cntPerPage5 == null) {
+             nowPage5 = "1";
+             cntPerPage5 = "5";
+         } else if (nowPage5 == null) {
+             nowPage5 = "1";
+         } else if (cntPerPage5 == null) {
+             cntPerPage5 = "5";
+         }
+
+         int expCount = commonBoardExpCountService.qBoardExpCount(subCa);
+
+         PagingVO expPaging = new PagingVO(expCount, Integer.parseInt(nowPage5), Integer.parseInt(cntPerPage5));
+         model.addAttribute("expPaging", expPaging);
+         List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa, expPaging);
+         model.addAttribute("expList", expList);
+
+         if (state1 == 1){
+             model.addAttribute("active1", "active");
+             model.addAttribute("show1", "active show");
+         } else if(state1 == 2){
+             model.addAttribute("active2", "active");
+             model.addAttribute("show2", "active show");
+         } else if(state1 == 3){
+             model.addAttribute("active3", "active");
+             model.addAttribute("show3", "active show");
+         } else if(state1 == 4){
+             model.addAttribute("active4", "active");
+             model.addAttribute("show4", "active show");
+         } else if(state1 == 5){
+             model.addAttribute("active5", "active");
+             model.addAttribute("show5", "active show");
+         }
+
+
+
+         model.addAttribute("subCa", subCa);
+         model.addAttribute("main", "board/board_list");
+         return "template";
     }
+
 
     //게시판 내용
     @RequestMapping("/qboardContent.bo")

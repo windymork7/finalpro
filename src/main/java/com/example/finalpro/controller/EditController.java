@@ -2,6 +2,7 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.edit.*;
 import com.example.finalpro.vo.EditMemberVO;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class EditController {
     EditBoardReplyInsertService editBoardReplyInsertService;
     @Autowired
     EditBoardReplyListService editBoardReplyListService;
+    @Autowired
+    EditboardCountService editboardCountService;
 
     // 에디터 게시판 페이지
     @RequestMapping("/editBoardInsert.ed")
@@ -59,10 +62,26 @@ public class EditController {
 
     // 에디터 리스트 페이지
     @RequestMapping("/editBoardList.ed")
-    public String editBoardList(Model model){
+    public String editBoardList(PagingVO pagingVO, Model model,
+                                @RequestParam(value = "nowPage", required = false) String nowPage,
+                                @RequestParam(value = "cntPerPage", required = false) String cntPerPage){
 
+        int count = editboardCountService.editBoardCount();
 
-        List<EditMemberVO> list = editBoardListService.editBoardList();
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+
+        pagingVO = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+        model.addAttribute("paging", pagingVO);
+
+        List<EditMemberVO> list = editBoardListService.editBoardList(pagingVO);
 
         model.addAttribute("list", list);
         model.addAttribute("main", "edit/et_list");

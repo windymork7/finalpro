@@ -24,10 +24,14 @@ public class EditBoardInsertServiceImpl implements EditBoardInsertService {
         Calendar c1 = Calendar.getInstance();
         String strToday = sdf.format(c1.getTime());
 
-//        File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+edit_img1.getOriginalFilename());
-        File dest = new File("C:/Users/CMH/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+edit_img1.getOriginalFilename());
+        File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+edit_img1.getOriginalFilename());
+//        File dest = new File("C:/Users/CMH/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+edit_img1.getOriginalFilename());
 
-        editMemberVO.setEdit_img(strToday+"_"+edit_img1.getOriginalFilename());
+        if (!(edit_img1.getOriginalFilename().equals(""))){
+            editMemberVO.setEdit_img(strToday+"_"+edit_img1.getOriginalFilename());
+        } else{
+            editMemberVO.setEdit_img("");
+        }
 
         try {
             edit_img1.transferTo(dest);
@@ -35,6 +39,8 @@ public class EditBoardInsertServiceImpl implements EditBoardInsertService {
             e.printStackTrace();
         }
 
-        editDAO.editBoardInsert(editMemberVO);
+//        for (int i=0; i< 30; i++) {
+            editDAO.editBoardInsert(editMemberVO);
+//        }
     }
 }
