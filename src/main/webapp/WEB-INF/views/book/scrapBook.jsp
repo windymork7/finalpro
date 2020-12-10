@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%
    response.setCharacterEncoding("UTF-8");
 %>
@@ -64,25 +65,21 @@ small {
                       <c:set var="a" value="0"/>
                       <c:set var="b" value="0"/>
                       <c:set var="c" value="4"/>
-                     <c:forEach begin="${b}" var="sList" items="${subCaList}" step="1" end="2">
+                     <c:forEach begin="${b}" var="sList" items="${subCaList}">
                          <li class="nav-item active"><a class="nav-link pl-0" href="#">
-                             <span class="d-none d-sm-inline"><b>${sList.sub_ca_name}</b></span></a>
+                             <span class="d-none d-sm-inline"><b>${sList.sub_ca_name},${fn:length(subCaList)}</b></span></a>
                          </li>
-                      <%--
-                      <li class="nav-item active"><a class="nav-link pl-0" href="#">
-                           <span class="d-none d-sm-inline"><b>C</b></span></a>
-                     </li>--%>
-                         <c:forEach begin="${a}" var="bList" items="${bookCaList}" end="${c}">
-                         <li class="nav-item"><a class="nav-link pl-0" href="#">
-                             <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}&bookCa=${bList.book_ca_no}">${bList.book_ca_name}</a> </span></a>
-                         </li>
-                         <c:set var="a" value="${a+1}"/>
-                         </c:forEach>
 
-                         <c:set var="b" value="${b + 1}"/>
-                         <c:set var="c" value="${c + 5}"/>
+						<c:forEach begin="${a}" var="bList" items="${bookCaList}" end="${c}">
+							<li class="nav-item"><a class="nav-link pl-0" href="#">
+                     	        <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}&bookCa=${bList.book_ca_no}">${bList.book_ca_name}</a></span></a>
+                    	    </li>
+                       	    <c:set var="a" value="${a+1}"/>
+                        </c:forEach>
+
+                        <c:set var="b" value="${b + 1}"/>
+                        <c:set var="c" value="${c + 5}"/>
                      </c:forEach>
-
                   </ul>
                </div>
             </nav>

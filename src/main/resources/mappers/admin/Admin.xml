@@ -86,4 +86,20 @@
 	<select id="bookCaList" resultType="com.example.finalpro.vo.CategoryVO">
 		SELECT * FROM BOOK_CA WHERE SUB_CA_NO=#{subCa}
 	</select>
+	<!-- 책카테고리수정폼 -->
+	<select id="bookCaNameUpdateForm" resultType="com.example.finalpro.vo.CategoryVO">
+		SELECT * FROM BOOK_CA WHERE BOOK_CA_NO=#{param1}
+	</select>
+	<!-- 책카테고리업데이트 -->
+	<update id="bookCaNameUpdateAction" parameterType="com.example.finalpro.vo.CategoryVO">
+		UPDATE BOOK_CA SET BOOK_CA_NAME=#{book_ca_name} WHERE BOOK_CA_NO=#{book_ca_no}
+	</update>
+	<!-- 어드민명성수정폼 -->
+	<select id="adminExpUpdateForm" resultType="com.example.finalpro.vo.CommonMemberVO">
+		SELECT * FROM MEM WHERE MEM_NICK='admin'
+	</select>
+	<!-- 어드민명성액션 -->
+	<update id="adminExpUpdateAction" parameterType="com.example.finalpro.vo.CommonMemberVO">
+		UPDATE MEM SET MEM_EXP=#{param1} WHERE MEM_NICK='admin'
+	</update>
 </mapper>

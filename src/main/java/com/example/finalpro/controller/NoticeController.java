@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.finalpro.service.notice.*;
 import com.example.finalpro.vo.NoticeVO;
@@ -35,6 +36,7 @@ public class NoticeController {
 	@Autowired
 	NoticeBoardUpdateForm noticeBoardUpdateForm;
 	//목록
+	/*
 	@RequestMapping("/noticeListForm.no")
 	public String noticeListForm(Model model) {
 		
@@ -58,7 +60,7 @@ public class NoticeController {
 	}
 	
 
-	
+	*/
 	//글쓰기 폼
 	@RequestMapping("/noticeWriteForm.no")
 	public String noticeWriteView(Model model) {
@@ -68,13 +70,13 @@ public class NoticeController {
 	
 	//글쓰기 액션
 	@RequestMapping("/noticeWriteAction.no")
-	public String noticeWriteAction(Model model, NoticeVO noticeVO) {
+	public String noticeWriteAction(Model model, NoticeVO noticeVO,@RequestParam MultipartFile q_file1) {
 		
-		noticeBoardInsert.noticeBoardInsert(noticeVO);
+		noticeBoardInsert.noticeBoardInsert(noticeVO,q_file1);
 		model.addAttribute("main","dsqMain");
 		return "template";
 	}
-	
+	/*
 	//수정폼
     @RequestMapping("/noticeUpdateForm.no")
     public String noticeUpdateView(@RequestParam("noticeNo") String noticeNo, Model model) {
@@ -113,8 +115,7 @@ public class NoticeController {
 	
 
 	//수정액션
-	/*
-    @RequestMapping("/noticeUpdate.no")
+   @RequestMapping("/noticeUpdate.no")
     public String noticeUpdateAction(@RequestParam("noticeNo") String noticeNo, Model model,NoticeVO noticeVO) {
     	System.out.println("noticeNo: "+ noticeNo);
     	noticeBoardUpdate.noticeBoardUpdate(Integer.parseInt(noticeNo));

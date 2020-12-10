@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%
    response.setCharacterEncoding("UTF-8");
 %>
@@ -64,6 +66,10 @@ small {
 </head>
 <body>
 
+    <c:set var="length" value="${fn:length(noticeVO.notice_file)}"/>
+    <c:set var="q_file3" value="${fn:substring(noticeVO.notice_file, length-3, length)}"/>
+    <c:set var="q_file4" value="${fn:substring(noticeVO.notice_file, length-4, length)}"/>
+    
    <div class="container-fluid">
       <div class="row">
          <div class="col-sm-3"></div>
@@ -92,9 +98,17 @@ small {
 
                      <div class="card-body">
                         <div class="card-text" id="question-text">
-
-                           <img src="img/Check.jpg" width="100%" height="350"> <br>
+							<c:if test="${not empty noticeVO.notice_file}">
+                            <a href="${pageContext.request.contextPath}/upload/${noticeVO.notice_file}">${noticeVO.notice_file}</a>
+                            <c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
+                                <img src="upload/${noticeVO.notice_file}" width="100%" height="350"><br><br>
+                            </c:if>
+                        </c:if>
+                        <%--  
+                        	<img src="img/${noticeVO.notice_file}" width="100%" height="350"/> <br>
+                           <!--<img src="img/Check.jpg" width="100%" height="350"/> <br>-->
                            <br>
+                        --%>
                            <textarea class="form-control" rows="12" readonly>
 ${noticeVO.notice_content }
 안녕하세요.  
@@ -108,8 +122,8 @@ ${noticeVO.notice_content }
 - 내용 : 데이터베이스 서버 분리
                   </textarea>
                            <br>
-                           <c:set var="nick" value="${sessionScope.userNick}"/>
-                           <c:if test="${nick eq 'admin'}">
+							<c:set var="nick" value="${sessionScope.userNick}"/>
+							<c:if test="${nick eq 'admin'}">
                            <div class="text-right">
                               <!-- 관리자만 보이게 -->
                               <button type="button" class="btn btn-primary">수정</button>

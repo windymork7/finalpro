@@ -39,4 +39,13 @@ public interface AdminDAO {
     public List<CategoryVO> subCaList(int ca_no);
     //책카테고리리스트
     public List<CategoryVO> bookCaList(int subCa);
+    //책카테고리수정폼에정보띄워주기
+    public CategoryVO bookCaNameUpdateForm(int book_ca);
+    //책카테고리이름수정액션
+    public void bookCaNameUpdateAction(int book_ca_no,String book_ca_name);
+    
+    //심심해서만든 어드민 EXP 수정
+    public CommonMemberVO adminExpUpdateForm();
+    //어드민 EXp수정액션
+    public void adminExpUpdateAction(int mem_exp);
 }
