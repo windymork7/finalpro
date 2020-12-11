@@ -24,5 +24,14 @@ public interface MemberDAO {
     public int emailVali(String mem_email);
     // 회원 닉네임 유효성 검사
     public int nickVali(String mem_nick);
+    // 회원 이메일 찾기
+    public String emailFind(String tel);
+    // 회원 비밀번호 찾기 및 수정
+    public void passFind(CommonMemberVO commonMemberVO);
+    // 회원 계정 확인
+    public int accountTelFind(String tel);
+    // 회원 비밀번호 계정 확인
+    public int accoutPwFind(String mem_email, String mem_tel);
+
 
 }

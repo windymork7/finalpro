@@ -27,6 +27,14 @@
    crossorigin="anonymous"></script>
 
 <style>
+
+.card-header-gd {
+   padding: 0.75rem 1.25rem;
+   margin-bottom: 0;
+   background-color: #f3969a;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+   color: #fff;
+}
 a {
    color: #888;
    text-decoration: none;
@@ -132,9 +140,9 @@ small {
             </div>
             
             <div class="col-sm-3">
-               <div class="card border-secondary mb-3" style="max-width: 20rem;"
+               <div class="card border-secondary mb-3"
                id="guideline">
-               <div class="card-header">
+               <div class="card-header-gd">
                   <b>스크랩 기준</b>
                </div>
                <div class="card-body">

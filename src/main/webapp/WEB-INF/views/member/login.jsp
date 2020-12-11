@@ -165,6 +165,8 @@
                            location.href="/";
                        } else if (data == "fail"){
                           alert("아이디와 비밀번호를 확인해 주세요.");
+                       } else if (data == "black"){
+                           alert("제재당한 이메일 입니다.");
                        }
                     },
                     error : function(request, status, error)

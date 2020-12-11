@@ -2,11 +2,13 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.business.BusinessMemberJoinService;
 import com.example.finalpro.service.business.BusinessMemberLoginSevice;
+import com.example.finalpro.service.business.BusinessMemberValiService;
 import com.example.finalpro.vo.BusinessMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,9 @@ public class BusinessController {
 
     @Autowired
     BusinessMemberLoginSevice businessMemberLoginSevice;
+
+    @Autowired
+    BusinessMemberValiService businessMemberValiService;
 
     // 사업자 회원가입 페이지
     @RequestMapping("/businessJoinForm.bi")
@@ -48,6 +53,20 @@ public class BusinessController {
         String page = businessMemberLoginSevice.businessLoginProcess(request, session);
 
         return page;
+    }
+
+
+    // 사업자 중복 체크
+    @ResponseBody
+    @RequestMapping("/businessVali.bi")
+    public int businessVali(@RequestParam(required = false) String biz_email,
+                            @RequestParam(required = false) String biz_number,
+                            @RequestParam(required = false) String biz_tel,
+                            @RequestParam int state){
+
+        int valiCheck = businessMemberValiService.businessMemberVali(biz_email, biz_number, biz_tel, state);
+
+        return valiCheck;
     }
 
 

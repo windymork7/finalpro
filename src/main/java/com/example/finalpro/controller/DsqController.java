@@ -130,7 +130,7 @@ public class DsqController {
 //        return "template";
 //    }
 
-     @RequestMapping("/qboardListForm.bo")
+    @RequestMapping("/qboardListForm.bo")
     public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model,
                                 @RequestParam(value = "nowPage1", required = false) String nowPage1,
                                 @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
@@ -495,6 +495,13 @@ public class DsqController {
         return new ResponseEntity(jsonArray.toString(), responseHeaders, HttpStatus.CREATED);
     }
 
+    // 게시판 검색 리스트
+    @RequestMapping("/qboardSearchList.bo")
+    public String qboardSearchList(Model model){
 
+
+
+        return "template";
+    }
 
 }

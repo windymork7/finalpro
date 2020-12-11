@@ -302,7 +302,7 @@
         </div>
         <div class="col-sm-3">
 
-            <div class="card border-secondary mb-3" style="max-width: 20rem;"
+            <div class="card border-secondary mb-3"
                  id="guideline">
                 <div class="card-header-gd">
                     <b>오늘의 문제</b>

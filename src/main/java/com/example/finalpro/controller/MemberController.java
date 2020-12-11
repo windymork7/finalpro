@@ -1,8 +1,6 @@
 package com.example.finalpro.controller;
 
-import com.example.finalpro.service.member.CommonMemberJoinService;
-import com.example.finalpro.service.member.CommonMemberLoginService;
-import com.example.finalpro.service.member.CommonMemberValiService;
+import com.example.finalpro.service.member.*;
 import com.example.finalpro.vo.CommonMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +24,12 @@ public class MemberController {
     @Autowired
     CommonMemberValiService commonMemberValiService;
 
+    @Autowired
+    CommonMemberEmailFindSerivce commonMemberEmailFindSerivce;
+
+    @Autowired
+    CommonMemberPwFindService commonMemberPwFindService;
+
     // 이메일 찾기 첫번째
     @RequestMapping("/emailSearchFirst.me")
     public String emailSearchFirst(Model model){
@@ -34,14 +38,6 @@ public class MemberController {
         return "template";
     }
 
-    // 이메일 찾기 두번째
-    @RequestMapping("/emailSearchSecond.me")
-    public String emailSearchSecond(Model model){
-
-
-        model.addAttribute("main", "member/email_search_next");
-        return "template";
-    }
 
     // 패스워드 찾기 첫번째
     @RequestMapping("/passSearchFirst.me")
@@ -53,9 +49,22 @@ public class MemberController {
 
     // 패스워드 찾기 두번째
     @RequestMapping("/passSearchSecond.me")
-    public String passSearchSecond(Model model){
+    public String passSearchSecond(@RequestParam String email,
+                                   @RequestParam String tel,Model model){
 
+        model.addAttribute("email", email);
+        model.addAttribute("tel", tel);
         model.addAttribute("main", "member/password_search_next");
+        return "template";
+    }
+
+    // 패스워드 찾기 변경하기
+    @RequestMapping("/passSearchUpdate.me")
+    public String passSearchUpdate(CommonMemberVO commonMemberVO, Model model){
+
+        commonMemberPwFindService.commonMemberPwFind(commonMemberVO);
+
+        model.addAttribute("main", "member/login");
         return "template";
     }
 
@@ -142,15 +151,15 @@ public class MemberController {
     public String logout(HttpSession session, Model model){
 
         session.invalidate();
-        model.addAttribute("main", "dsqMain");
+        model.addAttribute("main", "mainForm");
         return "template";
     }
-    // 제제된 회원 alert
-    @RequestMapping("/loginFail.me")
-    public String loginFail(Model model){
-        model.addAttribute("main","member/loginFailPopup");
-        return "template";
-    }
+//    // 제제된 회원 alert
+//    @RequestMapping("/loginFail.me")
+//    public String loginFail(Model model){
+//        model.addAttribute("main","member/loginFailPopup");
+//        return "template";
+//    }
 
 
     // 회원가입 중복 체크
@@ -158,21 +167,28 @@ public class MemberController {
     @RequestMapping("/memberVali.me")
     public int memberVali(@RequestParam(required = false) String mem_email,
                         @RequestParam(required = false) String mem_nick,
+                        @RequestParam(required = false) String mem_tel,
                         @RequestParam int state){
 
         System.out.println("email : " + mem_email);
         System.out.println("nick : " + mem_nick);
         System.out.println("state : " + state);
 
-        int check = commonMemberValiService.memberVali(mem_email, mem_nick, state);
+        int check = commonMemberValiService.memberVali(mem_email, mem_nick, mem_tel, state);
 
 
         return check;
     }
 
+    // 회원 이메일 찾기
+    @RequestMapping("/emailSearchSecond.me")
+    public String emailSearchSecond(@RequestParam String tel, Model model){
 
+        String email = commonMemberEmailFindSerivce.emailFind(tel);
 
-
-
+        model.addAttribute("email", email);
+        model.addAttribute("main", "member/email_search_next");
+        return "template";
+    }
 
 }

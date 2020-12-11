@@ -11,6 +11,12 @@ public interface BusinessDAO {
     public String businessLoginProcess(String businessEmail);
     // 사업자 정보 조회
     public BusinessMemberVO businessMemberSelect(String businessEmail);
+    // 사업자 이메일 체크
+    public int businessEmailVali(String biz_email);
+    // 사업자 등록번호 체크
+    public int businessNumVali(String biz_number);
+    // 사업자 전화번호 체크
+    public int businessTelVali(String biz_tel);
     
 
 }

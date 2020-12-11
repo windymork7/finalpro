@@ -52,7 +52,7 @@
 				<fieldset>
 				<!-- 해당 email 데이터값 뿌리기 -->
 					<div class="fonts">
-						고객님의 계정은 <span class="text-primary">sl@dsq.com</span> 입니다.
+						고객님의 계정은 <span class="text-primary">${email}</span> 입니다.
 					</div>
 					<br> 
 					
