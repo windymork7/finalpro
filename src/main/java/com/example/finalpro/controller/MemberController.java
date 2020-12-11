@@ -2,12 +2,14 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.member.CommonMemberJoinService;
 import com.example.finalpro.service.member.CommonMemberLoginService;
+import com.example.finalpro.service.member.CommonMemberValiService;
 import com.example.finalpro.vo.CommonMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,43 @@ public class MemberController {
     @Autowired
     CommonMemberLoginService commonMemberLoginService;
 
+    @Autowired
+    CommonMemberValiService commonMemberValiService;
+
+    // 이메일 찾기 첫번째
+    @RequestMapping("/emailSearchFirst.me")
+    public String emailSearchFirst(Model model){
+
+        model.addAttribute("main","member/email_search");
+        return "template";
+    }
+
+    // 이메일 찾기 두번째
+    @RequestMapping("/emailSearchSecond.me")
+    public String emailSearchSecond(Model model){
+
+
+        model.addAttribute("main", "member/email_search_next");
+        return "template";
+    }
+
+    // 패스워드 찾기 첫번째
+    @RequestMapping("/passSearchFirst.me")
+    public String passSearchFirst(Model model){
+
+        model.addAttribute("main", "member/password_search");
+        return "template";
+    }
+
+    // 패스워드 찾기 두번째
+    @RequestMapping("/passSearchSecond.me")
+    public String passSearchSecond(Model model){
+
+        model.addAttribute("main", "member/password_search_next");
+        return "template";
+    }
+
+
     // 일반회원 로그인 페이지로 이동
     @RequestMapping("/loginForm.me")
     public String loginForm(Model model){
@@ -30,12 +69,13 @@ public class MemberController {
     }
 
     // 일반회원 로그인 프로세스
+    @ResponseBody
     @RequestMapping("/loginProcess.me")
     public String loginProcess(HttpServletRequest request, HttpSession session, Model model){
 
         String page = commonMemberLoginService.commonMemberLogin(request, session);
 
-        return "redirect:"+page;
+        return page;
     }
 
     // 로그인 길 나누기
@@ -111,7 +151,24 @@ public class MemberController {
         model.addAttribute("main","member/loginFailPopup");
         return "template";
     }
-    // 회원 제재
+
+
+    // 회원가입 중복 체크
+    @ResponseBody
+    @RequestMapping("/memberVali.me")
+    public int memberVali(@RequestParam(required = false) String mem_email,
+                        @RequestParam(required = false) String mem_nick,
+                        @RequestParam int state){
+
+        System.out.println("email : " + mem_email);
+        System.out.println("nick : " + mem_nick);
+        System.out.println("state : " + state);
+
+        int check = commonMemberValiService.memberVali(mem_email, mem_nick, state);
+
+
+        return check;
+    }
 
 
 

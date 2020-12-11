@@ -26,9 +26,9 @@ public class BusinessMemberLoginService implements BusinessMemberLoginSevice {
             BusinessMemberVO businessMemberVO = businessDAO.businessMemberSelect(request.getParameter("biz_email"));
             session.setAttribute("businessNo", businessMemberVO.getBiz_no());
             session.setAttribute("businessNick", businessMemberVO.getBiz_trademark());
-            return "/";
+            return "success";
         }
 
-        return "section";
+        return "fail";
     }
 }

@@ -11,16 +11,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>business_join</title>
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="css/bootstrap.css">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <script src="js/mapApi.js"></script>
+   <!-- 부트스트랩 -->
+   <link rel="stylesheet" href="css/bootstrap.css">
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
    crossorigin="anonymous"></script>
-<script
+   <script
    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
    crossorigin="anonymous"></script>
-<script
+   <script
    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
    crossorigin="anonymous"></script>
@@ -85,40 +87,19 @@
 
             <!-- 주소 api사용해야함! -->
             <div class="form-group">
-               <label for="biz_address"><b>회사 주소</b></label>
+               <label for="branch address"><b>회사 주소</b></label>
                <div class="form-group">
                   <div class="input-group mb-3">
-                     <input type="text" class="form-control" id="biz_address" name="biz_address">
+                     <input type="text" class="form-control" id="branch address" name="biz_address">
                      <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary"
-                           data-toggle="modal" data-target="#exampleModal2">
-                           <span class="glyphicon glyphicon-search" aria-hidden="true">
+                        <button type="button" class="btn btn-secondary" onclick="sample4_execDaumPostcode()">
+                           <span class="glyphicon glyphicon-search" aria-hidden="true"/>
                            </button>
                      </div>
                   </div>
                </div>
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1"
-               aria-labelledby="exampleModalLabel2" aria-hidden="true">
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel2">주소찾기</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                           aria-label="Close">
-                           <span aria-hidden="true">&times;</span>
-                        </button>
-                     </div>
-                     <div class="modal-body">주소 api사용해야함!</div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                           data-dismiss="modal">닫기</button>
-                     </div>
-                  </div>
-               </div>
-            </div>
 
             <div class="form-group">
                <input type="text" class="form-control" id="biz_detail_address"
@@ -174,4 +155,15 @@
       </form>
    </div>
 </body>
+<script>
+   // function vali(){
+   //    var re = /^[a-zA-Z0-9]{4,12}$/;	// 아이디 패스워드 정규식
+   //    var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;	// 이메일 정규식
+   //
+   // }
+   //
+   // function idVali(){
+   //    if ()
+   // }
+</script>
 </html>

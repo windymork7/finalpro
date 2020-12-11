@@ -45,4 +45,18 @@
         SET MEM_EXP = MEM_EXP + #{param2}
         WHERE MEM_NO = #{param1}
     </update>
+
+    <!-- 회원 이메일 중복 체크 -->
+    <select id="emailVali" resultType="Integer">
+        SELECT COUNT(*)
+        FROM MEM
+        WHERE MEM_EMAIL = #{param1}
+    </select>
+
+    <!-- 회원 닉네임 중복 체크 -->
+    <select id="nickVali" resultType="Integer">
+        SELECT COUNT(*)
+        FROM MEM
+        WHERE MEM_NICK = #{param1}
+    </select>
 </mapper>
