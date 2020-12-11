@@ -85,6 +85,9 @@
                      <div class="input-group mb-3">
                         <input type="text" class="form-control" id="tel" name="mem_tel">
                         <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" onclick="telCheck()">중복
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
                            <button type="button" class="btn btn-secondary"
                               data-toggle="modal" data-target="#exampleModal3" onclick="random()">인증</button>
                         </div>
@@ -122,6 +125,10 @@
                <div class="text-center">
                   <button type="button" onclick="vali()" class="btn btn-primary btn-lg">회원가입</button>
                </div>
+
+                <input type="hidden" id="emailInput" value="1">
+                <input type="hidden" id="nickInput" value="1">
+                <input type="hidden" id="telInput" value="1">
             </fieldset>
          </form>
       </div>
@@ -140,6 +147,8 @@
         if (nickVali() == false){return false;}
         if (telVali() == false){return false;}
         if (autuVali() == false){return  false;}
+        if (inputCheck() == false){return false;}
+
 
 
         alert("회원가입이 완료 되었습니다.");
@@ -197,6 +206,12 @@
             alert("전화번호를 입력해 주세요");
             return false;
         }
+
+        if ($("#tel").val().indexOf("-") != -1){
+            for (var i=0; i< $("#tel").val().length; i++){
+                $("#tel").val($("#tel").val().replace("-", ""));
+            }
+        }
     }
 
     function  autuVali(){
@@ -204,6 +219,22 @@
             alert("인증번호를 다시 입력해 주세요");
             return false;
         }
+    }
+
+    function inputCheck(){
+        if ($("#emailInput").val()==1){
+            alert("이메일 중복 검사를 확인해 주세요.");
+            return false;
+        }
+        if ($("#nickInput").val()==1){
+            alert("닉네임 중복 검사를 확인해 주세요.");
+            return false;
+        }
+        if ($("#telInput").val()==1){
+            alert("전화번호 중복 검사를 확인해 주세요.");
+            return false;
+        }
+
     }
 
     function emailCheck(){
@@ -227,9 +258,13 @@
                 {
                     if (data == 0){
                         alert("사용 가능합니다.");
+                        $("#emailInput").val(0);
                     } else if (data != 0){
                         alert("사용 불가능 합니다.");
+                        $("#emailInput").val(1);
                     }
+
+
                 },
                 error : function(request, status, error)
                 {
@@ -261,8 +296,47 @@
                 {
                     if (data == 0){
                         alert("사용 가능합니다.");
+                        $("#nickInput").val(0);
+
                     } else if (data != 0){
                         alert("사용 불가능 합니다.");
+                        $("#nickInput").val(1);
+                    }
+                },
+                error : function(request, status, error)
+                {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+
+            });
+    }
+
+    function telCheck(){
+        var tel = $("#tel").val();
+
+        if (tel == ""){
+            alert("전화번호를 입력해 주세요");
+            return false;
+        }
+
+
+        $.ajax(
+            {
+                type : 'GET',
+                url : "/memberVali.me",
+                data : {
+                    "mem_tel" : tel,
+                    "state" : 3,
+                },
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success : function(data)
+                {
+                    if (data == 0){
+                        alert("사용 가능합니다.");
+                        $("#telInput").val(0);
+                    } else if (data != 0){
+                        alert("사용 불가능 합니다.");
+                        $("#telInput").val(1);
                     }
                 },
                 error : function(request, status, error)

@@ -59,4 +59,32 @@
         FROM MEM
         WHERE MEM_NICK = #{param1}
     </select>
+
+    <!-- 회원 닉네임 찾기 -->
+    <select id="emailFind" resultType="String">
+        SELECT MEM_EMAIL
+        FROM MEM
+        WHERE MEM_TEL = #{param1}
+    </select>
+
+    <!-- 회원 등록 확인 -->
+    <select id="accountTelFind" resultType="Integer">
+        SELECT COUNT(*)
+        FROM MEM
+        WHERE MEM_TEL = #{param1}
+    </select>
+
+    <!-- 비밀번호 회원등록 확인 -->
+    <select id="accoutPwFind" resultType="Integer">
+        SELECT COUNT(*)
+        FROM MEM
+        WHERE MEM_EMAIL = #{param1} AND MEM_TEL = #{param2}
+    </select>
+
+    <!-- 회원 비밀번호 찾기 및 변경-->
+    <update id="passFind" parameterType="com.example.finalpro.vo.CommonMemberVO">
+        UPDATE MEM
+        SET MEM_PW = #{mem_pw}
+        WHERE MEM_EMAIL = #{mem_email} AND MEM_TEL = #{mem_tel}
+    </update>
 </mapper>

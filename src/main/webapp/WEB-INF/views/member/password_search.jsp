@@ -52,7 +52,7 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="tel">
 									<div class="input-group-append">
-										<button type="button" class="btn btn-secondary"
+										<button type="button" class="btn btn-secondary" onclick="random()"
 											data-toggle="modal" data-target="#exampleModal">인증</button>
 									</div>
 								</div>
@@ -71,7 +71,8 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="modal-body">여기에 랜덤값 넣으면 됩니당.</div>
+									<div id="random" class="modal-body"></div>
+									<input type="hidden" id="hiddenRandom">
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">닫기</button>
@@ -87,11 +88,95 @@
 						<br>
 						<!-- password_search_next.jsp 파일과 연결하기 -->
 						<div class="text-center">
-							<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='/passSearchSecond.me'">다음</button>
+							<button type="button" class="btn btn-primary btn-lg btn-block" onclick="next()">다음</button>
 						</div>
 				</fieldset>
 			</form>
 		</div>
 	</div>
 </body>
+<script>
+	var random1 = Math.floor(Math.random()*9999);
+
+	function next(){
+
+		var email = $("#email").val();
+		var tel = $("#tel").val();
+
+		if (emailVali() == false){return false;}
+		if (telVali() == false){return false;}
+		if (autuVali() == false){return false;}
+		if (emailCheck() == false){return false;}
+
+		location.href='/passSearchSecond.me?tel='+tel+"&email="+email;
+	}
+
+	function emailVali(){
+		if ($("#email").val() == ""){
+			alert("이메일을 입력해 주세요");
+			return false;
+		}
+	}
+
+	function telVali(){
+		if ($("#tel").val() == ""){
+			alert("전화번호를 입력해 주세요");
+			return false;
+		}
+
+		if ($("#tel").val().indexOf("-") != -1){
+			for (var i=0; i< $("#tel").val().length; i++){
+				$("#tel").val($("#tel").val().replace("-", ""));
+			}
+		}
+	}
+
+	function  autuVali(){
+		if ($("#tel_check").val() != $("#hiddenRandom").val()){
+			alert("인증번호를 다시 입력해 주세요");
+			return false;
+		}
+	}
+
+	function random(){
+		$("#random").html(random1);
+		$("#hiddenRandom").val(random1);
+	}
+
+	function emailCheck(){
+		var email = $("#email").val();
+		var tel = $("#tel").val();
+		var rtn = true;
+
+
+		$.ajax(
+				{
+					type : 'GET',
+					async: false,
+					url : "/memberVali.me",
+					data : {
+						"mem_email" : email,
+						"mem_tel" : tel,
+						"state" : 4,
+					},
+					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+					success : function(data)
+					{
+						if (data == 0){
+							alert("가입된 계정이 없습니다.");
+							rtn = false;
+						}
+					},
+					error : function(request, status, error)
+					{
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+
+				});
+
+		return rtn;
+	}
+
+
+</script>
 </html>

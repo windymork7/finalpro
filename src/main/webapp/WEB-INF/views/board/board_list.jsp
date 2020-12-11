@@ -454,7 +454,7 @@
 </div>
 
 <div class="col-sm-3">
-		<div class="card border-secondary mb-3" style="max-width: 20rem;" id="guideline">
+		<div class="card border-secondary mb-3" id="guideline">
                <div class="card-header-gd"><b>필독사항</b></div>
                <div class="card-body">
 				<p>1. 질문은 <b>구체</b>적으로 해주세요!</p>
@@ -462,7 +462,7 @@
 				<p>3. 질문 내용에 개인정보(실명, 주민번호, 연락처)가 포함되지 않게 작성해주세요!</p>
                </div>
 		</div>
-	<div style="max-width: 20rem;">
+	<div>
 		<c:if test="${not empty sessionScope.userNo}">
 			<a href="#"><button type="button" class="btn btn-secondary btn-block" onclick="location.href='/qBoardInsertForm.bo?subCa=${requestScope.subCa}'">질문하기</button></a>
 		</c:if>

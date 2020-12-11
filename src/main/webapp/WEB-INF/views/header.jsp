@@ -15,15 +15,31 @@
     <!-- 부트스트랩 -->
 <%--  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
 <%--  <link  rel="stylesheet" href="css/bootstrap.css">--%>
-<%--   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--%>
+<%--&lt;%&ndash;   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>&ndash;%&gt;--%>
 <%--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--%>
 <%--   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--%>
+<style>
+  .custom-popover li {
+    border: none!important;
+    text-align: center;
+  }
+
+  .custom-popover li:nth-child(2) {
+    border-top: 1px solid #ccc!important;
+  }
+
+  .custom-popover li:last-child {
+    border-top: 1px solid #ccc!important;
+  }
+
+
+</style>
 </head>
 <body>
    <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <a class="navbar-brand" href="/">
-           <img src="img/D'sQ.png" width="70">
+           <img src="img/d'sQ_main.png" width="70" height="50" style="padding-bottom:7px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
            data-target="#navbarColor02" aria-controls="navbarColor02" 
@@ -105,13 +121,35 @@
               </div>
             </li>
           </ul>
-          
+
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="내용을 검색하세요">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">검색
-               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <input class="form-control mr-sm-2" style="padding-right: 0.6em; padding-left: 0.6em; border-radius: 10rem;" type="text" placeholder="검색어를 입력하세요.">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
-          </form>&nbsp;&nbsp;
+          </form>
+
+
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+          <button type="button" class="btn btn-primary popover-title"
+                  data-container="body" data-toggle="popover" data-placement="bottom"
+                  title="" style="border-color:#fff">
+            <i class="fa fa-user-circle fa-2x" aria-hidden="true"
+               style="color: #fff;"></i>
+          </button>
+
+          <!-- loaded popover content -->
+          <div id="popover-content" style="display: none">
+            <ul class="list-group custom-popover">
+              <li class="list-group-item"><a href="#"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true"> 아이디</i></a></li>
+              <li class="list-group-item"><a href="#" class="a-header">계정 설정</a></li>
+              <li class="list-group-item"><a href="#" class="a-header">로그아웃</a></li>
+            </ul>
+          </div>
+
 
           <c:choose>
             <c:when test="${not empty sessionScope.userNick || not empty sessionScope.businessNick}">
@@ -142,4 +180,14 @@
    <br>
 <!-- header -->   
 </body>
+<script>
+  $(document).ready(function() {
+    $('[data-toggle="popover"]').popover({
+      html: true,
+      content: function() {
+        return $('#popover-content').html();
+      }
+    });
+  });
+</script>
 </html>

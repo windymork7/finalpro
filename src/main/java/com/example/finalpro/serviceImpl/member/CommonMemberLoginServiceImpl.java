@@ -56,7 +56,7 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
                         System.out.println("날짜트루");
                         return "success";
                     }
-                    return "fail";
+                    return "black";
                 } catch (Exception e) {
                     System.out.println(e);
                 }

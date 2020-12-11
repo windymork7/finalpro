@@ -224,7 +224,7 @@ small {
 
          <div class="col-sm-3">
             
-            <div class="card border-secondary mb-3" style="max-width: 20rem;"
+            <div class="card border-secondary mb-3"
                id="guideline">
                <div class="card-header-gd">
                   <b>유의사항</b>
@@ -235,7 +235,7 @@ small {
                   <p>3. 등록순으로 노출됩니다.</p>
                </div>
             </div>
-            <div style="max-width: 20rem;">
+            <div>
                 <c:if test="${not empty sessionScope.businessNo}">
                    <button type="button" class="btn btn-secondary btn-block" onclick="location.href='/contestInsert.co'">등록하기</button>
                 </c:if>

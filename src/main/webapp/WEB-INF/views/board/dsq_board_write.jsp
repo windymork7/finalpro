@@ -28,6 +28,14 @@
    crossorigin="anonymous"></script>
 
 <style>
+.card-header-gd {
+   padding: 0.75rem 1.25rem;
+   margin-bottom: 0;
+   background-color: #f3969a;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+   color: #fff;
+}
+
 #c_left {
    float: left;
 }
@@ -130,7 +138,7 @@
             <br><br><br>
             <div id="guideline" class="card border-secondary mb-3" style="max-width: 20rem;">
 
-               <div class="card-header"><b>필독사항</b></div>
+               <div class="card-header-gd"><b>필독사항</b></div>
                <div class="card-body">
             <p>1. 질문은 <b>구체</b>적으로 해주세요!</p>
             <p>2. 토론을 유발할 가능성이 높은 질문은 피하세요!</p>

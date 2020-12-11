@@ -2,22 +2,22 @@ package com.example.finalpro.vo;
 
 public class BusinessMemberVO {
 
-    private int biz_no;
+    private String biz_no;
     private String biz_pw;
     private String biz_trademark;
     private String biz_name;
     private String biz_tel;
     private String biz_email;
     private String biz_address;
+    private String biz_detail_address;
 
-    public int getBiz_no() {
+    public String getBiz_no() {
         return biz_no;
     }
 
-    public void setBiz_no(int biz_no) {
+    public void setBiz_no(String biz_no) {
         this.biz_no = biz_no;
     }
-
 
     public String getBiz_pw() {
         return biz_pw;
@@ -68,15 +68,25 @@ public class BusinessMemberVO {
         this.biz_address = biz_address;
     }
 
+    public String getBiz_detail_address() {
+        return biz_detail_address;
+    }
+
+    public void setBiz_detail_address(String biz_detail_address) {
+        this.biz_detail_address = biz_detail_address;
+    }
+
     @Override
     public String toString() {
         return "BusinessMemberVO{" +
                 "biz_no=" + biz_no +
+                ", biz_pw='" + biz_pw + '\'' +
                 ", biz_trademark='" + biz_trademark + '\'' +
                 ", biz_name='" + biz_name + '\'' +
                 ", biz_tel='" + biz_tel + '\'' +
                 ", biz_email='" + biz_email + '\'' +
                 ", biz_address='" + biz_address + '\'' +
+                ", biz_detail_address='" + biz_detail_address + '\'' +
                 '}';
     }
 }

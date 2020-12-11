@@ -12,7 +12,7 @@ public class CommonMemberValiServiceImpl implements CommonMemberValiService {
     MemberDAO memberDAO;
 
     @Override
-    public int memberVali(String mem_email, String mem_nick, int state) {
+    public int memberVali(String mem_email, String mem_nick, String mem_tel, int state) {
 
         if (state == 1){
             int emailCheck = memberDAO.emailVali(mem_email);
@@ -20,6 +20,12 @@ public class CommonMemberValiServiceImpl implements CommonMemberValiService {
         } else if (state == 2){
             int nickCheck = memberDAO.nickVali(mem_nick);
             return nickCheck;
+        } else if (state == 3){
+            int accountCheck = memberDAO.accountTelFind(mem_tel);
+            return accountCheck;
+        } else if (state == 4){
+            int accountCheck = memberDAO.accoutPwFind(mem_email, mem_tel);
+            return accountCheck;
         }
 
         return 0;
