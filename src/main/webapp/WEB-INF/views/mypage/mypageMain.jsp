@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +77,7 @@
             text-align: center;
             white-space: nowrap;
             vertical-align: baseline;
-            border-radius: 0.4rem;
+            border-radius: 1rem;
             transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
             border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
@@ -111,12 +111,16 @@
                     <h5 class="card-title">Special title treatment</h5>
                     <h6 class="card-subtitle text-muted">Support card subtitle</h6>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200"
+                     aria-label="Placeholder: Image cap" focusable="false" role="img"
+                     preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+                     style="font-size:1.125rem;text-anchor:middle">
                     <rect width="100%" height="100%" fill="#868e96"></rect>
                     <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
                 </svg>
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Cras justo odio</li>
@@ -135,7 +139,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Card title</h4>
                     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                     <a href="#" class="card-link">Card link</a>
                     <a href="#" class="card-link">Another link</a>
                 </div>
@@ -144,6 +149,16 @@
 
         <div class="col-sm-7">
             <ul class="nav nav-tabs">
+                <li class="nav-item ${active2}" style="width: 33.333333%;"><a class="nav-link active"
+                                                                              data-toggle="tab" href="#my_Q"><b>
+                    나의 질문</b></a></li>
+                <li class="nav-item ${active3}" style="width: 33.333333%;"><a class="nav-link" data-toggle="tab"
+                                                                              href="#my_A"><b>
+                    나의 답변</b></a></li>
+                <li class="nav-item ${active1}" style="width: 33.333333%;"><a class="nav-link" data-toggle="tab"
+                                                                              href="#my_S"><b>
+                    스크랩</b></a></li>
+                <%--
                 <li class="nav-item text-center" style="width: 33.333333%;"><a class="nav-link active"
                                                     data-toggle="tab" href="#my_Q"><b>
                     나의 질문</b></a></li>
@@ -153,35 +168,37 @@
                 <li class="nav-item text-center" style="width: 33.333333%;"><a class="nav-link" data-toggle="tab"
                                                     href="#my_S"><b>
                     스크랩</b></a></li>
+                --%>
             </ul>
             <br>
 
             <div id="myTabContent" class="tab-content">
 
-                <div class="tab-pane fade active show" id="my_Q">
+                <div class="tab-pane fade ${show2}" id="my_Q">
                     <!-- for each문 여기 넣으면 됩니다 -->
                     <c:forEach var="qList" items="${questionList}">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="card-title">
-                                    <a href="qboardContent.bo?qboardNum=${qList.q_no}&subCa=${qList.sub_ca_no}"> <i class="fa fa-quora" aria-hidden="true"></i>
-                                        ${qList.q_title}
-                                    </a>
-                                </h4>
-                                <small> <span class="glyphicon glyphicon-thumbs-up"
-                                              aria-hidden="true"></span>${qList.q_up}
-                                </small>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h4 class="card-title">
+                                        <a href="qboardContent.bo?qboardNum=${qList.q_no}&subCa=${qList.sub_ca_no}"> <i
+                                                class="fa fa-quora" aria-hidden="true"></i>
+                                                ${qList.q_title}
+                                        </a>
+                                    </h4>
+                                    <small> <span class="glyphicon glyphicon-thumbs-up"
+                                                  aria-hidden="true"></span>${qList.q_up}
+                                    </small>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted text-right">${qList.q_date}</h6>
+                                <p class="card-text">
+                                        ${qList.sub_ca_name}
+                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                        ${qList.book_ca_name}
+                                </p>
                             </div>
-                            <h6 class="card-subtitle mb-2 text-muted text-right">${qList.q_date}</h6>
-                            <p class="card-text">
-                                ${qList.sub_ca_name}
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                ${qList.book_ca_name}
-                            </p>
                         </div>
-                    </div>
-                    <br>
+                        <br>
                     </c:forEach>
 
                     <div>
@@ -189,87 +206,111 @@
                         <br>
                         <ul
                                 class="pagination pagination-lg justify-content-center align-items-center">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                            </li>
+                            <c:if test="${questionPaging.startPage != 1}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage2=${questionPaging.startPage - 1 }&cntPerPage2=${questionPaging.cntPerPage}&state=2">&laquo;</a>
+                                </li>
+                            </c:if>
+                            <c:forEach begin="${questionPaging.startPage}" end="${questionPaging.endPage}" var="p2">
+                                <c:choose>
+                                    <c:when test="${p2 == questionPaging.nowPage}">
+                                        <li class="page-item active"><a class="page-link">${p2}</a></li>
+                                    </c:when>
+                                    <c:when test="${p2 != questionPaging.nowPage}">
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="mypageMain.my?nowPage2=${p2}&cntPerPage2=${questionPaging.cntPerPage}&state=2">${p2}</a>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${questionPaging.endPage != questionPaging.lastPage}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage2=${questionPaging.endPage+1 }&cntPerPage2=${questionPaging.cntPerPage}&state=2">&raquo;</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
 
                 </div>
 
-                <div class="tab-pane fade" id="my_A">
+                <div class="tab-pane fade" ${show3} id="my_A">
                     <c:forEach var="rList" items="${replyList}">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="card-title">
-                                    <a href="#"> <i class="fa fa-quora" aria-hidden="true"></i>
-                                        ${rList.q_title}
-                                    </a>
-                                </h4>
-                                <small> <span class="glyphicon glyphicon-thumbs-up"
-                                              aria-hidden="true"></span>${rList.q_up}
-                                </small>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h4 class="card-title">
+                                        <a href="qboardContent.bo?qboardNum=${rList.q_no}&subCa=${rList.sub_ca_no}"> <i class="fa fa-quora" aria-hidden="true"></i>
+                                                ${rList.q_title}
+                                        </a>
+                                    </h4>
+                                    <small> <span class="glyphicon glyphicon-thumbs-up"
+                                                  aria-hidden="true"></span>${rList.q_up}
+                                    </small>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted text-right">${rList.q_date}</h6>
+                                <p class="card-text">
+                                        ${rList.sub_ca_name}
+                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                        ${rList.book_ca_name}
+                                </p>
                             </div>
-                            <h6 class="card-subtitle mb-2 text-muted text-right">${rList.q_date}</h6>
-                            <p class="card-text">
-                                ${rList.sub_ca_name}
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                ${rList.book_ca_name}
-                            </p>
                         </div>
-                    </div>
-                    <br>
+                        <br>
                     </c:forEach>
                     <div>
                         <br>
                         <br>
                         <ul
                                 class="pagination pagination-lg justify-content-center align-items-center">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                            </li>
+                            <c:if test="${replyPaging.startPage != 1}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage3=${replyPaging.startPage - 1 }&cntPerPage3=${replyPaging.cntPerPage}&state=3">&laquo;</a>
+                                </li>
+                            </c:if>
+                            <c:forEach begin="${replyPaging.startPage }" end="${replyPaging.endPage }" var="p3">
+                                <c:choose>
+                                    <c:when test="${p3 == replyPaging.nowPage}">
+                                        <li class="page-item active"><a class="page-link">${p3}</a></li>
+                                    </c:when>
+                                    <c:when test="${p3 != replyPaging.nowPage}">
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="mypageMain.my?nowPage3=${p3}&cntPerPage3=${replyPaging.cntPerPage}&state=3">${p3}</a>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${replyPaging.endPage != replyPaging.lastPage}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage3=${replyPaging.endPage+1 }&cntPerPage3=${replyPaging.cntPerPage}&state=3">&raquo;</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="my_S">
+                <div class="tab-pane fade ${show1}" id="my_S">
                     <c:forEach var="sList" items="${scrapList}">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="card-title">
-                                    <a href="#"> <i class="fa fa-quora" aria-hidden="true"></i>
-                                        ${sList.q_title}
-                                    </a>
-                                </h4>
-                                <small> <span class="glyphicon glyphicon-thumbs-up"
-                                              aria-hidden="true"></span>${sList.q_up}
-                                </small>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h4 class="card-title">
+                                        <a href="#"> <i class="fa fa-quora" aria-hidden="true"></i>
+                                                ${sList.q_title}
+                                        </a>
+                                    </h4>
+                                    <small> <span class="glyphicon glyphicon-thumbs-up"
+                                                  aria-hidden="true"></span>${sList.q_up}
+                                    </small>
+                                </div>
+                                <h6 class="card-subtitle mb-2 text-muted text-right">${sList.my_scrap_date}</h6>
+                                <p class="card-text">
+                                        ${sList.sub_ca_name}
+                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                        ${sList.book_ca_name}
+                                </p>
                             </div>
-                            <h6 class="card-subtitle mb-2 text-muted text-right">${sList.my_scrap_date}</h6>
-                            <p class="card-text">
-                                ${sList.sub_ca_name}
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                ${sList.book_ca_name}
-                            </p>
                         </div>
-                    </div>
-                    <br>
+                        <br>
                     </c:forEach>
 
                     <div>
@@ -277,16 +318,28 @@
                         <br>
                         <ul
                                 class="pagination pagination-lg justify-content-center align-items-center">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                            </li>
+                            <c:if test="${scrapPaging.startPage !=1 }">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage1=${scrapPaging.startPage -1}&cntPerPage1=${scrapPaging.cntPerPage}&state=1">&laquo;</a>
+                                </li>
+                            </c:if>
+                            <c:forEach begin="${scrapPaging.startPage}" end="${scrapPaging.endPage}" var="p1">
+                                <c:choose>
+                                    <c:when test="${p1 == scrapPaging.nowPage}">
+                                        <li class="page-item active"><a class="page-link">${p1}</a></li>
+                                    </c:when>
+                                    <c:when test="${p1 != scrapPaging.nowPage}">
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="mypageMain.my?nowPage1=${p1}&cntPerPage1=${scrapPaging.cntPerPage}&state=1">${p1}</a>
+                                        </li>
+                                    </c:when>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${scrapPaging.endPage != scrapPaging.lastPage}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="mypageMain.my?nowPage1=${scrapPaging.endPage+1 }&cntPerPage1=${scrapPaging.cntPerPage}&state=1">&raquo;</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -300,81 +353,77 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="card-title text-center">
-                                <span class="badge badge-danger">${mem.mem_exp}xp</span>
-                                <div class="text-danger">
-                                    <i class="fa fa-thermometer-full fa-4x" aria-hidden="true"></i>
-                                </div>
-                            </div>
 
-                          <c:choose>
-                          <c:when test = "${mem.grade_no eq 1}">
-                          <span class="badge badge-light">${mem.mem_exp}xp</span>
-                          <div class="text-muted">
-                             <i class="fa fa-thermometer-empty fa-4x" aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						  
-						  <c:when test = "${mem.grade_no eq 2}">
-                          <span class="badge badge-warning">${mem.mem_exp}xp</span>
-                          <div class="text-warning">
-                             <i class="fa fa-thermometer-quarter fa-4x" aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no eq 3}">
-                          <span class="badge badge-primary">${mem.mem_exp}xp</span>
-                          <div class="text-primary">
-                             <i class="fa fa-thermometer-half fa-4x" aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no eq 4}">
-                          <span class="badge badge-secondary">${mem.mem_exp}xp</span>
-                          <div class="text-secondary">
-                             <i class="fa fa-thermometer-three-quarters fa-4x"
-                                aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						  <c:when test = "${mem.grade_no >= 5}">
-                          <span class="badge badge-danger">${mem.mem_exp}xp</span>
-                          <div class="text-danger">
-                             <i class="fa fa-thermometer-full fa-4x" aria-hidden="true"></i>
-                          </div>
-						  </c:when>
-						</c:choose>
+                                <c:choose>
+                                    <c:when test="${mem.grade_no eq 1}">
+                                        <span class="badge badge-light">${mem.mem_exp}xp</span>
+                                        <div class="text-muted">
+                                            <i class="fa fa-thermometer-empty fa-4x" aria-hidden="true"></i>
+                                        </div>
+                                    </c:when>
+
+                                    <c:when test="${mem.grade_no eq 2}">
+                                        <span class="badge badge-warning">${mem.mem_exp}xp</span>
+                                        <div class="text-warning">
+                                            <i class="fa fa-thermometer-quarter fa-4x" aria-hidden="true"></i>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${mem.grade_no eq 3}">
+                                        <span class="badge badge-primary">${mem.mem_exp}xp</span>
+                                        <div class="text-primary">
+                                            <i class="fa fa-thermometer-half fa-4x" aria-hidden="true"></i>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${mem.grade_no eq 4}">
+                                        <span class="badge badge-secondary">${mem.mem_exp}xp</span>
+                                        <div class="text-secondary">
+                                            <i class="fa fa-thermometer-three-quarters fa-4x"
+                                               aria-hidden="true"></i>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${mem.grade_no >= 5}">
+                                        <span class="badge badge-danger">${mem.mem_exp}xp</span>
+                                        <div class="text-danger">
+                                            <i class="fa fa-thermometer-full fa-4x" aria-hidden="true"></i>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
+                            </div>
                         </div>
                         <div class="col-sm-8">
-                            <p>
-                            </p>
+
                             <!-- 여기 닉네임도 등급 색깔 참고 -->
-                          <c:choose>
-                            <c:when test = "${mem.grade_no eq 1}">
-                              <h4 class="card-title"><span class="text-muted">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 2}">
-                              <h4 class="card-title"><span class="text-warning">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 3}">
-                              <h4 class="card-title"><span class="text-primary">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no eq 4}">
-                              <h4 class="card-title"><span class="text-secondary">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                            
-                            <c:when test = "${mem.grade_no >= 5}">
-                              <h4 class="card-title"><span class="text-danger">${mem.mem_nick}</span>님</h4>
-                              <h4 class="card-title">안녕하세요!</h4>
-                            </c:when>
-                          </c:choose>
+                            <c:choose>
+                                <c:when test="${mem.grade_no eq 1}">
+                                    <h4 class="card-title"><span class="text-muted">${mem.mem_nick}</span>님</h4>
+                                    <h4 class="card-title">안녕하세요!</h4>
+                                </c:when>
+
+                                <c:when test="${mem.grade_no eq 2}">
+                                    <h4 class="card-title"><span class="text-warning">${mem.mem_nick}</span>님</h4>
+                                    <h4 class="card-title">안녕하세요!</h4>
+                                </c:when>
+
+                                <c:when test="${mem.grade_no eq 3}">
+                                    <h4 class="card-title"><span class="text-primary">${mem.mem_nick}</span>님</h4>
+                                    <h4 class="card-title">안녕하세요!</h4>
+                                </c:when>
+
+                                <c:when test="${mem.grade_no eq 4}">
+                                    <h4 class="card-title"><span class="text-secondary">${mem.mem_nick}</span>님</h4>
+                                    <h4 class="card-title">안녕하세요!</h4>
+                                </c:when>
+
+                                <c:when test="${mem.grade_no >= 5}">
+                                    <h4 class="card-title"><span class="text-danger">${mem.mem_nick}</span>님</h4>
+                                    <h4 class="card-title">안녕하세요!</h4>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
-                <div class="text-center" data-toggle="tooltip" data-placement="bottom" title="회원정보 수정" style="background-color:#fff"><a href="/mypageUpdateForm.my">
+                <div class="text-center" data-toggle="tooltip" data-placement="bottom" title="회원정보 수정"
+                     style="background-color:#fff"><a href="/mypageUpdateForm.my">
                     <img src="img/Profile.PNG" class="rounded-circle" width="80%" height="200"></a>
                 </div>
                 <div class="card-body" style="background-color:#fff">

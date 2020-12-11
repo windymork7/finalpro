@@ -13,6 +13,15 @@ public class MyscrapVO {
     private String sub_ca_name;
     private int q_up;
     private String q_date;
+    private int rn;
+
+    public int getRn() {
+        return rn;
+    }
+
+    public void setRn(int rn) {
+        this.rn = rn;
+    }
 
     public String getQ_date() {
         return q_date;
@@ -113,6 +122,10 @@ public class MyscrapVO {
                 ", q_title='" + q_title + '\'' +
                 ", rownum=" + rownum +
                 ", book_ca_name='" + book_ca_name + '\'' +
+                ", sub_ca_name='" + sub_ca_name + '\'' +
+                ", q_up=" + q_up +
+                ", q_date='" + q_date + '\'' +
+                ", rn=" + rn +
                 '}';
     }
 }
