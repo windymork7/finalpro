@@ -29,5 +29,6 @@
 	<button type="button" onclick="location.href='/qRptList.ad'">신고10개넘은게시물들</button>
 	<button type="button" onclick="location.href='/bookStandByList.ad'">책승인대기리스트</button>
 	<button type="button" onclick="location.href='/caManegementMain.ad'">카테고리관리</button>
+	<button type="button" onclick="location.href='/adminExpUpdateForm.ad'">관리자명성수정</button>
 </body>
 </html>

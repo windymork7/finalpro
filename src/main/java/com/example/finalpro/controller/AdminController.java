@@ -2,8 +2,12 @@ package com.example.finalpro.controller;
 
 import com.example.finalpro.service.admin.AdminBookAddActionService;
 import com.example.finalpro.service.admin.AdminBookCaListService;
+import com.example.finalpro.service.admin.AdminBookCaNameUpdateActionService;
+import com.example.finalpro.service.admin.AdminBookCaNameUpdateFormService;
 import com.example.finalpro.service.admin.AdminBookStandByListService;
 import com.example.finalpro.service.admin.AdminCaListService;
+import com.example.finalpro.service.admin.AdminExpUpdateActionService;
+import com.example.finalpro.service.admin.AdminExpUpdateFormService;
 import com.example.finalpro.service.admin.AdminMemberBlackListService;
 import com.example.finalpro.service.admin.AdminMemberRptListService;
 import com.example.finalpro.service.admin.AdminQDeleteActionService;
@@ -46,6 +50,14 @@ public class AdminController {
     AdminSubCaListService adminSubCaListService;
     @Autowired
     AdminBookCaListService adminBookCaListService;
+    @Autowired
+    AdminBookCaNameUpdateFormService adminBookCaNameUpdateFormService;
+    @Autowired
+    AdminBookCaNameUpdateActionService adminBookCaNameUpdateActionService;
+    @Autowired
+    AdminExpUpdateFormService adminExpUpdateFormService; 
+    @Autowired
+    AdminExpUpdateActionService adminExpUpdateActionService;
     //어드민 메인페이지
     @RequestMapping("/adminMain.ad")
     public String adminMain(Model model){
@@ -135,6 +147,38 @@ public class AdminController {
     	model.addAttribute("main","admin/TestBookCaList");
     	return "template";
     }
-    
-
+    //책카테고리수정폼
+    @RequestMapping("/bookCaNameUpdateForm.ad")
+    public String bookCaNameUpdateForm(Model model,@RequestParam("book_ca_no")int book_ca_no) {
+    	
+    	CategoryVO categoryVO = adminBookCaNameUpdateFormService.bookCaNameUpdateForm(book_ca_no);
+    	model.addAttribute("categoryVO",categoryVO);
+    	model.addAttribute("main","admin/TestBookCaNameUpdateForm");;
+    	
+    	return "template";
+    }
+    //책카테고리 수정액션
+    @RequestMapping("bookCaNameUpdateAction.ad")
+    public String bookCaNameUpdateAction(
+    									@RequestParam("book_ca_name")String book_ca_name,
+    									@RequestParam("book_ca_no")int book_ca_no) {
+    	adminBookCaNameUpdateActionService.bookCaNameUpdateAction(book_ca_no, book_ca_name);
+    	
+    	return "redirect:/adminMain.ad";
+    }
+    //심심해서만들어본 관리자 명성 수정폼
+    @RequestMapping("adminExpUpdateForm.ad")
+    public String adminExpUpdateForm(Model model,CommonMemberVO memVO) {
+    	
+    	memVO = adminExpUpdateFormService.adminExpUpdateForm();
+    	model.addAttribute("admin",memVO);
+    	model.addAttribute("main","admin/TestAdminExpUpdateForm");
+    	return "template";
+    }
+    //심심해서만들어본 관리자 명성 수정액션
+    @RequestMapping("adminExpUpdateAction.ad")
+    public String adminExpUpdateAction(@RequestParam("mem_exp")int mem_exp) {
+    	adminExpUpdateActionService.adminExpUpdateAction(mem_exp);
+    	return "redirect:/adminExpUpdateForm.ad";
+    }
 }

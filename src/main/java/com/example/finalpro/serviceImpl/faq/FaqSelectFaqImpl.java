@@ -17,6 +17,12 @@ public class FaqSelectFaqImpl implements FaqSelectFaqService {
 
     @Override
     public List<FaqVO> selectFaq(PagingVO vo) {
-        return faqDAO.selectFaq(vo);
+    	List<FaqVO> list = faqDAO.selectFaq(vo);
+    	
+    	for (int i=0; i<list.size();i++) {
+    		list.get(i).setFaq_date(list.get(i).getFaq_date().substring(0,11));
+    	}
+    	
+        return list;
     }
 }

@@ -19,10 +19,11 @@
 
 
 <body>
-
-    <c:forEach var="bookCa" items="${list}">
-    		${bookCa.book_ca_name}<button type="button" onclick="location.href='/bookCaNameUpdateForm.ad?book_ca_no=${bookCa.book_ca_no}'">수정</button>
-    	<br>
-    </c:forEach>
+<form action="bookCaNameUpdateAction.ad">
+	<input type="hidden" name="book_ca_no" value="${categoryVO.book_ca_no}">
+   <input type="text" name="book_ca_name" value="${categoryVO.book_ca_name}">
+   <input type="submit" value="수정">
+</form>
+   
 </body>
 </html>

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.finalpro.service.faq.FaqBoardContent;
 import com.example.finalpro.service.faq.FaqBoardList;
+import com.example.finalpro.service.faq.FaqCountFaqService;
+import com.example.finalpro.service.faq.FaqSelectFaqService;
 import com.example.finalpro.service.notice.NoticeBoardContent;
+import com.example.finalpro.service.notice.NoticeBoardCountService;
 import com.example.finalpro.service.notice.NoticeBoardDelete;
 import com.example.finalpro.service.notice.NoticeBoardInsert;
 import com.example.finalpro.service.notice.NoticeBoardList;
@@ -19,6 +22,7 @@ import com.example.finalpro.service.notice.NoticeBoardUpdateAction;
 import com.example.finalpro.service.notice.NoticeBoardUpdateForm;
 import com.example.finalpro.vo.FaqVO;
 import com.example.finalpro.vo.NoticeVO;
+import com.example.finalpro.vo.PagingVO;
 
 @Controller
 public class CustomerController {
@@ -40,12 +44,19 @@ public class CustomerController {
 	
 	@Autowired
 	NoticeBoardUpdateForm noticeBoardUpdateForm;
+	@Autowired
+	NoticeBoardCountService noticeBoardCountService;
 	
+
 	//FAQ
 	@Autowired
 	FaqBoardList faqBoardList;
 	@Autowired
 	FaqBoardContent faqBoardContent;
+	@Autowired
+	FaqCountFaqService faqCountFaqService;
+	@Autowired
+	FaqSelectFaqService faqSelectFaqService;
 	
 	//가이드라인
 	@RequestMapping("/guideLine.cu")
@@ -54,20 +65,35 @@ public class CustomerController {
 		return "template";
 	}
 	
-	//공지사항목록
-	@RequestMapping("/noticeList.cu")
-	public String noticeList(Model model) {
-		List<NoticeVO> list = new ArrayList<NoticeVO>();
-		list = noticeBoardList.noticeBoardList();
-		
-		for(int i=0;i<list.size();i++)
-			System.out.println(list.get(i).toString());
-
-		model.addAttribute("list",list);
-		model.addAttribute("main","customer/cs_notice_list");
-		
-		return "template";
-	}
+	//노티스 리스트
+    @RequestMapping("/noticeList.cu")
+    public String noticeList(PagingVO vo,Model model,
+                               @RequestParam(value = "nowPage", required = false)String nowPage,
+                                @RequestParam(value = "cntPerPage",required = false)String cntPerPage){
+        int count = noticeBoardCountService.noticeBoardCount();
+        System.out.println("count:"+ count);
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "10";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "10";
+        }
+        vo = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        System.out.println("vo: "+ vo.toString());
+        
+        List<NoticeVO> list = new ArrayList<>();
+        list = noticeBoardList.noticeBoardList(vo);
+        
+        for(int i=0;i<list.size();i++)
+        	System.out.println("list: "+list.get(i).toString());
+        
+        model.addAttribute("paging",vo);
+        model.addAttribute("list",list);
+        model.addAttribute("main","customer/cs_notice_list");
+        return "template";
+    }
 	//내용
 	@RequestMapping("/noticeContent.cu")
 	public String noticeContent(@RequestParam("notice_no") String notice_no, Model model) {
@@ -79,21 +105,32 @@ public class CustomerController {
 		return "template";
 	}
 	
-	
-	
-	//FAQ 목록
-	@RequestMapping("/faqList.cu")
-	public String faqList(Model model) {
-		List<FaqVO> list = new ArrayList<FaqVO>();
-		list = faqBoardList.faqBoardList();
+	//Faq
+    @RequestMapping("/faqList.cu")
+    public String faqBoardList(PagingVO vo,Model model,
+                               @RequestParam(value = "nowPage", required = false)String nowPage,
+                                @RequestParam(value = "cntPerPage",required = false)String cntPerPage){
+        int count = faqCountFaqService.countFaq();
 
-		for(int i=0;i<list.size();i++)
-			System.out.println(list.get(i).toString());
-		
-		model.addAttribute("list",list);
-		model.addAttribute("main","customer/cs_faq_list");
-		return "template";
-	}
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "10";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "10";
+        }
+        vo = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+        List<FaqVO> list = new ArrayList<>();
+        list = faqSelectFaqService.selectFaq(vo);
+        
+        model.addAttribute("paging",vo);
+        model.addAttribute("list",list);
+    	model.addAttribute("main","customer/cs_faq_list");
+        return "template";
+    }
+	
 	//FAQ 내용
 	 @RequestMapping("faqContent.cu")
 	 public String faqContent(@RequestParam("faq_no") String faq_no,Model model) {

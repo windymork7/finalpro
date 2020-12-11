@@ -48,7 +48,8 @@ public class FaqController {
     public String faqBoardList(PagingVO vo,Model model,
                                @RequestParam(value = "nowPage", required = false)String nowPage,
                                 @RequestParam(value = "cntPerPage",required = false)String cntPerPage){
-        int total = faqCountFaqService.countFaq();
+        int count = faqCountFaqService.countFaq();
+        System.out.println("count: "+ count);
 
         if (nowPage == null && cntPerPage == null) {
             nowPage = "1";
@@ -58,8 +59,8 @@ public class FaqController {
         } else if (cntPerPage == null) {
             cntPerPage = "5";
         }
-        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-
+        vo = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        System.out.println("vo : "+ vo.toString());
 //
         List<FaqVO> list = new ArrayList<>();
         list = faqSelectFaqService.selectFaq(vo);

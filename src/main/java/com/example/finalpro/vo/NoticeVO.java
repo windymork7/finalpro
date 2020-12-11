@@ -6,8 +6,17 @@ public class NoticeVO {
 	private String notice_content;
 	private String notice_date;
 	private int rownum;
+	private String notice_file;
 	
 	
+
+	public String getNotice_file() {
+		return notice_file;
+	}
+
+	public void setNotice_file(String notice_file) {
+		this.notice_file = notice_file;
+	}
 
 	public int getRownum() {
 		return rownum;

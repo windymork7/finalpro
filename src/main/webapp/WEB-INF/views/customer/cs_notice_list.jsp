@@ -54,7 +54,6 @@
             -->
 
          <hr class="my-4">
-         
          <table class="table">
             <thead>
                <tr class="table-secondary">
@@ -74,6 +73,7 @@
                </tr>
                <br>
             </c:forEach>
+                 <button type="button" class="btn btn-primary" onclick="location.href='noticeWriteForm.no'">글쓰기</button>
             </tbody>
          </table>
 
@@ -81,6 +81,24 @@
             <br> <br>
             <ul
                class="pagination pagination-lg justify-content-center align-items-center">
+                              <c:if test="${paging.startPage != 1 }">
+               <li class="page-item"><a class="page-link" href="noticeList.cu?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&laquo;</a>
+               </c:if>
+               </li>
+                <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+                <c:choose>
+                 <c:when test="${p == paging.nowPage}">
+               <li class="page-item active"><a class="page-link">${p}</a></li>
+               </c:when>
+               <c:when test="${p != paging.nowPage}">
+               <li class="page-item"><a class="page-link" href="noticeList.cu?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+               </c:when>
+               </c:choose>
+               </c:forEach>
+                <c:if test="${paging.endPage != paging.lastPage}">
+               <li class="page-item"><a class="page-link" href="noticeList.cu?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&raquo;</a></li>
+               </c:if>
+               <%-- 
                <li class="page-item"><a class="page-link" href="#">&laquo;</a>
                </li>
                <li class="page-item active"><a class="page-link" href="#">1</a>
@@ -91,6 +109,7 @@
                <li class="page-item"><a class="page-link" href="#">5</a></li>
                <li class="page-item"><a class="page-link" href="#">&raquo;</a>
                </li>
+               --%>
             </ul>
          </div>
 
