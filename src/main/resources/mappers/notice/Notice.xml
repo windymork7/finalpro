@@ -17,6 +17,7 @@
         FROM
         (SELECT * FROM NOTICE) N)
         WHERE RN BETWEEN #{start} AND #{end}
+		ORDER BY NOTICE_DATE DESC
     </select>
     
     <!-- 해당 게시글 조회-->

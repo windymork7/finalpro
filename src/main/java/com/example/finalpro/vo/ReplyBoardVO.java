@@ -17,6 +17,15 @@ public class ReplyBoardVO {
     private int q_up;
     private String sub_ca_name;
     private String book_ca_name;
+    private int sub_ca_no;
+
+    public int getSub_ca_no() {
+        return sub_ca_no;
+    }
+
+    public void setSub_ca_no(int sub_ca_no) {
+        this.sub_ca_no = sub_ca_no;
+    }
 
     public String getBook_ca_name() {
         return book_ca_name;

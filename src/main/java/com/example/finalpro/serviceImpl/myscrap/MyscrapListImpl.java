@@ -6,10 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.finalpro.vo.PagingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.finalpro.service.mypage.MyscrapDAO;
+import com.example.finalpro.dao.MyscrapDAO;
 import com.example.finalpro.service.myscrap.MyscrapListService;
 import com.example.finalpro.vo.MyscrapVO;
 
@@ -20,12 +21,13 @@ public class MyscrapListImpl implements MyscrapListService {
 	MyscrapDAO myscrapDAO;
 
 	@Override
-	public List<MyscrapVO> myscrapList(HttpServletRequest request,HttpSession session) {
+	public List<MyscrapVO> myscrapList(HttpServletRequest request, HttpSession session, PagingVO pagingVO) {
 
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy.mm.dd");
 
 		int mem_no =  (Integer) session.getAttribute("userNo");
-		List<MyscrapVO> list = myscrapDAO.myscrapList(mem_no);
+		pagingVO.setMem_no(mem_no);
+		List<MyscrapVO> list = myscrapDAO.myscrapList(pagingVO);
 
 		for (int i = 0; i < list.size(); i++) {
 

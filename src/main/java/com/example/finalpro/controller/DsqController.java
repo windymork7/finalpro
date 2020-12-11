@@ -108,27 +108,6 @@ public class DsqController {
         return "redirect:qboardListForm.bo?subCa="+subCa;
     }
 
-    // 내가 작업하려고 만든 테스트용 메소드 ( 게시판 조회 )
-//    @RequestMapping("/qboardListForm.bo")
-//    public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model){
-//
-//
-//        List<QboardVO> completeList = commonBoardListService.qBoardList(subCa);
-//        List<QboardVO> readyList = commonBoardReadyListService.qBoardReadyList(subCa);
-//        List<QboardVO> latestList = commonBoardLatesListService.qBoardLatesList(subCa);
-//        List<QboardVO> popularityList = commonBoardPopularityListService.qBoardPopularityList(subCa);
-//        List<QboardVO> expList = commonBoardExpListSerivce.qboardExpList(subCa);
-//
-//        model.addAttribute("completeList",completeList);
-//        model.addAttribute("readyList", readyList);
-//        model.addAttribute("latestList", latestList);
-//        model.addAttribute("popularityList", popularityList);
-//        model.addAttribute("expList", expList);
-//
-//        model.addAttribute("subCa", subCa);
-//        model.addAttribute("main", "board/board_list");
-//        return "template";
-//    }
 
      @RequestMapping("/qboardListForm.bo")
     public String boardListForm(@RequestParam(defaultValue = "1") int subCa, Model model,
@@ -161,6 +140,7 @@ public class DsqController {
          model.addAttribute("completePaging", completePaging);
          List<QboardVO> completeList = commonBoardListService.qBoardList(subCa, completePaging);
          model.addAttribute("completeList", completeList);
+
 
          if (nowPage2 == null && cntPerPage2 == null) {
              nowPage2 = "1";

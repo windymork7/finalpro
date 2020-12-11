@@ -9,28 +9,33 @@
 <mapper namespace="com.example.finalpro.dao.MypageDAO">
 	<!-- 마이페이지 내가한 질문 -->
 	<select id="myquestion" resultType="com.example.finalpro.vo.QboardVO" >
-		select rownum,q_no,mem_no,ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
-		q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state
-		from q q1, (select * from sub_ca) ca,(select * from book_ca) bca
-		where q1.sub_ca_no = ca.sub_ca_no
-		and bca.book_ca_no = q1.book_ca_no
-		and mem_no=#{mem_no}
+		SELECT A.*
+		FROM
+		(SELECT ROWNUM RN, Q.*,B.BOOK_CA_NAME,S.SUB_CA_NAME FROM
+		(SELECT * FROM Q WHERE MEM_NO=#{mem_no} ORDER BY Q_NO DESC) Q,
+		(SELECT * FROM SUB_CA) S,
+		(SELECT * FROM BOOK_CA) B
+		WHERE Q.SUB_CA_NO = S.SUB_CA_NO
+		AND B.BOOK_CA_NO = Q. BOOK_CA_NO ) A
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<!-- 마이페이지 내가한 답변 -->
 	<select id="myreply" resultType="com.example.finalpro.vo.ReplyBoardVO">
-		SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,Q1.*,C.CA_NO FROM
-		(SELECT * FROM Q) Q1,
+		SELECT  A.*
+		FROM
+		(SELECT ROWNUM RN, Q.Q_TITLE,Q.Q_NO,Q.Q_UP,Q.Q_DATE,S.SUB_CA_NAME,S.SUB_CA_NO,B.BOOK_CA_NAME,B.BOOK_CA_NO,M.MEM_NICK, C.CA_NAME FROM
+		(SELECT * FROM REPLY WHERE MEM_NO=#{mem_no} ORDER BY REPLY_NO DESC) R,
+		(SELECT * FROM Q) Q,
+		(SELECT * FROM SUB_CA)S,
+		(SELECT * FROM BOOK_CA) B,
 		(SELECT * FROM MEM) M,
-		(SELECT * FROM SUB_CA) SC,
-		(SELECT * FROM CA) C,
-		(SELECT * FROM REPLY) R,
-		(SELECT * FROM BOOK_CA) BC
-		WHERE Q1.MEM_NO = M.MEM_NO
-		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
-		AND SC.CA_NO = C.CA_NO
-		AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
-		AND Q1.Q_NO = R.Q_NO
-		AND R.MEM_NO=#{mem_no}
+		(SELECT * FROM CA) C
+		WHERE Q.SUB_CA_NO = S.SUB_CA_NO
+		AND Q.BOOK_CA_NO = B.BOOK_CA_NO
+		AND Q.MEM_NO = M.MEM_NO
+		AND C.CA_NO = S.CA_NO
+		AND Q.Q_NO = R.Q_NO)A
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<!-- 내정보 -->
 	<select id="mypageUpdateForm" resultType="com.example.finalpro.vo.CommonMemberVO">
@@ -42,5 +47,13 @@
 		(SELECT COUNT(*)SCRAPCNT FROM MY_SCRAP WHERE MEM_NO=#{mem_no})S
 		WHERE MEM_NO=#{mem_no}
 		AND M.GRADE_NO = G.GRADE_NO
+	</select>
+	<!-- 내 질문 카운트 -->
+	<select id="myquestionCount" resultType="int">
+		SELECT COUNT(*) FROM Q WHERE MEM_NO=#{param1}
+	</select>
+	<!-- 내 답변 카운트 -->
+	<select id="myreplyCount" resultType="int">
+		SELECT COUNT(*) FROM REPLY WHERE MEM_NO=#{param1}
 	</select>
 </mapper>
