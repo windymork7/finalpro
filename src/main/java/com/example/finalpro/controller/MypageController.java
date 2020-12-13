@@ -63,24 +63,18 @@ public class MypageController {
         }
 
         int mem_no = (Integer)session.getAttribute("userNo");
-        System.out.println("mem_no: "+ mem_no);
 
         int myscrapCount = myscrapCountService.MyscrapCount(mem_no); //스크랩총갯수
         int myquestionCount = myquestionCountService.myquestionCount(mem_no); //질문 총갯수
         int myreplyCount = myreplyCountService.myreplyCount(mem_no);    //답변 총 갯수
 
         PagingVO scrapPaing = new PagingVO(myscrapCount,Integer.parseInt(nowPage1), Integer.parseInt(cntPerPage1));
-        System.out.println("start,end: "+ scrapPaing.toString());
         model.addAttribute("scrapPaging",scrapPaing);
         //스크랩리스트
         List<MyscrapVO> scrapList = new ArrayList<MyscrapVO>();
         scrapList = myscrapListService.myscrapList(request,session,scrapPaing);
         model.addAttribute("scrapList",scrapList);
         //스크랩북 끝
-
-        for(int i=0; i< scrapList.size();i++)
-            System.out.println("스크랩리스트투스트링: "+scrapList.get(i).toString());
-        System.out.println("여기옴? ");
         
         
         //내가한질문 시작
@@ -98,12 +92,6 @@ public class MypageController {
         model.addAttribute("questionPaging",questionPaging);
         List<QboardVO> questionList = mypageQuestionService.mypageQuestion(session,questionPaging);
         model.addAttribute("questionList",questionList);
-        //내가한 질문 끝
-
-        for(int i=0; i< questionList.size();i++)
-            System.out.println("질문리스트투스트링: "+questionList.get(i).toString());
-
-        System.out.println("여기옴? ");
 
 
         //내가한답변리스트 시작
@@ -118,13 +106,9 @@ public class MypageController {
 
         PagingVO replyPaging = new PagingVO(myreplyCount,Integer.parseInt(nowPage3),Integer.parseInt(cntPerPage3));
         model.addAttribute("replyPaging",replyPaging);
-        System.out.println("여기오나 ?? ");
         List<ReplyBoardVO> replyList = mypageReplyListService.replyList(session,replyPaging);
         model.addAttribute("replyList",replyList);
 
-        for (int i=0; i<replyList.size();i++) {
-            System.out.println("답변리스트:" + replyList.get(i).toString());
-        }
         //회원정보객체
         CommonMemberVO commonMemberVO = mypageUpdateFormService.mypageUpdateForm(session);
         model.addAttribute("mem",commonMemberVO);

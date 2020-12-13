@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.finalpro.dao.AdminDAO;
 import com.example.finalpro.service.admin.AdminQRptListService;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 
 @Service
@@ -16,9 +17,9 @@ public class AdminQRptListImpl implements AdminQRptListService{
 	AdminDAO adminDAO;
 
 	@Override
-	public List<QboardVO> qRptList() {
+	public List<QboardVO> qRptList(PagingVO pagingVO) {
 		
-		List<QboardVO> list = adminDAO.qRptList();
+		List<QboardVO> list = adminDAO.qRptList(pagingVO);
 		return list;
 	}
 	
