@@ -14,6 +14,16 @@ public class MyscrapVO {
     private int q_up;
     private String q_date;
     private int rn;
+    private int sub_ca_no;
+
+
+    public int getSub_ca_no() {
+        return sub_ca_no;
+    }
+
+    public void setSub_ca_no(int sub_ca_no) {
+        this.sub_ca_no = sub_ca_no;
+    }
 
     public int getRn() {
         return rn;

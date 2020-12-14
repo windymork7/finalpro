@@ -75,18 +75,17 @@ small {
                       <c:set var="c" value="4"/>
                      <c:forEach begin="${b}" var="sList" items="${subCaList}">
                          <li class="nav-item active"><a class="nav-link pl-0" href="#">
-                             <span class="d-none d-sm-inline"><b>${sList.sub_ca_name},${fn:length(subCaList)}</b></span></a>
+                             <span class="d-none d-sm-inline"><b>${sList.sub_ca_name}</b></span></a>
                          </li>
-
-						<c:forEach begin="${a}" var="bList" items="${bookCaList}" end="${c}">
+                        <c:forEach var="bList" items="${bookCaList}">
+                           <c:if test="${bList.sub_ca_no==b+1}">
 							<li class="nav-item"><a class="nav-link pl-0" href="#">
                      	        <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}&bookCa=${bList.book_ca_no}">${bList.book_ca_name}</a></span></a>
                     	    </li>
-                       	    <c:set var="a" value="${a+1}"/>
+                           </c:if>
                         </c:forEach>
 
                         <c:set var="b" value="${b + 1}"/>
-                        <c:set var="c" value="${c + 5}"/>
                      </c:forEach>
                   </ul>
                </div>
