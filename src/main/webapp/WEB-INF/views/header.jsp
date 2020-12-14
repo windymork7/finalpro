@@ -120,6 +120,17 @@
                 <a class="dropdown-item" href="faqList.cu"><b>FAQ</b></a>
               </div>
             </li>
+
+            <%-- 설문조사 드롭다운 추가 --%>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                 role="button" aria-haspopup="true" aria-expanded="false">설문조사</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="surveyForm.su"><b>설문조사 참여</b></a>
+                <a class="dropdown-item" href="surveyView.su"><b>설문조사 통계</b></a>
+              </div>
+            </li>
+
           </ul>
 
           <form class="form-inline my-2 my-lg-0">

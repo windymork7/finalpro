@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.finalpro.dao.SurveyDAO">
+	<select id="surveyQList" resultType="com.example.finalpro.vo.SurveyVO">
+		SELECT ROWNUM RN, SQ.* FROM SURVEY_Q SQ
+	</select>
+	<select id="surveyRList" resultType="com.example.finalpro.vo.SurveyVO">
+		SELECT ROWNUM RN, SQ.*, SR.* FROM
+		(SELECT * FROM SURVEY_Q) SQ,
+		(SELECT * FROM SURVEY_R) SR
+		WHERE SQ.SURVEY_Q_NO = SR.SURVEY_Q_NO
+	</select>
+	<update id="surveyCountUp" parameterType="Integer">
+		UPDATE SURVEY_R SET SURVEY_R_CNT = SURVEY_R_CNT+1 WHERE SURVEY_R_NO=#{param1}
+	</update>
+	<update id="surveyMemUpdate" parameterType="int">
+		UPDATE MEM SET MEM_SURVEY =1 WHERE MEM_NO=#{param1}
+	</update>
+</mapper>
