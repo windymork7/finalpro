@@ -48,4 +48,9 @@ public class SurveyController {
 
         return "redirect:/";
     }
+    @RequestMapping("/surveyView.su")
+    public String surveyView(Model model){
+        model.addAttribute("main","survey/surveyView");
+        return "template";
+    }
 }
