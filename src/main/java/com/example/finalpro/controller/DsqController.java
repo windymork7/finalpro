@@ -20,8 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +79,11 @@ public class DsqController {
     CommonBoardPopularityCountService commonBoardPopularityCountService;
     @Autowired
     CommonBoardExpCountService commonBoardExpCountService;
+    @Autowired
+    CommonBoardSearchService commonBoardSearchService;
+    @Autowired
+    CommonBoardSearchCountService commonBoardSearchCountService;
+
 
     
     // Q게시판 등록 페이지 이동
@@ -477,10 +480,28 @@ public class DsqController {
 
     // 게시판 검색 리스트
     @RequestMapping("/qboardSearchList.bo")
-    public String qboardSearchList(Model model){
+    public String qboardSearchList(@RequestParam(value = "nowPage", required = false) String nowPage,
+                                   @RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+                                   @RequestParam(required = false) String searchTerm, Model model){
 
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
 
+        int searchCount = commonBoardSearchCountService.qBoardSearchCount(searchTerm);
 
+        PagingVO searchPaging = new PagingVO(searchCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("searchPaging", searchPaging);
+        List<QboardVO> searchList = commonBoardSearchService.qboardSearchList(searchTerm, searchPaging);
+
+        model.addAttribute("searchTerm", searchTerm);
+        model.addAttribute("searchList", searchList);
+        model.addAttribute("main", "board/search");
         return "template";
     }
 

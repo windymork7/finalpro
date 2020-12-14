@@ -14,6 +14,7 @@ public class PagingVO {
     private int cntPage = 5;
     private int subCa;
     private int mem_no;
+    private String searchTerm;
 
     public int getMem_no() {
         return mem_no;
@@ -172,11 +173,29 @@ public class PagingVO {
         this.subCa = subCa;
     }
 
+    public String getSearchTerm() {
+        return searchTerm;
+    }
+
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+
     @Override
-    public String toString()
-    {
-        return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
-                + ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-                + ", cntPage=" + cntPage + "]";
+    public String toString() {
+        return "PagingVO{" +
+                "nowPage=" + nowPage +
+                ", startPage=" + startPage +
+                ", endPage=" + endPage +
+                ", total=" + total +
+                ", cntPerPage=" + cntPerPage +
+                ", lastPage=" + lastPage +
+                ", start=" + start +
+                ", end=" + end +
+                ", cntPage=" + cntPage +
+                ", subCa=" + subCa +
+                ", mem_no=" + mem_no +
+                ", searchTerm='" + searchTerm + '\'' +
+                '}';
     }
 }

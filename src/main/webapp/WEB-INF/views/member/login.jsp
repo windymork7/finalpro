@@ -13,8 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 부트스트랩 css 추가 -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.css">
+<%--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--<link rel="stylesheet" href="css/bootstrap.css">--%>
+<%--<script src="https://use.fontawesome.com/b490e94c82.js"></script>--%>
 
 <!-- 해외 부트스트랩 js -->
 <%--<script src="https://code.jquery.com/jquery-3.5.1.min.js"--%>
