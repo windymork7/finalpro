@@ -98,10 +98,10 @@ public class DsqController {
 
     // q게시판 등록 프로세스.
     @RequestMapping("/qboardInsertProcess.bo")
-    public String boardInsertProcess(Model model, @RequestParam MultipartFile q_file1, QboardVO qboardVO){
+    public String boardInsertProcess(Model model, @RequestParam MultipartFile q_file1, QboardVO qboardVO, HttpServletRequest request){
 
         System.out.println("QboardVO : " + qboardVO.toString());
-        commonBoardInsertService.qBoardInsert(q_file1, qboardVO);
+        commonBoardInsertService.qBoardInsert(q_file1, qboardVO, request);
 
         int subCa = qboardVO.getSub_ca_no();
 

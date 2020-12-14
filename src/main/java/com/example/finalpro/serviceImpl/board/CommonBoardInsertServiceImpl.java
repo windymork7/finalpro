@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class CommonBoardInsertServiceImpl implements CommonBoardInsertService {
     MemberDAO memberDAO;
 
     @Override
-    public void qBoardInsert(MultipartFile q_file2, QboardVO qboardVO) {
+    public void qBoardInsert(MultipartFile q_file2, QboardVO qboardVO, HttpServletRequest request) {
 
 //        String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
 //        System.out.println("Directory : "+ FileSystemView.getFileSystemView().getDefaultDirectory());
@@ -37,13 +38,16 @@ public class CommonBoardInsertServiceImpl implements CommonBoardInsertService {
 //        String filePath = basePath + "/" + q_file2.getOriginalFilename();
 //        System.out.println("filePath : " + filePath);
 
-        System.out.println("q_file2 : " + q_file2);
+        String contextPath = request.getSession().getServletContext().getRealPath("/");
+        System.out.println(contextPath);
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일HH시mm분ss초");
         Calendar c1 = Calendar.getInstance();
         String strToday = sdf.format(c1.getTime());
 
-        File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+q_file2.getOriginalFilename());
+        File dest = new File(contextPath+"../resources/static/upload/"+strToday+"_" + q_file2.getOriginalFilename());
+//        File dest = new File("C:/Users/Administrator/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+q_file2.getOriginalFilename());
 //        File dest = new File("C:/Users/CMH/IdeaProjects/finalpro/src/main/resources/static/upload/"+strToday+"_"+q_file2.getOriginalFilename());
 
         if (!(q_file2.getOriginalFilename().equals(""))){
