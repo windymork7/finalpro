@@ -11,15 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>sb_problem</title>
     <!-- 부트스트랩 -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="https://use.fontawesome.com/b490e94c82.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="css/bootstrap.css">--%>
+<%--    <script src="https://use.fontawesome.com/b490e94c82.js"></script>--%>
+<%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"--%>
+<%--            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"--%>
+<%--            crossorigin="anonymous"></script>--%>
+<%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"--%>
+<%--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"--%>
+<%--            crossorigin="anonymous"></script>--%>
 
     <style>
 
@@ -231,7 +231,7 @@
                 <li class="nav-item text-center" style="width: 14.285714%; border-radius: 0rem;">
                     <a class="nav-link btn3 btn-outline-info active"
                        style="border-color:#6cc3d5; border-width: 2px; margin: 0px 1.5px 0px 1.5px;" data-toggle="tab"
-                       href="#Pro"><b>C</b></a>
+                       href="#Pro" onclick="cProblem()"><b>C</b></a>
                 </li>
                 <li class="nav-item text-center" style="width: 14.285714%; border-radius: 0rem;">
                     <a class="nav-link btn3 btn-outline-secondary"
@@ -320,7 +320,82 @@
 </div>
 </body>
 <script>
+/*
+    $(window).on('load', function(){
 
+    });*/
+
+    $(document).ready(function() {
+        cProblem();
+    });
+
+
+
+    function cProblem() {
+        $("#Image").html("");
+        $("#AnswerHere").html("");
+
+        random = Math.floor(Math.random() * 8);
+
+        $.ajax({
+            url: "/CProblem.bp",
+            type: "get",
+            data: "",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                var program = obj.program;
+                var html = "";
+
+
+                answer = program[random].pro[0].val6;
+
+                html += "<b><font size='5' style=''>" + program[random].pro[0].val0 + "</font>";
+                $("#Problem").html(html);
+
+                // if (random == 1){
+                //     html = "<img src=\"img/Check.jpg\" width=\"100%\">";
+                //     $("#JavaImage").html(html);
+                // }
+
+
+                html = "<div class=\"custom-control custom-radio\">\n" +
+                    "                                            <input type=\"radio\" id=\"customRadio6\" name=\"customRadio\" class=\"custom-control-input\" value=\"val1\">\n" +
+                    "                                            <label id='val1' class=\"custom-control-label\" for=\"customRadio6\" style=\"font-size: 20px;\">" + program[random].pro[0].val1 + "</label>\n" +
+                    "                                        </div>\n" +
+                    "                                        <div class=\"custom-control custom-radio\">\n" +
+                    "                                            <input type=\"radio\" id=\"customRadio7\" name=\"customRadio\" class=\"custom-control-input\" value=\"val2\">\n" +
+                    "                                            <label id='val2' class=\"custom-control-label\" for=\"customRadio7\" style=\"font-size: 20px;\">" + program[random].pro[0].val2 + "</label>\n" +
+                    "                                        </div>\n" +
+                    "                                        <div class=\"custom-control custom-radio\">\n" +
+                    "                                            <input type=\"radio\" id=\"customRadio8\" name=\"customRadio\" class=\"custom-control-input\" value=\"val3\">\n" +
+                    "                                            <label id='val3' class=\"custom-control-label\" for=\"customRadio8\" style=\"font-size: 20px;\">" + program[random].pro[0].val3 + "</label>\n" +
+                    "                                        </div>\n" +
+                    "                                        <div class=\"custom-control custom-radio\">\n" +
+                    "                                            <input type=\"radio\" id=\"customRadio9\" name=\"customRadio\" class=\"custom-control-input\" value=\"val4\">\n" +
+                    "                                            <label id='val4' class=\"custom-control-label\" for=\"customRadio9\" style=\"font-size: 20px;\">" + program[random].pro[0].val4 + "</label>\n" +
+                    "                                        </div>\n" +
+                    "                                        <div class=\"custom-control custom-radio\">\n" +
+                    "                                            <input type=\"radio\" id=\"customRadio10\" name=\"customRadio\" class=\"custom-control-input\" value=\"val5\">\n" +
+                    "                                            <label id='val5' class=\"custom-control-label\" for=\"customRadio10\" style=\"font-size: 20px;\">" + program[random].pro[0].val5 + "</label>\n" +
+                    "                                        </div>";
+
+                $("#Exm").html(html);
+
+                html = "";
+                html += "<button type=\"button\" class=\"btn2 btn2-primary\" onclick=\"submit(" + 'answer' + ")\">\n" +
+                    "                                        <h4 style=\"margin: 0px;\">정답 확인 &nbsp;\n" +
+                    "                                            <i class=\"fa fa-caret-right\" aria-hidden=\"true\"></i></h4>\n" +
+                    "                                    </button>";
+
+                $("#AnswerButton").html(html);
+
+            },
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+
+        });
+    }
 
     // 자바 문제
     function javaProblem() {
@@ -416,16 +491,16 @@
                 // 그림
                 if (random == 1){
                     html = "<img src='img/PyProblem1.png' width='100%'/>"
-                    $("#image").html(html);
+                    $("#Image").html(html);
                 } else if(random == 3){
                     html = "<img src='img/PyProblem3.png' width='100%'/>";
-                    $("#image").html(html);
+                    $("#Image").html(html);
                 }else if(random == 4){
                     html = "<img src='img/PyProblem4.png' width='100%'/>";
-                    $("#image").html(html);
+                    $("#Image").html(html);
                 }else{
                     html = "";
-                    $("#image").html(html);
+                    $("#Image").html(html);
                 }
 
 
