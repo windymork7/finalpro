@@ -4,6 +4,7 @@ import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -81,5 +82,10 @@ public interface BoardDAO {
     public int qBoardPopularityCount(int subCa);
     public int qBoardExpCount(int subCa);
 
+
+    // 게시글 검색
+    public List<QboardVO> qBoardSearchList(PagingVO searchPaging);
+    // 검색된 게시글 총 수
+    public int qBoardSearchCount(String searchTerm);
 
 }

@@ -13,11 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>header</title>
     <!-- 부트스트랩 -->
-<%--  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
-<%--  <link  rel="stylesheet" href="css/bootstrap.css">--%>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link  rel="stylesheet" href="css/bootstrap.css">
+    <script src="https://use.fontawesome.com/b490e94c82.js"></script>
 <%--&lt;%&ndash;   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>&ndash;%&gt;--%>
-<%--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--%>
-<%--   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--%>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <style>
   .custom-popover li {
     border: none!important;
@@ -133,8 +134,8 @@
 
           </ul>
 
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" style="padding-right: 0.6em; padding-left: 0.6em; border-radius: 10rem;" type="text" placeholder="검색어를 입력하세요.">
+          <form action="/qboardSearchList.bo" method="post" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" style="padding-right: 0.6em; padding-left: 0.6em; border-radius: 10rem;" type="text" name="searchTerm" placeholder="검색어를 입력하세요.">
             <button class="btn btn-primary my-2 my-sm-0" type="submit">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
@@ -145,33 +146,55 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-          <button type="button" class="btn btn-primary popover-title"
-                  data-container="body" data-toggle="popover" data-placement="bottom"
-                  title="" style="border-color:#fff">
-            <i class="fa fa-user-circle fa-2x" aria-hidden="true"
-               style="color: #fff;"></i>
-          </button>
+<%--          <button type="button" class="btn btn-primary popover-title"--%>
+<%--                  data-container="body" data-toggle="popover" data-placement="bottom"--%>
+<%--                  title="" style="border-color:#fff">--%>
+<%--            <i class="fa fa-user-circle fa-2x" aria-hidden="true"--%>
+<%--               style="color: #fff;"></i>--%>
+<%--          </button>--%>
 
           <!-- loaded popover content -->
-          <div id="popover-content" style="display: none">
-            <ul class="list-group custom-popover">
-              <li class="list-group-item"><a href="#"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true"> 아이디</i></a></li>
-              <li class="list-group-item"><a href="#" class="a-header">계정 설정</a></li>
-              <li class="list-group-item"><a href="#" class="a-header">로그아웃</a></li>
-            </ul>
-          </div>
+<%--          <div id="popover-content" style="display: none">--%>
+<%--            <ul class="list-group custom-popover">--%>
+<%--              <li class="list-group-item"><a href="#"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true"> 아이디</i></a></li>--%>
+<%--              <li class="list-group-item"><a href="#" class="a-header">계정 설정</a></li>--%>
+<%--              <li class="list-group-item"><a href="#" class="a-header">로그아웃</a></li>--%>
+<%--            </ul>--%>
+<%--          </div>--%>
 
 
           <c:choose>
             <c:when test="${not empty sessionScope.userNick || not empty sessionScope.businessNick}">
+              <button type="button" class="btn btn-primary popover-title"
+                      data-container="body" data-toggle="popover" data-placement="bottom"
+                      title="" style="border-color:#fff">
+                <i class="fa fa-user-circle fa-2x" aria-hidden="true"
+                   style="color: #fff;"></i>
+              </button>
                 <c:choose>
                   <c:when test="${sessionScope.userNick eq 'admin'}">
-                    <span><a href="adminMain.ad">${sessionScope.userNick}</a>&nbsp;</span>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
+                    <div id="popover-content" style="display: none">
+                      <ul class="list-group custom-popover">
+                        <li class="list-group-item"><a href="adminMain.ad"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                        <li class="list-group-item"><a href="#" class="a-header">계정 설정</a></li>
+                        <li class="list-group-item"><a href="logout.me" class="a-header">로그아웃</a></li>
+                      </ul>
+                    </div>
+
+<%--                    <span><a href=""></a>&nbsp;</span>--%>
+<%--                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>--%>
                   </c:when>
                   <c:when test="${not empty sessionScope.userNick}">
-                    <span><a href="mypageMain.my" class="text-warning">${sessionScope.userNick}</a>&nbsp;</span>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
+                    <div id="popover-content" style="display: none">
+                      <ul class="list-group custom-popover">
+                        <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                        <li class="list-group-item"><a href="mypageUpdateForm.my" class="a-header">계정 설정</a></li>
+                        <li class="list-group-item"><a href="logout.me" class="a-header">로그아웃</a></li>
+                      </ul>
+                    </div>
+
+<%--                    <span><a href="mypageMain.my" class="text-warning">${sessionScope.userNick}</a>&nbsp;</span>--%>
+<%--                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>--%>
                   </c:when>
                   <c:when test="${not empty sessionScope.businessNick}">
                     <span><a href="#">${sessionScope.businessNick}</a>&nbsp;</span>
@@ -183,7 +206,9 @@
               <button type="button" class="btn btn-primary" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
             </c:otherwise>
           </c:choose>
-          <button type="button" class="btn btn-primary" onclick="location.href='/joinFormWay.me'">회원가입</button>
+          <c:if test="${empty sessionScope.userNick}">
+            <button type="button" class="btn btn-primary" onclick="location.href='/joinFormWay.me'">회원가입</button>
+          </c:if>
         </div>
       </nav>
    </div>

@@ -411,5 +411,34 @@
         ORDER BY QRSC.Q_DATE DESC) B
     </select>
 
+    <!-- 검색어 게시글 찾기 -->
+    <select id="qBoardSearchList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">
+        SELECT *
+        FROM
+        (SELECT ROWNUM RN, A.*
+        FROM
+        (SELECT Q.Q_NO, Q.Q_TITLE, Q.Q_CONTENT, Q.Q_SOS, Q.Q_UP, Q.Q_DATE, Q.SUB_CA_NO, S.SUB_CA_NAME, B.BOOK_CA_NAME
+        FROM Q, BOOK_CA B, SUB_CA S
+        WHERE Q.BOOK_CA_NO = B.BOOK_CA_NO
+        AND Q.SUB_CA_NO = B.SUB_CA_NO
+        AND S.SUB_CA_NO = Q.SUB_CA_NO
+        AND (Q.Q_TITLE LIKE '%' || #{searchTerm} || '%'
+        OR Q.Q_CONTENT LIKE '%' || #{searchTerm} || '%')
+        ORDER BY Q_DATE DESC) A) B
+        WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+
+    <!-- 검색된 총 게시물의 수 -->
+    <select id="qBoardSearchCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM Q, BOOK_CA B, SUB_CA S
+        WHERE Q.BOOK_CA_NO = B.BOOK_CA_NO
+        AND Q.SUB_CA_NO = B.SUB_CA_NO
+        AND S.SUB_CA_NO = Q.SUB_CA_NO
+        AND (Q.Q_TITLE LIKE '%' || #{param1} || '%'
+        OR Q.Q_CONTENT LIKE '%' || #{param1} || '%')
+        ORDER BY Q_DATE DESC
+    </select>
+
 
 </mapper>
