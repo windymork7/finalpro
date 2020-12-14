@@ -49,7 +49,7 @@ public class BookController {
 
     // Oracle 문제 파일
     @RequestMapping("/OracleProblem.bp")
-    public String oracleProblem(){ return "json//OracleProblem";}
+    public String oracleProblem(){ return "json/OracleProblem";}
 
     // Python 문제 파일
     @RequestMapping("/PythonProblem.bp")

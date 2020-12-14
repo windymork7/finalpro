@@ -18,8 +18,27 @@ public class CommonMemberVO {
     private int replycnt;
     private int questioncnt;
     private int scrapcnt;
+    private int rn;
+    private int mem_rpt_cnt;
+    
 
-    public int getScrapcnt() {
+    public int getMem_rpt_cnt() {
+		return mem_rpt_cnt;
+	}
+
+	public void setMem_rpt_cnt(int mem_rpt_cnt) {
+		this.mem_rpt_cnt = mem_rpt_cnt;
+	}
+
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
+
+	public int getScrapcnt() {
         return scrapcnt;
     }
 

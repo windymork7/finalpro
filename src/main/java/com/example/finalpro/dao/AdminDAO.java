@@ -2,6 +2,7 @@ package com.example.finalpro.dao;
 
 import com.example.finalpro.vo.CategoryVO;
 import com.example.finalpro.vo.CommonMemberVO;
+import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -11,22 +12,22 @@ import java.util.List;
 @Mapper
 public interface AdminDAO {
     //신고 10개 넘은 애들 리스트
-    public List<CommonMemberVO> memRptList();
+    public List<CommonMemberVO> memRptList(PagingVO pagingVO);
 
     // 블랙처리 액션
     public void memBlackAction(int mem_no);
 
     // 블랙 리스트
-    public List<CommonMemberVO> memBlackList();
+    public List<CommonMemberVO> memBlackList(PagingVO pagingVO);
     
     // 신고 10개 넘은 게시판 리스트
-    public List<QboardVO> qRptList();
+    public List<QboardVO> qRptList(PagingVO pagingVO);
     
     // 신고 10개 넘은 게시판 삭제
     public void qDeleteAction(int q_no);
     
     //승인이 필요한 게시글들 ( 책가는거 )
-    public List<QboardVO> bookStandByList();
+    public List<QboardVO> bookStandByList(PagingVO pagingVO);
 
     //책에 추가하기  필요 X
     //public void bookAddAction(int q_no, int ca_no, int sub_ca_no, int book_ca_no);
@@ -48,4 +49,12 @@ public interface AdminDAO {
     public CommonMemberVO adminExpUpdateForm();
     //어드민 EXp수정액션
     public void adminExpUpdateAction(int mem_exp);
+    
+    
+    //카운트
+    public int memRptCount();	//신고10개 mem
+    public int memBlackCount();	//블랙리스트 
+    public int qRptCount();		//신고10개 Q
+    public int bookStandByCount();	//책승인
+    
 }

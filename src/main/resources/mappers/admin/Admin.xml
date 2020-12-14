@@ -6,14 +6,14 @@
 
 <mapper namespace="com.example.finalpro.dao.AdminDAO">
     <!-- 신고 10개 넘은 애들 -->
-    <select id="memRptList" resultType="com.example.finalpro.vo.CommonMemberVO">
-        SELECT * FROM
-        (select rownum,mem_no from mem WHERE MEM_RPT_CNT>10)r,
-        MEM m ,
-        (select * from grade) g
-        WHERE r.mem_no = m.mem_no
-        and m.grade_no = g.grade_no
-        AND MEM_RPT_CNT>10
+    <select id="memRptList" resultType="com.example.finalpro.vo.CommonMemberVO" parameterType="com.example.finalpro.vo.PagingVO">
+        SELECT a.* FROM
+        (select rownum rn, m.*,g.grade_name from
+            (select * from mem where mem_rpt_cnt >=10 order by mem_rpt_cnt desc)m,
+            (select * from grade) g
+            WHERE m.grade_no = g.grade_no
+            order by m.mem_rpt_cnt desc)a
+            where rn between #{start} and #{end}
     </select>
 
     <!-- 블랙리스트로 보내버리는 액션 -->
@@ -22,28 +22,28 @@
     </update>
 
     <!-- 블랙리스트 -->
-    <select id="memBlackList" resultType="com.example.finalpro.vo.CommonMemberVO">
-        SELECT * FROM
-        (SELECT ROWNUM,MEM_NO
-        FROM MEM WHERE MEM_BLACK_DATE > SYSDATE)R,
-        MEM M,
-        (SELECT * FROM GRADE) G
-        WHERE MEM_BLACK_DATE > SYSDATE
-        AND R.MEM_NO=M.MEM_NO
-        AND M.GRADE_NO = G.GRADE_NO
+    <select id="memBlackList" resultType="com.example.finalpro.vo.CommonMemberVO" parameterType="com.example.finalpro.vo.PagingVO">
+		SELECT A.* FROM
+	    	(SELECT ROWNUM RN,M.*,G.GRADE_NAME FROM
+	        	(SELECT * FROM MEM WHERE MEM_BLACK_DATE > SYSDATE ORDER BY MEM_BLACK_DATE ASC)M,
+	        	(SELECT * FROM GRADE) G
+	        	WHERE M.GRADE_NO=G.GRADE_NO
+	        	ORDER BY M.MEM_BLACK_DATE ASC)A
+	        	WHERE RN BETWEEN #{start} AND #{end}
     </select>
     
     <!-- Q신고 10개 넘은 리스트 -->
-    <select id="qRptList" resultType="com.example.finalpro.vo.QboardVO">
-		SELECT rownum,Q1.*,M.MEM_NICK,SC.SUB_CA_NAME FROM 
-		(SELECT ROWNUM,Q_NO FROM Q) R,
-		(SELECT * FROM Q) Q1,
-		(SELECT MEM_NO, MEM_NICK FROM MEM) M,
-		(SELECT * FROM SUB_CA) SC
-		WHERE R.Q_NO = Q1.Q_NO
-		AND Q1.MEM_NO = M.MEM_NO
-		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
-		AND Q_RPT_CNT>10
+    <select id="qRptList" resultType="com.example.finalpro.vo.QboardVO"  parameterType="com.example.finalpro.vo.PagingVO">
+		SELECT A.* FROM
+		    (SELECT ROW_NUMBER() OVER(ORDER BY Q.Q_RPT_CNT DESC)RN,Q.*,M.MEM_NICK,S.SUB_CA_NAME,B.BOOK_CA_NAME FROM 
+		    (SELECT * FROM Q WHERE Q_RPT_CNT>=10) Q,
+		    (SELECT * FROM MEM) M,
+		    (SELECT * FROM SUB_CA) S,
+		    (SELECT * FROM BOOK_CA) B
+		    WHERE Q.MEM_NO = M.MEM_NO
+		    AND Q.SUB_CA_NO = S.SUB_CA_NO
+		    AND Q.BOOK_CA_NO = B.BOOK_CA_NO)A
+		    WHERE RN BETWEEN #{start} AND #{end}
     </select>
 	<!-- Q신고 10개 넘은거 삭제 -->
 	<delete id="qDeleteAction" parameterType="com.example.finalpro.vo.QboardVO">
@@ -51,25 +51,31 @@
 	</delete>    
     
     <!-- 승인허가 리스트 -->
-    <select id="bookStandByList" resultType="com.example.finalpro.vo.QboardVO">
-		SELECT rownum,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,Q1.*,C.CA_NO FROM 
-		(SELECT * FROM Q) Q1,
+    <select id="bookStandByList" resultType="com.example.finalpro.vo.QboardVO"  parameterType="com.example.finalpro.vo.PagingVO">
+
+SELECT RN,A.* FROM 
+		(SELECT ROWNUM RN,A.* FROM
+        ( SELECT BS.BOOK_SCRAP_CNT,C.CA_NAME,SC.SUB_CA_NAME,BC.BOOK_CA_NAME,M.MEM_NICK,Q1.*,C.CA_NO FROM 
+		(SELECT * FROM Q WHERE Q_ADMIN_STATE=3) Q1,
 		(SELECT * FROM MEM) M,
 		(SELECT * FROM SUB_CA) SC,
 		(SELECT * FROM CA) C,
-        (SELECT * FROM BOOK_CA) BC
+        (SELECT * FROM BOOK_CA) BC,
+        (SELECT * FROM BOOK_SCRAP ORDER BY BOOK_SCRAP_CNT DESC) BS
 		WHERE Q1.MEM_NO = M.MEM_NO
+        AND Q1.Q_NO = BS.Q_NO
 		AND Q1.SUB_CA_NO = SC.SUB_CA_NO
 		AND SC.CA_NO = C.CA_NO
         AND Q1.BOOK_CA_NO = BC.BOOK_CA_NO
-		AND Q_ADMIN_STATE=3
+        ORDER BY BS.BOOK_SCRAP_CNT DESC)A)A
+        WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 승인 ( 책에 추가 )  필요 없는 컬럼
 	<insert id="bookAddAction" parameterType="com.example.finalpro.vo.QboardVO">
 		insert into test3 values(1)
 	</insert> -->
-	<!-- 승인 ( 어드빈 상태 5로 변경 )  -->
+	<!-- 승인 ( 어드빈 상태 4 로 변경 )  -->
 	<update id="bookAdminStateUpdate" parameterType="com.example.finalpro.vo.QboardVO">
 		UPDATE Q SET Q_ADMIN_STATE=4 WHERE Q_NO=#{param1}
 	</update>
@@ -102,4 +108,17 @@
 	<update id="adminExpUpdateAction" parameterType="com.example.finalpro.vo.CommonMemberVO">
 		UPDATE MEM SET MEM_EXP=#{param1} WHERE MEM_NICK='admin'
 	</update>
+	<!-- 밑에는 카운트 -->
+	<select id="memRptCount" resultType="int">
+		SELECT COUNT(*) FROM MEM WHERE MEM_RPT_CNT >=10
+	</select>
+	<select id="memBlackCount" resultType="int">
+		SELECT COUNT(*) FROM MEM WHERE MEM_BLACK_DATE>SYSDATE
+	</select>
+	<select id="qRptCount" resultType="int">
+		SELECT COUNT(*) FROM Q WHERE Q_RPT_CNT >=10
+	</select>
+	<select id="bookStandByCount" resultType="int">
+		SELECT COUNT(*) FROM Q WHERE Q_ADMIN_STATE = 3
+	</select>
 </mapper>

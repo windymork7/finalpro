@@ -294,7 +294,7 @@
                             <div class="card-body">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h4 class="card-title">
-                                        <a href="#"> <i class="fa fa-quora" aria-hidden="true"></i>
+                                        <a href="qboardContent.bo?qboardNum=${sList.q_no}&subCa=${sList.sub_ca_no}""> <i class="fa fa-quora" aria-hidden="true"></i>
                                                 ${sList.q_title}
                                         </a>
                                     </h4>
