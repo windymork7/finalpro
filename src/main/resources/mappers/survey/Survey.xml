@@ -20,4 +20,18 @@
 	<update id="surveyMemUpdate" parameterType="int">
 		UPDATE MEM SET MEM_SURVEY =1 WHERE MEM_NO=#{param1}
 	</update>
+
+	<!-- 설문지 갯 수-->
+	<select id="serveyCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM SURVEY_R
+	</select>
+
+	<!-- 설문지 성비 -->
+	<select id="surveyResponseCount" resultType="Integer">
+		SELECT SURVEY_R_CNT
+		FROM SURVEY_R
+		WHERE SURVEY_R_NO = #{param1}
+	</select>
+
 </mapper>

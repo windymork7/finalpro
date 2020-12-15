@@ -1,6 +1,7 @@
 package com.example.finalpro.controller;
 
 import com.example.finalpro.service.survey.SurveyCountUpService;
+import com.example.finalpro.service.survey.SurveyGenderCountService;
 import com.example.finalpro.service.survey.SurveyQListService;
 import com.example.finalpro.service.survey.SurveyRListService;
 import com.example.finalpro.vo.SurveyVO;
@@ -24,7 +25,10 @@ public class SurveyController {
     SurveyRListService surveyRListService;
     @Autowired
     SurveyCountUpService surveyCountUpService;
+    @Autowired
+    SurveyGenderCountService surveyGenderCountService;
 
+    // 설문조사 페이지
     @RequestMapping("/surveyForm.su")
     public String surveyForm(Model model){
 
@@ -36,6 +40,8 @@ public class SurveyController {
         model.addAttribute("main","survey/surveyForm");
         return "template";
     }
+
+    // 설문조사 카운터 업
     @RequestMapping("/surveyCountUp.su")
     public String servuyCountUp(HttpSession session, HttpServletRequest request){
         int mem_no = (Integer)session.getAttribute("userNo");
@@ -50,7 +56,10 @@ public class SurveyController {
     }
     @RequestMapping("/surveyView.su")
     public String surveyView(Model model){
-        model.addAttribute("main","survey/TestsurveyView");
+
+        surveyGenderCountService.surveyGenderCount(model);
+
+        model.addAttribute("main","survey/surveyView");
         return "template";
     }
 }

@@ -35,9 +35,6 @@
    border-color: #888 !important;
 }
 
-.list-group-item{
-   font-size: 25px;
-}
 
 .card-body {
   -ms-flex: 1 1 auto;
@@ -141,19 +138,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-info" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-info" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -173,19 +170,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-secondary" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-secondary" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -206,19 +203,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-warning" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-warning" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -250,19 +247,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-gray" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-gray" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -282,19 +279,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-danger" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-danger" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -323,19 +320,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-success" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-success" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>
@@ -355,19 +352,19 @@ background-color: #34551F;
                 </div>
                 </div>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-deepgreen" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-deepgreen" aria-hidden="true"></i>
                   </a>
                   <a href="#"
-                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center">
+                     class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
                      </b>

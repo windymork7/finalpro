@@ -61,21 +61,7 @@ public class NoticeController {
 	
 
 	*/
-	//글쓰기 폼
-	@RequestMapping("/noticeWriteForm.no")
-	public String noticeWriteView(Model model) {
-		model.addAttribute("main","notice/TestNoticeWriteForm");
-		return "template";
-	}
-	
-	//글쓰기 액션
-	@RequestMapping("/noticeWriteAction.no")
-	public String noticeWriteAction(Model model, NoticeVO noticeVO,@RequestParam MultipartFile q_file1) {
-		
-		noticeBoardInsert.noticeBoardInsert(noticeVO,q_file1);
-		model.addAttribute("main","dsqMain");
-		return "template";
-	}
+
 	/*
 	//수정폼
     @RequestMapping("/noticeUpdateForm.no")
