@@ -99,6 +99,8 @@ public class DsqController {
     TipBoardCountService tipBoardCountService;
     @Autowired
     TipBoardContentService tipBoardContentService;
+    @Autowired
+    TipBoardDownActionService tipBoardDownActionService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -623,15 +625,29 @@ public class DsqController {
         return "template";
     }
 
+    //검색팁 내용보기
     @RequestMapping("qboardTipContent.bo")
     public String qboardTipContent(Model model,@RequestParam("new_no") int new_no){
         QboardVO tipVO = tipBoardContentService.tipboardContent(new_no);
         tipVO.setNew_date(tipVO.getNew_date().substring(0,11));
+        System.out.println("tipVO:"+tipVO.toString());
         model.addAttribute("tipVO",tipVO);
         model.addAttribute("main","board/dsq_new_content");
 
         return "template";
     }
+    
+    //신고
+    @RequestMapping("/qboardTipDownAction.bo")
+    public String qboardTipDownPopup(HttpServletRequest request){
+    	System.out.println("다운");
+        String new_no = request.getParameter("new_no");
+        
+        tipBoardDownActionService.tipBoardDownAction(request);
+
+        return "redirect:/qboardTipContent.bo?new_no="+new_no;
+    }
+    
 
 
 

@@ -39,10 +39,20 @@ public class QboardVO {
     private int new_reply_up;
     private int new_reply_pick;
     private int new_reply_rpt_cnt;
+    private int new_pick_state;
     private String new_reply_date;
     private String new_reply_Content;
 
-    public int getNew_reply_no() {
+    
+    public int getNew_pick_state() {
+		return new_pick_state;
+	}
+
+	public void setNew_pick_state(int new_pick_state) {
+		this.new_pick_state = new_pick_state;
+	}
+
+	public int getNew_reply_no() {
         return new_reply_no;
     }
 
@@ -381,6 +391,7 @@ public class QboardVO {
                 ", new_no=" + new_no +
                 ", new_up=" + new_up +
                 ", new_rpt_cnt=" + new_rpt_cnt +
+                ", new_pick_state=" + new_pick_state +
                 ", new_date='" + new_date + '\'' +
                 ", new_title='" + new_title + '\'' +
                 ", new_content='" + new_content + '\'' +
