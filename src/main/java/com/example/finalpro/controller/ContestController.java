@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -66,9 +67,9 @@ public class ContestController {
 
     // 공모전 글쓰기
     @RequestMapping("/contestInsertProcess.co")
-    public String contestInsertProcess(@RequestParam MultipartFile contest_img2, ContestVO contestVO){
+    public String contestInsertProcess(@RequestParam MultipartFile contest_img2, ContestVO contestVO, HttpServletRequest request){
 
-        contestInsertService.contestInsert(contest_img2, contestVO);
+        contestInsertService.contestInsert(contest_img2, contestVO, request);
 
         return "redirect:contestList.co";
     }

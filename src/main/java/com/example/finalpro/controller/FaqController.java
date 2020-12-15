@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,21 +91,21 @@ public class FaqController {
         faqBoardDelete.faqBoardDelete(Integer.parseInt(faq_no));
 
         model.addAttribute("faq_no",faq_no);
-        model.addAttribute("main","faq/TestFaqList");
-        return "redirect:faqListForm.fa";
+        return "redirect:faqList.cu";
     }
     //쓰기폼
     @RequestMapping("faqBoardInsertForm.fa")
     public String faqBoardInsertForm(Model model){
-        model.addAttribute("main","faq/TestFaqWriteForm");
+        model.addAttribute("main","customer/cs_faq_write");
         return "template";
     }
     //쓰기 액션
     @RequestMapping("faqBoardInsert.fa")
-    public String faqBoardInsert(FaqVO faqVO, Model model){
+    public String faqBoardInsert(FaqVO faqVO){
+
         faqBoardInsert.faqBoardInsert(faqVO);
 //        model.addAttribute("main","faq/TestFaqList");
-        return "redirect:faqListForm.fa";
+        return "redirect:/faqList.cu";
     }
     //수정폼
     @RequestMapping("faqBoardUpdateForm.fa")
@@ -119,8 +122,8 @@ public class FaqController {
     public String faqBoardUpdate(@RequestParam("faq_no")String faq_no, FaqVO faqVO, Model model){
         faqBoardUpdate.faqBoardUpdate(faqVO);
 
-        model.addAttribute("main","faq/TestFaqList");
-        return "redirect:faqListForm.fa";
+//        model.addAttribute("main","custom/TestFaqList");
+        return "redirect:faqContent.cu?faq_no="+faq_no;
     }
 
 

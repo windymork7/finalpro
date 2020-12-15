@@ -2,6 +2,8 @@ package com.example.finalpro.controller;
 
 import java.util.List;
 
+import com.example.finalpro.service.book.*;
+import com.example.finalpro.vo.PagingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.finalpro.service.book.BookBookCaContentListService;
-import com.example.finalpro.service.book.BookBookCaListService;
-import com.example.finalpro.service.book.BookBookCaNameService;
-import com.example.finalpro.service.book.BookSubCaListService;
-import com.example.finalpro.service.book.BookSubCaNameService;
 import com.example.finalpro.vo.QboardVO;
 
 @Controller
@@ -29,6 +26,8 @@ public class BookController {
 	BookBookCaListService bookBookCaListSerivce;
 	@Autowired
 	BookBookCaNameService bookBookCaNameService;
+	@Autowired
+    BookBookCaCountService bookBookCaCountService;
 
 
     // 문제풀이
@@ -61,11 +60,27 @@ public class BookController {
 
     //스크랩북 메인
     @RequestMapping("/scrapBookMain.bs")
-    public String scrapBookMain(Model model,@RequestParam int ca_no ,@RequestParam(defaultValue = "1") int subCa,@RequestParam(defaultValue = "1") int bookCa){
+    public String scrapBookMain(Model model,@RequestParam int ca_no ,@RequestParam(defaultValue = "1") int subCa,@RequestParam(defaultValue = "1") int bookCa,
+                                @RequestParam(value = "nowPage", required = false) String nowPage,
+                                @RequestParam(value = "cntPerPage", required = false) String cntPerPage){
+
+        int count = bookBookCaCountService.bookCaListCount(subCa, bookCa, ca_no);
+
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+
+        PagingVO contentPaging = new PagingVO(count, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("contentPaging", contentPaging);
 
         List<QboardVO> subCaList = bookSubCaListService.subCaList(ca_no);
         List<QboardVO> bookCaList = bookBookCaListSerivce.bookCaList(ca_no);
-        List<QboardVO> contentlist = bookBookCaContentListService.bookCaContentList(subCa,bookCa,ca_no);
+        List<QboardVO> contentlist = bookBookCaContentListService.bookCaContentList(subCa,bookCa,ca_no, contentPaging);
 
         QboardVO subVO = bookSubCaNameService.subCaName(subCa);
         QboardVO bookVO = bookBookCaNameService.bookCaName(bookCa);
@@ -84,6 +99,9 @@ public class BookController {
     //스크랩북 큰 카테고리 ( 자바, 파이선 등 리스트 )
     @RequestMapping("/bookSubCaList.bs")
     public String bookSubCaList(Model model,@RequestParam int ca_no) {
+
+
+
     	List<QboardVO> list = bookSubCaListService.subCaList(ca_no);
     	
     	model.addAttribute("main","book/TestBookSubCaList");

@@ -25,6 +25,8 @@ import com.example.finalpro.vo.NoticeVO;
 import com.example.finalpro.vo.PagingVO;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class CustomerController {
 
@@ -115,11 +117,11 @@ public class CustomerController {
 	}
 
 	//글쓰기 액션
-	@RequestMapping("/noticeWriteAction.no")
-	public String noticeWriteAction(Model model, NoticeVO noticeVO,@RequestParam MultipartFile q_file1) {
+	@RequestMapping("/noticeWriteAction.cu")
+	public String noticeWriteAction(Model model, NoticeVO noticeVO, @RequestParam MultipartFile q_file1, HttpServletRequest request) {
 
-		noticeBoardInsert.noticeBoardInsert(noticeVO,q_file1);
-		model.addAttribute("main","dsqMain");
+		noticeBoardInsert.noticeBoardInsert(noticeVO,q_file1, request);
+		model.addAttribute("main","mainForm");
 		return "template";
 	}
 	
@@ -151,10 +153,13 @@ public class CustomerController {
 	
 	//FAQ 내용
 	 @RequestMapping("faqContent.cu")
-	 public String faqContent(@RequestParam("faq_no") String faq_no,Model model) {
+	 public String faqContent(@RequestParam("faq_no") String faq_no,
+			 				 @RequestParam(defaultValue = "0") int upda,Model model) {
+
 	        FaqVO faqVO = faqBoardContent.faqBoardContent(Integer.parseInt(faq_no));
 	        System.out.println(faqVO.toString());
 	        model.addAttribute("faqVO",faqVO);
+	        model.addAttribute("upda", upda);
 	        model.addAttribute("main","customer/cs_faq");
 	        return "template";
 		 

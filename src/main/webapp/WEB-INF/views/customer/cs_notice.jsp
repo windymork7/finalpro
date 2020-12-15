@@ -109,18 +109,7 @@ small {
                            <!--<img src="img/Check.jpg" width="100%" height="350"/> <br>-->
                            <br>
                         --%>
-                           <textarea class="form-control" rows="12" readonly>
-${noticeVO.notice_content }
-안녕하세요.  
-
-현재 잦은 서비스 다운으로 인해 서버 증설 작업을 진행합니다.
-그로 인해 불가피하게 서비스가 2시간 가량 정지될 예정입니다.
-해당 시간에 D's Q와 함께 하길 계획 하셨던 분들에겐 심심한 사과를 전해드립니다.
-
-- 일시 : 2020년 12월 7일 월요일 2:00AM~4:00AM
-
-- 내용 : 데이터베이스 서버 분리
-                  </textarea>
+                           <textarea class="form-control" rows="12" readonly>${noticeVO.notice_content }</textarea>
                            <br>
 							<c:set var="nick" value="${sessionScope.userNick}"/>
 							<c:if test="${nick eq 'admin'}">

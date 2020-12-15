@@ -116,16 +116,22 @@
                      <br>
                      <ul
                              class="pagination pagination-lg justify-content-center align-items-center">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                        </li>
+                        <c:if test="${contentPaging.startPage != 1 }">
+                           <li class="page-item"><a class="page-link" href="scrapBookMain.bs?nowPage=${contentPaging.startPage - 1 }&cntPerPage=${contentPaging.cntPerPage}">&laquo;</a></li>
+                        </c:if>
+                        <c:forEach begin="${contentPaging.startPage }" end="${contentPaging.endPage }" var="p">
+                           <c:choose>
+                              <c:when test="${p == contentPaging.nowPage}">
+                                 <li class="page-item active"><a class="page-link">${p}</a></li>
+                              </c:when>
+                              <c:when test="${p != contentPaging.nowPage}">
+                                 <li class="page-item"><a class="page-link" href="scrapBookMain.bs?nowPage=${p}&cntPerPage=${contentPaging.cntPerPage}">${p}</a></li>
+                              </c:when>
+                           </c:choose>
+                        </c:forEach>
+                        <c:if test="${contentPaging.endPage != contentPaging.lastPage}">
+                           <li class="page-item"><a class="page-link" href="scrapBookMain.bs?nowPage=${contentPaging.endPage+1 }&cntPerPage=${contentPaging.cntPerPage}">&raquo;</a></li>
+                        </c:if>
                      </ul>
                   </div>
 
