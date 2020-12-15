@@ -91,7 +91,7 @@
                 <a class="dropdown-item" href="/qboardListForm.bo?subCa=4">SPRING</a>
                   <a class="dropdown-item" href="#">DJANGO</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center" href="#"><b>검색 Tip</b></a>
+                <a class="dropdown-item text-center" href="/qboardTipForm.bo"><b>검색 Tip</b></a>
               </div>
             </li>
             <li class="nav-item dropdown active">

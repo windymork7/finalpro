@@ -50,7 +50,7 @@ public class SurveyController {
     }
     @RequestMapping("/surveyView.su")
     public String surveyView(Model model){
-        model.addAttribute("main","survey/TestsurveyView");
+        model.addAttribute("main","survey/surveyView");
         return "template";
     }
 }

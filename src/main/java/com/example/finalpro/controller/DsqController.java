@@ -83,9 +83,22 @@ public class DsqController {
     CommonBoardSearchService commonBoardSearchService;
     @Autowired
     CommonBoardSearchCountService commonBoardSearchCountService;
-
-
-    
+    @Autowired
+    TipBoardPickCountService tipBoardPickCountService;
+    @Autowired
+    TipBoardPickListService tipBoardPickListService;
+    @Autowired
+    TipBoardReadyCountService tipBoardReadyCountService;
+    @Autowired
+    TipBoardReadyListService tipBoardReadyListService;
+    @Autowired
+    TipBoardPopularityListService tipBoardPopularityListService;
+    @Autowired
+    TipBoardLatesListService tipBoardLatesListService;
+    @Autowired
+    TipBoardCountService tipBoardCountService;
+    @Autowired
+    TipBoardContentService tipBoardContentService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -506,7 +519,119 @@ public class DsqController {
     }
 
 
+    /***********여기부터새터**************/
+    @RequestMapping("/qboardTipForm.bo")
+    public String qboardTipForm( Model model,
+                                @RequestParam(value = "nowPage1", required = false) String nowPage1,
+                                @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
+                                @RequestParam(value = "nowPage2", required = false) String nowPage2,
+                                @RequestParam(value = "cntPerPage2", required = false) String cntPerPage2,
+                                @RequestParam(value = "nowPage3", required = false) String nowPage3,
+                                @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
+                                @RequestParam(value = "nowPage4", required = false) String nowPage4,
+                                @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
+                                @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 
+        //답변완료 글 카운트
+        int pickCount= tipBoardPickCountService.tipBoardPickCount();
+        //답변대기 글 카운트
+        int readyCount= tipBoardReadyCountService.tipBoardReadyCount();
+        //전체 글 카운트
+        int allCount= tipBoardCountService.tipboardCount();
+        int state1 = Integer.parseInt(state);
+
+        /*****답변완료********/
+        if (nowPage1 == null && cntPerPage1 == null) {
+            nowPage1 = "1";
+            cntPerPage1 = "5";
+        } else if (nowPage1 == null) {
+            nowPage1 = "1";
+        } else if (cntPerPage1 == null) {
+            cntPerPage1 = "5";
+        }
+
+        PagingVO pickPaging = new PagingVO(pickCount,Integer.parseInt(nowPage1),Integer.parseInt(cntPerPage1));
+        List<QboardVO> pickList = tipBoardPickListService.tipBoardPickList(pickPaging);
+
+        for(int i=0;i< pickList.size();i++) {
+            System.out.println("cnt: " +pickCount);
+            System.out.println("pickList: " + pickList.get(i).toString());
+        }
+        model.addAttribute("pickPaging",pickPaging);
+        model.addAttribute("pickList",pickList);
+
+        /************답변대기********/
+        if (nowPage2 == null && cntPerPage2 == null) {
+            nowPage2 = "1";
+            cntPerPage2 = "5";
+        } else if (nowPage2 == null) {
+            nowPage2 = "1";
+        } else if (cntPerPage2 == null) {
+            cntPerPage2 = "5";
+        }
+        PagingVO readyPaging = new PagingVO(readyCount,Integer.parseInt(nowPage2),Integer.parseInt(cntPerPage2));
+        List<QboardVO> readyList = tipBoardReadyListService.tipBoardReadyList(readyPaging);
+
+        model.addAttribute("readyPaging",readyPaging);
+        model.addAttribute("readyList",readyList);
+
+
+        /********최신순********/
+        if (nowPage3 == null && cntPerPage3 == null) {
+            nowPage3 = "1";
+            cntPerPage3 = "5";
+        } else if (nowPage3 == null) {
+            nowPage3 = "1";
+        } else if (cntPerPage3 == null) {
+            cntPerPage3 = "5";
+        }
+        PagingVO latePaging = new PagingVO(allCount,Integer.parseInt(nowPage3),Integer.parseInt(cntPerPage3));
+        List<QboardVO> lateList = tipBoardLatesListService.tipBoardLatesList(latePaging);
+        model.addAttribute("latePaging",latePaging);
+        model.addAttribute("lateList",lateList);
+
+
+        /********인기순******/
+        if(nowPage4 == null && cntPerPage4 == null){
+            nowPage4 = "1";
+            cntPerPage4 ="5";
+        } else if (nowPage4 == null){
+            nowPage4 = "1";
+        } else if (cntPerPage4 == null){
+            cntPerPage4 = "5";
+        }
+        PagingVO populPaging = new PagingVO(allCount,Integer.parseInt(nowPage4),Integer.parseInt(cntPerPage4));
+        List<QboardVO> populList = tipBoardPopularityListService.tipBoardPopularityList(populPaging);
+        model.addAttribute("populPaging",populPaging);
+        model.addAttribute("populList",populList);
+
+        if (state1 == 1){
+            model.addAttribute("active1", "active");
+            model.addAttribute("show1", "active show");
+        } else if(state1 == 2){
+            model.addAttribute("active2", "active");
+            model.addAttribute("show2", "active show");
+        } else if(state1 == 3){
+            model.addAttribute("active3", "active");
+            model.addAttribute("show3", "active show");
+        } else if(state1 == 4){
+            model.addAttribute("active4", "active");
+            model.addAttribute("show4", "active show");
+        }
+
+        model.addAttribute("main", "board/dsq_new_list");
+        return "template";
+    }
+
+    @RequestMapping("qboardTipContent.bo")
+    public String qboardTipContent(Model model,@RequestParam("new_no") int new_no){
+        QboardVO tipVO = tipBoardContentService.tipboardContent(new_no);
+        tipVO.setNew_date(tipVO.getNew_date().substring(0,11));
+        model.addAttribute("tipVO",tipVO);
+        model.addAttribute("main","board/dsq_new_content");
+
+        return "template";
+    }
 
 
 
