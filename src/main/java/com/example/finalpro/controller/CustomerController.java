@@ -23,6 +23,7 @@ import com.example.finalpro.service.notice.NoticeBoardUpdateForm;
 import com.example.finalpro.vo.FaqVO;
 import com.example.finalpro.vo.NoticeVO;
 import com.example.finalpro.vo.PagingVO;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class CustomerController {
@@ -94,6 +95,7 @@ public class CustomerController {
         model.addAttribute("main","customer/cs_notice_list");
         return "template";
     }
+
 	//내용
 	@RequestMapping("/noticeContent.cu")
 	public String noticeContent(@RequestParam("notice_no") String notice_no, Model model) {
@@ -102,6 +104,22 @@ public class CustomerController {
 		
 		model.addAttribute("noticeVO",noticeVO);
 		model.addAttribute("main","customer/cs_notice");
+		return "template";
+	}
+
+	//글쓰기 폼
+	@RequestMapping("/noticeWriteForm.no")
+	public String noticeWriteView(Model model) {
+		model.addAttribute("main","customer/cs_notice_write");
+		return "template";
+	}
+
+	//글쓰기 액션
+	@RequestMapping("/noticeWriteAction.no")
+	public String noticeWriteAction(Model model, NoticeVO noticeVO,@RequestParam MultipartFile q_file1) {
+
+		noticeBoardInsert.noticeBoardInsert(noticeVO,q_file1);
+		model.addAttribute("main","dsqMain");
 		return "template";
 	}
 	
