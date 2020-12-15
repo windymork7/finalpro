@@ -28,8 +28,116 @@ public class QboardVO {
     private String reply_Edit_Content;
     private int book_scrap_cnt;
     private int rn;
-    
-    
+    /*여기부터 새터 */
+    private int new_no;
+    private int new_up;
+    private int new_rpt_cnt;
+    private String new_date;
+    private String new_title;
+    private String new_content;
+    private int new_reply_no;
+    private int new_reply_up;
+    private int new_reply_pick;
+    private int new_reply_rpt_cnt;
+    private String new_reply_date;
+    private String new_reply_Content;
+
+    public int getNew_reply_no() {
+        return new_reply_no;
+    }
+
+    public void setNew_reply_no(int new_reply_no) {
+        this.new_reply_no = new_reply_no;
+    }
+
+    public int getNew_reply_up() {
+        return new_reply_up;
+    }
+
+    public void setNew_reply_up(int new_reply_up) {
+        this.new_reply_up = new_reply_up;
+    }
+
+    public int getNew_reply_pick() {
+        return new_reply_pick;
+    }
+
+    public void setNew_reply_pick(int new_reply_pick) {
+        this.new_reply_pick = new_reply_pick;
+    }
+
+    public int getNew_reply_rpt_cnt() {
+        return new_reply_rpt_cnt;
+    }
+
+    public void setNew_reply_rpt_cnt(int new_reply_rpt_cnt) {
+        this.new_reply_rpt_cnt = new_reply_rpt_cnt;
+    }
+
+    public String getNew_reply_date() {
+        return new_reply_date;
+    }
+
+    public void setNew_reply_date(String new_reply_date) {
+        this.new_reply_date = new_reply_date;
+    }
+
+    public String getNew_reply_Content() {
+        return new_reply_Content;
+    }
+
+    public void setNew_reply_Content(String new_reply_Content) {
+        this.new_reply_Content = new_reply_Content;
+    }
+
+    public int getNew_no() {
+        return new_no;
+    }
+
+    public void setNew_no(int new_no) {
+        this.new_no = new_no;
+    }
+
+    public int getNew_up() {
+        return new_up;
+    }
+
+    public void setNew_up(int new_up) {
+        this.new_up = new_up;
+    }
+
+    public int getNew_rpt_cnt() {
+        return new_rpt_cnt;
+    }
+
+    public void setNew_rpt_cnt(int new_rpt_cnt) {
+        this.new_rpt_cnt = new_rpt_cnt;
+    }
+
+    public String getNew_date() {
+        return new_date;
+    }
+
+    public void setNew_date(String new_date) {
+        this.new_date = new_date;
+    }
+
+    public String getNew_title() {
+        return new_title;
+    }
+
+    public void setNew_title(String new_title) {
+        this.new_title = new_title;
+    }
+
+    public String getNew_content() {
+        return new_content;
+    }
+
+    public void setNew_content(String new_content) {
+        this.new_content = new_content;
+    }
+
     public int getRn() {
 		return rn;
 	}
@@ -229,6 +337,7 @@ public class QboardVO {
         this.q_file = q_file;
     }
 
+    /*
     @Override
     public String toString() {
         return "QboardVO{" +
@@ -255,6 +364,32 @@ public class QboardVO {
                 ", rownum=" + rownum +
                 ", ca_name='" + ca_name + '\'' +
                 ", reply_Edit_Content='" + reply_Edit_Content + '\'' +
+                '}';
+    }
+    */
+
+    @Override
+    public String toString() {
+        return "QboardVO{" +
+                "mem_no=" + mem_no +
+                ", mem_nick='" + mem_nick + '\'' +
+                ", grade_no=" + grade_no +
+                ", ca_no=" + ca_no +
+                ", rownum=" + rownum +
+                ", ca_name='" + ca_name + '\'' +
+                ", rn=" + rn +
+                ", new_no=" + new_no +
+                ", new_up=" + new_up +
+                ", new_rpt_cnt=" + new_rpt_cnt +
+                ", new_date='" + new_date + '\'' +
+                ", new_title='" + new_title + '\'' +
+                ", new_content='" + new_content + '\'' +
+                ", new_reply_no=" + new_reply_no +
+                ", new_reply_up=" + new_reply_up +
+                ", new_reply_pick=" + new_reply_pick +
+                ", new_reply_rpt_cnt=" + new_reply_rpt_cnt +
+                ", new_reply_date='" + new_reply_date + '\'' +
+                ", new_reply_Content='" + new_reply_Content + '\'' +
                 '}';
     }
 }

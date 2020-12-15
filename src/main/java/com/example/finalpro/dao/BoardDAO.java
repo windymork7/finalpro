@@ -88,4 +88,24 @@ public interface BoardDAO {
     // 검색된 게시글 총 수
     public int qBoardSearchCount(String searchTerm);
 
+
+    /**********새터*************/
+    //새터 답변 완료 조회
+    public List<QboardVO> tipBoardPickList(PagingVO pagingVO);
+    //새터 답변 대기 조회
+    public List<QboardVO> tipBoardReadyList(PagingVO pagingVO);
+    //새터 최근순
+    public List<QboardVO> tipBoardLatesList(PagingVO pagingVO);
+    //새터 인기순
+    public List<QboardVO> tipBoardPopularityList(PagingVO pagingVO);
+
+    //새터 답변 완료 카운트
+    public int tipBoardPickCount();
+    //새터 답변 대기 카운트
+    public int tipBoardReadyCount();
+    //전체글 카운트
+    public int tipBoardCount();
+
+    //새터 게시슬 내용 보기
+    public QboardVO tipBoardContent(int new_no);
 }
