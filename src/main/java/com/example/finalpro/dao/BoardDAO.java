@@ -108,4 +108,12 @@ public interface BoardDAO {
 
     //새터 게시슬 내용 보기
     public QboardVO tipBoardContent(int new_no);
+    //새터 신고 체크
+    public int tipBoardRptCheck(int mem_no,int new_no);
+    //새터 신고 게시글에 카운트 + 1
+    public void tipBoardRptCntUp(int new_no);
+    //새터 DOWN테이블에 Update
+    public void tipBoardRptAction(QboardVO vo);
+    //새터 신고당한유저 명성 내려감
+    public void tipBoardRptExpUpdate(int mem_no);
 }

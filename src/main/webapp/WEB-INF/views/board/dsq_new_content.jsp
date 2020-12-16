@@ -1,7 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%
-	response.setCharacterEncoding("UTF-8");
+   response.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
 <html>
@@ -74,17 +76,16 @@
 				<fieldset>
 					<div>
 						<div id="c_left">
-							<legend>검색 Tip</legend>
+							<legend>검색 Tip ${tipVO.mem_no},${tipVO.new_pick_state }</legend>
 						</div>
 						<div id="c_right">
 							<c:choose>
 							<c:when test="${empty sessionScope.userNo}"></c:when>
-							<c:when test="${sessionScope.userNo ne qBoardVO.mem_no}">
-							<c:if test="${tipVO.reply_pick == 0}">
-							<a href="#">
-								<button type="button" class="btn btn-primary">답변하기</button>
-							</a>
-							<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천">
+							<c:when test="${sessionScope.userNo ne tipVO.mem_no}">
+							<c:if test="${tipVO.new_pick_state == 0}">
+								<button type="button" class="btn btn-primary"onclick="location.href='/newReplyWriteForm.bo?new_no=${tioVO.new_no}'">답변하기</button>
+							</c:if>
+							<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='newUpCheck.bo?new_no=${tipVO.new_no}'">
 								<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 							</button>
 							<span data-toggle="modal" data-target="#Modal_1">
@@ -92,6 +93,8 @@
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                   </button>
                   </span>
+                  </c:when>
+                  </c:choose>
 						</div>
 					</div>
 					<br>
@@ -130,6 +133,7 @@ ${tipVO.new_content}
 					</div>
 
 					<!-- Modal -->
+					 
 					<div class="modal fade" id="Modal_1" tabindex="-1"
 						 aria-labelledby="ModalLabel_1" aria-hidden="true">
 						<div class="modal-dialog">
@@ -140,37 +144,38 @@ ${tipVO.new_content}
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio1">신고 사유 1</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio2">신고 사유 2</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 3</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 4</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 5</label>
-										</div>
+		                       <form action="/qboardTipDownAction.bo" method="post">
+		                            <div class="modal-body">
+		                                <div class="form-group">
+		                                <input type="hidden" name="new_no" value="${tipVO.new_no}">
+		                                <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+		                            <div class="custom-control custom-radio">
+		                              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
+		                              <label class="custom-control-label" for="customRadio1">주제에 맞지 않음</label>
+		                            </div>
+		                            <div class="custom-control custom-radio">
+		                              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
+		                              <label class="custom-control-label" for="customRadio2">욕설</label>
+		                            </div>
+		                            <div class="custom-control custom-radio">
+		                              <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
+		                              <label class="custom-control-label" for="customRadio3">광고</label>
+		                            </div>
+		                            <div class="custom-control custom-radio">
+		                              <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
+		                              <label class="custom-control-label" for="customRadio4">사칭</label>
+		                            </div>
 									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>
+					
 
 					<div class="modal fade" id="Modal_3" tabindex="-1"
 						 aria-labelledby="ModalLabel_3" aria-hidden="true">

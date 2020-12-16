@@ -498,5 +498,10 @@
         (SELECT MEM_NO,MEM_NICK FROM MEM)M
         WHERE N.MEM_NO=M.MEM_NO
     </select>
-
+    
+    <!-- 여 기 부 터 는 새 터 입 니 다 람 쥐  -->
+    <!-- 새터 신고 처음하는 유저인지 체크 -->
+	<select id="tipBoardRptCheck" resultType="Integer">
+		SELECT COUNT(*) FROM NEW_DOWN WHERE NEW_NO=#{param1} AND NEW_NO=#{param2}
+	</select>
 </mapper>
