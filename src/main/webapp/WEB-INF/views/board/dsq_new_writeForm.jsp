@@ -49,7 +49,9 @@
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-			<form>
+
+			<form action="/qboardTipWriteAction.bo" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="userNo" value="${sessionScope.userNo}">
 				<fieldset>
 					<div>
 						<div id="c_left">
@@ -66,17 +68,17 @@
 
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="제목을 입력하세요"
-							   id="title">
+							   id="title" name="new_title">
 					</div>
 
 					<div class="form-group">
-                     <textarea class="form-control" id="content" rows="20">
+                     <textarea class="form-control" id="content" name="new_content" rows="20">
 
                      </textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputFile" class="text-muted">파일 Upload</label>
-						<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+						<input type="file" class="form-control-file" id="exampleInputFile" name="q_file1" aria-describedby="fileHelp">
 					</div>
 				</fieldset>
 			</form>

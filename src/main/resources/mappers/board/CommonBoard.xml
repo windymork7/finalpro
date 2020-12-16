@@ -461,19 +461,22 @@
     </select>
     <!-- 답변대기 -->
     <select id="tipBoardReadyList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">
-        SELECT A.* FROM (
+<!--        SELECT A.* FROM (-->
+<!--        SELECT ROWNUM RN, N.* FROM-->
+<!--        (SELECT * FROM NEW ORDER BY NEW_NO DESC)N,-->
+<!--        (SELECT * FROM NEW_REPLY WHERE NEW_REPLY_PICK=0)R-->
+<!--        WHERE N.NEW_NO=R.NEW_NO)A-->
+<!--        WHERE RN BETWEEN 1 AND 5-->
+        SELECT  A.* FROM (
         SELECT ROWNUM RN, N.* FROM
-        (SELECT * FROM NEW ORDER BY NEW_NO DESC)N,
-        (SELECT * FROM NEW_REPLY WHERE NEW_REPLY_PICK=0)R
-        WHERE N.NEW_NO=R.NEW_NO)A
-        WHERE RN BETWEEN 1 AND 5
+        (SELECT * FROM NEW WHERE NEW_PICK_STATE = 0 ORDER BY NEW_NO  DESC)N
+        )A
+        WHERE RN BETWEEN #{start} AND #{end}
     </select>
     <!-- 답변대기 카운트 -->
     <select id="tipBoardReadyCount" resultType="Integer">
         SELECT count(*) FROM
-        (SELECT * FROM NEW)N,
-        (SELECT * FROM NEW_REPLY WHERE NEW_REPLY_PICK=0)R
-        WHERE N.NEW_NO=R.NEW_NO
+        (SELECT * FROM NEW WHERE NEW_PICK_STATE=0)
     </select>
     <!-- 최신순 -->
     <select id="tipBoardLatesList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">
@@ -499,9 +502,49 @@
         WHERE N.MEM_NO=M.MEM_NO
     </select>
     
-    <!-- 여 기 부 터 는 새 터 입 니 다 람 쥐  -->
+    <!-- 여 기 부 터 는 새 터 신 고 입 니 다 람 쥐  -->
     <!-- 새터 신고 처음하는 유저인지 체크 -->
 	<select id="tipBoardRptCheck" resultType="Integer">
-		SELECT COUNT(*) FROM NEW_DOWN WHERE NEW_NO=#{param1} AND NEW_NO=#{param2}
+		SELECT COUNT(*) FROM NEW_DOWN WHERE MEM_NO=#{param1} AND NEW_NO=#{param2}
 	</select>
+    <!-- 새터글 신고 처음당하는 게시글인지 체크 -->
+    <select id="tipBoardDownCheck" resultType="Integer">
+        SELECT COUNT(*) FROM NEW_DOWN WHERE NEW_NO=#{param1}
+    </select>
+    <!-- 처음 신고당하는 게시글 new_down테이블에 insert-->
+    <insert id="tipBoardDownInsert" parameterType="Integer">
+        INSERT INTO NEW_DOWN VALUES(NEW_DOWN_SEQ.NEXTVAL,#{param2},#{param3},#{param1})
+    </insert>
+    <!-- 새터게시글 신고수 +1 -->
+    <update id="tipBoardRptCntUp" parameterType="Integer">
+        UPDATE NEW SET NEW_RPT_CNT= NEW_RPT_CNT+1 WHERE NEW_NO=#{param1}
+    </update>
+    <!-- 유저 exp 마이너스 -->
+    <update id="tipBoardRptExpUpdate" parameterType="Integer">
+        UPDATE MEM SET MEM_EXP = MEM_EXP + #{param2} WHERE MEM_NO=#{param1}
+    </update>
+    <!-- 새터글 추천 처음하는 유저인지 체크-->
+    <select id="tipBoardUpCheck" resultType="Integer">
+        SELECT COUNT(*) FROM NEW_UP
+        WHERE MEM_NO=#{param1} AND NEW_NO=#{param2}
+    </select>
+    <!-- 새터 게시글에 추천 카운트 +1-->
+    <update id="tipBoardUpCntUp">
+        UPDATE NEW SET NEW_UP = NEW_UP + 1
+        WHERE NEW_NO=#{param1}
+    </update>
+    <!-- new_up 테이블에 insert-->
+    <insert id="tipBoardUpInsert">
+        INSERT INTO NEW_UP VALUES(NEW_UP_SEQ.NEXTVAL,#{param2},#{param1})
+    </insert>
+    <!-- 추천 당한유저 명성 + 3-->
+    <update id="tipBoardUpExpUpdate">
+        UPDATE MEM SET MEM_EXP = MEM_EXP + 3
+        WHERE MEM_NO=#{param1}
+    </update>
+
+    <!-- 새터 글쓰기 -->
+    <insert id="tipBoardWriteAction" parameterType="com.example.finalpro.vo.QboardVO">
+        INSERT INTO NEW VALUES(NEW_SEQ.NEXTVAL,#{mem_no},4,#{new_title},#{new_content},0,0,sysdate,0,#{new_file})
+    </insert>
 </mapper>

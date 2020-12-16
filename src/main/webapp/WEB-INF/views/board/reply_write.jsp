@@ -142,6 +142,7 @@
                                 <img src="upload/${qBoardVO.q_file}" width="100%" height="350"><br><br>
                             </c:if>
                         </c:if>
+
 					    <textarea class="form-control" rows="20" readonly>${qBoardVO.q_content}</textarea>
 						<br>
 						<div id="q_right">

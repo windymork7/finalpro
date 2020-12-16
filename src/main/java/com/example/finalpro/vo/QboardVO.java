@@ -42,8 +42,17 @@ public class QboardVO {
     private int new_pick_state;
     private String new_reply_date;
     private String new_reply_Content;
+    private String new_file;
 
-    
+
+    public String getNew_file() {
+        return new_file;
+    }
+
+    public void setNew_file(String new_file) {
+        this.new_file = new_file;
+    }
+
     public int getNew_pick_state() {
 		return new_pick_state;
 	}
@@ -400,6 +409,7 @@ public class QboardVO {
                 ", new_reply_pick=" + new_reply_pick +
                 ", new_reply_rpt_cnt=" + new_reply_rpt_cnt +
                 ", new_reply_date='" + new_reply_date + '\'' +
+                ", new_file='" + new_file + '\'' +
                 ", new_reply_Content='" + new_reply_Content + '\'' +
                 '}';
     }
