@@ -28,13 +28,18 @@
 <%--   crossorigin="anonymous"></script>--%>
 
 <style>
-.card-header-gd {
-   padding: 0.75rem 1.25rem;
-   margin-bottom: 0;
-   background-color: #f3969a;
-   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-   color: #fff;
-}
+   .card-header-gd {
+      padding: 0.75rem 1.25rem;
+      margin-top:0;
+      margin-bottom: 0;
+      background-color: #f3969a;
+      color: #fff;
+      border-radius: 0.4rem 0.4rem 0 0;
+      border-top: 2px solid #f3969a;
+      border-left: 2px solid #f3969a;
+      border-bottom:0px;
+      border-right: 2px solid #f3969a;
+   }
 
 #c_left {
    float: left;
@@ -136,10 +141,10 @@
          
          <div class="col-sm-3">
             <br><br><br>
-            <div id="guideline" class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card" style="max-width: 20rem; border:0">
 
                <div class="card-header-gd"><b>필독사항</b></div>
-               <div class="card-body">
+            <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
             <p>1. 질문은 <b>구체</b>적으로 해주세요!</p>
             <p>2. 토론을 유발할 가능성이 높은 질문은 피하세요!</p>
             <p>3. 질문 내용에 개인정보(실명, 주민번호, 연락처)가 포함되지 않게 작성해주세요!</p>

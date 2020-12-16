@@ -49,7 +49,7 @@ public class MypageController {
                              @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
                              @RequestParam(value = "nowPage4", required = false) String nowPage4,
                              @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
-                             @RequestParam(value = "state", defaultValue = "1", required = false) String state){
+                             @RequestParam(value = "state", defaultValue = "2", required = false) String state){
 
         int state1 = Integer.parseInt(state);
 
@@ -228,7 +228,7 @@ public class MypageController {
         System.out.println(commonMemberVO.toString());
 
         mypageUpdateActionService.mypageUpdateAction(session,commonMemberVO);
-        return "redirect:mypageInfo.my";
+        return "redirect:/mypageMain.my";
 
     }
 }

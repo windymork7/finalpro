@@ -29,10 +29,15 @@
    <style>
       .card-header-gd {
          padding: 0.75rem 1.25rem;
+         margin-top:0;
          margin-bottom: 0;
          background-color: #f3969a;
-         border-bottom: 1px solid rgba(0, 0, 0, 0.125);
          color: #fff;
+         border-radius: 0.4rem 0.4rem 0 0;
+         border-top: 2px solid #f3969a;
+         border-left: 2px solid #f3969a;
+         border-bottom:0px;
+         border-right: 2px solid #f3969a;
       }
       a {
          color: #888;
@@ -139,12 +144,11 @@
             </div>
 
             <div class="col-sm-3">
-               <div class="card border-secondary mb-3"
-                    id="guideline">
+               <div class="card" style="border:0">
                   <div class="card-header-gd">
                      <b>스크랩 기준</b>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
                      <p>자바 시작하기 :
                         <i class="fa fa-book" aria-hidden="true"></i>
                         100 이상</p>

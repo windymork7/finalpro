@@ -11,8 +11,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>business_join</title>
-<%--   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>--%>
-<%--   <script src="js/mapApi.js"></script>--%>
+   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <script src="js/mapApi.js"></script>
 <%--   <!-- 부트스트랩 -->--%>
 <%--   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
 <%--   <link rel="stylesheet" href="css/bootstrap.css">--%>

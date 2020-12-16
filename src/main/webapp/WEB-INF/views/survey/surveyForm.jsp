@@ -45,10 +45,15 @@
     <style>
         .card-header-gd {
             padding: 0.75rem 1.25rem;
+            margin-top:0;
             margin-bottom: 0;
             background-color: #f3969a;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
             color: #fff;
+            border-radius: 0.4rem 0.4rem 0 0;
+            border-top: 2px solid #f3969a;
+            border-left: 2px solid #f3969a;
+            border-bottom:0px;
+            border-right: 2px solid #f3969a;
         }
     </style>
 </head>
@@ -57,35 +62,7 @@
     <div class="row">
 
         <div class="col-sm-2">
-            <div class="card mb-3">
-                <h3 class="card-header">Card header</h3>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="d-block user-select-none" width="100%"
-                     aria-label="Placeholder: Image cap" focusable="false" role="img"
-                     preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
-                     style="font-size: 1.125rem; text-anchor: middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the
-                        card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a> <a href="#"
-                                                                   class="card-link">Another link</a>
-                </div>
-                <div class="card-footer text-muted">2 days ago</div>
-            </div>
+            <img src="img/Banner4.png" width="100%">
         </div>
 
         <div class="col-sm-7">
@@ -148,14 +125,15 @@
 
         <div class="col-sm-3">
 
-            <div class="card border-secondary mb-3" id="guideline">
+            <div class="card" style="border:0">
                 <div class="card-header-gd">
                     <b>공지사항</b>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
                     <p>1. 설문조사 작성 후, 결과를 확인할 수 있습니다!</p>
                     <p>2. 보기의 내용과 가장 가깝다고 생각하는 선택지에 체크해주세요!</p>
                     <p>3. 설문조사는 한 계정당 1회만 참여할 수 있습니다!</p>
+                    <p>4. 설문 참여시, EXP15를 지급 받습니다!</p>
                 </div>
             </div>
         </div>

@@ -127,7 +127,7 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
                  role="button" aria-haspopup="true" aria-expanded="false">설문조사</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="surveyForm.su"><b>설문조사 참여</b></a>
+                <a class="dropdown-item" onclick="loginCheck()"><b>설문조사 참여</b></a>
                 <a class="dropdown-item" href="surveyView.su"><b>설문조사 통계</b></a>
               </div>
             </li>
@@ -135,9 +135,9 @@
           </ul>
 
           <form action="/qboardSearchList.bo" method="post" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" style="padding-right: 0.6em; padding-left: 0.6em; border-radius: 10rem;" type="text" name="searchTerm" placeholder="검색어를 입력하세요.">
+            <input class="form-control mr-sm-2" style="border-radius: 10rem;" type="text" name="searchTerm" placeholder="검색어를 입력하세요.">
             <button class="btn btn-primary my-2 my-sm-0" type="submit">
-              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </form>
 
@@ -171,12 +171,12 @@
                 <i class="fa fa-user-circle fa-2x" aria-hidden="true"
                    style="color: #fff;"></i>
               </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <c:choose>
                   <c:when test="${sessionScope.userNick eq 'admin'}">
                     <div id="popover-content" style="display: none">
                       <ul class="list-group custom-popover">
                         <li class="list-group-item"><a href="adminMain.ad"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.userNick}</i></a></li>
-                        <li class="list-group-item"><a href="#" class="a-header">계정 설정</a></li>
                         <li class="list-group-item"><a href="logout.me" class="a-header">로그아웃</a></li>
                       </ul>
                     </div>
@@ -197,17 +197,21 @@
 <%--                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>--%>
                   </c:when>
                   <c:when test="${not empty sessionScope.businessNick}">
-                    <span><a href="#">${sessionScope.businessNick}</a>&nbsp;</span>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/logout.me'">로그아웃</button>
+                    <div id="popover-content" style="display: none">
+                      <ul class="list-group custom-popover">
+                        <li class="list-group-item"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.businessNick}</i></li>
+                        <li class="list-group-item"><a href="logout.me" class="a-header">로그아웃</a></li>
+                      </ul>
+                    </div>
                   </c:when>
                 </c:choose>
             </c:when>
             <c:otherwise>
-              <button type="button" class="btn btn-primary" onclick="location.href='/loginForm.me'">로그인</button>&nbsp;&nbsp;
+              <button type="button" class="btn btn-outline-primary" onclick="location.href='/loginForm.me'" style="color:#fff; border-color:#fff; border-radius: 10rem;"><b>로그인</b></button>&nbsp;&nbsp;
             </c:otherwise>
           </c:choose>
-          <c:if test="${empty sessionScope.userNick}">
-            <button type="button" class="btn btn-primary" onclick="location.href='/joinFormWay.me'">회원가입</button>
+          <c:if test="${empty sessionScope.userNick && empty sessionScope.businessNick}">
+            <button type="button" class="btn btn-outline-primary" onclick="location.href='/joinFormWay.me'" style="color:#fff; border-color:#fff; border-radius: 10rem;"><b>회원가입</b></button>
           </c:if>
         </div>
       </nav>
@@ -225,5 +229,16 @@
       }
     });
   });
+
+  function loginCheck(){
+    if (${empty sessionScope.userNick}){
+      alert("로그인을 먼저 해주세요.");
+      location.href="/loginForm.me";
+    } else {
+      location.href="surveyForm.su";
+    }
+
+
+  }
 </script>
 </html>

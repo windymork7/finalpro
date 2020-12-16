@@ -52,8 +52,14 @@
                <button type="button" class="btn btn-primary">글 등록하기</button>
             </div>
             -->
-
          <hr class="my-4">
+         <div class="text-right">
+         <c:if test="${sessionScope.userNick eq 'admin'}">
+            <button type="button" class="btn btn-primary" onclick="location.href='noticeWriteForm.no'">글쓰기</button>
+            <br><br>
+         </c:if>
+         </div>
+
          <table class="table">
             <thead>
                <tr class="table-secondary">
@@ -73,9 +79,6 @@
                </tr>
                <br>
             </c:forEach>
-               <c:if test="${sessionScope.userNick eq 'admin'}">
-                 <button type="button" class="btn btn-primary" onclick="location.href='noticeWriteForm.no'">글쓰기</button>
-               </c:if>
             </tbody>
          </table>
 
