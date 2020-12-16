@@ -13,16 +13,16 @@
     <meta name="viewport" content="width=de0vice-width, initial-scale=1">
     <title>dsq_searchTip</title>
     <!-- 부트스트랩 -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="https://use.fontawesome.com/b490e94c82.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            crossorigin="anonymous"></script>
-    <script
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+<%--    <link rel="stylesheet" href="css/bootstrap.css">--%>
+<%--    <script src="https://use.fontawesome.com/b490e94c82.js"></script>--%>
+<%--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--    <script--%>
+<%--            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"--%>
+<%--            crossorigin="anonymous"></script>--%>
+<%--    <script--%>
+<%--            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"--%>
+<%--            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"--%>
+<%--            crossorigin="anonymous"></script>--%>
 
     <style>
         .nav-tabs {

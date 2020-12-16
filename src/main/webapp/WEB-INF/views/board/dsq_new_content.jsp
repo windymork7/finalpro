@@ -13,11 +13,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>dsq_searchTip</title>
 	<!-- 부트스트랩 -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<script src="https://use.fontawesome.com/b490e94c82.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<%--	<link rel="stylesheet" href="css/bootstrap.css">--%>
+<%--	<script src="https://use.fontawesome.com/b490e94c82.js"></script>--%>
+<%--	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--%>
+<%--	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--%>
 
 
 	<style>
@@ -72,7 +72,6 @@
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-			<form>
 				<fieldset>
 					<div>
 						<div id="c_left">
@@ -168,8 +167,8 @@ ${tipVO.new_content}
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+									<button type="submit" class="btn btn-primary">전송</button>
+									<button type="button" class="btn btn-secondary">닫기</button>
 								</div>
 								</form>
 							</div>
@@ -177,47 +176,47 @@ ${tipVO.new_content}
 					</div>
 					
 
-					<div class="modal fade" id="Modal_3" tabindex="-1"
-						 aria-labelledby="ModalLabel_3" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="ModalLabel_3">신고 사유를 선택하세요.</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<div class="form-group">
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio1">신고 사유 1</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio2">신고 사유 2</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 3</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 4</label>
-										</div>
-										<div class="custom-control custom-radio">
-											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-											<label class="custom-control-label" for="customRadio3">신고 사유 5</label>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-								</div>
-							</div>
-						</div>
-					</div>
+<%--					<div class="modal fade" id="Modal_3" tabindex="-1"--%>
+<%--						 aria-labelledby="ModalLabel_3" aria-hidden="true">--%>
+<%--						<div class="modal-dialog">--%>
+<%--							<div class="modal-content">--%>
+<%--								<div class="modal-header">--%>
+<%--									<h5 class="modal-title" id="ModalLabel_3">신고 사유를 선택하세요.</h5>--%>
+<%--									<button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--										<span aria-hidden="true">&times;</span>--%>
+<%--									</button>--%>
+<%--								</div>--%>
+<%--								<div class="modal-body">--%>
+<%--									<div class="form-group">--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio1">신고 사유 1</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio2">신고 사유 2</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 3</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 4</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 5</label>--%>
+<%--										</div>--%>
+<%--									</div>--%>
+<%--								</div>--%>
+<%--								<div class="modal-footer">--%>
+<%--									<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>--%>
+<%--									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
+<%--					</div>--%>
 
 
 
@@ -326,7 +325,6 @@ ${tipVO.new_content}
 					<br>
 
 				</fieldset>
-			</form>
 		</div>
 
 		<div class="col-sm-1 offset-sm-2">
