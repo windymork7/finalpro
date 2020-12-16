@@ -254,8 +254,8 @@
                             <div class="card-body">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h4 class="card-title">
-                                        <a href="qboardContent.bo?qboardNum=${sList.q_no}&subCa=${sList.sub_ca_no}""> <i class="fa fa-quora" aria-hidden="true"></i>
-                                                ${sList.q_title}
+                                        <a href="qboardContent.bo?qboardNum=${sList.q_no}&subCa=${sList.sub_ca_no}"> <i class="fa fa-quora" aria-hidden="true"></i>
+                                                ${sList.q_title},${sList.sub_ca_no}
                                         </a>
                                     </h4>
                                     <small> <span class="glyphicon glyphicon-thumbs-up"

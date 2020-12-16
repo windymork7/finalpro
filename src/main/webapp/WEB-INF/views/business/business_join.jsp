@@ -103,13 +103,15 @@
                   <div class="input-group mb-3">
                      <input type="text" class="form-control" id="biz_tel" name="biz_tel">
                      <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary" onclick="telCheck()">중복
+                        <button type="button" class="btn btn-outline-secondary" style="border-radius: 0rem 0.4rem 0.4rem 0rem;" onclick="telCheck()">중복
                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </button>
+                     </div>
+                     &nbsp;
                         <button type="button" class="btn btn-secondary" onclick="random()"
                            data-toggle="modal" data-target="#exampleModal3">인증</button>
                      </div>
-                  </div>
+
                </div>
             </div>
 
