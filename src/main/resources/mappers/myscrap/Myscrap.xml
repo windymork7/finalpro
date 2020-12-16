@@ -33,7 +33,7 @@
 	<select id="myscrapList" resultType="com.example.finalpro.vo.MyscrapVO" parameterType="com.example.finalpro.vo.PagingVO">
 		SELECT A.*
 		FROM
-		(SELECT ROWNUM RN ,MS.* ,Q.Q_TITLE,B.BOOK_CA_NAME,S.SUB_CA_NAME FROM
+		(SELECT ROWNUM RN ,MS.* ,Q.Q_TITLE,B.BOOK_CA_NAME,S.SUB_CA_NAME,S.SUB_CA_NO FROM
 		(SELECT * FROM MY_SCRAP WHERE MEM_NO=#{mem_no} ORDER BY MY_SCRAP_NO DESC)MS,
 		(SELECT * FROM Q)Q,
 		(SELECT * FROM BOOK_CA)B,
