@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,9 +53,9 @@ public class EditController {
 
     // 에디터 게시판 글쓰기
     @RequestMapping("/editBoardInsertProcess.ed")
-    public String editBoardInsertProcess(@RequestParam MultipartFile edit_img1, EditMemberVO editMemberVO){
+    public String editBoardInsertProcess(@RequestParam MultipartFile edit_img1, EditMemberVO editMemberVO, HttpServletRequest request){
 
-        editBoardInsertService.editBoardInsert(edit_img1, editMemberVO);
+        editBoardInsertService.editBoardInsert(edit_img1, editMemberVO, request);
 
         return "redirect:/editBoardList.ed";
     }

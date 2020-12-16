@@ -73,7 +73,9 @@
                </tr>
                <br>
             </c:forEach>
+               <c:if test="${sessionScope.userNick eq 'admin'}">
                  <button type="button" class="btn btn-primary" onclick="location.href='noticeWriteForm.no'">글쓰기</button>
+               </c:if>
             </tbody>
          </table>
 

@@ -15,6 +15,8 @@ public class PagingVO {
     private int subCa;
     private int mem_no;
     private String searchTerm;
+    private int ca_no;
+    private int book_no;
 
     public int getMem_no() {
         return mem_no;
@@ -181,6 +183,22 @@ public class PagingVO {
         this.searchTerm = searchTerm;
     }
 
+    public int getCa_no() {
+        return ca_no;
+    }
+
+    public void setCa_no(int ca_no) {
+        this.ca_no = ca_no;
+    }
+
+    public int getBook_no() {
+        return book_no;
+    }
+
+    public void setBook_no(int book_no) {
+        this.book_no = book_no;
+    }
+
     @Override
     public String toString() {
         return "PagingVO{" +
@@ -196,6 +214,8 @@ public class PagingVO {
                 ", subCa=" + subCa +
                 ", mem_no=" + mem_no +
                 ", searchTerm='" + searchTerm + '\'' +
+                ", ca_no=" + ca_no +
+                ", book_no=" + book_no +
                 '}';
     }
 }

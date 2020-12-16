@@ -14,6 +14,7 @@ public class FaqBoardContentImpl implements FaqBoardContent {
     @Override
     public FaqVO faqBoardContent(int faq_no){
         FaqVO faqVO = faqDAO.faqBoardContent(faq_no);
+        faqVO.setFaq_date(faqVO.getFaq_date().substring(0, 11));
         return faqVO;
     }
 

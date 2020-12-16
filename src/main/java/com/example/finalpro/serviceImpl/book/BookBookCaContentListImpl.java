@@ -2,6 +2,7 @@ package com.example.finalpro.serviceImpl.book;
 
 import java.util.List;
 
+import com.example.finalpro.vo.PagingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,13 @@ public class BookBookCaContentListImpl implements BookBookCaContentListService{
 	BookDAO bookDAO;
 
 	@Override
-	public List<QboardVO> bookCaContentList(int sub_ca_no,int book_ca_no,int ca_no) {
+	public List<QboardVO> bookCaContentList(int sub_ca_no, int book_ca_no, int ca_no, PagingVO contentPaging) {
+
+		contentPaging.setSubCa(sub_ca_no);
+		contentPaging.setBook_no(book_ca_no);
+		contentPaging.setCa_no(ca_no);
 		
-		List<QboardVO> list = bookDAO.bookCaContentList(sub_ca_no,book_ca_no,ca_no);
+		List<QboardVO> list = bookDAO.bookCaContentList(contentPaging);
 		return list;
 	}
 	

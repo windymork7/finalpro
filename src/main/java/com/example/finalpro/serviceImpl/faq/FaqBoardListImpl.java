@@ -19,7 +19,6 @@ public class FaqBoardListImpl implements FaqBoardList {
     @Override
     public List<FaqVO> faqBoardList(){
 
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy.mm.dd");
         List<FaqVO> list = faqDAO.faqBoardList();
 
         for ( int i =0; i<list.size();i++){

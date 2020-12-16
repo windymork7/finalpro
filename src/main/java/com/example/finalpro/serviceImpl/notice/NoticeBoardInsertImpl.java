@@ -12,6 +12,8 @@ import com.example.finalpro.dao.NoticeDAO;
 import com.example.finalpro.service.notice.NoticeBoardInsert;
 import com.example.finalpro.vo.NoticeVO;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class NoticeBoardInsertImpl implements NoticeBoardInsert {
 
@@ -19,13 +21,15 @@ public class NoticeBoardInsertImpl implements NoticeBoardInsert {
 	NoticeDAO noticeDAO;
 	
 	@Override
-	public void noticeBoardInsert(NoticeVO noticeVO,MultipartFile notice_file) {
+	public void noticeBoardInsert(NoticeVO noticeVO, MultipartFile notice_file, HttpServletRequest request) {
+
+		String contextPath = request.getSession().getServletContext().getRealPath("/");
 		System.out.println("notice_file: "+notice_file);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일HH시mm분ss초");
 		Calendar c1 = Calendar.getInstance();
         String strToday = sdf.format(c1.getTime());
         
-        File dest = new File("E:/학원/finalworkspace/finalpro/src/main/resources/static/upload/"+strToday+"_"+notice_file.getOriginalFilename());
+        File dest = new File(contextPath + "../resources/static/upload/"+strToday+"_"+notice_file.getOriginalFilename());
 		
         if (!(notice_file.getOriginalFilename().equals(""))){
         	noticeVO.setNotice_file(strToday+"_"+notice_file.getOriginalFilename());

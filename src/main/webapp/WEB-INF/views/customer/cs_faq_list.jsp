@@ -72,6 +72,9 @@
                   <td>${faq.faq_date }</td>
                </tr>
             </c:forEach>
+            <c:if test="${sessionScope.userNick eq 'admin'}">
+               <button type="button" class="btn btn-primary" onclick="location.href='faqBoardInsertForm.fa'">글쓰기</button>
+            </c:if>
             <!-- 
                <tr class="table-light">
                   <td>1</td>

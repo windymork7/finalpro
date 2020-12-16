@@ -13,17 +13,17 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>cs_faq</title>
 <!-- 부트스트랩 -->
-<link rel="stylesheet" href="css/bootstrap.css">
-<script src="https://use.fontawesome.com/b490e94c82.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
+<%--<link rel="stylesheet" href="css/bootstrap.css">--%>
+<%--<script src="https://use.fontawesome.com/b490e94c82.js"></script>--%>
+<%--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--<script--%>
+<%--	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"--%>
+<%--	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"--%>
+<%--	crossorigin="anonymous"></script>--%>
+<%--<script--%>
+<%--	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"--%>
+<%--	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"--%>
+<%--	crossorigin="anonymous"></script>--%>
 
 
 <style>
@@ -69,7 +69,7 @@ small {
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
-				<form>
+				<form action="/faqBoardUpdate.fa" method="post">
 					<fieldset>
 						<div>
 							<div>
@@ -81,27 +81,45 @@ small {
 							<div class="card-header">
 
 								<div class="d-flex w-100 justify-content-between">
-									<h4 class="card-title">${faqVO.faq_title }</h4>
+									<h4 class="card-title">
+										<c:choose>
+											<c:when test="${upda == 0}">
+												${faqVO.faq_title }
+											</c:when>
+											<c:when test="${upda == 1}">
+												<input type="text" class="form-control" name="faq_title" value="${faqVO.faq_title}">
+											</c:when>
+										</c:choose>
+									</h4>
 								</div>
 
 								<p class="card-text">
 								<h6>관리자</h6>
-								<p>2020-12-05</p>
+								<p>${faqVO.faq_date}</p>
 							</div>
-
+							<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 							<div class="card-body">
 								<div class="card-text" id="question-text">
-
-									<textarea class="form-control" rows="4" readonly>
-${faqVO.faq_content }
-                  </textarea>
+									<c:choose>
+										<c:when test="${upda == 0}">
+											<textarea class="form-control" name="faq_content" rows="4" readonly>${faqVO.faq_content }</textarea>
+										</c:when>
+										<c:when test="${upda == 1}">
+											<textarea class="form-control" name="faq_content" rows="4">${faqVO.faq_content }</textarea>
+										</c:when>
+									</c:choose>
 									<br>
-									<c:set var="nick" value="${sessionScope.userNick}"/>
-									<c:if test="${nick eq 'admin'}">									
-									<div class="text-right">
-										<!-- 관리자만 보이게 -->
-										<button type="button" class="btn btn-primary">수정</button>
-										<button type="button" class="btn btn-secondary">삭제</button>
+									<c:if test="${sessionScope.userNick eq 'admin'}">
+										<div class="text-right">
+										<c:choose>
+											<c:when test="${upda == 0}">
+												<button type="button" onclick="location.href='faqContent.cu?upda=1&faq_no=${faqVO.faq_no}'" class="btn btn-primary">수정</button>
+											</c:when>
+											<c:when test="${upda == 1}">
+												<button type="submit" class="btn btn-primary">수정</button>
+											</c:when>
+										</c:choose>
+										<button type="button" onclick="faqDelete()" class="btn btn-secondary">삭제</button>
 									</div>
 									</c:if>
 								</div>
@@ -117,4 +135,14 @@ ${faqVO.faq_content }
 	
 
 </body>
+<script>
+	function faqDelete(){
+
+		var result = confirm("정말로 삭제하시겠습니까?");
+		if (result == true){
+			location.href="faqBoardDelete.fa?faq_no=${faqVO.faq_no}";
+		}
+	}
+
+</script>
 </html>
