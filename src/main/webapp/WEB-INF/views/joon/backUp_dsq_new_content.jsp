@@ -66,10 +66,6 @@
 </head>
 <body>
 
-<c:set var="length" value="${fn:length(tipVO.new_file)}"/>
-<c:set var="q_file3" value="${fn:substring(tipVO.new_file, length-3, length)}"/>
-<c:set var="q_file4" value="${fn:substring(tipVO.new_file, length-4, length)}"/>
-
 <br>
 <br>
 <div class="container-fluid">
@@ -79,11 +75,8 @@
 				<fieldset>
 					<div>
 						<div id="c_left">
-							<legend>검색 Tip</legend>
+							<legend>검색 Tip ${tipVO.mem_no},${tipVO.new_pick_state }</legend>
 						</div>
-						<form action="qboardTipUpAction.bo" method="post">
-							<input type="hidden" name="new_no" value="${tipVO.new_no}">
-							<input type="hidden" name="mem_no" value="${sessionScope.userNo}">
 						<div id="c_right">
 							<c:choose>
 							<c:when test="${empty sessionScope.userNo}"></c:when>
@@ -91,11 +84,9 @@
 							<c:if test="${tipVO.new_pick_state == 0}">
 								<button type="button" class="btn btn-primary"onclick="location.href='/newReplyWriteForm.bo?new_no=${tioVO.new_no}'">답변하기</button>
 							</c:if>
-
-
-							<button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천">
+							<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="추천" onclick="location.href='newUpCheck.bo?new_no=${tipVO.new_no}'">
 								<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-							</button></form>
+							</button>
 							<span data-toggle="modal" data-target="#Modal_1">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="신고">
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -104,7 +95,6 @@
                   </c:when>
                   </c:choose>
 						</div>
-					</form>
 					</div>
 					<br>
 
@@ -126,13 +116,6 @@
 						</div>
 						<div class="card-body">
 							<div class="card-text" id="question-text">
-								${tipVO.new_file}
-								<c:if test="${not empty tipVO.new_file}">
-									<a href="${pageContext.request.contextPath}/upload/${tipVO.new_file}">${tipVO.new_file}</a>
-									<c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
-										<img src="upload/${tipVO.new_file}" width="100%" height="350"><br><br>
-									</c:if>
-								</c:if>
                    <textarea class="form-control" rows="20" readonly>
 ${tipVO.new_content}
                   </textarea>
@@ -192,6 +175,51 @@ ${tipVO.new_content}
 						</div>
 					</div>
 					
+
+<%--					<div class="modal fade" id="Modal_3" tabindex="-1"--%>
+<%--						 aria-labelledby="ModalLabel_3" aria-hidden="true">--%>
+<%--						<div class="modal-dialog">--%>
+<%--							<div class="modal-content">--%>
+<%--								<div class="modal-header">--%>
+<%--									<h5 class="modal-title" id="ModalLabel_3">신고 사유를 선택하세요.</h5>--%>
+<%--									<button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--										<span aria-hidden="true">&times;</span>--%>
+<%--									</button>--%>
+<%--								</div>--%>
+<%--								<div class="modal-body">--%>
+<%--									<div class="form-group">--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio1">신고 사유 1</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio2">신고 사유 2</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 3</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 4</label>--%>
+<%--										</div>--%>
+<%--										<div class="custom-control custom-radio">--%>
+<%--											<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">--%>
+<%--											<label class="custom-control-label" for="customRadio3">신고 사유 5</label>--%>
+<%--										</div>--%>
+<%--									</div>--%>
+<%--								</div>--%>
+<%--								<div class="modal-footer">--%>
+<%--									<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>--%>
+<%--									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
+<%--					</div>--%>
+
+
+
 
 					<form id="editListForm">
 						<div id="commentList">

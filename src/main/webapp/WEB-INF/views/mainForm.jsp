@@ -137,19 +137,19 @@ background-color: #34551F;
                 <span class="badge badge-info">대표적인 절차 지향언어</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-info" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=3"
                      class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-info" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="scrapBookMain.bs?ca_no=1&subCa=3&bookCa=11"
                      class="list-group-item list-group-item-action border-info d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -169,19 +169,19 @@ background-color: #34551F;
                 <span class="badge badge-secondary">대표적인 객체 지향 언어</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-secondary" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=1"
                      class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-secondary" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="scrapBookMain.bs?ca_no=1&subCa=1&bookCa=1"
                      class="list-group-item list-group-item-action border-secondary d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -202,19 +202,19 @@ background-color: #34551F;
                 <span class="badge badge-warning">간결하고 생산성 높은 언어</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-warning" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="http://localhost:8945/qboardListForm.bo?subCa=2"
                      class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-warning" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/scrapBookMain.bs?ca_no=1&subCa=2&bookCa=6"
                      class="list-group-item list-group-item-action border-warning d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -246,19 +246,19 @@ background-color: #34551F;
                 <span class="badge badge-gray">유닉스 체제에서 가장 많이 사용하는 데이터 저장소</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-gray" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=7"
                      class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-gray" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/scrapBookMain.bs?ca_no=3&subCa=8&bookCa=36"
                      class="list-group-item list-group-item-action border-gray d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -278,19 +278,19 @@ background-color: #34551F;
                 <span class="badge badge-danger">개방 관계형으로 운영되는 언어 바탕의 데이터 저장소</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-danger" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=8"
                      class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-danger" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/scrapBookMain.bs?ca_no=3&subCa=8&bookCa=36"
                      class="list-group-item list-group-item-action border-danger d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -319,19 +319,19 @@ background-color: #34551F;
                 <span class="badge badge-success">자바 플랫폼을 위한 오픈 소스 애플리케이션 프레임워크</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-success" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=4"
                      class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-success" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/scrapBookMain.bs?ca_no=2&subCa=4&bookCa=16"
                      class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -351,7 +351,7 @@ background-color: #34551F;
                 <span class="badge badge-deepgreen">파이썬으로 작성된 오픈 소스 웹 프레임워크</span>
                 </div>
                 </div>
-                  <a href="#"
+                  <a href="langJavaFirst01.fi"
                      class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-deepgreen" aria-hidden="true"></i>

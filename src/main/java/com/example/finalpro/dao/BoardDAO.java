@@ -108,12 +108,28 @@ public interface BoardDAO {
 
     //새터 게시슬 내용 보기
     public QboardVO tipBoardContent(int new_no);
-    //새터 신고 체크
+    //새터 신고 체크 ( 같은 게시물에 신고를 했던 회원인지 체크  )
     public int tipBoardRptCheck(int mem_no,int new_no);
+    //새터글 신고 체크 ( 최초신고당한 게시글인지 체크)
+    public int tipBoardDownCheck(int new_no);
     //새터 신고 게시글에 카운트 + 1
     public void tipBoardRptCntUp(int new_no);
-    //새터 DOWN테이블에 Update
-    public void tipBoardRptAction(QboardVO vo);
-    //새터 신고당한유저 명성 내려감
-    public void tipBoardRptExpUpdate(int mem_no);
+    //새터 신고 당한 게시글 new_down테이블에  insert
+    public void tipBoardDownInsert(int mem_no,int new_no,int radio);
+    //새터 DOWN테이블에 Update   : ( 생각해보니 update는 필요없어서 일단 주석 해놓음 )
+    //public void tipBoardDownUpdate(int mem_no,int new_no,int radio);
+    //새터 신고당한유저 명성 내려감 ( 신고한유저도 )    ( 당한유저 -1 한 유저 -2 ( 나중에 +4로 받을수도 )
+    public void tipBoardRptExpUpdate(int mem_no,int exp);
+
+    //새터 추천 체크 ( 같은 게시물에 추천을 했던 회원인지 체크 )
+    public int tipBoardUpCheck(int mem_no, int new_no);
+    // 새터 게시글에 추천 카운트 + 1
+    public void tipBoardUpCntUp(int new_no);
+    // 새터 추천 당한 게시글 new_up테이블에 insert
+    public void tipBoardUpInsert(int mem_no,int new_no);
+    //새터 추천당한유저 명성 올라감 ( + 3 )
+    public void tipBoardUpExpUpdate(int mem_no);
+
+    //새터 글쓰기
+    public void tipBoardWriteAction(QboardVO qboardVO);
 }

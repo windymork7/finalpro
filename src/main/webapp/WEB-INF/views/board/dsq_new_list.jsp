@@ -219,17 +219,17 @@
                             <div class="d-flex w-100 justify-content-between">
                                 <h4 class="card-title">
                                     <a href="qboardTipContent.bo?new_no=${rlist.new_no}"> <i class="fa fa-quora" aria-hidden="true"></i>
-                                        ${rlist.new_title}답변 대기 질문 제목이 들어갑니다.
+                                        ${rlist.new_title}
                                     </a>
                                 </h4>
                                 <small> <span class="glyphicon glyphicon-thumbs-up"
-                                              aria-hidden="true"></span> 추천수${rlist.new_up}
+                                              aria-hidden="true"></span>${rlist.new_up}
                                 </small>
                             </div>
                             <h6 class="card-subtitle mb-2 text-muted text-right">${rlist.new_date}</h6>
                             <p class="card-text">
                                 <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                검색 Tip
+<%--                                검색 Tip--%>
                             </p>
                         </div>
                     </div>
@@ -259,7 +259,6 @@
                             <c:if test="${readyPaging.endPage != readyPaging.lastPage}">
                                 <li class="page-item"><a class="page-link" href="qboardTipForm.bo?nowPage2=${readyPaging.endPage+1 }&cntPerPage2=${readyPaging.cntPerPage}&state=2">&raquo;</a></li>
                             </c:if>
-                            </li>
                         </ul>
                     </div>
 
@@ -311,7 +310,6 @@
                             <c:if test="${latePaging.endPage != latePaging.lastPage}">
                                 <li class="page-item"><a class="page-link" href="qboardTipForm.bo?nowPage3=${latePaging.endPage+1 }&cntPerPage3=${latePaging.cntPerPage}&state=3">&raquo;</a></li>
                             </c:if>
-                            </li>
                         </ul>
                     </div>
 
@@ -388,7 +386,7 @@
             <div>
                 <a href="#">
                     <button type="button"
-                            class="btn btn-secondary btn-block">질문하기
+                            class="btn btn-secondary btn-block" onclick="location.href='/qboardTipWriteForm.bo'">질문하기
                     </button>
                 </a>
             </div>

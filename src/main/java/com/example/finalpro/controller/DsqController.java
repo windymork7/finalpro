@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,6 +98,10 @@ public class DsqController {
     TipBoardContentService tipBoardContentService;
     @Autowired
     TipBoardDownActionService tipBoardDownActionService;
+    @Autowired
+    TipBoardUpActionService tipBoardUpActionService;
+    @Autowired
+    TipBoardWriteActionService tipBoardWriteActionService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -524,14 +525,14 @@ public class DsqController {
     /***********여기부터새터**************/
     @RequestMapping("/qboardTipForm.bo")
     public String qboardTipForm( Model model,
-                                @RequestParam(value = "nowPage1", required = false) String nowPage1,
-                                @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
-                                @RequestParam(value = "nowPage2", required = false) String nowPage2,
-                                @RequestParam(value = "cntPerPage2", required = false) String cntPerPage2,
-                                @RequestParam(value = "nowPage3", required = false) String nowPage3,
-                                @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
-                                @RequestParam(value = "nowPage4", required = false) String nowPage4,
-                                @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
+                                 @RequestParam(value = "nowPage1", required = false) String nowPage1,
+                                 @RequestParam(value = "cntPerPage1", required = false) String cntPerPage1,
+                                 @RequestParam(value = "nowPage2", required = false) String nowPage2,
+                                 @RequestParam(value = "cntPerPage2", required = false) String cntPerPage2,
+                                 @RequestParam(value = "nowPage3", required = false) String nowPage3,
+                                 @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
+                                 @RequestParam(value = "nowPage4", required = false) String nowPage4,
+                                 @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
                                 @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 
         //답변완료 글 카운트
@@ -639,17 +640,56 @@ public class DsqController {
     
     //신고
     @RequestMapping("/qboardTipDownAction.bo")
-    public String qboardTipDownPopup(HttpServletRequest request){
-    	System.out.println("다운");
+//  @ResponseBody
+    public String qboardTipDownPopup(HttpServletRequest request) {
+        System.out.println("다운");
         String new_no = request.getParameter("new_no");
-        
-        tipBoardDownActionService.tipBoardDownAction(request);
 
-        return "redirect:/qboardTipContent.bo?new_no="+new_no;
+        String result = tipBoardDownActionService.tipBoardDownAction(request);
+        System.out.println("result: " + result);
+        if (result.equals("T")) {
+            //신고 완료
+            return "redirect:/qboardTipContent.bo?new_no=" + new_no;
+        }
+        //신고 실패 ( alert창을 띄워주고 신고는 update 2 )
+        return "redirect:/qboardRptFail.bo?new_no=" + new_no + "&updown=" + 2;
     }
-    
+    //추천
+    @RequestMapping("/qboardTipUpAction.bo")
+    public String qboardTipUpAction(HttpServletRequest request){
+        System.out.println("업");
+        String new_no = request.getParameter("new_no");
+        String result = tipBoardUpActionService.tipBoardUpAction(request);
+        if(result.equals("T")) {
+            //추천 완료
+            return "redirect:/qboardTipContent.bo?new_no=" + new_no;
+        }
+        //추천 실패 ( alert창을 띄워주고 추천은 update 1 )
+        return "redirect:/qboardRptFail.bo?new_no="+new_no+"&updown="+1;
+    }
 
+    // 중복추천, 신고 alert창
+    @RequestMapping(value = "/qboardRptFail.bo")
+    public String qboardRptFail(Model model,@RequestParam int new_no,@RequestParam int updown){
+        model.addAttribute("main","board/TestFail");
+        model.addAttribute("updown",updown);
+        return "template";
+    }
 
+    //글 쓰기 폼
+    @RequestMapping("/qboardTipWriteForm.bo")
+    public String qboardTipWriteForm(Model model){
+        model.addAttribute("main","board/dsq_new_writeForm");
+        return "template";
+    }
+    //글쓰기 액션
+    @RequestMapping(value = "/qboardTipWriteAction.bo")
+    public String qboardTipWriteAction(QboardVO vo,@RequestParam MultipartFile q_file1,HttpServletRequest request){
+        vo.setMem_no(Integer.parseInt(request.getParameter("userNo")));
+        System.out.println("vo:"+vo.toString());
+        tipBoardWriteActionService.tipBoardWriteAction(q_file1,vo,request);
+        return "redirect:/qboardTipForm.bo?state=2";
+    }
 
 
 }
