@@ -24,7 +24,7 @@
          <div class="row">
             <div class="col-sm-12">
                <p>
-                  <img src="img/D'sQ.png" alt="D'sQ">
+                  <img src="img/d'sQ_footer.png" width="200" alt="D'sQ">
                </p>
                <p>
                   <a href="#">About D's Q</a> 

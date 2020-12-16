@@ -26,6 +26,9 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
 //            return "/loginForm.me";
 //        }
 //
+        System.out.println(request.getParameter("mem_email"));
+        System.out.println(request.getParameter("mem_pw"));
+
         if (memberDAO.commonMemberLogin(request.getParameter("mem_email")) == null){
             return "fail";
         }

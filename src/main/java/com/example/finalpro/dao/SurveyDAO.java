@@ -14,7 +14,7 @@ public interface SurveyDAO {
     // 설문 갯수
     public int serveyCount();
     // 설문지 성비
-    public int surveyResponseCount(int gender);
+    public Integer surveyResponseCount(int gender);
 
 
 

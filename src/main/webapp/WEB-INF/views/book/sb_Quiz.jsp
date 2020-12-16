@@ -96,10 +96,15 @@
 
         .card-header-gd {
             padding: 0.75rem 1.25rem;
+            margin-top:0;
             margin-bottom: 0;
             background-color: #f3969a;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
             color: #fff;
+            border-radius: 0.4rem 0.4rem 0 0;
+            border-top: 2px solid #f3969a;
+            border-left: 2px solid #f3969a;
+            border-bottom:0px;
+            border-right: 2px solid #f3969a;
         }
 
         .fa-quora {
@@ -267,7 +272,7 @@
             </ul>
 
 
-            <div class="tab-pane fade" id="Pro">
+            <div class="tab-pane fade show active" id="Pro">
                 <br>
                 <div class="card mb-3">
                     <div class="card-header">
@@ -302,12 +307,11 @@
         </div>
         <div class="col-sm-3">
 
-            <div class="card border-secondary mb-3"
-                 id="guideline">
+            <div class="card" style="border:0">
                 <div class="card-header-gd">
                     <b>오늘의 문제</b>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
                     <p>1. 풀기 원하는 출제 영역을 고르세요.</p>
                     <p>2. 문제가 랜덤으로 출제됩니다.</p>
                     <p>3. 문제를 풀어보며 공부한 내용을 점검해보세요.</p>

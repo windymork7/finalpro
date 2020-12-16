@@ -1,6 +1,7 @@
 package com.example.finalpro.serviceImpl.edit;
 
 import com.example.finalpro.dao.EditDAO;
+import com.example.finalpro.dao.MemberDAO;
 import com.example.finalpro.service.edit.EditBoardInsertService;
 import com.example.finalpro.vo.EditMemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class EditBoardInsertServiceImpl implements EditBoardInsertService {
 
     @Autowired
     EditDAO editDAO;
+    @Autowired
+    MemberDAO memberDAO;
 
     @Override
     public void editBoardInsert(MultipartFile edit_img1, EditMemberVO editMemberVO, HttpServletRequest request) {
@@ -42,8 +45,11 @@ public class EditBoardInsertServiceImpl implements EditBoardInsertService {
             e.printStackTrace();
         }
 
+
+
 //        for (int i=0; i< 30; i++) {
             editDAO.editBoardInsert(editMemberVO);
 //        }
+        memberDAO.commonExpUpate(editMemberVO.getMem_no(), 20);
     }
 }

@@ -54,6 +54,13 @@
             -->
             
          <hr class="my-4">
+         <div class="text-right">
+            <c:if test="${sessionScope.userNick eq 'admin'}">
+               <button type="button" class="btn btn-primary" onclick="location.href='noticeWriteForm.no'">글쓰기</button>
+               <br><br>
+            </c:if>
+         </div>
+
          <table class="table">
             <thead>
                <tr class="table-secondary">
@@ -72,10 +79,7 @@
                   <td>${faq.faq_date }</td>
                </tr>
             </c:forEach>
-            <c:if test="${sessionScope.userNick eq 'admin'}">
-               <button type="button" class="btn btn-primary" onclick="location.href='faqBoardInsertForm.fa'">글쓰기</button>
-            </c:if>
-            <!-- 
+            <!--
                <tr class="table-light">
                   <td>1</td>
                   <td><a href="#">답변은 아무나 할 수 있나요?</a></td>

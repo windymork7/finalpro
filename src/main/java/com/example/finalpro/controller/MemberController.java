@@ -30,6 +30,9 @@ public class MemberController {
     @Autowired
     CommonMemberPwFindService commonMemberPwFindService;
 
+    @Autowired
+    CommonMemberPwConfirmService commonMemberPwConfirmService;
+
     // 이메일 찾기 첫번째
     @RequestMapping("/emailSearchFirst.me")
     public String emailSearchFirst(Model model){
@@ -189,6 +192,17 @@ public class MemberController {
         model.addAttribute("email", email);
         model.addAttribute("main", "member/email_search_next");
         return "template";
+    }
+
+    // 회원 비밀번호 확인
+    @RequestMapping("/passConfirm.me")
+    @ResponseBody
+    public String passConfirm(@RequestParam String mem_email,
+                            @RequestParam String mem_pw){
+
+        String confirm = commonMemberPwConfirmService.passConfirm(mem_email, mem_pw);
+
+        return confirm;
     }
 
 }

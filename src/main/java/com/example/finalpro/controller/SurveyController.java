@@ -57,7 +57,6 @@ public class SurveyController {
     @RequestMapping("/surveyView.su")
     public String surveyView(Model model){
 
-
         surveyGenderCountService.surveyGenderCount(model);
 
         model.addAttribute("main","survey/surveyView");

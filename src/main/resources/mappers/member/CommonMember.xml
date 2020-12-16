@@ -12,7 +12,7 @@
     <insert id="commonMemberInsert" parameterType="com.example.finalpro.vo.CommonMemberVO">
         INSERT INTO MEM(MEM_NO,GRADE_NO,MEM_EMAIL,MEM_PW,MEM_NICK,MEM_NAME,MEM_TEL,MEM_EXP,MEM_RPT_CNT) VALUES(MEM_SEQ.NEXTVAL,1,#{mem_email},#{mem_pw},#{mem_nick},#{mem_name},#{mem_tel},0,0)
     </insert>
-<!---->
+
     <!-- 일반 회원 로그인-->
     <select id="commonMemberLogin" resultType="String">
         SELECT MEM_PW FROM MEM WHERE MEM_EMAIL=#{param1}
@@ -24,7 +24,7 @@
     </select>
     <!-- 회원 수정   -->
     <select id="commonMemberUpdate" parameterType="com.example.finalpro.vo.CommonMemberVO">
-        UPDATE MEM SET MEM_NAME=#{mem_name},MEM_NICK=#{mem_nick},MEM_TEL=#{mem_tel} WHERE MEM_NO=#{mem_no}
+        UPDATE MEM SET MEM_PW = #{mem_pw}, MEM_NAME=#{mem_name},MEM_NICK=#{mem_nick},MEM_TEL=#{mem_tel} WHERE MEM_NO=#{mem_no}
     </select>
 
     <update id="commonMemberRpt">
