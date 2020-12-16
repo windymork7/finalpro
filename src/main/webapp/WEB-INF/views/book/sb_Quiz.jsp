@@ -198,35 +198,7 @@
     <div class="row">
 
         <div class="col-sm-2">
-            <div class="card mb-3">
-                <h3 class="card-header">Card header</h3>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="d-block user-select-none" width="100%"
-                     aria-label="Placeholder: Image cap" focusable="false" role="img"
-                     preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
-                     style="font-size: 1.125rem; text-anchor: middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the
-                        card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a> <a href="#"
-                                                                   class="card-link">Another link</a>
-                </div>
-                <div class="card-footer text-muted">2 days ago</div>
-            </div>
+            <img src="img/Banner2.png" width="100%">
         </div>
 
         <div class="col-sm-7">
@@ -312,9 +284,9 @@
                     <b>오늘의 문제</b>
                 </div>
                 <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
-                    <p>1. 풀기 원하는 출제 영역을 고르세요.</p>
-                    <p>2. 문제가 랜덤으로 출제됩니다.</p>
-                    <p>3. 문제를 풀어보며 공부한 내용을 점검해보세요.</p>
+                    <p>1. 풀기 원하는 출제 영역을 고르세요!</p>
+                    <p>2. 문제가 랜덤으로 출제됩니다!</p>
+                    <p>3. 문제를 풀어보며 공부한 내용을 점검해보세요!</p>
                 </div>
             </div>
 
