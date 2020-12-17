@@ -109,6 +109,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
+         	<img src="img/Banner1.png" width="100%">
+        <!--  
             <div class="card mb-3">
                 <h3 class="card-header">Card header</h3>
                 <div class="card-body">
@@ -138,7 +140,7 @@
                 </div>
                 <div class="card-footer text-muted">2 days ago</div>
             </div>
-
+-->
         </div>
         <div class="col-sm-7">
             <ul class="nav nav-tabs">
