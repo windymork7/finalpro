@@ -257,6 +257,7 @@
         FROM MEM M, REPLY RP
         WHERE M.MEM_NO = RP.MEM_NO
         AND RP.Q_NO = #{q_no}
+        ORDER BY REPLY_UP DESC
     </select>
 
     <!-- 댓글 추천 체크 -->
@@ -440,6 +441,25 @@
         ORDER BY Q_DATE DESC
     </select>
 
+    <!-- 스크랩북 신청전 book_Scrap테이블 체크 결과가 0이면 insert될거고 0이상이면 update될 것 -->
+    <select id="bookScrapCheck" resultType="Integer">
+        SELECT COUNT(*) FROM BOOK_SCRAP WHERE Q_NO = #{param1}
+    </select>
+    <!-- 스크랩북 신청전 mem_book_state 체크 결과가 1이면  신청 안됨-->
+    <select id="bookMemCheck" resultType="Integer">
+        SELECT MEM_BOOK_STATE FROM MEM WHERE MEM_NO=#{param1}
+    </select>
+    <insert id="bookScrapCntInsert">
+        INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,#{param1},1)
+    </insert>
+    <update id="bookScrapCntUp">
+        UPDATE BOOK_SCRAP SET BOOK_SCRAP_CNT = BOOK_SCRAP_CNT + 1
+        WHERE Q_NO=#{param1}
+    </update>
+    <update id="bookMemStateUpdate">
+        UPDATE MEM SET MEM_BOOK_STATE = 1
+        WHERE MEM_NO = #{param1}
+    </update>
     <!-- ***************새터시작************** -->
     <!-- 채택완료 -->
     <select id="tipBoardPickList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">

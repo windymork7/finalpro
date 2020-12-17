@@ -56,19 +56,19 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">C</a>
-                  <a class="dropdown-item" href="#">JAVA</a>
-                  <a class="dropdown-item" href="#">PYTHON</a>
+                <a class="dropdown-item" href="/langJavaFirst01.fi">C</a>
+                  <a class="dropdown-item" href="/langJavaFirst01.fi">JAVA</a>
+                  <a class="dropdown-item" href="/langJavaFirst01.fi">PYTHON</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>데이터베이스</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">ORACLE</a>
-                  <a class="dropdown-item" href="#">MYSQL</a>
+                <a class="dropdown-item" href="/langJavaFirst01.fi">ORACLE</a>
+                  <a class="dropdown-item" href="/langJavaFirst01.fi">MYSQL</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>프레임워크</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">SPRING</a>
-                  <a class="dropdown-item" href="#">DJANGO</a>
+                <a class="dropdown-item" href="/langJavaFirst01.fi">SPRING</a>
+                  <a class="dropdown-item" href="/langJavaFirst01.fi">DJANGO</a>
               </div>
             </li>
             <li class="nav-item dropdown active">

@@ -111,27 +111,27 @@ a:hover {
 			<div class="col-sm-10 offset-sm-1">
 				<ul class="nav nav-tabs">
 
-					<li class="nav-item ${active5}" style="width: 16.666666%"><a
-						class="nav-link" data-toggle="tab" href="#site_statistics"><b>
-								사이트 통계</b></a></li>
+<%--					<li class="nav-item ${active5} text-center" style="width: 16.666666%"><a--%>
+<%--						class="nav-link" data-toggle="tab" href="#site_statistics"><b>--%>
+<%--								사이트 통계</b></a></li>--%>
 
-					<li class="nav-item ${active6}" style="width: 16.666666%"><a
-						class="nav-link" data-toggle="tab" href="#survey_statistics"><b>
-								설문조사 통계</b></a></li>
+<%--					<li class="nav-item ${active6} text-center" style="width: 16.666666%"><a--%>
+<%--						class="nav-link" data-toggle="tab" href="#survey_statistics"><b>--%>
+<%--								설문조사 통계</b></a></li>--%>
 
-					<li class="nav-item ${active1}" style="width: 16.666666%"><a
+					<li class="nav-item ${active1} text-center" style="width: 16.666666%"><a
 						class="nav-link" data-toggle="tab" href="#mem_management1"><b>회원
 								관리1</b></a></li>
 
-					<li class="nav-item ${active2}" style="width: 16.666666%"><a
+					<li class="nav-item ${active2} text-center " style="width: 16.666666%"><a
 						class="nav-link" data-toggle="tab" href="#mem_management2"><b>회원
 								관리2</b></a></li>
 
-					<li class="nav-item ${active3}" style="width: 16.666666%"><a
+					<li class="nav-item ${active3} text-center" style="width: 16.666666%"><a
 						class="nav-link" data-toggle="tab" href="#post_management"><b>게시물
 								관리</b></a></li>
 
-					<li class="nav-item ${active4}" style="width: 16.666666%"><a
+					<li class="nav-item ${active4} text-center" style="width: 16.666666%"><a
 						class="nav-link" data-toggle="tab" href="#scrapBook"><b>
 								스크랩북</b></a></li>
 				</ul>

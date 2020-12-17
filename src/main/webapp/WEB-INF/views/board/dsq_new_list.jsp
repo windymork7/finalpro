@@ -173,10 +173,10 @@
                                     </small>
                                 </div>
                                 <h6 class="card-subtitle mb-2 text-muted text-right">${plist.new_date}</h6>
-                                <p class="card-text">
-                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                    검색 Tip
-                                </p>
+<%--                                <p class="card-text">--%>
+<%--                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>--%>
+<%--                                    검색 Tip--%>
+<%--                                </p>--%>
                             </div>
                         </div>
                         <br>
@@ -227,10 +227,10 @@
                                 </small>
                             </div>
                             <h6 class="card-subtitle mb-2 text-muted text-right">${rlist.new_date}</h6>
-                            <p class="card-text">
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+<%--                            <p class="card-text">--%>
+<%--                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>--%>
 <%--                                검색 Tip--%>
-                            </p>
+<%--                            </p>--%>
                         </div>
                     </div>
                     <br>
@@ -330,10 +330,10 @@
                                 </small>
                             </div>
                             <h6 class="card-subtitle mb-2 text-muted text-right">${plist.new_date}</h6>
-                            <p class="card-text">
-                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                                1~5번 책 대분류 선택한 것
-                            </p>
+<%--                            <p class="card-text">--%>
+<%--                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>--%>
+<%--                                1~5번 책 대분류 선택한 것--%>
+<%--                            </p>--%>
                         </div>
                     </div>
                     <br>
