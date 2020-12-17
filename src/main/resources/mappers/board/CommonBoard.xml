@@ -257,6 +257,7 @@
         FROM MEM M, REPLY RP
         WHERE M.MEM_NO = RP.MEM_NO
         AND RP.Q_NO = #{q_no}
+        ORDER BY REPLY_UP DESC
     </select>
 
     <!-- 댓글 추천 체크 -->

@@ -64,6 +64,8 @@
 		color: #fff;
 		text-decoration: none;
 	}
+
+    #sidebox { position:absolute; }
 	
 	</style>
 </head>
@@ -256,7 +258,36 @@
 				
             	</fieldset>
          </div>
-         
+          <div class="col-sm-1 offset-sm-2">
+              <div id="sidebox">
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <p><i class="fa fa-chevron-up fa-2x text-primary" aria-hidden="true" id="topBtn"></i></p>
+                  <p><i class="fa fa-chevron-down fa-2x text-primary" aria-hidden="true" id="bottomBtn"></i></p>
+              </div>
+          </div>
+      </div>
          
          
       </div>
@@ -418,7 +449,31 @@
 
             });
     }
+
+    $(window).scroll(function(){
+        var scrollTop = $(document).scrollTop();
+        if (scrollTop < 230) {
+            scrollTop = 230;
+        }
+        $("#sidebox").stop();
+        $("#sidebox").animate( { "top" : scrollTop });
+    });
+
+    var topEle = $('#topBtn');
+    var delay = 1000;
+    topEle.on('click', function() {
+        $('html, body').stop().animate({scrollTop: 0}, delay);
+    });
+
+    var topEle = $('#bottomBtn');
+    var delay = 1000;
+    topEle.on('click', function() {
+        $("html, body").animate({ scrollTop: $(document).height() }, delay);
+    });
+
 </script>
+
+
 
 </body>
 </html>
