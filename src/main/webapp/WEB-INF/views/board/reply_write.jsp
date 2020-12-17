@@ -147,7 +147,7 @@
 						<br>
 						<div id="q_right">
                         <c:if test="${qBoardVO.q_admin_state > 0 && qBoardVO.q_admin_state < 4}">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="신청" onclick="location.href='bookAddAction.bo?qboardNum=${qBoardVO.q_no}&subCa=${qBoardVO.sub_ca_no}'">
 						  <i class="fa fa-book" aria-hidden="true"></i>
 						</button>
                         </c:if>

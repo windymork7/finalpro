@@ -88,6 +88,17 @@ public interface BoardDAO {
     // 검색된 게시글 총 수
     public int qBoardSearchCount(String searchTerm);
 
+    //스크랩북 신청전  체크 ( 첫 신청이면 insert 후에는 update )
+    public int bookScrapCheck(int q_no);  // book_scrap 체크
+    public int bookMemCheck(int mem_no);    //mem 체크
+    //스크랩북 cnt 인서트
+    public void bookScrapCntInsert(int q_no);
+    //스크랩북 cnt 업데이트
+    public void bookScrapCntUp(int q_no);
+    //스크랩북 mem_book_state 1로 업데이트
+    public void bookMemStateUpdate(int mem_no);
+
+
 
     /**********새터*************/
     //새터 답변 완료 조회
@@ -105,6 +116,7 @@ public interface BoardDAO {
     public int tipBoardReadyCount();
     //전체글 카운트
     public int tipBoardCount();
+
 
     //새터 게시슬 내용 보기
     public QboardVO tipBoardContent(int new_no);

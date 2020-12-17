@@ -102,6 +102,12 @@ public class DsqController {
     TipBoardUpActionService tipBoardUpActionService;
     @Autowired
     TipBoardWriteActionService tipBoardWriteActionService;
+    @Autowired
+    BookScrapCheckService bookScrapCheckService;
+    @Autowired
+    BookMemCheckService bookMemCheckService;
+    @Autowired
+    BookAddActionService bookAddActionService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -521,6 +527,32 @@ public class DsqController {
         return "template";
     }
 
+    //스크랩북 신청
+    @RequestMapping("/bookAddAction.bo")
+    public String bookAddAction(HttpSession session,@RequestParam int qboardNum,@RequestParam int subCa){
+        int q_no = qboardNum;
+        int mem_no = (Integer) session.getAttribute("userNo");
+
+        int bookCheck = bookScrapCheckService.bookScrapCheck(q_no);
+        int memCheck = bookMemCheckService.bookMemCheck(mem_no);
+
+        String result =bookAddActionService.bookAddAction(bookCheck,memCheck,mem_no, q_no);
+
+        return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
+
+
+    }
+
+    // 중복추천, 신고 alert창
+    /*
+    @RequestMapping(value = "/bookFail.bo")
+    public String qboardRptFail(Model model,@RequestParam int new_no,@RequestParam int updown){
+        model.addAttribute("main","board/TestFail");
+        model.addAttribute("updown",updown);
+        return "template";
+    }
+    */
+
 
     /***********여기부터새터**************/
     @RequestMapping("/qboardTipForm.bo")
@@ -690,6 +722,7 @@ public class DsqController {
         tipBoardWriteActionService.tipBoardWriteAction(q_file1,vo,request);
         return "redirect:/qboardTipForm.bo?state=2";
     }
+
 
 
 }
