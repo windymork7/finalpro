@@ -51,7 +51,7 @@
 		<div class="col-sm-6">
 
 			<form action="/qboardTipWriteAction.bo" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="userNo" value="${sessionScope.userNo}">
+				<input type="hidden" name="mem_no" value="${sessionScope.userNo}">
 				<fieldset>
 					<div>
 						<div id="c_left">

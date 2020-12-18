@@ -5,8 +5,10 @@ import com.example.finalpro.service.member.CommonMemberExpSelect;
 import com.example.finalpro.vo.PagingVO;
 import com.example.finalpro.vo.QboardVO;
 import com.example.finalpro.vo.ReplyBoardVO;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -108,6 +110,14 @@ public class DsqController {
     BookMemCheckService bookMemCheckService;
     @Autowired
     BookAddActionService bookAddActionService;
+    @Autowired
+    TipReplyWriteActionService tipReplyWriteActionService;
+    @Autowired
+    CommonReplyLateListService commonReplyLateListService;
+    @Autowired
+    TipReplyUpListService tipReplyUpListService;
+    @Autowired
+    TipReplyLateListService tipReplyLateListService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -297,7 +307,7 @@ public class DsqController {
         return "redirect:/qboardContent.bo?qboardNum="+ qboardNum + "&subCa=" + subCa;
     }
 
-    // 댓글 리스트
+    // 댓글 리스트 ( 인기순 )
     @RequestMapping(value = "/replyList.bo", produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity replyList(@ModelAttribute("ReplyBoardVO") ReplyBoardVO replyBoardVO, HttpSession session){
@@ -308,6 +318,39 @@ public class DsqController {
         ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
 
         List<ReplyBoardVO> replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
+
+//        System.out.println(replyVOlist);
+
+        if (replyVOlist.size() > 0){
+            for (int i = 0; i < replyVOlist.size(); i++) {
+                HashMap hm = new HashMap();
+                hm.put("reply_no", replyVOlist.get(i).getReply_no());
+                hm.put("q_no", replyVOlist.get(i).getQ_no());
+                hm.put("mem_no", replyVOlist.get(i).getMem_no());
+                hm.put("mem_nick", replyVOlist.get(i).getMem_nick());
+                hm.put("reply_content", replyVOlist.get(i).getReply_content());
+                hm.put("reply_pick", replyVOlist.get(i).getReply_pick());
+                hm.put("reply_up", replyVOlist.get(i).getReply_up());
+                hm.put("reply_rpt_cnt", replyVOlist.get(i).getReply_rpt_cnt());
+
+                hmlist.add(hm);
+            }
+        }
+        JSONArray jsonArray = new JSONArray(hmlist);
+        return new ResponseEntity(jsonArray.toString(), responseHeaders, HttpStatus.CREATED);
+    }
+
+    // 댓글 리스트 ( 최신순 )
+    @RequestMapping(value = "/replyLateList.bo", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity replyLateList(@ModelAttribute("ReplyBoardVO") ReplyBoardVO replyBoardVO, HttpSession session){
+//        System.out.println("replyBoardVO : " + replyBoardVO);
+//        System.out.println("sessionNick : " + (String)session.getAttribute("userNick"));
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+
+        List<ReplyBoardVO> replyVOlist = commonReplyLateListService.commonReplyLateList(replyBoardVO);
 
 //        System.out.println(replyVOlist);
 
@@ -663,8 +706,12 @@ public class DsqController {
     public String qboardTipContent(Model model,@RequestParam("new_no") int new_no){
         QboardVO tipVO = tipBoardContentService.tipboardContent(new_no);
         tipVO.setNew_date(tipVO.getNew_date().substring(0,11));
-        System.out.println("tipVO:"+tipVO.toString());
+        List<QboardVO> replyLateList = tipReplyLateListService.tipReplyLateList(new_no);
+        List<QboardVO> replyUpList = tipReplyUpListService.tipReplyUpList(new_no);
         model.addAttribute("tipVO",tipVO);
+        model.addAttribute("replyLateList",replyLateList);
+
+        model.addAttribute("replyUpList",replyUpList);
         model.addAttribute("main","board/dsq_new_content");
 
         return "template";
@@ -703,7 +750,7 @@ public class DsqController {
     // 중복추천, 신고 alert창
     @RequestMapping(value = "/qboardRptFail.bo")
     public String qboardRptFail(Model model,@RequestParam int new_no,@RequestParam int updown){
-        model.addAttribute("main","board/TestFail");
+        model.addAttribute("main","board/tipFail");
         model.addAttribute("updown",updown);
         return "template";
     }
@@ -716,12 +763,36 @@ public class DsqController {
     }
     //글쓰기 액션
     @RequestMapping(value = "/qboardTipWriteAction.bo")
-    public String qboardTipWriteAction(QboardVO vo,@RequestParam MultipartFile q_file1,HttpServletRequest request){
-        vo.setMem_no(Integer.parseInt(request.getParameter("userNo")));
+    public String qboardTipWriteAction(QboardVO vo, @RequestParam MultipartFile q_file1, HttpServletRequest request, HttpSession session){
+
+        int mem_no = (Integer)session.getAttribute("userNo");
+        vo.setMem_no(mem_no);
         System.out.println("vo:"+vo.toString());
         tipBoardWriteActionService.tipBoardWriteAction(q_file1,vo,request);
         return "redirect:/qboardTipForm.bo?state=2";
     }
+    //답글 쓰기 폼
+    @RequestMapping("/tipReplyWriteForm.bo")
+    public String tipReplyWriteForm(@RequestParam("new_no") int new_no,QboardVO vo,Model model){
+        System.out.println("답글쓰기폼");
+        vo = tipBoardContentService.tipboardContent(new_no);
+        model.addAttribute("main","board/dsq_new_reply_writeForm");
+        model.addAttribute("vo",vo);
+        return "template";
+    }
+
+    //댓글 쓰기 액션
+    @RequestMapping("/tipReplyWriteAction.bo")
+    public String tipReplyWriteAction(QboardVO vo,HttpSession session){
+        System.out.println("리플라이라이트액션");
+        int mem_no = (Integer)session.getAttribute("userNo");
+        int new_no = vo.getNew_no();
+        vo.setMem_no(mem_no);
+        tipReplyWriteActionService.tipReplyWriteAction(vo);
+        System.out.println("작업완료");
+        return "redirect:/qboardTipContent.bo?new_no="+new_no;
+    }
+
 
 
 

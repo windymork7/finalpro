@@ -48,8 +48,10 @@ public interface BoardDAO {
     // 댓글 채택 있는지 체크
     public QboardVO qBoardReplyPickCheck(int q_no);
 
-    // 댓글 리스트
+    // 댓글 리스트 ( 인기순 )
     public List<ReplyBoardVO> replyList(ReplyBoardVO replyBoardVO);
+    public List<ReplyBoardVO> replyLateList(ReplyBoardVO replyBoardVO);
+
     // 해당 댓글 번호 댓글 조회
     public ReplyBoardVO replyContent(int reply_no);
     // 댓글 글쓰기 프로세스
@@ -120,6 +122,7 @@ public interface BoardDAO {
 
     //새터 게시슬 내용 보기
     public QboardVO tipBoardContent(int new_no);
+
     //새터 신고 체크 ( 같은 게시물에 신고를 했던 회원인지 체크  )
     public int tipBoardRptCheck(int mem_no,int new_no);
     //새터글 신고 체크 ( 최초신고당한 게시글인지 체크)
@@ -144,4 +147,10 @@ public interface BoardDAO {
 
     //새터 글쓰기
     public void tipBoardWriteAction(QboardVO qboardVO);
+    //새터 댓글 쓰기
+    public void tipReplyWriteAction(QboardVO qboardVO);
+    //새터 댓글 최신순 리스트
+    public List<QboardVO> tipReplyLateList(int new_no);
+    //새터 댓글 인기순 리스트
+    public List<QboardVO> tipReplyUpList(int new_no);
 }

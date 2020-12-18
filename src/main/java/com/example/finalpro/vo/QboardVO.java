@@ -41,9 +41,17 @@ public class QboardVO {
     private int new_reply_rpt_cnt;
     private int new_pick_state;
     private String new_reply_date;
-    private String new_reply_Content;
-    private String new_file;
 
+    private String new_file;
+    private String new_reply_content;
+
+    public String getNew_reply_content() {
+        return new_reply_content;
+    }
+
+    public void setNew_reply_content(String new_reply_content) {
+        this.new_reply_content = new_reply_content;
+    }
 
     public String getNew_file() {
         return new_file;
@@ -99,14 +107,6 @@ public class QboardVO {
 
     public void setNew_reply_date(String new_reply_date) {
         this.new_reply_date = new_reply_date;
-    }
-
-    public String getNew_reply_Content() {
-        return new_reply_Content;
-    }
-
-    public void setNew_reply_Content(String new_reply_Content) {
-        this.new_reply_Content = new_reply_Content;
     }
 
     public int getNew_no() {
@@ -410,7 +410,7 @@ public class QboardVO {
                 ", new_reply_rpt_cnt=" + new_reply_rpt_cnt +
                 ", new_reply_date='" + new_reply_date + '\'' +
                 ", new_file='" + new_file + '\'' +
-                ", new_reply_Content='" + new_reply_Content + '\'' +
+                ", new_reply_content='" + new_reply_content + '\'' +
                 '}';
     }
 }

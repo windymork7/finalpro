@@ -64,6 +64,33 @@
 		color: #fff;
 		text-decoration: none;
 	}
+    .nav-tabs {
+        color: #5a5a5a;
+        border-bottom: 1px solid #eceeef;
+    }
+
+    .nav-tabs .nav-item {
+        color: #5a5a5a;
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs .nav-link {
+        color: #5a5a5a;
+        border: 1px solid transparent;
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem;
+    }
+
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+        color: #78c2ad;
+        border-color: #f7f7f9 #f7f7f9 #eceeef;
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        color: #78c2ad;
+        background-color: #fff;
+        border-color: #eceeef #eceeef #fff;
+    }
 
     #sidebox { position:absolute; }
 	

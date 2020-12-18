@@ -49,16 +49,17 @@
 			color:#78c2ad;
 		}
 
-		a {
-			color: #fff;
-			text-decoration: none;
-			background-color: transparent;
-		}
+		/*a {*/
+		/*	color: #fff;*/
+		/*	text-decoration: none;*/
+		/*	background-color: transparent;*/
+		/*}*/
 
-		a:hover {
-			color: #fff;
-			text-decoration: none;
-		}
+		/*a:hover {*/
+		/*	color: #fff;*/
+		/*	text-decoration: none;*/
+		/*}*/
+
 
 		#sidebox { position:absolute; }
 
@@ -82,14 +83,14 @@
 							<legend>검색 Tip</legend>
 						</div>
 						<form action="qboardTipUpAction.bo" method="post">
-							<input type="hidden" name="new_no" value="${tipVO.new_no}">
+<%--							<input type="hidden" name="new_no" value="${tipVO.new_no}">--%>
 							<input type="hidden" name="mem_no" value="${sessionScope.userNo}">
 						<div id="c_right">
 							<c:choose>
 							<c:when test="${empty sessionScope.userNo}"></c:when>
 							<c:when test="${sessionScope.userNo ne tipVO.mem_no}">
 							<c:if test="${tipVO.new_pick_state == 0}">
-								<button type="button" class="btn btn-primary"onclick="location.href='/newReplyWriteForm.bo?new_no=${tioVO.new_no}'">답변하기</button>
+								<button type="button" class="btn btn-primary" onclick="location.href='/tipReplyWriteForm.bo?new_no=${tipVO.new_no}'">답변하기</button>
 							</c:if>
 
 
@@ -200,16 +201,17 @@ ${tipVO.new_content}
 
 					<hr class="my-4">
 
+				<c:forEach var="llist" items="${replyLateList}">
 					<div class="card">
 						<div class="card-header">
-							아이디1 (로고)
+							${llist.mem_nick}
 						</div>
 						<div class="card-body">
 							<div class="card-text d-flex justify-content-between align-items-center">
 								<div class="btn-group-vertical">
 									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
 										<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-										20
+										${llist.new_reply_up}
 									</button>
 									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
 										<i class="fa fa-check" aria-hidden="true"></i>
@@ -223,71 +225,14 @@ ${tipVO.new_content}
 								&nbsp;
 								&nbsp;
 								<textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 안 했을 때(질문자에게 이렇게 보임)
-
-1차원 배열이면 "java swap"으로 다차원 배열이면 "java 반복문 swap"키워드를 검색해보세요!
+${llist.new_reply_content}
       </textarea>
 							</div>
 						</div>
 					</div>
 					<br>
+				</c:forEach>
 
-					<div class="card">
-						<div class="card-header">
-							아이디2 (로고)
-						</div>
-						<div class="card-body">
-							<div class="card-text d-flex justify-content-between align-items-center">
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-										<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-										20
-									</button>
-									<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="채택">
-										<i class="fa fa-check" aria-hidden="true"></i>
-									</button>
-									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-										<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-									</button>
-								</div>
-								&nbsp;
-								&nbsp;
-								<textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 했을 때(질문자, 사용자에게 모두 이렇게 보임)
-
-1차원 배열이면 "java swap"으로 다차원 배열이면 "java 반복문 swap"키워드를 검색해보세요!
-      </textarea>
-							</div>
-						</div>
-					</div>
-					<br>
-
-					<div class="card">
-						<div class="card-header">
-							아이디3 (로고)
-						</div>
-						<div class="card-body">
-							<div class="card-text d-flex justify-content-between align-items-center">
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="추천">
-										<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-										13
-									</button>
-									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="신고">
-										<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-									</button>
-								</div>
-								&nbsp;
-								&nbsp;
-								<textarea class="form-control" rows="8" id="reply_text" readonly>
-채택 받지 못한 답변
-
-1차원 배열이면 "java swap"으로 다차원 배열이면 "java 반복문 swap"키워드를 검색해보세요!
-      </textarea>
-							</div>
-						</div>
-					</div>
-					<br>
 
 					<br>
 					<br>
