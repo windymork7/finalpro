@@ -6,7 +6,7 @@
 
 <mapper namespace="com.example.finalpro.dao.SurveyDAO">
 	<select id="surveyQList" resultType="com.example.finalpro.vo.SurveyVO">
-		SELECT ROWNUM RN, SQ.* FROM SURVEY_Q SQ
+		SELECT ROWNUM RN, SQ.* FROM SURVEY_Q SQ ORDER BY SURVEY_Q_NO ASC
 	</select>
 	<select id="surveyRList" resultType="com.example.finalpro.vo.SurveyVO">
 		SELECT ROWNUM RN, SQ.*, SR.* FROM

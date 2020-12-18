@@ -60,6 +60,16 @@
                                 <div id="language" style="width: 800px; height: 500px; margin: 0 auto"></div>
                                 <h1>가장 배우고 싶은 언어</h1>
                                 <div id="studyLanguage" style="width: 800px; height: 500px; margin: 0 auto"></div>
+                                <h1>가장 많이 사용하는 데이터베이스</h1>
+                                <div id=database style="width: 800px; height: 500px; margin: 0 auto"></div>
+                                <h1>가장 배우고 싶은 데이터베이스</h1>
+                                <div id="studyDatebase" style="width: 800px; height: 500px; margin: 0 auto"></div>
+                                <h1>가장 많이 사용하는 프레임워크</h1>
+                                <div id="framework" style="width: 800px; height: 500px; margin: 0 auto"></div>
+                                <h1>가장 배우고 싶은 프레임워크</h1>
+                                <div id="studyFramework" style="width: 800px; height: 500px; margin: 0 auto"></div>
+
+                                
                             </div>
                             <br><br>
                         </div>
@@ -90,6 +100,11 @@
     google.charts.setOnLoadCallback(drawChart2);
     google.charts.setOnLoadCallback(drawChart3);
     google.charts.setOnLoadCallback(drawChart4);
+    google.charts.setOnLoadCallback(drawChart5);
+    google.charts.setOnLoadCallback(drawChart6);
+    google.charts.setOnLoadCallback(drawChart7);
+    google.charts.setOnLoadCallback(drawChart8);
+
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -139,8 +154,8 @@
 
     function drawChart2() {
         var data = new google.visualization.arrayToDataTable([
-            ['연령', '10대', '20대', '30대', '40대'],
-            [' ', ${survey["3"]}, ${survey["4"]}, ${survey["5"]}, ${survey["6"]}],
+            ['연령', '10대', '20대', '30대', '40대', '50대이상'],
+            [' ', ${survey["3"]}, ${survey["4"]}, ${survey["5"]}, ${survey["6"]},${survey["7"]}],
         ]);
 
         var options = {
@@ -158,8 +173,8 @@
     function drawChart3() {
         var data = google.visualization.arrayToDataTable([
             ['언어', 'JAVA', 'PYTHON', 'C', 'C#', 'C++', 'KOTLIN', 'HTML', 'CSS', 'JAVASCRIPT'],
-            [' ', ${survey["7"]}, ${survey["8"]}, ${survey["9"]}, ${survey["10"]}, ${survey["11"]}, ${survey["12"]}
-                , ${survey["13"]}, ${survey["14"]}, ${survey["15"]}]
+            [' ', ${survey["8"]}, ${survey["9"]}, ${survey["10"]}, ${survey["11"]}, ${survey["12"]}
+                , ${survey["13"]}, ${survey["14"]}, ${survey["15"]},${survey["16"]}]
 
         ]);
 
@@ -177,8 +192,8 @@
     function drawChart4() {
         var data = google.visualization.arrayToDataTable([
             ['언어', 'JAVA', 'PYTHON', 'C', 'C#', 'C++', 'KOTLIN', 'HTML', 'CSS', 'JAVASCRIPT'],
-            [' ', ${survey["16"]}, ${survey["17"]}, ${survey["18"]}, ${survey["19"]}, ${survey["20"]}, ${survey["21"]}
-                , ${survey["22"]}, ${survey["23"]}, ${survey["24"]}]
+            [' ', ${survey["17"]}, ${survey["18"]}, ${survey["19"]}, ${survey["20"]}, ${survey["21"]}
+                , ${survey["22"]}, ${survey["23"]}, ${survey["24"]}, ${survey["25"]}]
 
         ]);
 
@@ -191,5 +206,75 @@
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+    
+    /***************/
+        function drawChart5() {
+        var data = google.visualization.arrayToDataTable([
+            ['데이터베이스', 'Oracle', 'MySQL', 'NoSQL', 'MongoDB', 'PostgreSQL', 'Redis', 'MariaDB'],
+            [' ', ${survey["26"]}, ${survey["27"]}, ${survey["28"]}, ${survey["29"]}, ${survey["30"]}, ${survey["31"]}
+                , ${survey["32"]}]
+
+        ]);
+
+        var options = {
+            title: '가장 많이 사용하는 데이터베이스',
+            colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('database'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+    
+       function drawChart6() {
+           var data = google.visualization.arrayToDataTable([
+           	['데이터베이스', 'Oracle', 'MySQL', 'NoSQL', 'MongoDB', 'PostgreSQL', 'Redis', 'MariaDB'],
+            [' ', ${survey["33"]}, ${survey["34"]}, ${survey["35"]}, ${survey["36"]}, ${survey["37"]}, ${survey["38"]}
+            , ${survey["39"]}]
+
+           ]);
+
+           var options = {
+               title: '가장 배우고 싶은 데이터베이스',
+               colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
+           };
+
+           var chart = new google.charts.Bar(document.getElementById('studyDatebase'));
+
+           chart.draw(data, google.charts.Bar.convertOptions(options));
+       }
+       
+       function drawChart7() {
+           var data = google.visualization.arrayToDataTable([
+               ['프레임워크', 'Spring', 'Django', 'Node.js', 'React', 'Angular', 'NETCore', 'Tensorflow'],
+               [' ', ${survey["40"]}, ${survey["41"]}, ${survey["42"]}, ${survey["43"]}, ${survey["44"]}, ${survey["45"]}, ${survey["46"]}]
+
+           ]);
+
+           var options = {
+               title: '가장 많이 사용하는 프레임워크',
+               colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
+           };
+
+           var chart = new google.charts.Bar(document.getElementById('framework'));
+
+           chart.draw(data, google.charts.Bar.convertOptions(options));
+       }
+       
+       function drawChart8() {
+           var data = google.visualization.arrayToDataTable([
+               ['프레임워크', 'Spring', 'Django', 'Node.js', 'React', 'Angular', 'NETCore', 'Tensorflow'],
+               [' ', ${survey["47"]}, ${survey["48"]}, ${survey["49"]}, ${survey["50"]}, ${survey["51"]}, ${survey["52"]}, ${survey["53"]}]
+           ]);
+
+           var options = {
+               title: '가장 배우고 싶은 프레임워크',
+               colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
+           };
+
+           var chart = new google.charts.Bar(document.getElementById('studyFramework'));
+
+           chart.draw(data, google.charts.Bar.convertOptions(options));
+       }
 </script>
 </html>
