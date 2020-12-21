@@ -41,9 +41,36 @@ public class QboardVO {
     private int new_reply_rpt_cnt;
     private int new_pick_state;
     private String new_reply_date;
+    private int new_reply_edit_no;
+    private String new_reply_edit_content;
+    private String new_reply_edit_date;
 
     private String new_file;
     private String new_reply_content;
+
+    public int getNew_reply_edit_no() {
+        return new_reply_edit_no;
+    }
+
+    public void setNew_reply_edit_no(int new_reply_edit_no) {
+        this.new_reply_edit_no = new_reply_edit_no;
+    }
+
+    public String getNew_reply_edit_content() {
+        return new_reply_edit_content;
+    }
+
+    public void setNew_reply_edit_content(String new_reply_edit_content) {
+        this.new_reply_edit_content = new_reply_edit_content;
+    }
+
+    public String getNew_reply_edit_date() {
+        return new_reply_edit_date;
+    }
+
+    public void setNew_reply_edit_date(String new_reply_edit_date) {
+        this.new_reply_edit_date = new_reply_edit_date;
+    }
 
     public String getNew_reply_content() {
         return new_reply_content;
@@ -410,6 +437,10 @@ public class QboardVO {
                 ", new_reply_rpt_cnt=" + new_reply_rpt_cnt +
                 ", new_reply_date='" + new_reply_date + '\'' +
                 ", new_file='" + new_file + '\'' +
+                ", new_reply_date='" + new_reply_date + '\'' +
+                ", new_reply_edit_no='" + new_reply_edit_no + '\'' +
+                ", new_reply_edit_content='" + new_reply_edit_content + '\'' +
+                ", new_reply_edit_date='" + new_reply_edit_date + '\'' +
                 ", new_reply_content='" + new_reply_content + '\'' +
                 '}';
     }

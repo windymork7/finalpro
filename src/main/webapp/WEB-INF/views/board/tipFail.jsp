@@ -10,7 +10,9 @@
     <script>
 
         $(document).ready(function (){
+            console.log("..",${updown})
             if (${updown} == 1) {
+                console.log("ㅇㅇㅇ")
                 alert("이미 추천을 한 게시글입니다.")
                 history.back()
             }else

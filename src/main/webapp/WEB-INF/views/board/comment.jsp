@@ -12,7 +12,35 @@
 </head>
 <!-- 부트스트랩 css 추가 .-->
 <link rel="stylesheet" href="css/bootstrap.css">
+<style>
+    .nav-tabs {
+        color: #5a5a5a;
+        border-bottom: 1px solid #eceeef;
+    }
 
+    .nav-tabs .nav-item {
+        color: #5a5a5a;
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs .nav-link {
+        color: #5a5a5a;
+        border: 1px solid transparent;
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem;
+    }
+
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+        color: #78c2ad;
+        border-color: #f7f7f9 #f7f7f9 #eceeef;
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        color: #78c2ad;
+        background-color: #fff;
+        border-color: #eceeef #eceeef #fff;
+    }
+</style>
 <!-- 해외 부트스트랩 js -->
 <%--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
 <%--<script--%>
@@ -29,10 +57,10 @@
 <%--<button type="button" onclick="getCommentList()">인기순</button>--%>
 <ul class="nav nav-tabs">
     <li class="nav-item ml-auto">
-        <a class="nav-link active" data-toggle="tab" onclick="getCommentLateList()">최신순</a>
+        <a class="nav-link active" data-toggle="tab" onclick="getCommentLateList()" href="#">최신순</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" onclick="getCommentList()">인기순</a>
+        <a class="nav-link" data-toggle="tab" onclick="getCommentList()" href="#">인기순</a>
     </li>
 </ul>
 <br>
@@ -99,7 +127,7 @@
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick == 1){
-                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
+                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" >\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick !== -1){}
@@ -226,7 +254,7 @@
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                         } else if(data[i].reply_pick == 1){
-                            html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
+                            html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                         } else if(data[i].reply_pick !== -1){}
