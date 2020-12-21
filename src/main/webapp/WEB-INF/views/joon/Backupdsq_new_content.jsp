@@ -178,7 +178,7 @@ ${tipVO.new_content}
 					</div>
 
 					<!-- Modal -->
-
+					 
 					<div class="modal fade" id="Modal_1" tabindex="-1"
 						 aria-labelledby="ModalLabel_1" aria-hidden="true">
 						<div class="modal-dialog">
@@ -220,20 +220,18 @@ ${tipVO.new_content}
 							</div>
 						</div>
 					</div>
+					
 
-
-
-        <form id="editListForm">
-            <ul class="nav nav-tabs">
-                <li class="nav-item ml-auto"><a class="nav-link active"
-                                                data-toggle="tab" href="#latest">최신순</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                        href="#popular">인기순</a></li>&nbsp;
-            </ul>
-            <div id="commentList">
-            </div>
-        </form>
-
+					<form id="editListForm">
+						<ul class="nav nav-tabs">
+							<li class="nav-item ml-auto"><a class="nav-link active"
+															data-toggle="tab" href="#latest">최신순</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab"
+													href="#popular">인기순</a></li>&nbsp;
+						</ul>
+						<div id="commentList">
+						</div>
+					</form>
 
 					<hr class="my-4">
 <!-- 답글 최신순 -->
@@ -255,7 +253,7 @@ ${tipVO.new_content}
 									<!-- 글 작성자랑 세션 유저랑 같다면 and 게시글이 아직 채택상태가 아니라면 -->
 									<c:if test = "${tipVO.mem_nick == sessionScope.userNick}">
 										<c:if test="${tipVO.new_pick_state == 0}">
-									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택" onclick="location.href='/tipReplyPick.bo?new_no=${llist.new_no}&new_reply_no=${llist.new_reply_no}'">
+									<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
 										<i class="fa fa-check" aria-hidden="true"></i>
 									</button>
 										</c:if>
@@ -276,48 +274,6 @@ ${llist.new_reply_content}
 						</div>
 					</div>
 					<br>
-                    <!-- 최신순 리스트 신고-->
-                    <div class="modal fade" id="Modal_3" tabindex="-1"
-                         aria-labelledby="ModalLabel_3" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="ModalLabel_3">신고 사유를 선택하세요.</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="/tipReplyRpt.bo" method="post">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input type="hidden" name="new_reply_no" value="${llist.new_reply_no}">
-                                            <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
-                                                <label class="custom-control-label" for="customRadio1">주제에 맞지 않음</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
-                                                <label class="custom-control-label" for="customRadio2">욕설</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
-                                                <label class="custom-control-label" for="customRadio3">광고</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
-                                                <label class="custom-control-label" for="customRadio4">사칭</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">전송</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 				</c:forEach>
 			</div>
 
@@ -339,7 +295,7 @@ ${llist.new_reply_content}
 
 							<c:if test = "${tipVO.mem_nick == sessionScope.userNick}">
 								<c:if test="${tipVO.new_pick_state == 0}">
-							<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택" onclick="location.href='/tipReplyPick.bo?new_no=${ulist.new_no}&new_reply_no=${ulist.new_reply_no}'">
+							<button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="채택">
 								<i class="fa fa-check" aria-hidden="true"></i>
 							</button>
 								</c:if>
@@ -360,49 +316,6 @@ ${ulist.new_reply_content}
 				</div>
 			</div>
 			<br>
-            <!-- 인기순 리스트 신고 -->
-            <div class="modal fade" id="Modal_4" tabindex="-1"
-                 aria-labelledby="ModalLabel_3" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel_4">신고 사유를 선택하세요.</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="/tipReplyRpt.bo" method="post">
-                            <div class="modal-body">
-                                <div class="form-group">
-									<c:set var="new_reply_no" value="${ulist.new_reply_no}"/>
-                                    <input type="hidden" name="new_reply_no" value="${new_reply_no}">
-                                    <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
-                                        <label class="custom-control-label" for="customRadio1">주제에 맞지 않음${new_reply_no}</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
-                                        <label class="custom-control-label" for="customRadio2">욕설</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
-                                        <label class="custom-control-label" for="customRadio3">광고</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
-                                        <label class="custom-control-label" for="customRadio4">사칭</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">전송</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
 		</c:forEach>
 					<br>
 					<br>
@@ -413,9 +326,91 @@ ${ulist.new_reply_content}
 
 				</fieldset>
 		</div>
+			<!-- 최신순 리스트 신고-->
+	<div class="modal fade" id="Modal_3" tabindex="-1"
+		 aria-labelledby="ModalLabel_3" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLabel_3">신고 사유를 선택하세요.</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="/tipReplyRpt.bo" method="post">
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="hidden" name="new_reply_no" value="${llist.new_reply_no}">
+						<input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
+							<label class="custom-control-label" for="customRadio1">주제에 맞지 않음</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
+							<label class="custom-control-label" for="customRadio2">욕설</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
+							<label class="custom-control-label" for="customRadio3">광고</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
+							<label class="custom-control-label" for="customRadio4">사칭</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-
-
+			<!-- 인기순 리스트 신고 -->
+			<div class="modal fade" id="Modal_4" tabindex="-1"
+				 aria-labelledby="ModalLabel_3" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="ModalLabel_4">신고 사유를 선택하세요.</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="/tipReplyRpt.bo" method="post">
+							<div class="modal-body">
+								<div class="form-group">
+									<input type="hidden" name="new_reply_no" value="${ulist.new_reply_no}">
+									<input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+									<div class="custom-control custom-radio">
+										<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1">
+										<label class="custom-control-label" for="customRadio1">주제에 맞지 않음</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2">
+										<label class="custom-control-label" for="customRadio2">욕설</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3">
+										<label class="custom-control-label" for="customRadio3">광고</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4">
+										<label class="custom-control-label" for="customRadio4">사칭</label>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary" data-dismiss="modal">전송</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 
 		<div class="col-sm-1 offset-sm-2">
 			<div id="sidebox">

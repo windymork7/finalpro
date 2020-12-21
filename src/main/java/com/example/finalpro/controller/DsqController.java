@@ -118,6 +118,14 @@ public class DsqController {
     TipReplyUpListService tipReplyUpListService;
     @Autowired
     TipReplyLateListService tipReplyLateListService;
+    @Autowired
+    TipReplyUpCheckService tipReplyUpCheckService;
+    @Autowired
+    TipReplyUpActionService tipReplyUpActionService;
+    @Autowired
+    TipReplyRptCheckService tipReplyRptCheckService;
+    @Autowired
+    TipReplyPickActionService tipReplyPickActionService;
     // Q게시판 등록 페이지 이동
     @RequestMapping("/qBoardInsertForm.bo")
     public String qBoardInsertForm(@RequestParam int subCa, Model model){
@@ -444,6 +452,7 @@ public class DsqController {
 
         String qboardNum = request.getParameter("qboardNum");
         String subCa = request.getParameter("subCa");
+        System.out.println("답글번호 :"+ request.getParameter("reply_no"));
 
         commonReplyDownService.replyDown(request);
 
@@ -793,7 +802,54 @@ public class DsqController {
         return "redirect:/qboardTipContent.bo?new_no="+new_no;
     }
 
+    //새터 댓글 추천 유효성 및 액션
+    @RequestMapping("/tipReplyUp.bo")
+    public String tipReplyUp(@RequestParam("mem_no") int mem_no,@RequestParam("new_reply_no") int new_reply_no,Model model) {
+        System.out.println("새터댓글추천");
 
+        int check = tipReplyUpCheckService.TipReplyUpCheck(mem_no, new_reply_no);
+        System.out.println("check : " + check);
+
+        //0 추천 true
+        if (check == 0) {
+            tipReplyUpActionService.tipReplyUpActionService(mem_no, new_reply_no);
+            return "redirect:/tipReplyAlert.bo?check=0";
+        //0 아니면 추천 False
+        } else if (check != 0) {
+            return "redirect:/tipReplyAlert.bo?check=1";
+        }
+        return "template";
+    }
+
+    //새터 댓글 신고 유효성 및 액션
+    @RequestMapping("/tipReplyRpt.bo")
+    public String tipReplyRpt(HttpServletRequest request){
+        int check = tipReplyRptCheckService.tipReplyRptCheck(request);
+        //신고 true
+        System.out.println("신고 check:"+ check);
+        if(check == 2){
+            return "redirect:/tipReplyAlert.bo?check=2";
+        }else if(check == 3){   //신고 False
+            return "redirect:/tipReplyAlert.bo?check=3";
+        }
+        return "template";
+    }
+    //새터 추천,신고 알러트창
+    @RequestMapping("tipReplyAlert.bo")
+    public String tipReplyAlert(@RequestParam("check") int check,Model model) {
+        model.addAttribute("main", "board/replyAlert");
+        model.addAttribute("check",check);
+
+        return "template";
+    }
+    //새터 채택
+    @RequestMapping("tipReplyPick.bo")
+    public String tipReplyPick(@RequestParam("new_no") int new_no, @RequestParam("new_reply_no") int new_reply_no,HttpSession session){
+        tipReplyPickActionService.tipReplyPickAction(session,new_no,new_reply_no);
+
+        return "redirect:/qboardTipContent.bo?new_no="+new_no;
+    }
 
 
 }
+

@@ -153,4 +153,28 @@ public interface BoardDAO {
     public List<QboardVO> tipReplyLateList(int new_no);
     //새터 댓글 인기순 리스트
     public List<QboardVO> tipReplyUpList(int new_no);
+    //새터 댓글 추천 유효성
+    public int tipReplyUpCheck(int mem_no,int new_reply_no);
+    //새터 댓글 추천 액션 ( new_reply_up insert )
+    public void tipReplyUpAction(int mem_no, int new_reply_no);
+    //새터 댓글 추천 액션 ( new_reply_up_cnt + 1 update )
+    public void tipReplyUpUpdate(int new_reply_no);
+    // 새터 댓글 정보
+    public QboardVO tipReplyContent(int new_reply_no);
+    // 새터 댓글 신고 유효성
+    public int tipReplyRptCheck(int mem_no, int new_reply_no);
+    // 새터 댓글 신고 액션 ( insert )
+    public void tipReplyRptInsert(int mem_no,int new_reply_no, int radio);
+    // 새터 댓글 신고당한 유저 rpt_Cnt + 1
+    public void tipReplyRptCntUpdate(int mem_no);
+    // 새터 댓글 신고한/ 당한 유저 exp update
+    public void tipReplyRptExpUpdate(int mem_no, int mem_exp);
+    // 새터 댓글 채택
+    public void tipReplyPickAction(int new_reply_no);
+    // 새터 댓글 채택후 나머지 pick - 1
+    public void tipReplyPickDownAction(int new_no);
+    // 새터 채택되면 exp +
+    public void tipReplyPickExpUp(int mem_no);
+
+
 }
