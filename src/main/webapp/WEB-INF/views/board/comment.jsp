@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <title>NULL</title>
 </head>
-<!-- 부트스트랩 css 추가 -->
+<!-- 부트스트랩 css 추가 .-->
 <link rel="stylesheet" href="css/bootstrap.css">
 
 <!-- 해외 부트스트랩 js -->
