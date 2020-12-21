@@ -127,7 +127,7 @@
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick == 1){
-                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
+                                html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" >\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                             } else if(data[i].reply_pick !== -1){}
@@ -254,7 +254,7 @@
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                         } else if(data[i].reply_pick == 1){
-                            html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\" onclick='location.href=\"/replyPick.bo?replyNum="+data[i].reply_no+"&qMemNo="+qMemNo+"&qboardNum="+qboardNum+"&subCa="+subCa+"\"'>\n" +
+                            html += "                <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"채택\">\n" +
                                 "                    <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n" +
                                 "                </button>\n";
                         } else if(data[i].reply_pick !== -1){}

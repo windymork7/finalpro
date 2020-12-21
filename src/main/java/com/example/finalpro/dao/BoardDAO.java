@@ -175,6 +175,9 @@ public interface BoardDAO {
     public void tipReplyPickDownAction(int new_no);
     // 새터 채택되면 exp +
     public void tipReplyPickExpUp(int mem_no);
-
+    // 새터 에딧댓글 insert
+    public void editNewReplyInsert(QboardVO qboardVO);
+    // 새터 에딧댓글 list
+    public List<QboardVO> editNewReplyList(QboardVO qboardVO);
 
 }
