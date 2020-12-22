@@ -101,7 +101,7 @@ small {
 							<c:if test="${not empty noticeVO.notice_file}">
                             <a href="${pageContext.request.contextPath}/upload/${noticeVO.notice_file}">${noticeVO.notice_file}</a>
                             <c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
-                                <img src="upload/${noticeVO.notice_file}" width="100%" height="350"><br><br>
+                                <img src="upload/${noticeVO.notice_file}" width="100%"><br><br>
                             </c:if>
                         </c:if>
                         <%--  

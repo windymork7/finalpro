@@ -152,7 +152,7 @@
     <!-- 해당 게시글 조회 -->
     <select id="qBoardContent" resultType="com.example.finalpro.vo.QboardVO">
         select q1.q_no,q1.mem_no, q1.q_exp, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,q_file
-        , q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick
+        , q_content,q_sos,q_up,q_rpt_cnt,q_date,q_admin_state,m.mem_nick,m.grade_no
         from q q1, (select * from sub_ca) ca,(select * from book_ca) bca,(select * from mem)m
         where q1.sub_ca_no = ca.sub_ca_no
         and bca.book_ca_no = q1.book_ca_no
@@ -163,7 +163,7 @@
 
     <!-- 댓글 있는 해당 게시글 조회-->
     <select id="qBoardReplyContent" resultType="com.example.finalpro.vo.QboardVO">
-        select te.q_no,te.mem_no, te.sub_ca_name, te.sub_ca_no, te.book_ca_name, te.book_ca_no, te.q_title,
+        select te.q_no,te.mem_no, te.sub_ca_name, te.sub_ca_no, te.book_ca_name, te.book_ca_no, te.q_title,te.grade_no,
         te.q_content, te.q_sos, te.q_up, te.q_rpt_cnt, te.q_date, te.q_admin_state, te.mem_nick, r.reply_no, r.reply_pick
         from reply r,
         (select q1.q_no,q1.mem_no, ca.sub_ca_name,ca.sub_ca_no,book_ca_name,bca.book_ca_no,q_title,
@@ -252,21 +252,21 @@
 
     <!-- 댓글 리스트  인기순 -->
     <select id="replyList" parameterType="com.example.finalpro.vo.ReplyBoardVO" resultType="com.example.finalpro.vo.ReplyBoardVO">
-        SELECT M.MEM_NO MEM_NO, M.MEM_NICK MEM_NICK, RP.Q_NO Q_NO, RP.REPLY_CONTENT REPLY_CONTENT
+        SELECT M.MEM_NO MEM_NO, M.MEM_NICK MEM_NICK, M.GRADE_NO , RP.Q_NO Q_NO, RP.REPLY_CONTENT REPLY_CONTENT
         , RP.REPLY_UP REPLY_UP, RP.REPLY_PICK, REPLY_PICK, RP.REPLY_RPT_CNT REPLY_RPT_CNT, RP.REPLY_NO REPLY_NO
         FROM MEM M, REPLY RP
         WHERE M.MEM_NO = RP.MEM_NO
         AND RP.Q_NO = #{q_no}
-        ORDER BY REPLY_UP DESC
+        ORDER BY REPLY_UP DESC, REPLY_NO DESC
     </select>
     <!-- 댓글 리스트 최신순 -->
     <select id="replyLateList" parameterType="com.example.finalpro.vo.ReplyBoardVO" resultType="com.example.finalpro.vo.ReplyBoardVO">
-        SELECT M.MEM_NO MEM_NO, M.MEM_NICK MEM_NICK, RP.Q_NO Q_NO, RP.REPLY_CONTENT REPLY_CONTENT
+        SELECT M.MEM_NO MEM_NO, M.MEM_NICK MEM_NICK,M.GRADE_NO , RP.Q_NO Q_NO, RP.REPLY_CONTENT REPLY_CONTENT
         , RP.REPLY_UP REPLY_UP, RP.REPLY_PICK, REPLY_PICK, RP.REPLY_RPT_CNT REPLY_RPT_CNT, RP.REPLY_NO REPLY_NO
         FROM MEM M, REPLY RP
         WHERE M.MEM_NO = RP.MEM_NO
         AND RP.Q_NO = #{q_no}
-        ORDER BY REPLY_NO DESC
+        ORDER BY REPLY_NO DESC, REPLY_UP DESC
     </select>
 
     <!-- 댓글 추천 체크 -->
@@ -527,7 +527,7 @@
     <select id="tipBoardContent" parameterType="Integer" resultType="com.example.finalpro.vo.QboardVO">
         SELECT * FROM
         (SELECT * FROM NEW WHERE NEW_NO=#{param1})N,
-        (SELECT MEM_NO,MEM_NICK FROM MEM)M
+        (SELECT MEM_NO,MEM_NICK,GRADE_NO FROM MEM)M
         WHERE N.MEM_NO=M.MEM_NO
     </select>
     
@@ -582,7 +582,7 @@
     </insert>
     <!-- 새터 댓글 최신순 리스트 -->
     <select id="tipReplyLateList" resultType="com.example.finalpro.vo.QboardVO">
-        SELECT N.*,M.MEM_NICK FROM
+        SELECT N.*,M.MEM_NICK,M.GRADE_NO FROM
         (SELECT * FROM NEW_REPLY)N,
         (SELECT * FROM MEM)M
         WHERE N.MEM_NO = M.MEM_NO
@@ -591,7 +591,7 @@
     </select>
     <!-- 새터 댓글 인기순 리스트 -->
     <select id="tipReplyUpList" resultType="com.example.finalpro.vo.QboardVO">
-        SELECT N.*,M.MEM_NICK FROM
+        SELECT N.*,M.MEM_NICK,M.GRADE_NO FROM
         (SELECT * FROM NEW_REPLY)N,
         (SELECT * FROM MEM)M
         WHERE N.MEM_NO = M.MEM_NO
@@ -663,6 +663,11 @@
 <!--        INSERT INTO NEW_REPLY_EDIT VALUES(NEW_REPLY_EDIT_SEQ.NEXTVAL,-1,42,'sd',sysdate)-->
 
     </insert>
+    <!-- 새터 에디터 글쓰면 + 3 -->
+    <update id="editNewMemExpUp">
+        UPDATE MEM SET MEM_EXP = MEM_EXP + 3 WHERE MEM_NO = #{param1}
+    </update>
+
     <!-- 새터 에디터 리스트-->
     <select id="editNewReplyList" resultType="com.example.finalpro.vo.QboardVO" parameterType="com.example.finalpro.vo.QboardVO">
         SELECT * FROM NEW_REPLY_EDIT R, MEM M

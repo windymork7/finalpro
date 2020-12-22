@@ -234,6 +234,9 @@
     if (${empty sessionScope.userNick}){
       alert("로그인을 먼저 해주세요.");
       location.href="/loginForm.me";
+    } else if (${sessionScope.mem_survey == 1}) {
+      alert("이미 참여를 하였습니다.");
+      //history.back()
     } else {
       location.href="surveyForm.su";
     }

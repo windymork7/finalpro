@@ -52,7 +52,7 @@ public class SurveyController {
         //surveyCountUpService.surveyCountUp(survey_q_no.get(0),mem_no);
         surveyCountUpService.surveyCountUp(request,mem_no);
 
-        return "redirect:/";
+        return "redirect:/surveyView.su";
     }
     @RequestMapping("/surveyView.su")
     public String surveyView(Model model){

@@ -20,7 +20,15 @@ public class CommonMemberVO {
     private int scrapcnt;
     private int rn;
     private int mem_rpt_cnt;
-    
+    private int mem_survey;
+
+    public int getMem_survey() {
+        return mem_survey;
+    }
+
+    public void setMem_survey(int mem_survey) {
+        this.mem_survey = mem_survey;
+    }
 
     public int getMem_rpt_cnt() {
 		return mem_rpt_cnt;

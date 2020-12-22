@@ -77,7 +77,7 @@
                      </li>
 
                      <c:forEach var="bList" items="${bookCaList}">
-                        <c:if test="${bList.sub_ca_no==b+1 || bList.sub_ca_no==b+4 || bList.sub_ca_no==8}">
+                        <c:if test="${bList.sub_ca_no==b+1 || bList.sub_ca_no==b+4 || bList.sub_ca_no==b+7}">
                         <li class="nav-item"><a class="nav-link pl-0" href="#">
                            <span class="d-none d-sm-inline"><a href="scrapBookMain.bs?ca_no=${bList.ca_no}&subCa=${bList.sub_ca_no}&bookCa=${bList.book_ca_no}">${bList.book_ca_name}</a></span></a>
                         </li>

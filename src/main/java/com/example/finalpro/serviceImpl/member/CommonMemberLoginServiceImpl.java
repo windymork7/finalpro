@@ -52,10 +52,12 @@ public class CommonMemberLoginServiceImpl implements CommonMemberLoginService {
                     Date sysdate = format.parse(tempSysdate);
                     System.out.println(blackDate);
                     System.out.println(sysdate);
+                    System.out.println("mem_survey "+ commonMemberVO.getMem_survey());
                     if(sysdate.equals(blackDate) || sysdate.after(blackDate)) {
                         session.setAttribute("userNo", commonMemberVO.getMem_no());
                         session.setAttribute("userNick", commonMemberVO.getMem_nick());
                         session.setAttribute("userGrade", commonMemberVO.getGrade_no());
+                        session.setAttribute("mem_survey",commonMemberVO.getMem_survey());
                         System.out.println("날짜트루");
                         return "success";
                     }

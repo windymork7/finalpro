@@ -331,8 +331,8 @@ public class DsqController {
 
         List<ReplyBoardVO> replyVOlist = commonReplyListService.commonReplyList(replyBoardVO);
 
-//        System.out.println(replyVOlist);
-
+        System.out.println("replyVOlist");
+        System.out.println("replyVOlist: "+ replyVOlist.get(0).getGrade_no());
         if (replyVOlist.size() > 0){
             for (int i = 0; i < replyVOlist.size(); i++) {
                 HashMap hm = new HashMap();
@@ -344,7 +344,7 @@ public class DsqController {
                 hm.put("reply_pick", replyVOlist.get(i).getReply_pick());
                 hm.put("reply_up", replyVOlist.get(i).getReply_up());
                 hm.put("reply_rpt_cnt", replyVOlist.get(i).getReply_rpt_cnt());
-
+                hm.put("grade_no",replyVOlist.get(i).getGrade_no());
                 hmlist.add(hm);
             }
         }
@@ -377,7 +377,7 @@ public class DsqController {
                 hm.put("reply_pick", replyVOlist.get(i).getReply_pick());
                 hm.put("reply_up", replyVOlist.get(i).getReply_up());
                 hm.put("reply_rpt_cnt", replyVOlist.get(i).getReply_rpt_cnt());
-
+                hm.put("grade_no",replyVOlist.get(i).getGrade_no());
                 hmlist.add(hm);
             }
         }
@@ -856,11 +856,11 @@ public class DsqController {
     // 새터 게시판 에디터 답변 글쓰기
     @RequestMapping("/neweditInput.bo")
     @ResponseBody
-    public String neweditInput(QboardVO qboardVO){
+    public String neweditInput(QboardVO qboardVO,HttpSession session){
 
         System.out.println("여기오나요: ");
         System.out.println(qboardVO.toString());
-        editNewReplyInsertService.editNewReplyInsert(qboardVO);
+        editNewReplyInsertService.editNewReplyInsert(qboardVO,session);
 
         return "success";
     }

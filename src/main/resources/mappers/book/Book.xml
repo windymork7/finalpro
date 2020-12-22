@@ -18,6 +18,7 @@
         SELECT b.*,s.sub_ca_name,s.ca_no FROM BOOK_CA b,(select * from sub_ca)s
         where b.sub_ca_no = s.sub_ca_no
         and s.ca_no=#{param1}
+        order by book_ca_no asc
     </select>
     <!-- 북카테고리 ( 제어문, 출력문안에 속해있는 게시글 목록 리스트 ) -->
     <select id="bookCaContentList" parameterType="com.example.finalpro.vo.PagingVO" resultType="com.example.finalpro.vo.QboardVO">
