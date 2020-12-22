@@ -115,6 +115,7 @@
                     <form action="qboardTipUpAction.bo" method="post">
                         <%--							<input type="hidden" name="new_no" value="${tipVO.new_no}">--%>
                         <input type="hidden" name="mem_no" value="${sessionScope.userNo}">
+                            <input type="hidden" name="new_no" value="${tipVO.new_no}">
                         <div id="c_right">
                             <c:choose>
                                 <c:when test="${empty sessionScope.userNo}"></c:when>
@@ -158,7 +159,40 @@
                     </small>
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted text-right">${tipVO.new_date}</h6>
-                <h6 class="card-subtitle mb-2">${tipVO.mem_nick}</h6>
+<%--                <h6 class="card-subtitle mb-2">${tipVO.mem_nick}</h6>--%>
+                <c:choose>
+                    <c:when test="${tipVO.grade_no eq 1}">
+                  <span class="badge badge-light"></span>
+                    <div class="text-muted">
+                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${tipVO.mem_nick}</i>
+                    </div></h6>
+                    </c:when>
+                    <c:when test="${tipVO.grade_no eq 2}">
+                        <span class="badge badge-warning"></span>
+                        <div class="text-warning">
+                            <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${tipVO.mem_nick}</i>
+                        </div></h6>
+                    </c:when>
+                    <c:when test="${tipVO.grade_no eq 3}">
+                        <span class="badge badge-primary"></span>
+                        <div class="text-primary">
+                            <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${tipVO.mem_nick}</i>
+                        </div></h6>
+                    </c:when>
+                    <c:when test="${tipVO.grade_no eq 4}">
+                        <span class="badge badge-secondary"></span>
+                        <div class="text-secondary">
+                            <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${tipVO.mem_nick}</i>
+                        </div></h6>
+                    </c:when>
+                    <c:when test="${tipVO.grade_no eq 5}">
+                        <span class="badge badge-danger"></span>
+                        <div class="text-danger">
+                            <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${tipVO.mem_nick}</i>
+                        </div></h6>
+                    </c:when>
+                </c:choose>
+
             </div>
             <div class="card-body">
                 <div class="card-text" id="question-text">
@@ -256,7 +290,38 @@
                 <c:forEach var="llist" items="${replyLateList}">
                     <div class="card">
                         <div class="card-header">
-                                ${llist.mem_nick}
+                            <c:choose>
+                                <c:when test="${llist.grade_no eq 1}">
+                                    <span class="badge badge-light"></span>
+                                    <div class="text-muted">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${llist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${llist.grade_no eq 2}">
+                                    <span class="badge badge-warning"></span>
+                                    <div class="text-warning">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${llist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${llist.grade_no eq 3}">
+                                    <span class="badge badge-primary"></span>
+                                    <div class="text-primary">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${llist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${llist.grade_no eq 4}">
+                                    <span class="badge badge-secondary"></span>
+                                    <div class="text-secondary">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${llist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${llist.grade_no eq 5}">
+                                    <span class="badge badge-danger"></span>
+                                    <div class="text-danger">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${llist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                            </c:choose>
                         </div>
                         <div class="card-body">
                             <div class="card-text d-flex justify-content-between align-items-center">
@@ -365,8 +430,42 @@
                 <c:forEach var="ulist" items="${replyUpList}">
                     <c:set var="l" value="0"/>
                     <div class="card">
+<%--                        <div class="card-header">--%>
+<%--                                ${ulist.mem_nick}--%>
+<%--                        </div>--%>
                         <div class="card-header">
-                                ${ulist.mem_nick}
+                            <c:choose>
+                                <c:when test="${ulist.grade_no eq 1}">
+                                    <span class="badge badge-light"></span>
+                                    <div class="text-muted">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${ulist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${ulist.grade_no eq 2}">
+                                    <span class="badge badge-warning"></span>
+                                    <div class="text-warning">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${ulist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${ulist.grade_no eq 3}">
+                                    <span class="badge badge-primary"></span>
+                                    <div class="text-primary">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${ulist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${ulist.grade_no eq 4}">
+                                    <span class="badge badge-secondary"></span>
+                                    <div class="text-secondary">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${ulist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                                <c:when test="${ulist.grade_no eq 5}">
+                                    <span class="badge badge-danger"></span>
+                                    <div class="text-danger">
+                                        <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${ulist.mem_nick}</i>
+                                    </div></h6>
+                                </c:when>
+                            </c:choose>
                         </div>
                         <div class="card-body">
                             <div class="card-text d-flex justify-content-between align-items-center">
@@ -541,9 +640,9 @@
                     "\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
                     "\t   <textarea id='editText' name='new_reply_edit_content' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
                     "</textarea>\n" +
-                    "\t   </div>\n" +
-                    "<button type='button' class='btn btn-success' onclick='editAddContentInsert()'>전송</button>\n" +
-                    "<button type='reset' class='btn btn-danger' data-dismiss=card-body >취소</button>\n" +
+                    "\t   </div><br>\n" +
+                    "<button type='button' class='btn btn-primary' onclick='editAddContentInsert()'>전송</button>\n" +
+                    "<button type='reset' class='btn btn-secondary' data-dismiss=card-body >취소</button>\n" +
                     "\t  </div>\n" +
                     "\t</div>" +
                     "<br>";
@@ -573,7 +672,7 @@
                         for (var i = 0; i < data.length; i++) {
                             html += "<div class=\"card\">\n" +
                                 "\t  <div class=\"card-header\">\n" +
-                                "\t<i class=\"fa fa-pencil-square fa-lg\" aria-hidden=\"true\"></i>\n" +
+                                "\t<i class=\"fa fa-pencil-square fa-lg text-warning\" aria-hidden=\"true\"></i>\n" +
                                 "\t  " + data[i].mem_nick + "\n" +
                                 "\t  </div>\n" +
                                 "\t  <div class=\"card-body\">\n" +

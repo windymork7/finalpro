@@ -158,9 +158,40 @@
 					    </small>
 					    </div>
 					    <h6 class="card-subtitle mb-2 text-muted text-right">${qBoardVO.q_date}</h6>
-					    <h6 class="card-subtitle mb-2">${qBoardVO.mem_nick}</h6>
+                          <c:choose>
+                              <c:when test="${qBoardVO.grade_no eq 1}">
+                                  <span class="badge badge-light"></span>
+                                  <div class="text-muted">
+                                      <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${qBoardVO.mem_nick}</i>
+                                  </div></h6>
+                              </c:when>
+                              <c:when test="${qBoardVO.grade_no eq 2}">
+                                  <span class="badge badge-warning"></span>
+                                  <div class="text-warning">
+                                      <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${qBoardVO.mem_nick}</i>
+                                  </div></h6>
+                              </c:when>
+                              <c:when test="${qBoardVO.grade_no eq 3}">
+                                  <span class="badge badge-primary"></span>
+                                  <div class="text-primary">
+                                      <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${qBoardVO.mem_nick}</i>
+                                  </div></h6>
+                              </c:when>
+                              <c:when test="${qBoardVO.grade_no eq 4}">
+                                  <span class="badge badge-secondary"></span>
+                                  <div class="text-secondary">
+                                      <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${qBoardVO.mem_nick}</i>
+                                  </div></h6>
+                              </c:when>
+                              <c:when test="${qBoardVO.grade_no eq 5}">
+                                  <span class="badge badge-danger"></span>
+                                  <div class="text-danger">
+                                      <i class="fa fa-thermometer-full" aria-hidden="true">&nbsp;${qBoardVO.mem_nick}</i>
+                                  </div></h6>
+                              </c:when>
+                          </c:choose>
 					    <p class="card-text">
-					    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+					    <br><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 					    ${qBoardVO.book_ca_name}</p>
 					  </div>
 					  <div class="card-body">
@@ -343,9 +374,9 @@
 					"\t    <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
 					"\t   <textarea id='editText' name='edit_reply_content' class=\"form-control\" rows=\"8\" id=\"reply_text\">\n" +
 					"</textarea>\n" +
-					"\t   </div>\n" +
-					"<button type='button' class='btn btn-success' onclick='editAddContentInsert()'>전송</button>\n"+
-					"<button type='reset' class='btn btn-danger'>취소</button>\n"+
+					"\t   </div><br>\n" +
+					"<button type='button' class='btn btn-primary' onclick='editAddContentInsert()'>전송</button>\n"+
+					"<button type='reset' class='btn btn-secondary'>취소</button>\n"+
 					"\t  </div>\n" +
 					"\t</div>" +
                     "<br>";

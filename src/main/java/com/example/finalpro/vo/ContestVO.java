@@ -2,7 +2,7 @@ package com.example.finalpro.vo;
 
 public class ContestVO {
     private int contest_no;
-    private int biz_no;
+    private String biz_no;
     private String contest_title;
     private String contest_hosting;
     private String contest_period;
@@ -24,11 +24,11 @@ public class ContestVO {
         this.contest_no = contest_no;
     }
 
-    public int getBiz_no() {
+    public String getBiz_no() {
         return biz_no;
     }
 
-    public void setBiz_no(int biz_no) {
+    public void setBiz_no(String biz_no) {
         this.biz_no = biz_no;
     }
 

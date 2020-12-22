@@ -75,7 +75,7 @@
 </body>
 <script>
     $(document).ready(function(){
-        getCommentLateList();
+        getCommentList();
     });
 
     function getCommentList(){
@@ -107,46 +107,39 @@
 
                     for (var i = 0; i < data.length; i++) {
 
-                            //console.log(data[i].reply_no);
-                            //alert(data[i].grade_no);
+                            console.log(data[i].reply_no);
 
 
 
                         html += "<div class=\"card\">\n" +
                             "    <div class=\"card-header\">\n";
-                            if(data[i].grade_no == 1) {
-                                html += "   <span class=\"badge badge-light\"></span>\n" +
-                                "              <div class=\"text-muted\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                       </div></h6>\n";
-                            }
-                            else if(data[i].grade_no == 2) {
-                                html += "   <span class=\"badge badge-warning\"></span>\n" +
-                                "              <div class=\"text-warning\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                      </div></h6>\n";
-                            }
-                            else if(data[i].grade_no == 3) {
-                                html += "   <span class=\"badge badge-primary\"></span>\n" +
-                                    "              <div class=\"text-primary\">\n" +
-                                    "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                    "                      </div></h6>\n";
-                            }
-                            else if(data[i].grade_no == 4) {
-                                html += "   <span class=\"badge badge-secondary\"></span>\n" +
-                                    "              <div class=\"text-secondary\">\n" +
-                                    "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                    "                      </div></h6>\n";
-                            }
-                            else if(data[i].grade_no == 5) {
-                                html += "   <span class=\"badge badge-danger\"></span>\n" +
-                                    "              <div class=\"text-danger\">\n" +
-                                    "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                    "                      </div></h6>\n";
-                            }
-
-                        html += "    </div>\n" +
-                            "    <div class=\"card-body\">\n" +
+                        if(data[i].grade_no == 1) {
+                          html +=  "   <span class=\"badge badge-light\"></span>\n" +
+                              "                    <div class=\"text-muted\">\n" +
+                              "                        <i class=\"fa fa-thermometer-full fa-lg\" aria-hidden=\"true\">&nbsp;" + data[i].mem_nick + "\n" +
+                            "    </i></div></h6>\n";
+                        }else if(date[i].grade_no == 2){
+                            html +=  "   <span class=\"badge badge-light\"></span>\n" +
+                                "          <div class=\"text-muted\">\n" +
+                                "             <i class=\"fa fa-thermometer-full fa-lg\" aria-hidden=\"true\">&nbsp;" + data[i].mem_nick + "\n" +
+                                "    </i></div></h6>\n";
+                        }else if(date[i].grade_no == 3){
+                            html +=  "   <span class=\"badge badge-light\"></span>\n" +
+                                "          <div class=\"text-muted\">\n" +
+                                "             <i class=\"fa fa-thermometer-full fa-lg\" aria-hidden=\"true\">&nbsp;" + data[i].mem_nick + "\n" +
+                                "    </i></div></h6>\n";
+                        }else if(date[i].grade_no == 4){
+                            html +=  "   <span class=\"badge badge-light\"></span>\n" +
+                                "          <div class=\"text-muted\">\n" +
+                                "             <i class=\"fa fa-thermometer-full fa-lg\" aria-hidden=\"true\">&nbsp;" + data[i].mem_nick + "\n" +
+                                "    </i></div></h6>\n";
+                        }else if(date[i].grade_no == 5){
+                            html +=  "   <span class=\"badge badge-light\"></span>\n" +
+                                "          <div class=\"text-muted\">\n" +
+                                "             <i class=\"fa fa-thermometer-full fa-lg\" aria-hidden=\"true\">&nbsp;" + data[i].mem_nick + "\n" +
+                                "    </i></div></h6>\n";
+                        }
+                            html += "    <div class=\"card-body\">\n" +
                             "        <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
                             "            <div class=\"btn-group-vertical\">\n" +
                             "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"추천\" onclick='location.href=\"/replyUpCheck.bo?replyNum="+data[i].reply_no+"&subCa="+subCa+"&qboardNum="+qboardNum+"\"'>\n" +
@@ -273,38 +266,9 @@
 
 
                         html += "<div class=\"card\">\n" +
-                            "    <div class=\"card-header\">\n";
-                        if(data[i].grade_no == 1) {
-                            html += "   <span class=\"badge badge-light\"></span>\n" +
-                                "              <div class=\"text-muted\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                       </div></h6>\n";
-                        }
-                        else if(data[i].grade_no == 2) {
-                            html += "   <span class=\"badge badge-warning\"></span>\n" +
-                                "              <div class=\"text-warning\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                      </div></h6>\n";
-                        }
-                        else if(data[i].grade_no == 3) {
-                            html += "   <span class=\"badge badge-primary\"></span>\n" +
-                                "              <div class=\"text-primary\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                      </div></h6>\n";
-                        }
-                        else if(data[i].grade_no == 4) {
-                            html += "   <span class=\"badge badge-secondary\"></span>\n" +
-                                "              <div class=\"text-secondary\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                      </div></h6>\n";
-                        }
-                        else if(data[i].grade_no == 5) {
-                            html += "   <span class=\"badge badge-danger\"></span>\n" +
-                                "              <div class=\"text-danger\">\n" +
-                                "                   <i class=\"fa fa-thermometer-full\" aria-hidden=\"true\">" + data[i].mem_nick + "</i>\n" +
-                                "                      </div></h6>\n";
-                        }
-                        html += " </div>\n" +
+                            "    <div class=\"card-header\">\n" +
+                            "        " + data[i].mem_nick +"\n" +
+                            "    </div>\n" +
                             "    <div class=\"card-body\">\n" +
                             "        <div class=\"card-text d-flex justify-content-between align-items-center\">\n" +
                             "            <div class=\"btn-group-vertical\">\n" +

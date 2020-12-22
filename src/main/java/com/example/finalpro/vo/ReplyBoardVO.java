@@ -18,6 +18,15 @@ public class ReplyBoardVO {
     private String sub_ca_name;
     private String book_ca_name;
     private int sub_ca_no;
+    private int grade_no;
+
+    public int getGrade_no() {
+        return grade_no;
+    }
+
+    public void setGrade_no(int grade_no) {
+        this.grade_no = grade_no;
+    }
 
     public int getSub_ca_no() {
         return sub_ca_no;
