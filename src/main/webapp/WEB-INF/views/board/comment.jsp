@@ -133,7 +133,8 @@
                             } else if(data[i].reply_pick !== -1){}
                             if(data[i].mem_nick != sessionNick){
                                 html += "                <button type=\"button\" class=\"btn btn-outline-primary\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"신고\">\n" +
-                                    "<span data-toggle=\"modal\" data-target=\"#Modal_3\">" +
+                                    "<span data-toggle=\"modal\" data-target=\"#Modal_0\">" +
+                                    // "<span data-toggle=\"modal\" data-target=\"#et\">" +
                                     "                    <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>\n" +
                                     "</span>" +
                                     "                </button>\n";
@@ -149,6 +150,7 @@
                             "</div>" +
                             "<br>" +
                             "<div class=\"modal fade\" id=\"Modal_3\" tabindex=\"-1\"\n" +
+                            // "<div class=\"modal fade\" id=\"et\" tabindex=\"-1\"\n" +
                                 "                  aria-labelledby=\"ModalLabel_3\" aria-hidden=\"true\">\n" +
                                 "                  <div class=\"modal-dialog\">\n" +
                                 "                     <div class=\"modal-content\">\n" +
@@ -163,10 +165,10 @@
                                 "                                <div class=\"form-group\">\n" +
                                 "                                <input type=\"hidden\" name=\"qboardNum\" value='"+ qboardNum +"'>\n" +
                                 "                            <input type=\"hidden\" name=\"subCa\" value='"+ subCa+"'>\n" +
-                                "                            <input type=\"hidden\" name=\"reply_no\" value='"+ data[i].reply_no+"'>\n" +
+                                "                            <input type=\"hidden\" id=\"reply_no\" name=\"reply_no\" value='"+ data[i].reply_no+"'>\n" +
                                 "                            <div class=\"custom-control custom-radio\">\n" +
                                 "                              <input type=\"radio\" id=\"customRadio5\" name=\"customRadio\" class=\"custom-control-input\" value=\"1\">\n" +
-                                "                              <label class=\"custom-control-label\" for=\"customRadio5\">주제에 맞지 않음</label>\n" +
+                                "                              <label class=\"custom-control-label\" for=\"customRadio5\">주제에 맞지 않음</label>\n"+
                                 "                            </div>\n" +
                                 "                            <div class=\"custom-control custom-radio\">\n" +
                                 "                              <input type=\"radio\" id=\"customRadio6\" name=\"customRadio\" class=\"custom-control-input\" value=\"2\">\n" +
@@ -184,13 +186,14 @@
                                 "                            </div>\n" +
                                 "                            </div>\n" +
                                 "                            <div class=\"modal-footer\">\n" +
-                                "                               <button type=\"submit\" class=\"btn btn-primary\">전송</button>\n" +
-                                "                               <button type=\"button\" class=\"btn btn-secondary\">닫기</button>\n" +
+                                "                               <button type=\"button\" onclick=\"formsub(" + i + ")\" class=\"btn btn-primary\">전송</button>\n" +
+                                "                               <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">닫기</button>\n" +
                                 "                            </div>\n" +
                                 "                        </form>\n" +
                                 "                     </div>\n" +
                                 "                  </div>\n" +
                                 "               </div>";
+
 
                         $("#commentListForm").html(html);
                     }
@@ -312,7 +315,7 @@
                             "                            </div>\n" +
                             "                            <div class=\"modal-footer\">\n" +
                             "                               <button type=\"submit\" class=\"btn btn-primary\">전송</button>\n" +
-                            "                               <button type=\"button\" class=\"btn btn-secondary\">닫기</button>\n" +
+                            "                               <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">닫기</button>\n" +
                             "                            </div>\n" +
                             "                        </form>\n" +
                             "                     </div>\n" +
@@ -329,6 +332,10 @@
 
             });
 
+    }
+
+    function formsub(i){
+        alert(i);
     }
 </script>
 </html>
