@@ -659,8 +659,8 @@
     </update>
     <!-- 새터 에디터 등록-->
     <insert id="editNewReplyInsert" parameterType="com.example.finalpro.vo.QboardVO">
-<!--        INSERT INTO NEW_REPLY_EDIT VALUES(NEW_REPLY_EDIT_SEQ.NEXTVAL,#{mem_no},#{new_no},#{new_reply_edit_content},sysdate)-->
-        INSERT INTO NEW_REPLY_EDIT VALUES(NEW_REPLY_EDIT_SEQ.NEXTVAL,-1,42,\'sdfs\',sysdate)
+        INSERT INTO NEW_REPLY_EDIT VALUES(NEW_REPLY_EDIT_SEQ.NEXTVAL,#{mem_no},#{new_no},#{new_reply_edit_content},sysdate)
+<!--        INSERT INTO NEW_REPLY_EDIT VALUES(NEW_REPLY_EDIT_SEQ.NEXTVAL,-1,42,'sd',sysdate)-->
 
     </insert>
     <!-- 새터 에디터 리스트-->

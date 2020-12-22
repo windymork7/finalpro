@@ -287,13 +287,20 @@
                                         </button>
                                     </c:if>
 
-
+                                    <c:choose>
+                                    <c:when test="${not empty sessionScope.userNick}">
+                                    <c:choose>
+                                    <c:when test="${llist.mem_no != sessionScope.userNo}">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="tooltip"
                                             data-placement="left" title="신고">
          <span data-toggle="modal" data-target="#Modal_3">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
          </span>
                                     </button>
+                                    </c:when>
+                                    </c:choose>
+                                    </c:when>
+                                    </c:choose>
                                 </div>
                                 &nbsp;
                                 &nbsp;
@@ -356,6 +363,7 @@
             <!-- 답글 인기순 -->
             <div class="tab-pane fade" id="popular">
                 <c:forEach var="ulist" items="${replyUpList}">
+                    <c:set var="l" value="0"/>
                     <div class="card">
                         <div class="card-header">
                                 ${ulist.mem_nick}
@@ -389,13 +397,21 @@
                                         </button>
                                     </c:if>
 
-
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.userNick}">
+                                            <c:choose>
+                                            <c:when test="${ulist.mem_no != sessionScope.userNo}">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="tooltip"
                                             data-placement="left" title="신고">
-         <span data-toggle="modal" data-target="#Modal_4">
+<%--         <span data-toggle="modal" data-target="#Modal_4">--%>
+         <span data-toggle="modal" data-target="#${l}">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
          </span>
                                     </button>
+                                            </c:when>
+                                            </c:choose>
+                                        </c:when>
+                                    </c:choose>
                                 </div>
                                 &nbsp;
                                 &nbsp;
@@ -407,7 +423,8 @@
                     </div>
                     <br>
                     <!-- 인기순 리스트 신고 -->
-                    <div class="modal fade" id="Modal_4" tabindex="-1"
+<%--                    <div class="modal fade" id="Modal_4" tabindex="-1"--%>
+                    <div class="modal fade" id="${l}" tabindex="-1"
                          aria-labelledby="ModalLabel_3" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -453,6 +470,7 @@
                             </div>
                         </div>
                     </div>
+                    <c:set var="l" value="${l + 1}"/>
                 </c:forEach>
                 <br>
                 <br>

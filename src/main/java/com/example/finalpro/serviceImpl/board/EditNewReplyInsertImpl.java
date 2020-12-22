@@ -13,10 +13,6 @@ public class EditNewReplyInsertImpl implements EditNewReplyInsertService {
 
     @Override
     public void editNewReplyInsert(QboardVO qboardVO) {
-//        System.out.println("에디터 인서트 impl "+qboardVO.toString());
-        System.out.println(qboardVO.getMem_no());
-        System.out.println(qboardVO.getNew_no());
-        System.out.println(qboardVO.getNew_reply_edit_content());
-        boardDAO.editQboardReplyInsert(qboardVO);
+        boardDAO.editNewReplyInsert(qboardVO);
     }
 }
