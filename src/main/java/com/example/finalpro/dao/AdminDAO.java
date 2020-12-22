@@ -26,6 +26,10 @@ public interface AdminDAO {
     // 신고 10개 넘은 게시판 삭제
     public void qDeleteAction(int q_no);
     
+    //게시글 신고 눌렀던 회원들 EXP 다시  UP
+    public void memExpReturn(int board_no);
+    
+    //멤버 신고 눌렀던 회원들 ExP 다시 UP
     //승인이 필요한 게시글들 ( 책가는거 )
     public List<QboardVO> bookStandByList(PagingVO pagingVO);
 

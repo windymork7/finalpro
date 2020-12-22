@@ -17,6 +17,8 @@ public interface BusinessDAO {
     public int businessNumVali(String biz_number);
     // 사업자 전화번호 체크
     public int businessTelVali(String biz_tel);
+    // 사업자 승인상태
+    public String businessState(String biz_email);
     
 
 }

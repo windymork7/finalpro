@@ -33,5 +33,8 @@ public interface MemberDAO {
     // 회원 비밀번호 계정 확인
     public int accoutPwFind(String mem_email, String mem_tel);
 
+    //제재당한 게시글 신고 했던 유저들 exp update
+    public void memRptExpReturn(int q_no);
+    
 
 }

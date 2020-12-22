@@ -34,8 +34,8 @@ public class CommonBoardDownServiceImpl implements CommonBoardDownService {
             boardDAO.qBoardDownUpdate(q_no);
             boardDAO.qBoardDownInsert(q_no, mem_no, radio);
             QboardVO qboardVO = boardDAO.qBoardContent(q_no, Integer.parseInt(request.getParameter("subCa")));
-            memberDAO.commonExpUpate(qboardVO.getMem_no(), -2);
-            memberDAO.commonExpUpate(mem_no, -10);
+            memberDAO.commonExpUpate(qboardVO.getMem_no(), -5);
+            memberDAO.commonExpUpate(mem_no, -2);
             memberDAO.commonMemberRpt(qboardVO.getMem_no());
         }
 
