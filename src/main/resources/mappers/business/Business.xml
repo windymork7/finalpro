@@ -7,7 +7,7 @@
 <mapper namespace="com.example.finalpro.dao.BusinessDAO">
     <!-- 사업자 회원가입 -->
     <insert id="businessJoinProcess" parameterType="com.example.finalpro.vo.BusinessMemberVO">
-        INSERT INTO BIZ VALUES(#{biz_no}, #{biz_pw}, #{biz_trademark}, #{biz_name}, #{biz_tel}, #{biz_email}, #{biz_address}, #{biz_detail_address})
+        INSERT INTO BIZ VALUES(#{biz_no}, #{biz_pw}, #{biz_trademark}, #{biz_name}, #{biz_tel}, #{biz_email}, #{biz_address}, #{biz_detail_address},DEFAULT)
     </insert>
 
     <!-- 사업자 로그인-->
@@ -39,6 +39,11 @@
         SELECT COUNT(*)
         FROM BIZ
         WHERE BIZ_TEL = #{param1}
+    </select>
+    
+    <!-- 사업자 승인상태 체크  -->
+    <select id="businessState" resultType="String">
+    	SELECT BIZ_STATE FROM BIZ WHERE BIZ_EMAIL = #{param1}
     </select>
 
 </mapper>

@@ -21,7 +21,4 @@ public class BookBookCaListImpl implements BookBookCaListService{
 
 		return list;
 	}
-	
-	
-
 }

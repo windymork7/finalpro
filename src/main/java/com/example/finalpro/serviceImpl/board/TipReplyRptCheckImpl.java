@@ -30,7 +30,7 @@ public class TipReplyRptCheckImpl implements TipReplyRptCheckService {
             boardDAO.tipReplyRptInsert(mem_no,new_reply_no,radio);  //new_reply_down insert
             boardDAO.tipReplyRptCntUpdate(mem_no);
             boardDAO.tipReplyRptExpUpdate(mem_no,-2);   //신고 누른유저 -2
-            boardDAO.tipReplyRptExpUpdate(vo.getMem_no(),-3);   //신고 당한유저 -3
+            boardDAO.tipReplyRptExpUpdate(vo.getMem_no(),-1);   //신고 당한유저 -1
             return 2;
         }
 

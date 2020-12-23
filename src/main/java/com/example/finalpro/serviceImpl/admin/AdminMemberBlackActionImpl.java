@@ -10,7 +10,7 @@ public class AdminMemberBlackActionImpl implements AdminMemberBlackActionService
 
     @Autowired
     AdminDAO adminDAO;
-
+    
     @Override
     public void memBlackAction(int mem_no) {
         adminDAO.memBlackAction(mem_no);

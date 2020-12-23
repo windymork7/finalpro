@@ -87,4 +87,11 @@
         SET MEM_PW = #{mem_pw}
         WHERE MEM_EMAIL = #{mem_email} AND MEM_TEL = #{mem_tel}
     </update>
+    
+    <!-- 제재당한 게시글 신고 했던 유저들 exp update -->
+    <update id="memRptExpReturn">
+		UPDATE MEM M
+		SET M.MEM_EXP = M.MEM_EXP + 4
+		WHERE M.MEM_NO IN (SELECT D.MEM_NO FROM DOWN D WHERE Q_NO=#{param1})
+    </update>
 </mapper>
