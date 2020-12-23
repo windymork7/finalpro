@@ -383,6 +383,7 @@ CREATE TABLE BIZ( --사업자회원
     BIZ_EMAIL NVARCHAR2(50),        --대표자 이메일
     BIZ_ADDRESS NVARCHAR2(100),     --회사주소,
     BIZ_DETAIL_ADDRESS NVARCHAR2(100),   --회사상세주소
+    BIZ_STATE NUMBER DEFAULT 0,     --어드민 승인상태
     CONSTRAINT BIZ PRIMARY KEY(BIZ_NO)
 );
 

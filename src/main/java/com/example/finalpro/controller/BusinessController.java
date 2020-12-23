@@ -51,7 +51,7 @@ public class BusinessController {
     public String businessLoginProcess(HttpServletRequest request, HttpSession session, Model model){
 
         String page = businessMemberLoginSevice.businessLoginProcess(request, session);
-
+        System.out.println("page: "+page);
         return page;
     }
 

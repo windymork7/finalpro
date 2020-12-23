@@ -1,27 +1,8 @@
 package com.example.finalpro.controller;
 
-import com.example.finalpro.service.admin.AdminBookAddActionService;
-import com.example.finalpro.service.admin.AdminBookCaListService;
-import com.example.finalpro.service.admin.AdminBookCaNameUpdateActionService;
-import com.example.finalpro.service.admin.AdminBookCaNameUpdateFormService;
-import com.example.finalpro.service.admin.AdminBookStandByCountService;
-import com.example.finalpro.service.admin.AdminBookStandByListService;
-import com.example.finalpro.service.admin.AdminCaListService;
-import com.example.finalpro.service.admin.AdminExpUpdateActionService;
-import com.example.finalpro.service.admin.AdminExpUpdateFormService;
-import com.example.finalpro.service.admin.AdminMemBlackCountService;
-import com.example.finalpro.service.admin.AdminMemRptCountService;
-import com.example.finalpro.service.admin.AdminMemberBlackListService;
-import com.example.finalpro.service.admin.AdminMemberRptListService;
-import com.example.finalpro.service.admin.AdminQDeleteActionService;
-import com.example.finalpro.service.admin.AdminQRptCountService;
-import com.example.finalpro.service.admin.AdminQRptListService;
-import com.example.finalpro.service.admin.AdminSubCaListService;
+import com.example.finalpro.service.admin.*;
 import com.example.finalpro.serviceImpl.admin.AdminMemberBlackActionImpl;
-import com.example.finalpro.vo.CategoryVO;
-import com.example.finalpro.vo.CommonMemberVO;
-import com.example.finalpro.vo.PagingVO;
-import com.example.finalpro.vo.QboardVO;
+import com.example.finalpro.vo.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,7 +51,13 @@ public class AdminController {
 	@Autowired
 	AdminQRptCountService adminQRptCountService;
 	@Autowired
-	AdminBookStandByCountService adminBookStandByCountService; 
+	AdminBookStandByCountService adminBookStandByCountService;
+	@Autowired
+	AdminBizStandByCountService adminBizStandByCountService;
+	@Autowired
+	AdminBizStandByListService adminBizStandByListService;
+	@Autowired
+	AdminBizStateUpdateService adminBizStateUpdateService;
 
 	// 어드민 메인페이지
 	@RequestMapping("/adminMain.ad")
@@ -83,6 +70,8 @@ public class AdminController {
 				            @RequestParam(value = "cntPerPage3", required = false) String cntPerPage3,
 				            @RequestParam(value = "nowPage4", required = false) String nowPage4,
 				            @RequestParam(value = "cntPerPage4", required = false) String cntPerPage4,
+							@RequestParam(value = "nowPage5", required = false) String nowPage5,
+							@RequestParam(value = "cntPerPage5", required = false) String cntPerPage5,
 				            @RequestParam(value = "state", defaultValue = "1", required = false) String state){
 		
 		int state1 = Integer.parseInt(state);
@@ -90,6 +79,7 @@ public class AdminController {
 		int memBlackCnt = adminMemBlackCountService.memBlackCount();
 		int qRptCnt = adminQRptCountService.qRptCount();
 		int bookStandByCnt = adminBookStandByCountService.adminBookStandByCount();
+		int bizStandByCnt = adminBizStandByCountService.bizStandByCount();
 
         //멤버 신고 10개리스트
         if (nowPage1 == null && cntPerPage1 == null) {
@@ -157,6 +147,20 @@ public class AdminController {
         model.addAttribute("bookStandByPaging",bookStandByPaging);
         List<QboardVO> bookStandByList = adminBookStandByListService.bookStandByList(bookStandByPaging); 
         model.addAttribute("bookStandByList",bookStandByList);
+
+        //승인 대기중 기업회원 리스트
+		if(nowPage5 == null && cntPerPage5 == null){
+			nowPage5 = "1";
+			cntPerPage5 = "10";
+		}else if(nowPage5 == null){
+			nowPage5="1";
+		}else if(cntPerPage5==null){
+			cntPerPage5 = "10";
+		}
+		PagingVO bizPaging = new PagingVO(bizStandByCnt,Integer.parseInt(nowPage5),Integer.parseInt(cntPerPage5));
+		model.addAttribute("bizPaging",bizPaging);
+		List<BusinessMemberVO> bizList = adminBizStandByListService.bizStandByList(bizPaging);
+		model.addAttribute("bizList",bizList);
         
         if (state1 == 1){
             model.addAttribute("active1", "active");
@@ -168,9 +172,12 @@ public class AdminController {
             model.addAttribute("active3", "active");
             model.addAttribute("show3", "active show");
         } else if(state1 == 4){
-            model.addAttribute("active4", "active");
-            model.addAttribute("show4", "active show");
-        }
+			model.addAttribute("active4", "active");
+			model.addAttribute("show4", "active show");
+		} else if(state1 == 5){
+			model.addAttribute("active5", "active");
+			model.addAttribute("show5", "active show");
+		}
 
         model.addAttribute("main","admin/adminMain");
         return "template";
@@ -206,6 +213,13 @@ public class AdminController {
 		adminBookAddActionService.bookAddActionService(q_no, ca_no, sub_ca_no, book_ca_no);
 		return "redirect:/adminMain.ad?state=4";
 	}
+	//기업회원 승인
+	@RequestMapping("bizStateUpdate.ad")
+	public String bizStateUpdate(@RequestParam String biz_no){
+		adminBizStateUpdateService.bizStateUpdate(biz_no);
+		return "redirect:/adminMain.ad?state=5";
+	}
+
 	/*
 	// 블랙 리스트
 	@RequestMapping("/memBlackList.ad")

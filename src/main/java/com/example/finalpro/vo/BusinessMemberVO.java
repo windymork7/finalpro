@@ -10,6 +10,33 @@ public class BusinessMemberVO {
     private String biz_email;
     private String biz_address;
     private String biz_detail_address;
+    private int biz_state;
+    private String biz_date;
+    private int rn;
+
+    public int getRn() {
+        return rn;
+    }
+
+    public void setRn(int rn) {
+        this.rn = rn;
+    }
+
+    public int getBiz_state() {
+        return biz_state;
+    }
+
+    public void setBiz_state(int biz_state) {
+        this.biz_state = biz_state;
+    }
+
+    public String getBiz_date() {
+        return biz_date;
+    }
+
+    public void setBiz_date(String biz_date) {
+        this.biz_date = biz_date;
+    }
 
     public String getBiz_no() {
         return biz_no;

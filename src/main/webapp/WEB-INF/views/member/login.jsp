@@ -195,6 +195,8 @@
                           location.href="/";
                       } else if (data == "fail"){
                           alert("아이디와 비밀번호를 확인해 주세요.");
+                      } else if (data == "state_fail"){
+                          alert("아직 승인 대기중 입니다.");
                       }
                   },
                   error : function(request, status, error)
