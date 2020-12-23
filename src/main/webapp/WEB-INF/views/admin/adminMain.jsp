@@ -134,12 +134,15 @@ a:hover {
 					<li class="nav-item ${active4} text-center" style="width: 16.666666%"><a
 						class="nav-link" data-toggle="tab" href="#scrapBook"><b>
 								스크랩북</b></a></li>
+					<li class="nav-item ${active5} text-center" style="width: 16.666666%"><a
+							class="nav-link" data-toggle="tab" href="#biz"><b>
+								기업회원 승인 대기</b></a></li>
 				</ul>
 				<br>
 
 				<div id="myTabContent" class="tab-content">
 
-					<div class="tab-pane fade ${show5}" id="site_statistics">
+					<div class="tab-pane fade ${show7}" id="site_statistics">
 						<div class="text-center">
 							<legned>일일 접속자 수 통계</legend> <br>
 							<legend>게시물 조회 순위 통계</legend>
@@ -427,6 +430,73 @@ a:hover {
 									test="${bookStandByPaging.endPage != bookStandByPaging.lastPage}">
 									<li class="page-item"><a class="page-link"
 										href="adminMain.ad?nowPage4=${bookStandByPaging.endPage+1 }&cntPerPage4=${bookStandByPaging.cntPerPage}&state=4">&raquo;</a>
+									</li>
+								</c:if>
+							</ul>
+						</div>
+					</div>
+
+					<div class="tab-pane fade ${show5}" id="biz">
+						<div class="text-center">
+							<legend>
+								<b>기업회원 승인 대기 목록</b>
+							</legend>
+						</div>
+						<table class="table">
+							<thead>
+							<tr class="table-secondary">
+								<th scope="col" style="width: 6%" class="text-center">번호</th>
+								<th scope="col" style="width: 8%" class="text-center">기업명</th>
+								<th scope="col" style="width: 10%" class="text-center">대표자명</th>
+								<th scope="col" style="width: 13%" class="text-center">연락처</th>
+								<th scope="col" style="width: 25%" class="text-center">신청일</th>
+								<th scope="col" style="width: 8%" class="text-center">승인</th>
+							</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="bzList" items="${bizList}">
+								<tr class="table-light">
+									<td style="width: 6%" class="text-center">${bzList.rn }</td>
+									<td style="width: 8%" class="text-center">${bzList.biz_trademark }</td>
+									<td style="width: 10%" class="text-center">${bzList.biz_name }</td>
+									<td style="width: 13%" class="text-center">${bzList.biz_tel }</td>
+									<td style="width: 7%" class="text-center">${bzList.biz_date }</td>
+									<td style="width: 8%" class="text-center">
+										<button type="button"
+												onclick="location.href='bizStateUpdate.ad?biz_no=${bzList.biz_no}'"
+												class="btn btn-danger">승인</button>
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+
+						<br> <br>
+						<div>
+							<ul
+									class="pagination pagination-lg justify-content-center align-items-center">
+								<c:if test="${bizPaging.startPage != 1}">
+									<li class="page-item"><a class="page-link"
+															 href="adminMain.ad?nowPage5=${bizPaging.startPage - 1 }&cntPerPage5=${bizPaging.cntPerPage}&state=5">&laquo;</a>
+									</li>
+								</c:if>
+								<c:forEach begin="${bizPaging.startPage}"
+										   end="${bizPaging.endPage}" var="p5">
+									<c:choose>
+										<c:when test="${p5 == bizPaging.nowPage}">
+											<li class="page-item active"><a class="page-link">${p5}</a></li>
+										</c:when>
+										<c:when test="${p5 != bizPaging.nowPage}">
+											<li class="page-item"><a class="page-link"
+																	 href="adminMain.ad?nowPage5=${p5}&cntPerPage5=${bizPaging.cntPerPage}&state=5">${p5}</a>
+											</li>
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<c:if
+										test="${bizPaging.endPage != bizPaging.lastPage}">
+									<li class="page-item"><a class="page-link"
+															 href="adminMain.ad?nowPage5=${bizPaging.endPage+1 }&cntPerPage5=${bizPaging.cntPerPage}&state=5">&raquo;</a>
 									</li>
 								</c:if>
 							</ul>
