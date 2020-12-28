@@ -17,11 +17,13 @@ public class BookAddActionImpl implements BookAddActionService {
         if (memCheck != 1) {
             if (bookCheck == 0) {
                 boardDAO.bookScrapCntInsert(q_no);
-                boardDAO.bookMemStateUpdate(mem_no);
+//                boardDAO.bookMemStateUpdate(mem_no);
+                boardDAO.bookScrapUpInsert(q_no, mem_no);
                 return "T";
             }
             boardDAO.bookScrapCntUp(q_no);
-            boardDAO.bookMemStateUpdate(mem_no);
+//            boardDAO.bookMemStateUpdate(mem_no);
+            boardDAO.bookScrapUpInsert(q_no, mem_no);
             return "T";
         }
         return "F";

@@ -77,21 +77,21 @@
                         <c:when test="${subCategory eq 'PYTHON'}">
                            <c:set var="sub" value="2"/>
                         </c:when>
-                        <c:when test="${subCategory eq 'C'}">
+                        <c:when test="${subCategory eq 'C#'}">
                            <c:set var="sub" value="3"/>
                         </c:when>
                         <c:when test="${subCategory eq 'SPRING'}">
                            <c:set var="sub" value="4"/>
                         </c:when>
                         <c:when test="${subCategory eq 'REACT'}">
-                           <c:set var="sub" value="5"/>
+                           <c:set var="sub" value="4"/>
                         </c:when>
                         <c:when test="${subCategory eq 'VUE'}">
-                           <c:set var="sub" value="6"/>
+                           <c:set var="sub" value="5"/>
                         </c:when>
-                        <c:when test="${subCategory eq 'ORACLE'}">
-                           <c:set var="sub" value="7"/>
-                        </c:when>
+<%--                        <c:when test="${subCategory eq 'ORACLE'}">--%>
+<%--                           <c:set var="sub" value="7"/>--%>
+<%--                        </c:when>--%>
                         <c:when test="${subCategory eq 'MYSQL'}">
                            <c:set var="sub" value="8"/>
                         </c:when>
@@ -108,7 +108,7 @@
                   <hr class="my-4">
                   <div class="form-group">
                      <select class="custom-select" name="book_ca_no">
-                        <option>책 분류를 선택하세요</option>
+                        <option value="${setBookNo}">${setBook}</option>
                         <c:forEach var="BookCa" items="${Book}">
                            <option value="${BookCa.book_ca_no}">${BookCa.book_ca_name}</option>
                         </c:forEach>
