@@ -56,7 +56,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/langJavaFirst01.fi">C</a>
+                <a class="dropdown-item" href="/langJavaFirst01.fi">C#</a>
                   <a class="dropdown-item" href="/langJavaFirst01.fi">JAVA</a>
                   <a class="dropdown-item" href="/langJavaFirst01.fi">PYTHON</a>
                 <div class="dropdown-divider"></div>
@@ -67,8 +67,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>프레임워크</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/langJavaFirst01.fi">SPRING</a>
-                  <a class="dropdown-item" href="/langJavaFirst01.fi">DJANGO</a>
+                <a class="dropdown-item" href="/langJavaFirst01.fi">REACT</a>
+                  <a class="dropdown-item" href="/langJavaFirst01.fi">VUE.JS</a>
               </div>
             </li>
             <li class="nav-item dropdown active">
@@ -77,7 +77,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item text-center"><b>프로그래밍 언어</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/qboardListForm.bo?subCa=3">C</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=3">C#</a>
                   <a class="dropdown-item" href="/qboardListForm.bo?subCa=1">JAVA</a>
                   <a class="dropdown-item" href="/qboardListForm.bo?subCa=2">PYTHON</a>
                 <div class="dropdown-divider"></div>
@@ -88,8 +88,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center"><b>프레임워크</b></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/qboardListForm.bo?subCa=4">SPRING</a>
-                  <a class="dropdown-item" href="#">DJANGO</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=4">REACT</a>
+                <a class="dropdown-item" href="/qboardListForm.bo?subCa=5">VUE.JS</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center" href="/qboardTipForm.bo"><b>검색 Tip</b></a>
               </div>
@@ -187,7 +187,23 @@
                   <c:when test="${not empty sessionScope.userNick}">
                     <div id="popover-content" style="display: none">
                       <ul class="list-group custom-popover">
-                        <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                        <c:choose>
+                          <c:when test="${sessionScope.userGrade eq 1}">
+                        <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-muted" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                          </c:when>
+                          <c:when test="${sessionScope.userGrade eq 2}">
+                            <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-warning" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                          </c:when>
+                          <c:when test="${sessionScope.userGrade eq 3}">
+                            <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-primary" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                          </c:when>
+                          <c:when test="${sessionScope.userGrade eq 4}">
+                            <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-secondary" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                          </c:when>
+                          <c:when test="${sessionScope.userGrade eq 5}">
+                            <li class="list-group-item"><a href="mypageMain.my"><i class="fa fa-thermometer-full fa-lg text-danger" aria-hidden="true">${sessionScope.userNick}</i></a></li>
+                          </c:when>
+                        </c:choose>
                         <li class="list-group-item"><a href="mypageUpdateForm.my" class="a-header">계정 설정</a></li>
                         <li class="list-group-item"><a href="logout.me" class="a-header">로그아웃</a></li>
                       </ul>

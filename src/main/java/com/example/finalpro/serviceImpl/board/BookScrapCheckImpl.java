@@ -12,7 +12,7 @@ public class BookScrapCheckImpl implements BookScrapCheckService {
     BoardDAO boardDAO;
 
     @Override
-    public int bookScrapCheck(int q_no) {
-        return boardDAO.bookScrapCheck(q_no);
+    public int bookScrapCheck(int q_no,int mem_no) {
+        return boardDAO.bookScrapCheck(q_no,mem_no);
     }
 }

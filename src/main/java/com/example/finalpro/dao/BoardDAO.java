@@ -91,12 +91,14 @@ public interface BoardDAO {
     public int qBoardSearchCount(String searchTerm);
 
     //스크랩북 신청전  체크 ( 첫 신청이면 insert 후에는 update )
-    public int bookScrapCheck(int q_no);  // book_scrap 체크
-    public int bookMemCheck(int mem_no);    //mem 체크
+    public int bookScrapCheck(int q_no,int mem_no);  // book_scrap 체크
+    public int bookMemCheck(int q_no, int mem_no);    //mem 체크
     //스크랩북 cnt 인서트
     public void bookScrapCntInsert(int q_no);
     //스크랩북 cnt 업데이트
     public void bookScrapCntUp(int q_no);
+    // book_scrap_up 인서트
+    public void bookScrapUpInsert(int q_no,int mem_no);
     //스크랩북 mem_book_state 1로 업데이트
     public void bookMemStateUpdate(int mem_no);
 

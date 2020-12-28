@@ -137,6 +137,9 @@ public class DsqController {
         List<QboardVO> list = commonBoardBookCateSelectService.bookCategory(subCa);
         String subcategory = commonSubCateService.subCategory(subCa);
 
+        System.out.println("여여여: "+list.get(0).getBook_ca_name());
+        model.addAttribute("setBook",list.get(0).getBook_ca_name());    //유효성 처리중 시간부족으로 인해 첫번째 책 카테고리 이름 박아놓음
+        model.addAttribute("setBookNo",list.get(0).getBook_ca_no());
         model.addAttribute("Book", list);
         model.addAttribute("subCategory", subcategory);
         model.addAttribute("main", "board/dsq_board_write");
@@ -589,8 +592,8 @@ public class DsqController {
         int q_no = qboardNum;
         int mem_no = (Integer) session.getAttribute("userNo");
 
-        int bookCheck = bookScrapCheckService.bookScrapCheck(q_no);
-        int memCheck = bookMemCheckService.bookMemCheck(mem_no);
+        int bookCheck = bookScrapCheckService.bookScrapCheck(q_no,mem_no);
+        int memCheck = bookMemCheckService.bookMemCheck(q_no,mem_no);
 
         String result =bookAddActionService.bookAddAction(bookCheck,memCheck,mem_no, q_no);
 

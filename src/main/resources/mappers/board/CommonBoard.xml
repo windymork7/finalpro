@@ -454,10 +454,11 @@
     <select id="bookScrapCheck" resultType="Integer">
         SELECT COUNT(*) FROM BOOK_SCRAP WHERE Q_NO = #{param1}
     </select>
-    <!-- 스크랩북 신청전 mem_book_state 체크 결과가 1이면  신청 안됨-->
+    <!-- 스크랩북 신청전 체크 결과가 1이면  신청 안됨-->
     <select id="bookMemCheck" resultType="Integer">
-        SELECT MEM_BOOK_STATE FROM MEM WHERE MEM_NO=#{param1}
+        SELECT COUNT(*) FROM BOOK_SCRAP_UP WHERE Q_NO=#{param1} AND MEM_NO=#{param2}
     </select>
+    <!--   -->
     <insert id="bookScrapCntInsert">
         INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,#{param1},1)
     </insert>
@@ -465,6 +466,11 @@
         UPDATE BOOK_SCRAP SET BOOK_SCRAP_CNT = BOOK_SCRAP_CNT + 1
         WHERE Q_NO=#{param1}
     </update>
+    <!-- book_Scrap_up 테이블에 신청누른정보 isnert  -->
+    <insert id="bookScrapUpInsert">
+        INSERT INTO BOOK_SCRAP_UP VALUES(book_scrap_up_seq.nextval,#{param1},#{param2})
+
+    </insert>
     <update id="bookMemStateUpdate">
         UPDATE MEM SET MEM_BOOK_STATE = 1
         WHERE MEM_NO = #{param1}

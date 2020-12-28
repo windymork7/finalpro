@@ -197,9 +197,9 @@
 					  <div class="card-body">
 					    <div class="card-text" id="question-text">
                         <c:if test="${not empty qBoardVO.q_file}">
-                            <a href="${pageContext.request.contextPath}/upload/${qBoardVO.q_file}">${qBoardVO.q_file}</a>
+<%--                            <a href="${pageContext.request.contextPath}/upload/${qBoardVO.q_file}">${qBoardVO.q_file}</a>--%>
                             <c:if test="${q_file3 == 'jpg' || q_file3 == 'gif' || q_file3 == 'png' || q_file4 == 'jpeg'}">
-                                <img src="upload/${qBoardVO.q_file}" width="100%" height="350"><br><br>
+                                <a href="${pageContext.request.contextPath}/upload/${qBoardVO.q_file}"><img src="upload/${qBoardVO.q_file}" width="65%"></a><br><br>
                             </c:if>
                         </c:if>
 

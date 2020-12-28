@@ -12,7 +12,7 @@ public class BookMemCheckImpl implements BookMemCheckService {
     BoardDAO boardDAO;
 
     @Override
-    public int bookMemCheck(int mem_no) {
-        return boardDAO.bookMemCheck(mem_no);
+    public int bookMemCheck(int q_no , int mem_no) {
+        return boardDAO.bookMemCheck(q_no, mem_no);
     }
 }

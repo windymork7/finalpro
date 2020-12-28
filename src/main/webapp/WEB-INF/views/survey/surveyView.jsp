@@ -52,24 +52,22 @@
                         </div>
                         <div class="card-body">
                             <div class=text-center>
-                                <h1>성별 설문조사 비율</h1>
-                                <div id="gender" style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>설문자 연령대</h1>
-                                <div id="age" style="width: 800px; height: 500px; margin: 0 auto"></div><br>
-                                <h1>가장 많이 사용하는 언어</h1>
-                                <div id="language" style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>가장 배우고 싶은 언어</h1>
-                                <div id="studyLanguage" style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>가장 많이 사용하는 데이터베이스</h1>
-                                <div id=database style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>가장 배우고 싶은 데이터베이스</h1>
-                                <div id="studyDatebase" style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>가장 많이 사용하는 프레임워크</h1>
-                                <div id="framework" style="width: 800px; height: 500px; margin: 0 auto"></div>
-                                <h1>가장 배우고 싶은 프레임워크</h1>
-                                <div id="studyFramework" style="width: 800px; height: 500px; margin: 0 auto"></div>
-
-                                
+                                <h1>성별 설문조사 비율</h1><br><br>
+                                <div id="gender" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>설문자 연령대</h1><br><br>
+                                <div id="age" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 많이 사용하는 언어</h1><br><br>
+                                <div id="language" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 배우고 싶은 언어</h1><br><br>
+                                <div id="studyLanguage" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 많이 사용하는 데이터베이스</h1><br><br>
+                                <div id=database style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 배우고 싶은 데이터베이스</h1><br><br>
+                                <div id="studyDatebase" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 많이 사용하는 프레임워크</h1><br><br>
+                                <div id="framework" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
+                                <h1>가장 배우고 싶은 프레임워크</h1><br><br>
+                                <div id="studyFramework" style="width: 800px; height: 500px; margin: 0 auto"></div><br><br><br><br>
                             </div>
                             <br><br>
                         </div>
@@ -114,19 +112,19 @@
         ]);
 
         var options = {
-            title: '설문자 성비',
+            title: '',
             width: '100%',
             is3D: true,
             colors:['#6cc3d5','#F5A9BC'],
             backgroundColor: {
-                gradient: {
+                // gradient: {
                     color1: '#fbf6a7',
                     color2: '#33b679',
                     x1: '0%', y1: '0%',
                     x2: '100%', y2: '100%',
                     useObjectBoundingBoxUnits: true
-                },
-            }
+                // },
+            },
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('gender'));
@@ -159,7 +157,7 @@
         ]);
 
         var options = {
-            title: '설문자 연령',
+            title: '',
             colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997'],
         };
 
@@ -179,7 +177,7 @@
         ]);
 
         var options = {
-            title: '가장 많이 사용하는 언어',
+            title: '',
             colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
         };
 
@@ -198,7 +196,7 @@
         ]);
 
         var options = {
-            title: '가장 배우고 싶은 언어',
+            title: '',
             colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
         };
 
@@ -217,7 +215,7 @@
         ]);
 
         var options = {
-            title: '가장 많이 사용하는 데이터베이스',
+            title: '',
             colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
         };
 
@@ -235,7 +233,7 @@
            ]);
 
            var options = {
-               title: '가장 배우고 싶은 데이터베이스',
+               title: '',
                colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
            };
 
@@ -252,7 +250,7 @@
            ]);
 
            var options = {
-               title: '가장 많이 사용하는 프레임워크',
+               title: '',
                colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
            };
 
@@ -268,7 +266,7 @@
            ]);
 
            var options = {
-               title: '가장 배우고 싶은 프레임워크',
+               title: '',
                colors:['#6cc3d5','#f5a9bc','#ffce67','#20c997', '#58ACFA', '#F5A9F2', '#2EFEC8', '#4fde78', '#ff7851'],
            };
 

@@ -32,6 +32,7 @@ public class CommonBoardUpCheckServiceImpl implements CommonBoardUpCheckService 
 			if (boardDAO.qBoardUpCheck(mem_no, qboardNum) == 0) {	//up 테이블에 추천누른 정보가 없을때 ( 추천해도될때)
 				System.out.println("if qboardNum: "+qboardNum);
 
+				//return "/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 				return "/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 			}
 			return "/qboardContent.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
