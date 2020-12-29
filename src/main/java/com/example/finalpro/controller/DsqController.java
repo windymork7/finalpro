@@ -406,20 +406,27 @@ public class DsqController {
     	String page= commonBoardUpCheckService.qBoardUpCheck(qboardNum, subCa, request, session);
     	
     	//참이면 qboardUpAction.bo 거짓이면 qboardListForm.bo
-    	return "redirect:"+page;
+
+    	//return "redirect:"+page;
+        return "redirect:/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa+"&check="+page;
     }
     // 게시판 추천 액션
     @RequestMapping("/qboardUpAction.bo")
     public String qboardUp(@RequestParam("qboardNum")int qboardNum,
-                           @RequestParam("subCa") int subCa, HttpSession session){
+                           @RequestParam("subCa") int subCa,
+                           @RequestParam("check") int check, HttpSession session){
 
         System.out.println("업액션컨트롤러");
 
         int q_no = qboardNum;
         int mem_no = (Integer)session.getAttribute("userNo");
-        System.out.println("업액션 qboardNum: "+ q_no);
-        System.out.println("업액션 mem_no: "+mem_no);
-        commonBoardUpService.qBoardUp(mem_no,q_no, subCa);
+
+        if (check == 0) {
+            commonBoardUpService.qBoardUp(mem_no, q_no, subCa);
+            return "redirect:/tipReplyAlert.bo?check=0";
+        }else if (check!=0){
+            return "redirect:/tipReplyAlert.bo?check=1";
+        }
 
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum + "&subCa=" + subCa;
     }
@@ -433,7 +440,12 @@ public class DsqController {
 
 
         int check = commonReplyUpCheckService.replyUpCheck(request, session);
-        System.out.println("check : " + check);
+        if(check == 0){
+            return "redirect:/tipReplyAlert.bo?check=0";
+        }
+        else if(check !=0){
+            return "redirect:/tipReplyAlert.bo?check=1";
+        }
 
         return "redirect:/qboardContent.bo?qboardNum="+qboardNum+"&subCa="+subCa;
     }

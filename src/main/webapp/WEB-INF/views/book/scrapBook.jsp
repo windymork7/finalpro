@@ -146,27 +146,35 @@
             <div class="col-sm-3">
                <div class="card" style="border:0">
                   <div class="card-header-gd">
-                     <b>스크랩 기준</b>
+                     <b>스크랩북 공지사항</b>
                   </div>
                   <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">
-                     <p>자바 시작하기 :
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                        100 이상</p>
-                     <p>자료형 :
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                        200 이상</p>
-                     <p>제어문 :
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                        300 이상</p>
-                     <p>객체지향 프로그래밍 :
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                        400 이상</p>
-                     <p>자바 날개 달기 :
-                        <i class="fa fa-book" aria-hidden="true"></i>
-                        500 이상</p>
+                     <p>1. 유저가 만들어 가는 D'sQ 만의 스크랩북 입니다. </p>
+                     <p>2. 사용자들의 <b>추천</b>과 <b>신청</b>을 받은 게시글들이 등록 됩니다.</p>
+                     <p>3. 일정 추천 수 이상 받은 게시글들에 한해서 신청 버튼이 보입니다. </p>
                   </div>
-               </div>
 
+<%--                  <div class="card-header-gd">--%>
+<%--                     <b>스크랩 기준</b>--%>
+<%--                  </div>--%>
+<%--                  <div class="card-body" style="border: 2px solid #f3969a;  border-radius: 0rem 0rem 0.4rem 0.4rem;">--%>
+<%--                     <p>자바 시작하기 :--%>
+<%--                        <i class="fa fa-book" aria-hidden="true"></i>--%>
+<%--                        100 이상</p>--%>
+<%--                     <p>자료형 :--%>
+<%--                        <i class="fa fa-book" aria-hidden="true"></i>--%>
+<%--                        200 이상</p>--%>
+<%--                     <p>제어문 :--%>
+<%--                        <i class="fa fa-book" aria-hidden="true"></i>--%>
+<%--                        300 이상</p>--%>
+<%--                     <p>객체지향 프로그래밍 :--%>
+<%--                        <i class="fa fa-book" aria-hidden="true"></i>--%>
+<%--                        400 이상</p>--%>
+<%--                     <p>자바 날개 달기 :--%>
+<%--                        <i class="fa fa-book" aria-hidden="true"></i>--%>
+<%--                        500 이상</p>--%>
+<%--                  </div>--%>
+               </div>
             </div>
          </div>
       </main>

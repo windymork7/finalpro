@@ -176,8 +176,9 @@ public class MypageController {
     public String myscrapInsert(@RequestParam("qboardNum")int qboardNum, HttpServletRequest reqest, HttpSession session) {
     	System.out.println("마이스크랩인서트");
     	int mem_no = (Integer)session.getAttribute("userNo");
+        System.out.println("mem_no: "+ mem_no);
     	myscrapInsertService.myscrapInsert(mem_no, qboardNum);
-    	return "redirect:myscrapList.my";
+    	return "redirect:javascript:history.back()";
     }
     //마이스크랩 리스트
     /*

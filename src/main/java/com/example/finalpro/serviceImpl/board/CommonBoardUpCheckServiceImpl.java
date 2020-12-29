@@ -33,9 +33,9 @@ public class CommonBoardUpCheckServiceImpl implements CommonBoardUpCheckService 
 				System.out.println("if qboardNum: "+qboardNum);
 
 				//return "/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
-				return "/qboardUpAction.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
+				return "0";
 			}
-			return "/qboardContent.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
+			return "1";
 		}
 		return "/qboardContent.bo?qboardNum=" + qboardNum + "&subCa=" + subCa;
 	}
