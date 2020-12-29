@@ -204,7 +204,7 @@
                         </c:if>
                     </c:if>
                     <textarea class="form-control" rows="20" readonly>
-                        ${tipVO.new_content}
+${tipVO.new_content}
                     </textarea>
                     <br>
                     <div id="q_right">
@@ -369,8 +369,7 @@
                                 </div>
                                 &nbsp;
                                 &nbsp;
-                                <textarea class="form-control" rows="8" id="reply_text" readonly>
-                                        ${llist.new_reply_content}
+                                <textarea class="form-control" rows="8" id="reply_text" readonly>${llist.new_reply_content}
                                 </textarea>
                             </div>
                         </div>
@@ -515,7 +514,7 @@
                                 &nbsp;
                                 &nbsp;
                                 <textarea class="form-control" rows="8" id="reply_text" readonly>
-                                        ${ulist.new_reply_content}
+${ulist.new_reply_content}
                                 </textarea>
                             </div>
                         </div>

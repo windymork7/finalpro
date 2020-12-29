@@ -312,11 +312,11 @@ background-color: #34551F;
             
              <div class="card border-success mb-3">
                <h2 class="card-header text-center"
-                  style="color: #fff; background-color: #56cc9d;"><b>SPRING</b></h2>
+                  style="color: #fff; background-color: #56cc9d;"><b>REACT</b></h2>
                <div class="list-group list-group-flush">
                 <div class="card-body">
                 <div class="card-text">
-                <span class="badge badge-success">자바 플랫폼을 위한 오픈 소스 애플리케이션 프레임워크</span>
+                <span class="badge badge-success">사용자 인터페이스를 만들기 위한 자바스크립트 라이브러리</span>
                 </div>
                 </div>
                   <a href="langJavaFirst01.fi"
@@ -331,7 +331,7 @@ background-color: #34551F;
                      </b>
                      <i class="fa fa-chevron-right text-success" aria-hidden="true"></i>
                   </a>
-                  <a href="/scrapBookMain.bs?ca_no=2&subCa=4&bookCa=16"
+                  <a href="/scrapBookMain.bs?ca_no=2&subCa=4&bookCa=21"
                      class="list-group-item list-group-item-action border-success d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기
@@ -344,11 +344,11 @@ background-color: #34551F;
             
              <div class="card border-deepgreen mb-3">
                <h2 class="card-header text-center"
-                  style="color: #fff; background-color: #34551F;"><b>DJANGO</b></h2>
+                  style="color: #fff; background-color: #34551F;"><b>VUE.JS</b></h2>
                <div class="list-group list-group-flush">
                 <div class="card-body">
                 <div class="card-text">
-                <span class="badge badge-deepgreen">파이썬으로 작성된 오픈 소스 웹 프레임워크</span>
+                <span class="badge badge-deepgreen">프로그레시브 자바스크립트 프레임워크</span>
                 </div>
                 </div>
                   <a href="langJavaFirst01.fi"
@@ -356,14 +356,14 @@ background-color: #34551F;
                      <b>기초잡기</b>
                      <i class="fa fa-chevron-right text-deepgreen" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/qboardListForm.bo?subCa=5"
                      class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         질문하기
                      </b>
                      <i class="fa fa-chevron-right text-deepgreen" aria-hidden="true"></i>
                   </a>
-                  <a href="#"
+                  <a href="/scrapBookMain.bs?ca_no=2&subCa=5&bookCa=26"
                      class="list-group-item list-group-item-action border-deepgreen d-flex justify-content-between align-items-center" style="font-size: 25px">
                      <b>
                         스크랩북 보러가기

@@ -34,7 +34,7 @@ public class TipBoardDownActionImpl implements TipBoardDownActionService {
             //if(boardDAO.tipBoardDownCheck(new_no) == 0) {
             boardDAO.tipBoardDownInsert(mem_no, new_no, radio);    //최초 게시글 행 insert
             boardDAO.tipBoardRptCntUp(new_no);                    //new테이블의 new_cnt_up컬럼 +1
-            boardDAO.tipBoardRptExpUpdate(mem_no, mem_no=-2);        //신고한 유저 -2 ( 나중에 +4 )
+            boardDAO.tipBoardRptExpUpdate(mem_no, 0);        //신고한 유저 -2 ( 나중에 +4 )
             boardDAO.tipBoardRptExpUpdate(vo.getMem_no(), -1);    //신고당한유저 -1
             memberDAO.commonMemberRpt(vo.getMem_no());              //신고 당한유저 rpt_cnt + 1;
 			return "T";

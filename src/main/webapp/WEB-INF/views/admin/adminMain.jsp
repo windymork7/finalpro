@@ -303,7 +303,6 @@ a:hover {
 						<table class="table">
 							<thead>
 								<tr class="table-secondary">
-									11
 									<th scope="col" style="width: 6%" class="text-center">번호</th>
 									<th scope="col" style="width: 13%" class="text-center">카테고리</th>
 									<th scope="col" style="width: 30.5%" class="text-center">제목</th>

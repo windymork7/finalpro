@@ -133,7 +133,7 @@ small {
                   <div class="card-body col-sm-3">
                    <c:if test="${not empty list.contest_img}">
                        <c:if test="${contest_img3 == 'jpg' || contest_img3 == 'gif' || contest_img3 == 'png' || contest_img4 == 'jpeg'}">
-                           <img src="upload/${list.contest_img}" width="100%" height="163">
+                           <pre>      <img src="upload/${list.contest_img}" width="55%" ></pre>
                        </c:if>
                    </c:if>
                   </div>

@@ -26,16 +26,16 @@ public class CommonReplyUpCheckServiceImpl implements CommonReplyUpCheckService 
             int mem_no = (Integer)session.getAttribute("userNo");
 
             if (boardDAO.replyUpCheck(mem_no, replyNo) != 0){
-                return 0;
+                return 1;
             } else{
                 boardDAO.replyUpUpdate(replyNo);
                 boardDAO.replyUpInsert(replyNo, mem_no);
                 ReplyBoardVO replyBoardVO = boardDAO.replyContent(replyNo);
                 memberDAO.commonExpUpate(replyBoardVO.getMem_no(), 10);
-                return 1;
+                return 0;
             }
         }
 
-        return 0;
+        return 1;
     }
 }
