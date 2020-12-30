@@ -1,103 +1,11 @@
--- 트리거
-DROP TRIGGER ADMIN_STATE_0_TO_1;
-DROP TRIGGER ADMIN_STATE_1_TO_2;
-DROP TRIGGER ADMIN_STATE_2_TO_3;
-DROP TRIGGER GRADE_1_TRG;
-DROP TRIGGER GRADE_1_TO_2_TRG;
-DROP TRIGGER GRADE_2_TO_3_TRG;
-DROP TRIGGER GRADE_3_TO_4_TRG;
-DROP TRIGGER GRADE_4_TO_5_TRG;
-DROP TRIGGER GRADE_5_TO_6_TRG;
-----트리거---
---게시글 추천이 10이 될때 ADMIN_STATE값을 1로 변경하는 트리거
-CREATE OR REPLACE TRIGGER ADMIN_STATE_0_TO_1_TRG
-BEFORE UPDATE ON Q  --Q 테이블에 업데이트가 발생하면
-FOR EACH ROW        --몰름
-WHEN (NEW.Q_UP=10 AND NEW.Q_ADMIN_STATE<1)  --조건식 ( Q_UP의 값이 10일때, ADMIN_STATE값이 1보다 작을 때 )
-BEGIN                       --명령 실행부
-:NEW.Q_ADMIN_STATE:=1;      --Q.ADMIN_STATE값이 1로 변경
-END;
-/
-
---게시글 신청이 최초로 발생했을때 1에서 2로 변경하는 트리거
-CREATE OR REPLACE TRIGGER ADMIN_STATE_1_TO_2_TRG
-AFTER INSERT ON BOOK_SCRAP  -- BOOK_SCRAP 테이블에 삽입이 발생하면 ( 최초 신청이면 )
-FOR EACH ROW
-BEGIN
-    UPDATE Q SET Q_ADMIN_STATE=2
-    WHERE Q_NO=:NEW.Q_NO;
-END;
-/
-
-
---게시글 스크랩북 신청이 10이 될때 ADMIN_STATE값을 3로 변경하는 트리거
-CREATE OR REPLACE TRIGGER ADMIN_STATE_2_TO_3_TRG
-BEFORE UPDATE ON BOOK_SCRAP  --BOOK_SCRAP 테이블에 업데이트가 발생하면
-FOR EACH ROW        --몰름
-WHEN (NEW.BOOK_SCRAP_CNT=10)  --조건식 ( BOOK_SCRAP_CNT=10일때 )
-BEGIN                       --명령 실행부
-    UPDATE Q SET Q_ADMIN_STATE=3
-    WHERE Q_NO=:NEW.Q_NO; --Q_ADMIN_STATE는 3이된다 ( Q_NO = BOOK_SCRAP테이블의 CNT가 10이된 Q_NO에 )
-END;
-/
-
-
-
-CREATE OR REPLACE TRIGGER GRADE_1_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP<15)
-BEGIN
-:NEW.GRADE_NO:=1;
-END;
-/
-
-CREATE OR REPLACE TRIGGER GRADE_1_TO_2_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP>=15 AND NEW.MEM_EXP<50)
-BEGIN
-:NEW.GRADE_NO:=2;
-END;
-/
-CREATE OR REPLACE TRIGGER GRADE_2_TO_3_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP>=50 AND NEW.MEM_EXP<125)
-BEGIN
-:NEW.GRADE_NO:=3;
-END;
-/
-CREATE OR REPLACE TRIGGER GRADE_3_TO_4_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP>=125 AND NEW.MEM_EXP<500)
-BEGIN
-:NEW.GRADE_NO:=4;
-END;
-/
-CREATE OR REPLACE TRIGGER GRADE_4_TO_5_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP>=500 AND NEW.MEM_EXP<1000)
-BEGIN
-:NEW.GRADE_NO:=5;
-END;
-/
-CREATE OR REPLACE TRIGGER GRADE_5_TO_6_TRG
-BEFORE UPDATE ON MEM
-FOR EACH ROW
-WHEN (NEW.MEM_EXP>=1000)
-BEGIN
-:NEW.GRADE_NO:=6;
-END;
-/
-
+-- 전체 잡고 실행하면 됩니다.
+-- 혹시 트리거 작동 안될시에는 첫번째 커밋 부분까지 잡아서 실행 후
+-- 트리거 실행후 두번째 커밋 영역 잡고 실행하면 됩니다.
 --시퀀스는 테이블명_SEQ
 --제약조건 이름 : TABLE NAME
 --- PK : 테이블명
 --- FK : 원본테이블_참조하는테이블
-
+SET DEFINE OFF;
 --------DROP-------------
 DROP TABLE MEM CASCADE CONSTRAINTS;
 DROP TABLE BIZ CASCADE CONSTRAINTS;
@@ -278,7 +186,7 @@ START WITH 0
 MINVALUE 0;
 -- 게시물
 CREATE SEQUENCE Q_SEQ
-START WITH 1
+START WITH 50
 MINVALUE 0;
 -- 댓글
 CREATE SEQUENCE REPLY_SEQ
@@ -384,9 +292,9 @@ CREATE TABLE BIZ( --사업자회원
     BIZ_ADDRESS NVARCHAR2(100),     --회사주소,
     BIZ_DETAIL_ADDRESS NVARCHAR2(100),   --회사상세주소
     BIZ_STATE NUMBER DEFAULT 0,     --어드민 승인상태
+    BIZ_DATE DATE DEFAULT SYSDATE, -- 신청날짜
     CONSTRAINT BIZ PRIMARY KEY(BIZ_NO)
 );
-
 CREATE TABLE CONTEST(
     CONTEST_NO NUMBER,          -- 공모전글번호 ( 기본키 )
     BIZ_NO NVARCHAR2(50),              -- 사업자번호 ( 외래키 : BIZ )
@@ -571,10 +479,10 @@ CREATE TABLE BOOK_SCRAP(
 --책스크랩신청누른정보
 CREATE TABLE BOOK_SCRAP_UP(
     BOOK_SCRAP_UP_NO NUMBER, -- 책스크랩신청번호 ( 기본키 )
-    BOOK_SCRAP_NO NUMBER,    -- 책 번호 ( 외래키 : BOOK_SCRAP )
+    Q_NO NUMBER,    -- 책 번호 ( 외래키 : BOOK_SCRAP )
     MEM_NO NUMBER,           -- 회원 번호(신청한) 외래키 : MEM
     CONSTRAINT BOOK_SCRAP_UP PRIMARY KEY (BOOK_SCRAP_UP_NO),
-    CONSTRAINT BOOK_SCRAP_BOOK_SCRAP_UP FOREIGN KEY (BOOK_SCRAP_NO) REFERENCES BOOK_SCRAP(BOOK_SCRAP_NO)ON DELETE CASCADE,
+    CONSTRAINT Q_BOOK_SCRAP_UP FOREIGN KEY (Q_NO) REFERENCES Q(Q_NO)ON DELETE CASCADE,
     CONSTRAINT MEM_BOOK_SCRAP_UP FOREIGN KEY (MEM_NO) REFERENCES MEM(MEM_NO)ON DELETE CASCADE
 );
 --마이스크랩
@@ -603,6 +511,7 @@ CREATE TABLE NEW(
     NEW_RPT_CNT NUMBER,             -- 새터 신고수
     NEW_DATE DATE DEFAULT SYSDATE,  -- 새터 작성일
     NEW_PICK_STATE NUMBER DEFAULT 0,    --새터 채택 상태 ( 기본 0 채택 1 )
+    NEW_FILE NVARCHAR2(100),        --새터 파일명
     CONSTRAINT NEW PRIMARY KEY (NEW_NO),
     CONSTRAINT MEM_NEW FOREIGN KEY (MEM_NO) REFERENCES MEM(MEM_NO)ON DELETE CASCADE,
     CONSTRAINT CA_NEW FOREIGN KEY (CA_NO) REFERENCES CA(CA_NO)ON DELETE CASCADE
@@ -697,13 +606,11 @@ CREATE TABLE SURVEY_R(
 
 ---------INSERT---------------
 --GRADE
-INSERT INTO GRADE VALUES(1,'빨');
-INSERT INTO GRADE VALUES(2,'주');
-INSERT INTO GRADE VALUES(3,'노');
-INSERT INTO GRADE VALUES(4,'초');
-INSERT INTO GRADE VALUES(5,'파');
-INSERT INTO GRADE VALUES(6,'남');
-INSERT INTO GRADE VALUES(7,'보');
+INSERT INTO GRADE VALUES(1,'브론즈');
+INSERT INTO GRADE VALUES(2,'실버');
+INSERT INTO GRADE VALUES(3,'골드');
+INSERT INTO GRADE VALUES(4,'플레티넘');
+INSERT INTO GRADE VALUES(5,'다이아몬드');
 
 --CA
 INSERT INTO CA VALUES(1,'언어');
@@ -714,71 +621,75 @@ INSERT INTO CA VALUES(4,'검색팁');
 --SUB_CA
 INSERT INTO SUB_CA VALUES(1,1,'JAVA');
 INSERT INTO SUB_CA VALUES(2,1,'PYTHON');
-INSERT INTO SUB_CA VALUES(3,1,'C');
+INSERT INTO SUB_CA VALUES(3,1,'C#');
 
-INSERT INTO SUB_CA VALUES(4,2,'SPRING');
-INSERT INTO SUB_CA VALUES(5,2,'REACT');
-INSERT INTO SUB_CA VALUES(6,2,'VUE');
+--INSERT INTO SUB_CA VALUES(4,2,'SPRING');
+INSERT INTO SUB_CA VALUES(4,2,'REACT');
+INSERT INTO SUB_CA VALUES(5,2,'VUE');
 
 INSERT INTO SUB_CA VALUES(7,3,'ORACLE');
 INSERT INTO SUB_CA VALUES(8,3,'MYSQL');
-INSERT INTO SUB_CA VALUES(9,3,'NOSQL');
+--INSERT INTO SUB_CA VALUES(9,3,'NOSQL');
 
 ----------BOOK_CA----
-INSERT INTO BOOK_CA VALUES(1,1,'자바의개념');
+INSERT INTO BOOK_CA VALUES(1,1,'자바 환경 설정');
 INSERT INTO BOOK_CA VALUES(2,1,'제어문');
-INSERT INTO BOOK_CA VALUES(3,1,'클래스');
-INSERT INTO BOOK_CA VALUES(4,1,'인터페이스');
-INSERT INTO BOOK_CA VALUES(5,1,'GUI');
-INSERT INTO BOOK_CA VALUES(6,2,'파이썬의개념');
-INSERT INTO BOOK_CA VALUES(7,2,'출력문');
+INSERT INTO BOOK_CA VALUES(3,1,'메소드');
+INSERT INTO BOOK_CA VALUES(4,1,'클래스');
+INSERT INTO BOOK_CA VALUES(5,1,'컬렉션 프레임워크');
+
+INSERT INTO BOOK_CA VALUES(6,2,'파이썬 환경 설정');
+INSERT INTO BOOK_CA VALUES(7,2,'튜플 & 리스트 & 딕셔너리 자료형');
 INSERT INTO BOOK_CA VALUES(8,2,'제어문');
-INSERT INTO BOOK_CA VALUES(9,2,'딕셔너리');
-INSERT INTO BOOK_CA VALUES(10,2,'스크레이핑');
+INSERT INTO BOOK_CA VALUES(9,2,'함수');
+INSERT INTO BOOK_CA VALUES(10,2,'클래스');
 --C
-INSERT INTO BOOK_CA VALUES(11,3,'C의개념');
-INSERT INTO BOOK_CA VALUES(12,3,'출력문');
-INSERT INTO BOOK_CA VALUES(13,3,'제어문');
-INSERT INTO BOOK_CA VALUES(14,3,'포인터');
-INSERT INTO BOOK_CA VALUES(15,3,'구조체');
+INSERT INTO BOOK_CA VALUES(11,3,'c# 환경 설정');
+INSERT INTO BOOK_CA VALUES(12,3,'제어문');
+INSERT INTO BOOK_CA VALUES(13,3,'메소드');
+INSERT INTO BOOK_CA VALUES(14,3,'클래스');
+INSERT INTO BOOK_CA VALUES(15,3,'스레드 & 태스크');
+
 --FRAMEWORK
 --SPRING
-INSERT INTO BOOK_CA VALUES(16,4,'스프링의개념');
-INSERT INTO BOOK_CA VALUES(17,4,'데이터의흐름');
-INSERT INTO BOOK_CA VALUES(18,4,'모델');
-INSERT INTO BOOK_CA VALUES(19,4,'객체주입');
-INSERT INTO BOOK_CA VALUES(20,4,'MAPPER');
+--INSERT INTO BOOK_CA VALUES(16,4,'스프링의개념');
+--INSERT INTO BOOK_CA VALUES(17,4,'데이터의흐름');
+--INSERT INTO BOOK_CA VALUES(18,4,'모델');
+--INSERT INTO BOOK_CA VALUES(19,4,'객체주입');
+--INSERT INTO BOOK_CA VALUES(20,4,'MAPPER');
+
 --REACT
-INSERT INTO BOOK_CA VALUES(21,5,'프론트엔드');
-INSERT INTO BOOK_CA VALUES(22,5,'리액트의특징');
-INSERT INTO BOOK_CA VALUES(23,5,'리액트의장점');
-INSERT INTO BOOK_CA VALUES(24,5,'리액트의단점');
-INSERT INTO BOOK_CA VALUES(25,5,'기본문법');
+INSERT INTO BOOK_CA VALUES(21,4,'리액트의 특징');
+INSERT INTO BOOK_CA VALUES(22,4,'작업 환경 설정');
+INSERT INTO BOOK_CA VALUES(23,4,'JSX');
+INSERT INTO BOOK_CA VALUES(24,4,'컴포넌트');
+INSERT INTO BOOK_CA VALUES(25,4,'Hooks');
 --VUE
-INSERT INTO BOOK_CA VALUES(26,6,'프론트엔드');
-INSERT INTO BOOK_CA VALUES(27,6,'뷰의특징');
-INSERT INTO BOOK_CA VALUES(28,6,'뷰의장점');
-INSERT INTO BOOK_CA VALUES(29,6,'뷰의단점');
-INSERT INTO BOOK_CA VALUES(30,6,'기본문법');
+INSERT INTO BOOK_CA VALUES(26,5,'뷰의 특징');
+INSERT INTO BOOK_CA VALUES(27,5,'작업 환경 설정');
+INSERT INTO BOOK_CA VALUES(28,5,'인스턴스 & 컴포넌트');
+INSERT INTO BOOK_CA VALUES(29,5,'라우터 & HTTP 통신');
+INSERT INTO BOOK_CA VALUES(30,5,'템플릿 구성');
+
 --DATABASE
 --ORACLE
-INSERT INTO BOOK_CA VALUES(31,7,'데이터베이스');
-INSERT INTO BOOK_CA VALUES(32,7,'오라클의특징');
-INSERT INTO BOOK_CA VALUES(33,7,'오라클의장점');
-INSERT INTO BOOK_CA VALUES(34,7,'데이터조회');
-INSERT INTO BOOK_CA VALUES(35,7,'데이터삭제');
+INSERT INTO BOOK_CA VALUES(31,7,'작업 환경 구성');
+INSERT INTO BOOK_CA VALUES(32,7,'DML');
+INSERT INTO BOOK_CA VALUES(33,7,'DDL');
+INSERT INTO BOOK_CA VALUES(34,7,'DCL');
+INSERT INTO BOOK_CA VALUES(35,7,'PL/SQL');
 --MYSQL
-INSERT INTO BOOK_CA VALUES(36,8,'데이터베이스');
-INSERT INTO BOOK_CA VALUES(37,8,'MYSQL의특징');
-INSERT INTO BOOK_CA VALUES(38,8,'MYSQL의장점');
-INSERT INTO BOOK_CA VALUES(39,8,'데이터조회');
-INSERT INTO BOOK_CA VALUES(40,8,'데이터삭제');
+INSERT INTO BOOK_CA VALUES(36,8,'작업 환경 구성');
+INSERT INTO BOOK_CA VALUES(37,8,'아키텍처');
+INSERT INTO BOOK_CA VALUES(38,8,'트랜잭션');
+INSERT INTO BOOK_CA VALUES(39,8,'쿼리 작성');
+INSERT INTO BOOK_CA VALUES(40,8,'인덱스');
 --NOSQL
-INSERT INTO BOOK_CA VALUES(41,9,'데이터베이스');
-INSERT INTO BOOK_CA VALUES(42,9,'MOSQL의특징');
-INSERT INTO BOOK_CA VALUES(43,9,'MOSQL의장점');
-INSERT INTO BOOK_CA VALUES(44,9,'데이터조회');
-INSERT INTO BOOK_CA VALUES(45,9,'데이터삭제');
+--INSERT INTO BOOK_CA VALUES(41,9,'데이터베이스');
+--INSERT INTO BOOK_CA VALUES(42,9,'MOSQL의특징');
+--INSERT INTO BOOK_CA VALUES(43,9,'MOSQL의장점');
+--INSERT INTO BOOK_CA VALUES(44,9,'데이터조회');
+--INSERT INTO BOOK_CA VALUES(45,9,'데이터삭제');
 
 
 -----------RPT--------
@@ -799,14 +710,84 @@ INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 4, 'grade4@naver.com', '1234', '4등급 
 INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 1, 'grade1@naver.com', '1234', '1등급 계정', '명자', '01012341234', 0, 0, 0,0, SYSDATE, SYSDATE);
 INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 1, 'report@naver.com', '1234', '리폿당한 계정', '리폿이름', '01055554444', 0, 9, 0,0, SYSDATE, SYSDATE);
 INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 1, 'reply@naver.com', '1234', '댓글용 계정', '하이', '01012341235', 0, 0, 0,0, SYSDATE, SYSDATE);
+INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 1, 'report2@naver.com' ,'1234', '욕쟁이', 'xxx' , '01012343212', 0, 13 ,0,0,SYSDATE,SYSDATE);
+INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 1, 'report3@naver.com' ,'1234', '광고쟁이', 'xxx' , '01012788412', 0, 18 ,0,0,SYSDATE,SYSDATE);
+--제제당한애들
+INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 2, 'report4@naver.com' ,'1234', '길동', '푸딩', '01012355234', 0, 18 ,0,0,SYSDATE,SYSDATE+3);
+INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 3, 'report5@naver.com' ,'1234', '둘리', '딸기',  '01012346564', 0, 18 ,0,0,SYSDATE,SYSDATE+3);
+INSERT INTO MEM VALUES(MEM_SEQ.NEXTVAL, 2, 'report6@naver.com' ,'1234', '짱구', '산낙지', '01022224444', 0, 18 ,0,0,SYSDATE,SYSDATE+3);
 
 -- 게시글 더미
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 2, 1, 1, '자바의 최대 장점이 무엇인가요?', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 3, 1, 2, '알고리즘좀 대신 풀어주세요', '이 글은 신고가 9개입니다', '이미지명', 0, 0, 0, 9, SYSDATE, 0);
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 1, 1, 3, '이너클래스는 왜쓰나요 ?', '왜 굳이 클래스안에 클래스를 사용하나요?', '이미지', 1, 30, 0, 0, SYSDATE, 0);
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 1, 1, 4, '인터페이스는 왜쓰나요?', '어떤 이유때문에 유지보수가 좋아지나요?', '이미지', 0, 0, 9, 0, SYSDATE, 0);
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 2, 1, 5, 'Swing 사용중 에러가 발생...', 'Swing', '이미지명', 0, 0, 0, 0, SYSDATE, 0);
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL, 1, 1, 2, 'for문과 while문의 차이점이 궁금합니다', '각각의 장단점이 궁금합니다', '이미지명', 0, 0, 0, 0, SYSDATE, 0);
+INSERT INTO Q VALUES(1, 2, 1, 1, '자바의 최대 장점이 무엇인가요?', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
+INSERT INTO Q VALUES(2, 3, 1, 2, '알고리즘좀 대신 풀어주세요', '이 글은 신고가 9개입니다', '이미지명', 0, 0, 0, 9, SYSDATE, 0);
+INSERT INTO Q VALUES(3, 1, 1, 3, '이너클래스는 왜쓰나요 ?', '왜 굳이 클래스안에 클래스를 사용하나요?', '이미지', 1, 30, 0, 0, SYSDATE, 0);
+INSERT INTO Q VALUES(4, 1, 1, 4, '인터페이스는 왜쓰나요?', '어떤 이유때문에 유지보수가 좋아지나요?', '이미지', 0, 0, 9, 0, SYSDATE, 0);
+INSERT INTO Q VALUES(5, 2, 1, 5, 'Swing 사용중 에러가 발생...', 'Swing', '이미지명', 0, 0, 0, 0, SYSDATE, 0);
+INSERT INTO Q VALUES(6, 1, 1, 2, 'for문과 while문의 차이점이 궁금합니다', '각각의 장단점이 궁금합니다', '이미지명', 0, 0, 0, 0, SYSDATE, 0);
+INSERT INTO Q VALUES(30, 2, 1, 1, '자바 jdk 설치도중 에러가 발생...?', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
+INSERT INTO Q VALUES(31, 1, 1, 1, '자바 혼자 독학하려는데 몇 버전을 사용하는것이..', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
+INSERT INTO Q VALUES(32, 3, 1, 1, '자바언어를 학습하면 어느 분야에 취업하기 좋나요?', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
+INSERT INTO Q VALUES(33, 4, 1, 1, 'jdk와 jre는 어떤 역할을 하나요?', '궁금합니다', '이미지명', 0, 0, 0, 0, '20170311', 0 );
+--C#
+INSERT INTO Q VALUES(7, 1 ,3,12,'배열의 인덱스가 범위를 벗어났습니다 라는 에러발생 ','배열 사용중 에러가 발생했습니다 도와주세요',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(8, 1 ,3,15,'스레드가 종료되었습니다.','언어 버전 NET Framework 4.8로 작성되었습니다.
+환경 : 비주얼 스튜디오
+버튼을 누르면  Task 1개를 실행합니다.
+제가 아는 Task는...
+프로세스 당 단 1개의 ThreadPool이 생성되며, Task를 호출하게되면 ThreadPool에서 Thread를 할당받아 사용한 뒤 작업이 끝나면 ThreadPool에 반환되어,
+다음 Task 작업 시 재사용한다고 알고 있습니다.
+예제프로그램에서 버튼을 눌러 Task를 실행한 뒤, 작업이 끝나면
+Visual Studio의 출력창에 조금 뒤..."스레드가 종료되었습니다" 문구가 여러 번 발생됩니다.
+이 출력문구가 출력되는 횟수가 버튼을 누를때마다 다릅니다.
+"스레드가 종료되었습니다"문구는 실제로 디버깅 중인 프로세스의 Thread가 종료되면 나오는 문구인가요?',NULL,0,0,0,0,SYSDATE,0);
+
+INSERT INTO Q VALUES(9, 1 ,3,14,'클래스를 나누어 놓는 이유가 무엇인가요 ??','.',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(10, 1 ,3,11,'C# 환경 구축 중 에러가 발생했습니다.','질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 : C# 7.2
+                        2. 사용하는 IDE : 비주얼 스튜디오',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(11, 1 ,3,12,'switch 사용중 에러가 발생했는데 원인을 모르겠습니다','질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 : 7.2
+                        2. 사용하는 IDE : 비주얼 스튜디오',NULL,0,0,0,0,SYSDATE,0);
+
+--PYTHON
+SELECT * FROM Q;
+SELECT * FROM BOOK_CA;
+INSERT INTO Q VALUES(12,2,2,6,'PYTHON 어느 버전을 가장 많이 사용하나요??','가장 안정적이고 실무에서 많이 쓰는 버전이 무엇일까요?',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(13,2,2,7,'튜플과 리스트의 차이가 뭔가요?','어느상황에 주로 쓰이나요??',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(14,2,2,8,'FOR문 사용중 에러가 발생하였습니다.','질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 : 3.5.X
+                        2. 사용하는 IDE : 주피터 노트북
+
+for i in range(1,10)
+    print(i)',NULL,0,0,0,0,SYSDATE,0);
+UPDATE Q SET Q_EXP = 20 WHERE Q_NO=13;
+UPDATE Q SET Q_SOS = 1 WHERE Q_NO=13;
+
+INSERT INTO Q VALUES(15,2,2,6,'파이썬이 대세인 이유','갑자기 많이 쓰이게 된 이유가 뭔가요?',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(16,2,2,10,'클래스랑 함수랑 가장 큰 차이점이 뭔가요 ?','둘다 똑같이 사용하면 안되나요 ?',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(17,2,2,9,'함수 선언부에서 에러가 발생..','질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 : 3.5.X
+                        2. 사용하는 IDE : 주피터 노트북
+
+def temp:
+a = 1
+b = 2
+return a',NULL,0,0,0,0,SYSDATE,0);
+INSERT INTO Q VALUES(18,2,2,6,'가장 많이 사용되는 에디터가 무엇인가요?','질문글을 작성할 때  가이드라인을 지켜주세요.
+                        *필수 작성
+                        1. 사용하는 언어 버전 : 3.5
+                        2. 사용하는 IDE : X
+추천 부탁드립니다.',NULL,0,0,0,0,SYSDATE,0);
+
+-- 제재 당하기전 게시글들 더미
+INSERT INTO Q VALUES(19,2,1,3,'!@$#!@#','.',NULL,0,0,0,10,SYSDATE,0);
+INSERT INTO Q VALUES(20,2,2,6,'과제좀 대신 해주세요','.',NULL,0,0,0,17,SYSDATE,0);
+INSERT INTO Q VALUES(21,1,1,1,'프로그래밍 공부는 어떻게 시작할까요?','.',NULL,0,0,0,14,SYSDATE,0);
+
 
 -- 댓글 더미
 INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 1, 1, '융합성이 좋습니다', 10, 0, 0, SYSDATE); -- 일반
@@ -816,6 +797,19 @@ INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 4, 3, '내부클래스에서 외부�
 INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 2, 4, '클래스간 결합도를 낮출 수 있습니다.', 0, 1, 0, SYSDATE); --채택 완료
 INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 1, 5, '그럴땐 이렇게 하면 됩니다.', 0, 1, 0, SYSDATE); -- 채택 완료
 INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 1, 5, '안타깝네요', 0, -1, 0, SYSDATE); -- 채택 완료
+
+INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 2,8,'스레드가 종료되었습니다 문구는 실제로 스레드 종료를 알리는 것이 맞습니다. 1개의 스레드를 사용자가 생성했다고는 하지만 ThreadPool 제작자 입장에서는 그 1개의 생성을 미래의 또 다른 요청을 생각해 몇 개의 스레드를 더 만들 수도 있을 것입니다. 다음의 글도 함께 읽어보시다면 도움이 되실 것입니다.
+ThreadPool.QueueUserWorkItem 의 실행 지연
+ http://www.sysnet.pe.kr/2/0/1455
+
+.NET 응용 프로그램에 기본 생성되는 스레드들에 대한 탐구
+ http://www.sysnet.pe.kr/2/0/1247',0,0,0,SYSDATE);
+UPDATE REPLY SET REPLY_PICK = 1 WHERE REPLY_CONTENT LIKE '%종료%';
+
+INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 2, 15, '간결하고, 방대한 양의 라이브러리가 가장큰 장점입니다.', 0, 0, 0, SYSDATE);
+UPDATE REPLY SET REPLY_PICK = 1 WHERE REPLY_CONTENT LIKE '%방대한%';
+INSERT INTO REPLY VALUES(REPLY_SEQ.NEXTVAL, 1, 12, '3.X 버전을 많이 사용합니다.',3,1,0,SYSDATE);
+
 
 -- 설문 더미
 INSERT INTO SURVEY_Q VALUES (1,'성별을 선택해주세요');
@@ -904,13 +898,189 @@ INSERT INTO NEW_REPLY VALUES(NEW_REPLY_SEQ.NEXTVAL,4,1,'NEWREPLY',0,1,0,SYSDATE)
 INSERT INTO NEW_REPLY VALUES(NEW_REPLY_SEQ.NEXTVAL,2,1,'NEWREPLY',0,-1,0,SYSDATE);
 INSERT INTO NEW_REPLY VALUES(NEW_REPLY_SEQ.NEXTVAL,5,1,'NEWREPLY',0,0,0,SYSDATE);
 
+--공모전 및 기업회원 더미
+INSERT INTO BIZ VALUES('1234','1234','SL','김남성','01066728882','biz1@naver.com','가산동 남성프라자','1007호',1,sysdate);
+INSERT INTO BIZ VALUES('122134','1234','MJ','김명자','01049828882','biz2@naver.com','부산동 여성프라자','107호',0,sysdate);
+INSERT INTO BIZ VALUES('142134','1234','SH','명김자','01066468282','biz3@naver.com','용산동 이성프라자','1107호',0,sysdate);
+INSERT INTO BIZ VALUES('1297','1234','JH','최명자','01066721372','biz4@naver.com','철산동 삼성프라자','1307호',0,sysdate);
+INSERT INTO BIZ VALUES('81234','1234','JY','김최명','01067822872','biz5@naver.com','남산동 양성프라자','1507호',0,sysdate);
+INSERT INTO BIZ VALUES('16234','1234','WS','명호자','01066574982','biz6@naver.com','경산동 육성프라자','1707호',0,sysdate);
+INSERT INTO CONTEST VALUES(1,'1234','MZ인공지능 해커톤 대회','SL아카데미','2020.12.01 ~ 2020.12.30','SL아카데미 수강생','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz1@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+0- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전1.png');
+INSERT INTO CONTEST VALUES(2,'122134','시뮬레이션 경진대회','MJ컴퍼니','2020.12.01 ~ 2020.12.30','제한없음','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz2@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전2.jpg');
+INSERT INTO CONTEST VALUES(3,'142134','MZ인공지능 해커톤 대회','SH그룹','2020.12.01 ~ 2020.12.30','대학생/졸업예정자','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz1@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전3.jpg');
+INSERT INTO CONTEST VALUES(4,'1297','AI양재 허브','JY농업','2020.12.01 ~ 2020.12.30','제한없음','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz1@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전4.jpg');
+INSERT INTO CONTEST VALUES(5,'16234','해양 침적 쓰레기 이미지 데이터 해커톤','WS배추','2020.12.01 ~ 2020.12.30','제한없음','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz1@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전5.jpg');
+INSERT INTO CONTEST VALUES(6, '1234','작물 질병 해충 AI 공개데이터 기반 인공지능 해커톤','SL아카데미','2020.12.01 ~ 2020.12.30','제한없음','IT/웹/모바일','5백만원 ~ 1천만원','500만원','010-1544-1544','biz1@naver.com','itjy2.tistroy.com','MZ 인공지능 해커톤 대회
+
+■ 공모 및 접수 : 12.01(월) ~ 12. 30(수)
+
+■ 참가접수 : 홈페이지를 활용한 참가신청
+- 팀 신청, 학생/일반인 혼합팀 참가 가능
+- 접수는 지정된 접수일 시(12월 20일 일요일 23시 59분) 내에 신청','공모전6.jpg');
+
 -- FAQ 더미
 INSERT INTO FAQ VALUES(FAQ_SEQ.NEXTVAL,1,1,SYSDATE);
 
+--첫번째 커밋
 COMMIT;
 
+
+-- 트리거
+DROP TRIGGER ADMIN_STATE_0_TO_1;
+DROP TRIGGER ADMIN_STATE_1_TO_2;
+DROP TRIGGER ADMIN_STATE_2_TO_3;
+DROP TRIGGER GRADE_1_TRG;
+DROP TRIGGER GRADE_1_TO_2_TRG;
+DROP TRIGGER GRADE_2_TO_3_TRG;
+DROP TRIGGER GRADE_3_TO_4_TRG;
+DROP TRIGGER GRADE_4_TO_5_TRG;
+DROP TRIGGER GRADE_5_TO_6_TRG;
+----트리거---
+--게시글 추천이 10이 될때 ADMIN_STATE값을 1로 변경하는 트리거
+CREATE OR REPLACE TRIGGER ADMIN_STATE_0_TO_1_TRG
+BEFORE UPDATE ON Q  --Q 테이블에 업데이트가 발생하면
+FOR EACH ROW        --몰름
+WHEN (NEW.Q_UP=100 AND NEW.Q_ADMIN_STATE<1)  --조건식 ( Q_UP의 값이 10일때, ADMIN_STATE값이 1보다 작을 때 )
+BEGIN                       --명령 실행부
+:NEW.Q_ADMIN_STATE:=1;      --Q.ADMIN_STATE값이 1로 변경
+END;
+/
+
+--게시글 신청이 최초로 발생했을때 1에서 2로 변경하는 트리거
+CREATE OR REPLACE TRIGGER ADMIN_STATE_1_TO_2_TRG
+AFTER INSERT ON BOOK_SCRAP  -- BOOK_SCRAP 테이블에 삽입이 발생하면 ( 최초 신청이면 )
+FOR EACH ROW
+BEGIN
+    UPDATE Q SET Q_ADMIN_STATE=2
+    WHERE Q_NO=:NEW.Q_NO;
+END;
+/
+
+
+--게시글 스크랩북 신청이 10이 될때 ADMIN_STATE값을 3로 변경하는 트리거
+CREATE OR REPLACE TRIGGER ADMIN_STATE_2_TO_3_TRG
+BEFORE UPDATE ON BOOK_SCRAP  --BOOK_SCRAP 테이블에 업데이트가 발생하면
+FOR EACH ROW        --몰름
+WHEN (NEW.BOOK_SCRAP_CNT=50)  --조건식 ( BOOK_SCRAP_CNT=10일때 )
+BEGIN                       --명령 실행부
+    UPDATE Q SET Q_ADMIN_STATE=3
+    WHERE Q_NO=:NEW.Q_NO; --Q_ADMIN_STATE는 3이된다 ( Q_NO = BOOK_SCRAP테이블의 CNT가 10이된 Q_NO에 )
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER GRADE_1_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP<15)
+BEGIN
+:NEW.GRADE_NO:=1;
+END;
+/
+
+CREATE OR REPLACE TRIGGER GRADE_1_TO_2_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP>=15 AND NEW.MEM_EXP<50)
+BEGIN
+:NEW.GRADE_NO:=2;
+END;
+/
+CREATE OR REPLACE TRIGGER GRADE_2_TO_3_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP>=50 AND NEW.MEM_EXP<125)
+BEGIN
+:NEW.GRADE_NO:=3;
+END;
+/
+CREATE OR REPLACE TRIGGER GRADE_3_TO_4_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP>=125 AND NEW.MEM_EXP<500)
+BEGIN
+:NEW.GRADE_NO:=4;
+END;
+/
+CREATE OR REPLACE TRIGGER GRADE_4_TO_5_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP>=500 AND NEW.MEM_EXP<1000)
+BEGIN
+:NEW.GRADE_NO:=5;
+END;
+/
+CREATE OR REPLACE TRIGGER GRADE_5_TO_6_TRG
+BEFORE UPDATE ON MEM
+FOR EACH ROW
+WHEN (NEW.MEM_EXP>=1000)
+BEGIN
+:NEW.GRADE_NO:=6;
+END;
+/
+
+
+
+
 --게시글 트리거를 이용해 승인페이지까지 가는놈 ( 트리거 먼저 다시 컴파일 해줘야함 )
-INSERT INTO Q VALUES(Q_SEQ.NEXTVAL,1,1,1, '곧 승인페이지에 갈 글입니다.','.',NULL,0,0,0,0,SYSDATE,0);
-UPDATE Q SET Q_UP = 10 WHERE Q_NO=7;
-INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,7,0);
-UPDATE BOOK_SCRAP SET BOOK_SCRAP_CNT=10 WHERE Q_NO=7;
+INSERT INTO Q VALUES(9999,1,1,1, '곧 승인페이지에 갈 글입니다.','.',NULL,0,0,0,0,SYSDATE,0);
+UPDATE Q SET Q_UP = 10 WHERE Q_NO=9999;
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,9999,0);
+UPDATE BOOK_SCRAP SET BOOK_SCRAP_CNT=10 WHERE Q_NO=9999;
+
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=1;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=4;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=8;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=6;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=12;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=15;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=30;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=31;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=32;
+UPDATE Q SET Q_UP = 100 WHERE Q_NO=33;
+
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,1,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,4,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,8,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,6,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,12,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,15,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,30,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,31,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,32,0);
+INSERT INTO BOOK_SCRAP VALUES(BOOK_SCRAP_SEQ.NEXTVAL,33,0);
+
+UPDATE BOOK_SCRAP SET BOOK_SCRAP_CNT =50 WHERE Q_NO < 9999;
+-- 두번째 커밋
+COMMIT;
