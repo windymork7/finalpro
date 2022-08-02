@@ -7,7 +7,7 @@
 * Windows 7 Home 64bit
 * Windows 10 Home
 
-####Web Server
+#### Web Server
 * apache tomcat 8.5.31
 
 #### Tool 
@@ -72,10 +72,3 @@
 
 ### <개발자 설문조사(데이터 시각화)>
 ![image](https://user-images.githubusercontent.com/74748733/182308144-bb362a5e-7f72-4c95-a899-03620befc766.png)
-
-
-
-
-
-
-
