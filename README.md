@@ -14,21 +14,6 @@ Tech Stack
 : Java, Oracle, Springframework, SpringBoot, Mybatis,
 Javascript, jQuery, Ajax, Jstl, Json, Html, Css, Bootstrap
 
-## 내용
-1. 첫걸음 - 코딩의 기초부터 공부할 수 있도록 기초 개념 정보를 제공한다.
-
-2. D's Q(지식인) - 개발 관련 질문과 답변할 수 있다.
-
-3. 스크랩북 – 일정 신청 수 이상 받은 우수 게시물이 카테고리별로 분류되어 코딩 입문자가 쉽게 학습할 수 있다.
-
-4. 에디터 Tip – 에디터가 전하는 IT 관련 포스팅을 볼 수 있다.
-
-5. 공모전 – IT 관련 공모전 내용을 볼 수 있다.
-
-6. 고객센터 - D’S Q의 가이드라인, 공지사항, FAQ를 확인할 수 있다.
-
-7. 설문조사 - D’S Q 회원은 개발 관련 설문조사를 진행하고, 즉시 해당 결과를 확인할 수 있다.
-
 ## 데이터베이스 스키마 설계
 ![06 D'sQ - Database 모델링(2)](https://user-images.githubusercontent.com/74748733/182308355-03ac7cab-c3bf-4ebe-9b2a-7b2ef8f2e542.png)
 
