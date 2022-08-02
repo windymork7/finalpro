@@ -2,17 +2,35 @@
 4차 산업혁명이 일어나고 있는 지금, IT 업계에 꿈을 가지고 있는 사람들의 길잡이가 되어보려고 한다.
 
 ## 구현 환경
-OS : Windows 7 Professional K 64bit, Windows 7 Home 64bit, Windows 10 Home
+#### OS
+* Windows 7 Professional K 64bit
+* Windows 7 Home 64bit
+* Windows 10 Home
 
-Web Server : apache tomcat 8.5.31
+####Web Server
+* apache tomcat 8.5.31
 
-Tool : Eclipse, SQL developer, eXERD(테이블 모델링 구현)
+#### Tool 
+* Eclipse
+* SQL developer
+* eXERD(테이블 모델링 구현)
 
-Database : Oracle 11g
+#### Database
+* Oracle 11g
 
-Tech Stack 
-: Java, Oracle, Springframework, SpringBoot, Mybatis,
-Javascript, jQuery, Ajax, Jstl, Json, Html, Css, Bootstrap
+#### Tech Stack 
+* Java
+* Oracle 
+* Springframework
+* SpringBoot
+* Mybatis
+* Javascript
+* jQuery
+* Ajax
+* Jstl
+* Json
+* HtmlCss
+* Bootstrap
 
 ## 내용
 1. 첫걸음 - 코딩의 기초부터 공부할 수 있도록 기초 개념 정보를 제공한다.
